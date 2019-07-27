@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools="http://schemas.android.com/tools"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="match_parent">
+
+    <TextView android:layout_width="wrap_content" android:background="@drawable/black_border_box"
+              android:paddingBottom="3dp" android:textColor="@color/se_black" android:textSize="14dp"
+              android:layout_height="wrap_content" android:paddingLeft="15dp" android:paddingTop="3dp"
+              android:paddingRight="15dp" app:layout_constraintTop_toTopOf="parent" tools:text="시작 5초 전"
+              app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="24dp"
+              android:layout_marginStart="@dimen/proc_timeset_left_margin" android:id="@+id/tvTopExplain"/>
+    <TextView
+            tools:text="타임셋 명" android:textColor="@color/se_black" android:textSize="28dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvTimeSetName" android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@+id/tvTopExplain"
+            app:layout_constraintStart_toStartOf="@+id/tvTime"
+    />
+    <TextView
+            tools:text="01:22:22" android:textColor="@color/se_black" android:textSize="72dp"
+            android:layout_width="wrap_content" android:textStyle="bold"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvTime"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@+id/tvTimeSetName"/>
+
+    <Button android:id="@+id/btCancel" android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="임시_취소" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="8dp"/>
+    <Button android:id="@+id/btPause" android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="임시_일시정지"
+            app:layout_constraintBottom_toBottomOf="@+id/btCancel"
+            app:layout_constraintStart_toEndOf="@+id/btCancel"
+    />
+
+    <ImageView
+            android:layout_width="@dimen/proc_timeset_additional_info_iv_size"
+            android:layout_height="@dimen/proc_timeset_additional_info_iv_size"
+            android:src="@drawable/ic_tmp" android:id="@+id/ivRepeat"
+            app:layout_constraintEnd_toStartOf="@+id/tvWholeTime" android:layout_marginEnd="14dp"
+            app:layout_constraintTop_toTopOf="@+id/tvWholeTime"
+            app:layout_constraintBottom_toBottomOf="@+id/tvWholeTime"/>
+
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" tools:text="+1분"
+              android:textSize="@dimen/proc_timeset_additional_info_tv_size"
+              android:id="@+id/tvOverTime"
+              android:textColor="@color/se_black" app:layout_constraintStart_toEndOf="@+id/tvWholeTime_"
+              android:layout_marginStart="12dp"
+              app:layout_constraintBottom_toBottomOf="@+id/tvWholeTime_"/>
+
+    <TextView android:layout_width="0dp" android:layout_height="wrap_content" tools:text="+1분"
+              android:textSize="@dimen/proc_timeset_additional_info_tv_size"
+              android:id="@+id/tvWholeTime"
+              android:textColor="@color/se_black"
+              android:layout_marginEnd="14dp"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintBottom_toBottomOf="@+id/tvOverTime"/>
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" tools:text="10:57 AM"
+              android:textSize="@dimen/proc_timeset_additional_info_tv_size" android:textColor="@color/se_black"
+              android:id="@+id/tvEndTime"
+              app:layout_constraintStart_toEndOf="@+id/tvEndTime_" android:layout_marginStart="12dp"
+              app:layout_constraintBottom_toBottomOf="@+id/tvEndTime_"/>
+
+
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="전체 시간"
+              android:textSize="@dimen/proc_timeset_additional_info_tv_size" android:layout_marginBottom="8dp"
+              app:layout_constraintBottom_toTopOf="@+id/tvEndTime_" android:id="@+id/tvWholeTime_"
+              app:layout_constraintStart_toStartOf="@+id/rvHTRV" android:textColor="@color/se_black"/>
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="종료 예정"
+              android:textSize="@dimen/proc_timeset_additional_info_tv_size" android:textColor="@color/se_black"
+              app:layout_constraintBottom_toTopOf="@+id/view" app:layout_constraintStart_toStartOf="@+id/rvHTRV"
+              android:id="@+id/tvEndTime_" android:layout_marginBottom="20dp"/>
+
+    <View android:layout_width="wrap_content" android:layout_height="1dp" android:background="@color/se_black"
+          app:layout_constraintBottom_toTopOf="@+id/rvHTRV" app:layout_constraintStart_toStartOf="@+id/rvHTRV"
+          android:layout_marginBottom="20dp" android:id="@+id/view"/>
+
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="메모>" android:textColor="@color/se_white"
+            android:textSize="@dimen/proc_timeset_additional_info_tv_size"
+            android:background="@drawable/bg_memo" android:id="@+id/tvMemo"
+
+            app:layout_constraintBottom_toBottomOf="@+id/rvHTRV" app:layout_constraintTop_toTopOf="@+id/rvHTRV"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+
+    <com.timer.util.HorizontalTimesetRecyclerView
+            android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/rvHTRV"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="@dimen/proc_timeset_left_margin"
+            app:layout_constraintBottom_toTopOf="@+id/ivBell" android:layout_marginBottom="24dp">
+
+    </com.timer.util.HorizontalTimesetRecyclerView>
+
+    <TextView android:layout_width="wrap_content" android:textSize="@dimen/proc_timeset_additional_info_tv_size" android:textColor="@color/se_black"
+              android:layout_height="wrap_content" tools:text="기본음" app:layout_constraintStart_toEndOf="@+id/ivBell"
+              android:layout_marginStart="12dp" android:id="@+id/tvBell"
+              app:layout_constraintTop_toTopOf="@+id/ivBell" app:layout_constraintBottom_toBottomOf="@+id/ivBell"/>
+
+    <TextView android:layout_width="wrap_content" android:textSize="@dimen/proc_timeset_additional_info_tv_size" android:textColor="@color/se_black"
+              android:layout_height="wrap_content" tools:text="기본음" app:layout_constraintStart_toEndOf="@+id/ivComment"
+              android:layout_marginStart="12dp" android:id="@+id/tvComment"
+              app:layout_constraintTop_toTopOf="@+id/ivComment" app:layout_constraintBottom_toBottomOf="@+id/ivComment"/>
+
+    <ImageView
+            android:layout_width="@dimen/proc_timeset_additional_info_iv_size"
+            android:layout_height="@dimen/proc_timeset_additional_info_iv_size" android:src="@drawable/ic_tmp" android:id="@+id/ivBell"
+            android:layout_marginBottom="8dp" app:layout_constraintBottom_toTopOf="@+id/ivComment"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="@dimen/proc_timeset_left_margin"/>
+    <ImageView
+            android:layout_width="@dimen/proc_timeset_additional_info_iv_size"
+            android:layout_height="@dimen/proc_timeset_additional_info_iv_size" android:src="@drawable/ic_tmp" android:id="@+id/ivComment"
+            android:layout_marginBottom="128dp" app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="@dimen/proc_timeset_left_margin"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

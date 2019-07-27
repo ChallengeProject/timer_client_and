@@ -7,9 +7,11 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.timer.R
+import com.timer.timeset.proc.ProcTimeSetFragment
 
 class MainActivity : AppCompatActivity() {
     private val mainFragment = MainFragment()
+    private val procTimeSetFragment = ProcTimeSetFragment() // TODO need to remove
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,7 +27,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun addMainFragment() {
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.add(R.id.container, mainFragment)
+        transaction.add(R.id.container, procTimeSetFragment) // TODO need to changed
         transaction.commit()
     }
 }
