@@ -1,5 +1,6 @@
 package com.timer.timeset.proc
 
+import android.graphics.Point
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,9 +12,15 @@ import com.timer.util.TimesetBadgeType
 import com.timer.util.i
 import kotlinx.android.synthetic.main.fragment_proc_timeset.*
 
+
 class ProcTimeSetFragment : Fragment() {
 
     val TAG = "ProcTimeSetFragment"
+
+    lateinit var times: ArrayList<Int>
+    lateinit var cdt: PreciseCountdown
+
+    var deviceWidth = -1
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_proc_timeset, container, false)
@@ -23,9 +30,27 @@ class ProcTimeSetFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        rvHTRV.addTimesetBadge(TimesetBadge(second = 2, type = TimesetBadgeType.NORMAL))
-        rvHTRV.addTimesetBadge(TimesetBadge(second = 82, type = TimesetBadgeType.NORMAL))
-        rvHTRV.addTimesetBadge(TimesetBadge(second = 182, type = TimesetBadgeType.NORMAL))
+        initDeviceSpec()
+        initProperties()
+        initViews()
+    }
+
+    fun initDeviceSpec() {
+        val display = activity!!.windowManager.defaultDisplay
+        val size = Point()
+        display.getSize(size)
+        deviceWidth = size.x
+    }
+
+    fun initProperties() {
+        times = arrayListOf(30, 40, 50, 150)
+    }
+
+    fun initViews() {
+
+        times.forEach {
+            rvHTRV.addTimesetBadge(TimesetBadge(second = it, type = TimesetBadgeType.NORMAL))
+        }
 
         tvTopExplain.text = "기본음"
 
@@ -39,13 +64,27 @@ class ProcTimeSetFragment : Fragment() {
         tvComment.text = "코맨트"
 
         btCancel.setOnClickListener { _ ->
-            rvHTRV.showTopIcon()
+            rvHTRV.showTopIconAndGetTopIconPos()
+
+            showSkipView(rvHTRV.latelyMidPosX)
         }
 
-        rvHTRV.onBadgeSelectedListener =  { pos , topIconXCoordinate->
-            "$pos $topIconXCoordinate".i(TAG)
-
+        rvHTRV.onBadgeSelectedListener = { pos ->
+            "onBadgeSelectedListener callback $pos".i(TAG)
         }
 
     }
+
+    /**
+     * show skip view with calculate X position
+     */
+    fun showSkipView(midPos: Int) {
+        clSkipTimerMessage.visibility = View.VISIBLE
+        var rst = deviceWidth - midPos - clSkipTimerMessage.width / 2
+        if (rst + clSkipTimerMessage.width > deviceWidth) rst = deviceWidth - clSkipTimerMessage.width
+        val p = clSkipTimerMessage.layoutParams as ViewGroup.MarginLayoutParams
+        p.setMargins(0, 0, rst, 0)
+        clSkipTimerMessage.requestLayout()
+    }
+
 }

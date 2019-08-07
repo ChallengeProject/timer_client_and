@@ -11,13 +11,13 @@ class HorizontalTimesetRecyclerView : RecyclerView {
     lateinit var timesetBadgeAdapter: TimesetBadgeAdapter
 
     /**
-     * return (pos , topIconXCoordinate)
-     * if not focus with topIcon, second return value -1
-     *
+     * return (pos)
      */
-    var onBadgeSelectedListener: ((Int,Int) -> Unit)? = null
+    var onBadgeSelectedListener: ((Int) -> Unit)? = null
 
-    var latelyPos = 0
+    private var latelyPos = 0
+
+    var latelyMidPosX = 0 // use calculate skip view
 
     constructor(context: Context) : this(context, null) {
         initHorizontalTimesetList(context)
@@ -31,9 +31,10 @@ class HorizontalTimesetRecyclerView : RecyclerView {
         initHorizontalTimesetList(context)
     }
 
-    fun showTopIcon(){
-        if(timesetBadgeAdapter.getBadge(latelyPos).type == TimesetBadgeType.FOCUS)
+    fun showTopIconAndGetTopIconPos() {
+        if (timesetBadgeAdapter.getBadge(latelyPos).type == TimesetBadgeType.FOCUS) {
             timesetBadgeAdapter.setTopIconOnFocus(latelyPos)
+        }
     }
 
     private fun initHorizontalTimesetList(context: Context) {
@@ -43,15 +44,27 @@ class HorizontalTimesetRecyclerView : RecyclerView {
         }
         this.layoutManager = linearLayoutManager
         timesetBadgeAdapter =
-            TimesetBadgeAdapter(context, { pos ->
+            TimesetBadgeAdapter(context) { pos, view ->
                 timesetBadgeAdapter.resetFocus(pos)
                 latelyPos = pos
+
                 this.smoothScrollToPosition(pos)
-                onBadgeSelectedListener?.invoke(latelyPos,-1)
-            }, {
-                onBadgeSelectedListener?.invoke(latelyPos,it)
+
+                /**
+                 * get mid position of selected badge for draw skip view
+                 * adjust delay 100 ms for wait animation move delay time
+                 * [latelyMidPosX] will use from outer place that use this recyclerview for set skip view's X position
+                 */
+                postDelayed({
+                    val locationArr = intArrayOf(0, 0)
+                    view.getLocationOnScreen(locationArr)
+
+                    latelyMidPosX = locationArr[0] + view.width/2
+                    onBadgeSelectedListener?.invoke(latelyPos)
+                },100)
+
             }
-            )
+
         this.adapter = timesetBadgeAdapter
         this.smoothScrollToPosition(0)
     }

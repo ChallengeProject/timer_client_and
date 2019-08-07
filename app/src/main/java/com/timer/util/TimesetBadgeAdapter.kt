@@ -2,7 +2,6 @@ package com.timer.util
 
 import android.content.Context
 import android.graphics.Color
-import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,8 +11,7 @@ import kotlinx.android.synthetic.main.item_timeset_badge.view.*
 
 class TimesetBadgeAdapter(
     val context: Context,
-    val clickedPosCb: (Int) -> Unit,
-    val topIconPosYCb: (Int) -> Unit
+    val clickedCb: (Int, View) -> Unit
 ) : RecyclerView.Adapter<TimesetBadgeAdapter.VH>() {
 
     private var items = mutableListOf<TimesetBadge>()
@@ -26,7 +24,7 @@ class TimesetBadgeAdapter(
     fun getBadge(pos: Int) = items[pos]
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
-        return VH(LayoutInflater.from(context).inflate(R.layout.item_timeset_badge, parent, false), clickedPosCb)
+        return VH(LayoutInflater.from(context).inflate(R.layout.item_timeset_badge, parent, false), clickedCb)
     }
 
     /**
@@ -63,13 +61,6 @@ class TimesetBadgeAdapter(
                 holder.ivTopIcon.visibility = View.INVISIBLE
             else if (items[position].type == TimesetBadgeType.FOCUS_WITH_TOP_ICON) {
                 holder.ivTopIcon.visibility = View.VISIBLE
-
-                // Use handler for call after complete draw
-                Handler().postDelayed({
-                    val locationArr = intArrayOf(0, 0) // idx 0 = x     idx 1 = y
-                    holder.ivTopIcon.getLocationOnScreen(locationArr)
-                    topIconPosYCb.invoke(locationArr[0])
-                }, 10)
             }
         }
 
@@ -88,10 +79,10 @@ class TimesetBadgeAdapter(
         }
     }
 
-    inner class VH(view: View, cb: (Int) -> Unit) : RecyclerView.ViewHolder(view) {
+    inner class VH(view: View, cb: (Int, View) -> Unit) : RecyclerView.ViewHolder(view) {
         init {
             itemView.setOnClickListener {
-                cb.invoke(adapterPosition)
+                cb.invoke(adapterPosition, itemView)
             }
         }
 

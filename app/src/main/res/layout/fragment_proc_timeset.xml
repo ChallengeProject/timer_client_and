@@ -51,7 +51,7 @@
               android:layout_marginStart="12dp"
               app:layout_constraintBottom_toBottomOf="@+id/tvWholeTime_"/>
 
-    <TextView android:layout_width="0dp" android:layout_height="wrap_content" tools:text="+1분"
+    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:text="+1분"
               android:textSize="@dimen/proc_timeset_additional_info_tv_size"
               android:id="@+id/tvAddTime"
               android:textColor="@color/se_black"
@@ -152,8 +152,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="300dp" android:layout_height="wrap_content" android:id="@+id/clSkipTimerMessage"
-            android:background="@drawable/black_border_box" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="8dp" android:visibility="invisible"
+            android:background="@drawable/black_border_box" app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginRight="8dp" android:visibility="invisible"
             app:layout_constraintBottom_toTopOf="@+id/rvHTRV">
 
         <TextView android:layout_width="0dp" android:layout_height="wrap_content"
