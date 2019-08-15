@@ -2,7 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools" package="com.timer">
 
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
     <application
+            android:name=".util.App"
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
@@ -16,6 +19,28 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <activity android:name=".timeset.proc.TimingActivity"
+                  android:launchMode="singleTask"
+        />
+
+        <service
+                android:name=".timeset.proc.TimingService"
+                android:enabled="true"
+                android:exported="true" >
+
+            <intent-filter>
+                <action android:name="RESTART"/>
+                <action android:name="PAUSE"/>
+                <action android:name="SOUND_OFF"/>
+                <action android:name="STOP"/>
+                <action android:name="REMAIN_SEC"/>
+                <action android:name="ROUND"/>
+                <action android:name="REPEAT"/>
+
+            </intent-filter>
+        </service>
+
     </application>
 
 </manifest>

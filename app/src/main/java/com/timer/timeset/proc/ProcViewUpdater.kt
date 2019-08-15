@@ -34,7 +34,8 @@ class ProcViewUpdater(val act: Activity) {
     }
 
     fun setTopNotiReadyCnt(cnt: Int) {
-        setTopNoti(View.VISIBLE, "${cnt}회 반복")
+        setTopNoti(View.VISIBLE, "시작 ${cnt}초 전")
+        if(cnt == 0) hideTopNoti()
     }
 
     fun hideTopNoti() {
@@ -42,7 +43,7 @@ class ProcViewUpdater(val act: Activity) {
     }
 
     fun setTime(str: String) {
-        act.tvTimeSetName.text = str
+        act.tvTime.text = str
     }
 
     fun setTimeSetName(str: String) {
@@ -65,6 +66,10 @@ class ProcViewUpdater(val act: Activity) {
     }
 
     fun setAddTime(min: Int) {
+        if(min==0) {
+            hideAddTime()
+            return
+        }
         act.tvAddTime.visibility = View.VISIBLE
         act.tvAddTime.text = "+${min}분"
     }
@@ -92,7 +97,7 @@ class ProcViewUpdater(val act: Activity) {
         }
     }
 
-    // call from [ rvHTRV.onTouch listener , onBadgeSelectedListener ]
+    // call from [ rvHTRV.onTouch listener in this class ] + alpha
     fun hideSkipMessage() {
         act.clSkipTimerMessage.visibility = View.INVISIBLE
         act.rvHTRV.hideDownArrow()
@@ -163,7 +168,7 @@ class ProcViewUpdater(val act: Activity) {
         act.clMemoSpace.visibility = View.INVISIBLE
     }
 
-    fun showOnlyMemo() {
+    fun showMemoOnly() {
         showMemo()
         hideBottomButton()
     }

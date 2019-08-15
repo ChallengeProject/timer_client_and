@@ -1,5 +1,6 @@
 package com.timer.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -11,6 +12,7 @@ import com.timer.R
 import com.timer.home.HomeFragment
 import com.timer.settings.SettingsFragment
 import com.timer.timeset.local.LocalTimeSetListFragment
+import com.timer.timeset.proc.TimingActivity
 import com.timer.timeset.remote.SharedTimeSetListFragment
 import com.timer.toolbar.ToolbarButtonType
 import com.timer.toolbar.ToolbarFragment
@@ -45,7 +47,21 @@ class MainFragment : Fragment(), BottomNavigationView.OnNavigationItemSelectedLi
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_home -> changeFragment(homeFragment)
-            R.id.action_local_time_set -> changeFragment(localTimeSetListFragment)
+            R.id.action_local_time_set -> {
+                //changeFragment(localTimeSetListFragment)
+
+                val times = arrayListOf(
+                    8,
+                    8
+                )
+
+                val readySec = 3
+
+                startActivity(Intent(activity, TimingActivity::class.java).apply{
+                    putIntegerArrayListExtra(TimingActivity.TIMES,times)
+                    putExtra(TimingActivity.READY_SEC,readySec)
+                })
+            }
             R.id.action_shared_time_set -> changeFragment(sharedTimeSetListFragment)
         }
 

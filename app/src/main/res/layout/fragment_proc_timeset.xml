@@ -5,6 +5,7 @@
         android:layout_height="match_parent" android:background="@color/se_white">
 
     <TextView android:layout_width="match_parent" android:layout_height="60dp" android:background="#F1F1F1"
+              android:visibility="gone"
               android:text="임시 notification  공간" app:layout_constraintTop_toTopOf="parent"
               android:id="@+id/tmpNotificationSpace"/>
 
@@ -42,15 +43,15 @@
 
         <TextView android:layout_width="wrap_content" android:layout_height="match_parent" tools:text="+3분"
                   android:textSize="@dimen/proc_timeset_additional_info_tv_size" android:textColor="@color/se_red"
-                  android:id="@+id/tvOverTime" android:layout_toRightOf="@id/tvWholeTime" android:gravity="center"
+                  android:id="@+id/tvAddTime" android:layout_toRightOf="@id/tvWholeTime" android:gravity="center"
                   android:layout_marginStart="10dp"
         />
 
         <ImageView
                 android:layout_width="@dimen/proc_timeset_additional_info_iv_size"
                 android:layout_height="@dimen/proc_timeset_additional_info_iv_size"
-                android:src="@drawable/btn_repeat"
-                android:id="@+id/ivRepeat" android:layout_toLeftOf="@id/tvAddTime" android:layout_marginRight="22dp"
+                android:src="@drawable/btn_repeat_inactivation"
+                android:id="@+id/ivRepeat" android:layout_toLeftOf="@id/tvAddTime_" android:layout_marginRight="22dp"
         />
         <TextView android:layout_width="wrap_content" android:layout_height="match_parent" android:gravity="center"
                   android:text="전체 시간" android:textSize="@dimen/proc_timeset_additional_info_tv_size"
@@ -65,7 +66,7 @@
 
         <TextView android:layout_width="wrap_content" android:layout_height="match_parent" android:gravity="center"
                   android:text="+1분" android:textSize="@dimen/proc_timeset_additional_info_tv_size"
-                  android:id="@+id/tvAddTime"
+                  android:id="@+id/tvAddTime_"
                   android:textColor="@color/se_black" android:layout_alignParentRight="true"
                   android:layout_marginRight="14dp"
         />
@@ -141,28 +142,6 @@
 
 
     </RelativeLayout>
-
-
-    <!--<LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"-->
-    <!--android:padding="16dp" android:visibility="visible" android:id="@+id/llMemoMessage"-->
-    <!--android:background="@drawable/bg_black_border_white_box" android:orientation="horizontal"-->
-    <!--android:layout_marginBottom="8dp" app:layout_constraintBottom_toTopOf="@+id/tvMemo"-->
-    <!--app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp">-->
-
-    <!--<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"-->
-    <!--android:text="시간이 왜 더 필요했는지, 기록해보세요 :)" android:id="@+id/tvMemoMessage"-->
-    <!--android:textColor="@color/se_black" android:textSize="@dimen/proc_timeset_additional_info_tv_size"-->
-    <!--/>-->
-
-    <!--<Space android:layout_width="8dp" android:layout_height="0dp"/>-->
-
-    <!--<ImageView android:layout_width="@dimen/proc_timeset_additional_info_iv_size"-->
-    <!--android:layout_height="@dimen/proc_timeset_additional_info_iv_size"-->
-    <!--android:src="@drawable/ic_tmp" android:id="@+id/ivMemoOk"-->
-    <!--/>-->
-
-
-    <!--</LinearLayout>-->
 
     <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
                   android:orientation="vertical" android:id="@+id/llMemoWriteMessage"
@@ -290,7 +269,7 @@
 
     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                   android:id="@+id/llBottomButtion" android:orientation="horizontal" android:visibility="visible"
-                  android:paddingLeft="22dp" android:paddingRight="22dp" android:paddingBottom="13.5dp"
+                  android:paddingLeft="22dp" android:paddingRight="22dp" android:layout_marginBottom="13.5dp"
                   app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintLeft_toLeftOf="parent"
     >
 
@@ -315,7 +294,7 @@
                     app:layout_constraintBottom_toBottomOf="parent" android:layout_marginLeft="22dp"
                     android:layout_marginRight="22dp" android:visibility="invisible"
                     app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginBottom="14dp" android:id="@+id/rlBottomDialog">
+                    android:layout_marginBottom="11dp" android:id="@+id/rlBottomDialog">
 
         <TextView android:layout_width="wrap_content" android:layout_height="match_parent"
                   android:gravity="center_vertical" android:layout_marginLeft="14.5dp"

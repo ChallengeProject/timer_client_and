@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+    <TextView
+            android:id="@+id/notiTvTimeSetName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="38.5dp"
+            android:layout_marginTop="9.5dp"
+            android:text="내 타임셋"
+            android:textColor="@android:color/black"
+            android:textSize="9.5dp" />
+
+    <TextView
+            android:id="@+id/notiTvTimer"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/proc_timeset_additional_info_iv_size"
+            android:gravity="center_vertical"
+            android:layout_below="@id/notiTvTimeSetName"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="38.5dp"
+            android:layout_marginBottom="11.5dp"
+            android:text="00:00:28"
+            android:textColor="@android:color/black"
+            android:textSize="17dp" />
+
+    <TextView
+            android:id="@+id/notiTvRepeat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/notiTvTimer"
+            android:layout_alignBottom="@id/notiTvTimer"
+            android:layout_marginStart="16dp"
+            android:layout_toRightOf="@id/notiIvTimerIcon"
+            android:gravity="center"
+            android:textSize="9.5dp"
+            android:text="abcd"
+            android:textColor="@android:color/black" />
+
+    <ImageView
+            android:id="@+id/notiIvTimerIcon"
+            android:layout_width="@dimen/proc_timeset_additional_info_iv_size"
+            android:layout_height="@dimen/proc_timeset_additional_info_iv_size"
+            android:layout_alignTop="@id/notiTvTimer"
+            android:layout_toRightOf="@id/notiTvTimer"
+            android:src="@drawable/icon_timer" />
+
+    <ImageButton
+            android:id="@+id/notiIvCtrlPlay"
+            android:layout_width="@dimen/proc_timeset_additional_info_iv_size"
+            android:layout_height="match_parent"
+            android:layout_marginRight="9.5dp"
+            android:layout_toLeftOf="@id/notiIvCtrlClose"
+            android:background="@null"
+            android:src="@drawable/btn_play" />
+
+    <ImageButton
+            android:id="@+id/notiIvCtrlPause"
+            android:layout_width="@dimen/proc_timeset_additional_info_iv_size"
+            android:layout_height="match_parent"
+            android:layout_marginRight="9.5dp"
+            android:layout_toLeftOf="@id/notiIvCtrlClose"
+            android:background="@null"
+            android:src="@drawable/btn_pause" />
+
+    <ImageView
+            android:id="@+id/notiIvCtrlClose"
+            android:layout_width="@dimen/proc_timeset_additional_info_iv_size"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="19dp"
+            android:background="@null"
+            android:src="@drawable/btn_close" />
+
+</RelativeLayout>

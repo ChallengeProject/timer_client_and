@@ -1,6 +1,7 @@
 package com.timer.util
 
 import android.util.Log
+import android.widget.Toast
 import java.util.concurrent.TimeUnit
 
 fun Any.i(tag : String = ""){
@@ -19,4 +20,8 @@ fun Long.toTimeStr():String{
  */
 fun Int.x1000L():Long {
     return this*1000L
+}
+
+fun String.toast( duration: Int = Toast.LENGTH_LONG): Toast {
+    return Toast.makeText(App.get, this, duration).apply { show()  }
 }

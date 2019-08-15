@@ -16,6 +16,7 @@ class HorizontalTimesetRecyclerView : RecyclerView {
     var onBadgeSelectedListener: ((Int) -> Unit)? = null
 
     private var latelyPos = 0
+    private var focusPos = -1
 
     var latelyMidPosX = 0 // use calculate skip view
 
@@ -37,12 +38,19 @@ class HorizontalTimesetRecyclerView : RecyclerView {
         }
     }
 
-    fun hideDownArrow(){
+    fun hideDownArrow() {
         if (timesetBadgeAdapter.getBadge(latelyPos).type == TimesetBadgeType.FOCUS_WITH_TOP_ICON) {
             timesetBadgeAdapter.hideDownArrowToPosition(latelyPos)
         }
     }
 
+    fun getLatelyPos() = latelyPos
+    fun getFocusPos() = focusPos
+
+    fun setFocus(pos: Int) {
+        focusPos = pos
+        timesetBadgeAdapter.resetFocus(pos)
+    }
 
     private fun initHorizontalTimesetList(context: Context) {
 
@@ -52,11 +60,11 @@ class HorizontalTimesetRecyclerView : RecyclerView {
         this.layoutManager = linearLayoutManager
         timesetBadgeAdapter =
             TimesetBadgeAdapter(context) { pos, view ->
-                timesetBadgeAdapter.resetFocus(pos)
+                // call when clicked badge
+
+//                timesetBadgeAdapter.resetFocus(pos)
                 latelyPos = pos
-
                 this.smoothScrollToPosition(pos)
-
                 /**
                  * get mid position of selected badge for draw skip view
                  * adjust delay 150 ms for wait animation move delay time
@@ -66,9 +74,9 @@ class HorizontalTimesetRecyclerView : RecyclerView {
                     val locationArr = intArrayOf(0, 0)
                     view.getLocationOnScreen(locationArr)
 
-                    latelyMidPosX = locationArr[0] + view.width/2
+                    latelyMidPosX = locationArr[0] + view.width / 2
                     onBadgeSelectedListener?.invoke(latelyPos)
-                },150)
+                }, 150)
 
             }
 
