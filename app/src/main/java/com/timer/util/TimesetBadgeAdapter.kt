@@ -36,9 +36,16 @@ class TimesetBadgeAdapter(
         notifyItemChanged(position)
     }
 
-    fun setTopIconOnFocus(position: Int) {
+    fun setDownArrowToPosition(position: Int) {
         if (items[position].type == TimesetBadgeType.FOCUS) {
             items[position].type = TimesetBadgeType.FOCUS_WITH_TOP_ICON
+            notifyItemChanged(position)
+        }
+    }
+
+    fun hideDownArrowToPosition(position: Int) {
+        if (items[position].type == TimesetBadgeType.FOCUS_WITH_TOP_ICON) {
+            items[position].type = TimesetBadgeType.FOCUS
             notifyItemChanged(position)
         }
     }

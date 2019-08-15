@@ -31,11 +31,18 @@ class HorizontalTimesetRecyclerView : RecyclerView {
         initHorizontalTimesetList(context)
     }
 
-    fun showTopIconAndGetTopIconPos() {
+    fun showDownArrowAndUpdateDownArrowPos() {
         if (timesetBadgeAdapter.getBadge(latelyPos).type == TimesetBadgeType.FOCUS) {
-            timesetBadgeAdapter.setTopIconOnFocus(latelyPos)
+            timesetBadgeAdapter.setDownArrowToPosition(latelyPos)
         }
     }
+
+    fun hideDownArrow(){
+        if (timesetBadgeAdapter.getBadge(latelyPos).type == TimesetBadgeType.FOCUS_WITH_TOP_ICON) {
+            timesetBadgeAdapter.hideDownArrowToPosition(latelyPos)
+        }
+    }
+
 
     private fun initHorizontalTimesetList(context: Context) {
 

@@ -13,7 +13,7 @@
               android:layout_height="19dp" android:paddingLeft="15dp" android:paddingTop="3dp"
               android:paddingRight="15dp" tools:text="시작 5초 전"
               app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="@dimen/proc_timeset_left_margin"
-              android:id="@+id/tvTopExplain"
+              android:id="@+id/tvTopNotification"
               app:layout_constraintTop_toBottomOf="@+id/tmpNotificationSpace" android:layout_marginTop="23dp"/>
     <TextView
             tools:text="타임셋 명" android:textColor="@color/se_black" android:textSize="14dp"
@@ -41,7 +41,7 @@
     >
 
         <TextView android:layout_width="wrap_content" android:layout_height="match_parent" tools:text="+3분"
-                  android:textSize="@dimen/proc_timeset_additional_info_tv_size" android:textColor="#ACACAC"
+                  android:textSize="@dimen/proc_timeset_additional_info_tv_size" android:textColor="@color/se_red"
                   android:id="@+id/tvOverTime" android:layout_toRightOf="@id/tvWholeTime" android:gravity="center"
                   android:layout_marginStart="10dp"
         />
@@ -120,23 +120,23 @@
         <ImageView
                 android:layout_width="@dimen/proc_timeset_additional_info_iv_size"
                 android:layout_height="@dimen/proc_timeset_additional_info_iv_size" android:src="@drawable/icon_sound"
-                android:id="@+id/ivBell"
+                android:id="@+id/ivAlarm"
         />
         <ImageView
                 android:layout_width="@dimen/proc_timeset_additional_info_iv_size"
                 android:layout_height="@dimen/proc_timeset_additional_info_iv_size" android:src="@drawable/icon_comment"
-                android:id="@+id/ivComment" android:layout_below="@id/ivBell"
+                android:id="@+id/ivComment" android:layout_below="@id/ivAlarm"
         />
 
         <TextView android:layout_width="wrap_content" android:textSize="@dimen/proc_timeset_additional_info_tv_size"
-                  android:textColor="@color/se_black" tools:text="기본음" android:id="@+id/tvBell"
+                  android:textColor="@color/se_black" tools:text="기본음" android:id="@+id/tvAlarm"
                   android:layout_height="@dimen/proc_timeset_additional_info_iv_size" android:gravity="center"
-                  android:layout_toRightOf="@id/ivBell" android:layout_marginLeft="5dp"
+                  android:layout_toRightOf="@id/ivAlarm" android:layout_marginLeft="5dp"
         />
         <TextView android:layout_width="wrap_content" android:textSize="@dimen/proc_timeset_additional_info_tv_size"
                   android:textColor="@color/se_black" tools:text="코멘트" android:id="@+id/tvComment"
                   android:layout_marginLeft="5dp" android:layout_height="@dimen/proc_timeset_additional_info_iv_size"
-                  android:layout_below="@id/tvBell" android:layout_toRightOf="@id/ivComment" android:gravity="center"
+                  android:layout_below="@id/tvAlarm" android:layout_toRightOf="@id/ivComment" android:gravity="center"
         />
 
 
@@ -248,7 +248,7 @@
             android:background="@color/se_white" app:layout_constraintStart_toStartOf="parent"
             android:visibility="invisible" android:layout_marginStart="@dimen/proc_timeset_left_margin"
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toBottomOf="@+id/tvTime"
-            app:layout_constraintBottom_toTopOf="@+id/llBottomButtions">
+            app:layout_constraintBottom_toTopOf="@+id/llBottomButtion">
 
         <View android:layout_width="match_parent" android:layout_height="1dp" android:id="@+id/vMemoLine_"
               android:background="@color/se_black" app:layout_constraintTop_toTopOf="parent"
@@ -269,18 +269,27 @@
                 app:layout_constraintTop_toBottomOf="@+id/etMemo" android:layout_marginTop="8dp"/>
 
         <TextView
-                android:text="0/1000 bytes" android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:id="@+id/tvRemainBytes" app:layout_constraintTop_toBottomOf="@+id/etMemo"
+                android:text="/1000 bytes" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:id="@+id/tvRemainByte_" app:layout_constraintTop_toBottomOf="@+id/etMemo"
                 android:textColor="@color/se_black"
                 android:textSize="@dimen/proc_timeset_additional_info_tv_size"
                 app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
                 android:layout_marginTop="8dp"/>
 
+
+        <TextView
+                android:text="0" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:id="@+id/tvRemainByte"
+                android:textColor="@color/se_black"
+                android:textSize="@dimen/proc_timeset_additional_info_tv_size"
+                app:layout_constraintEnd_toStartOf="@+id/tvRemainByte_"
+                app:layout_constraintTop_toTopOf="@+id/tvRemainByte_"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-                  android:id="@+id/llBottomButtions" android:orientation="horizontal" android:visibility="visible"
+                  android:id="@+id/llBottomButtion" android:orientation="horizontal" android:visibility="visible"
                   android:paddingLeft="22dp" android:paddingRight="22dp" android:paddingBottom="13.5dp"
                   app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintLeft_toLeftOf="parent"
     >
@@ -320,6 +329,7 @@
 
         <TextView android:layout_width="wrap_content" android:layout_height="match_parent"
                   android:text="1/2" android:textColor="@color/se_deepGray" android:textSize="9.5dp"
+                  android:id="@+id/tvBottomDialogSubText"
                   android:gravity="center_vertical" android:layout_toRightOf="@id/ivBottomDialogTimerIcon_"
         />
 
