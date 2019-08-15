@@ -61,6 +61,8 @@ class TimingActivity : AppCompatActivity() {
 
     fun initProperties() {
         times = intent.getIntegerArrayListExtra(TIMES)
+
+        "initProperties ${times}".i()
         readySec = intent.getIntExtra(READY_SEC, 5)
 
     }
@@ -71,7 +73,7 @@ class TimingActivity : AppCompatActivity() {
             rvHTRV.addTimesetBadge(TimesetBadge(second = it, type = TimesetBadgeType.NORMAL))
         }
 
-        tvTopNotification.text = "시작 5초 전"
+//        tvTopNotification.text = "시작 5초 전"
 
         tvTime.text = "00:00:00"
         tvTimeSetName.text = "타임셋명"
@@ -92,6 +94,7 @@ class TimingActivity : AppCompatActivity() {
                     CMD_BRD.ROUND -> {
                         val round = intent.getIntExtra(CMD_BRD.MSG,0)
                         if(rvHTRV.getFocusPos() != round) {
+                            updater.hideSkipMessage()
                             rvHTRV.setFocus(round)
                             updater.showBottomDialogTimeEndMessage(round,times.size)
                         }
@@ -176,7 +179,8 @@ class TimingActivity : AppCompatActivity() {
 
         rvHTRV.onBadgeSelectedListener = { pos ->
             "onBadgeSelectedListener callback $pos".i(TAG)
-            updater.showSkipMessage(pos)
+            updater.hideSkipMessage()
+            updater.showSkipMessage(rvHTRV.latelyMidPosX)
         }
 
         llSkipTimerMessageO.setOnClickListener{

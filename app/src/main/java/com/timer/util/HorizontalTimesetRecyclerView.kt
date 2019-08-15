@@ -33,15 +33,13 @@ class HorizontalTimesetRecyclerView : RecyclerView {
     }
 
     fun showDownArrowAndUpdateDownArrowPos() {
-        if (timesetBadgeAdapter.getBadge(latelyPos).type == TimesetBadgeType.FOCUS) {
+//        if (timesetBadgeAdapter.getBadge(latelyPos).type == TimesetBadgeType.FOCUS) {
             timesetBadgeAdapter.setDownArrowToPosition(latelyPos)
-        }
+//        }
     }
 
     fun hideDownArrow() {
-        if (timesetBadgeAdapter.getBadge(latelyPos).type == TimesetBadgeType.FOCUS_WITH_TOP_ICON) {
-            timesetBadgeAdapter.hideDownArrowToPosition(latelyPos)
-        }
+        timesetBadgeAdapter.hideDownArrow()
     }
 
     fun getLatelyPos() = latelyPos

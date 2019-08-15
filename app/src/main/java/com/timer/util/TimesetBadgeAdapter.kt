@@ -40,13 +40,22 @@ class TimesetBadgeAdapter(
         if (items[position].type == TimesetBadgeType.FOCUS) {
             items[position].type = TimesetBadgeType.FOCUS_WITH_TOP_ICON
             notifyItemChanged(position)
+        } else if (items[position].type == TimesetBadgeType.NORMAL) {
+            items[position].type = TimesetBadgeType.NORMAL_WITH_TOP_ICON
+            notifyItemChanged(position)
         }
     }
 
-    fun hideDownArrowToPosition(position: Int) {
-        if (items[position].type == TimesetBadgeType.FOCUS_WITH_TOP_ICON) {
-            items[position].type = TimesetBadgeType.FOCUS
-            notifyItemChanged(position)
+    fun hideDownArrow() {
+
+        for (i in 0 until items.size) {
+            if (items[i].type == TimesetBadgeType.FOCUS_WITH_TOP_ICON) {
+                items[i].type = TimesetBadgeType.FOCUS
+                notifyItemChanged(i)
+            } else if (items[i].type == TimesetBadgeType.NORMAL_WITH_TOP_ICON) {
+                items[i].type = TimesetBadgeType.NORMAL
+                notifyItemChanged(i)
+            }
         }
     }
 
@@ -57,20 +66,19 @@ class TimesetBadgeAdapter(
         holder.tvName.text = items[position].getStringUsingFormat()
         holder.tvBottomNumber.text = "${position + 1}"
 
-        if (items[position].type == TimesetBadgeType.NORMAL) {
+        if (items[position].type == TimesetBadgeType.NORMAL || items[position].type == TimesetBadgeType.NORMAL_WITH_TOP_ICON) {
             holder.tvName.setTextColor(Color.BLACK)
-            holder.tvName.setBackgroundResource(0)
-            holder.ivTopIcon.visibility = View.INVISIBLE
+            holder.tvName.setBackgroundResource(R.drawable.bg_unselected_badge)
         } else {
             holder.tvName.setTextColor(Color.WHITE)
             holder.tvName.setBackgroundResource(R.drawable.bg_selected_badge)
-            if (items[position].type == TimesetBadgeType.FOCUS)
-                holder.ivTopIcon.visibility = View.INVISIBLE
-            else if (items[position].type == TimesetBadgeType.FOCUS_WITH_TOP_ICON) {
-                holder.ivTopIcon.visibility = View.VISIBLE
-            }
         }
 
+        when (items[position].type) {
+            TimesetBadgeType.FOCUS_WITH_TOP_ICON, TimesetBadgeType.NORMAL_WITH_TOP_ICON ->
+                holder.ivTopIcon.visibility = View.VISIBLE
+            TimesetBadgeType.FOCUS, TimesetBadgeType.NORMAL -> holder.ivTopIcon.visibility = View.INVISIBLE
+        }
     }
 
     /**

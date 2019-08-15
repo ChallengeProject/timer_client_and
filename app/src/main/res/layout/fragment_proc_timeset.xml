@@ -10,6 +10,7 @@
               android:id="@+id/tmpNotificationSpace"/>
 
     <TextView android:layout_width="wrap_content" android:background="@drawable/bg_black_border_white_box"
+              android:visibility="invisible"
               android:paddingBottom="3dp" android:textColor="@color/se_black" android:textSize="10dp"
               android:layout_height="19dp" android:paddingLeft="15dp" android:paddingTop="3dp"
               android:paddingRight="15dp" tools:text="시작 5초 전"

@@ -91,6 +91,7 @@ class TimingService : Service() {
             when (action) {
                 CMD_SERVICE.START_WITH_TIMERS -> {
                     times = intent.getIntegerArrayListExtra(TIMES)
+                    "CMD_SERVICE.START_WITH_TIMERS times : $times".i()
                     restart(StartType.INIT)
                 }
                 CMD_SERVICE.PAUSE -> {
@@ -255,7 +256,8 @@ class TimingService : Service() {
     override fun onDestroy() {
         super.onDestroy()
 
-        cancelTimerStatus(CancleType.INIT_ARR_CNT)
+        isRunning = false
+//        cancelTimerStatus(CancleType.INIT_ARR_CNT)
         timingService = null
     }
 

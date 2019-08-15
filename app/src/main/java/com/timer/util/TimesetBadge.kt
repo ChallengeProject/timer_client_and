@@ -18,4 +18,5 @@ enum class TimesetBadgeType {
     FOCUS,
     FOCUS_WITH_TOP_ICON,
     NORMAL,
+    NORMAL_WITH_TOP_ICON
 }

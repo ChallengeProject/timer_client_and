@@ -51,8 +51,10 @@ class MainFragment : Fragment(), BottomNavigationView.OnNavigationItemSelectedLi
                 //changeFragment(localTimeSetListFragment)
 
                 val times = arrayListOf(
-                    8,
-                    8
+                    4,
+                    5,
+                    4,
+                    5
                 )
 
                 val readySec = 3

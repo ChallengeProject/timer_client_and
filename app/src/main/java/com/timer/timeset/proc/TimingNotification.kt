@@ -28,7 +28,7 @@ class TimingNotification(val timingService: TimingService, val times: ArrayList<
 
     val TAG = "TimingNotication"
 
-    val NOTI_ID = 111
+    val NOTI_ID = 1112
 
     var isForeground = false
 
@@ -48,12 +48,17 @@ class TimingNotification(val timingService: TimingService, val times: ArrayList<
 //        "showNotification".i(TAG)
 
         if (!isForeground) {
+
+            "showNotification times ${times}".i()
+
             val notificationIntent = Intent(timingService, TimingActivity::class.java).apply {
                 putIntegerArrayListExtra(TimingActivity.TIMES, times)
             }
             notificationIntent.action = "TIMING_NOTI_ACTION"
-            val pendingIntent = PendingIntent.getActivity(timingService, 0,
-                notificationIntent, 0)
+            val pendingIntent = PendingIntent.getActivity(
+                timingService, 0,
+                notificationIntent, 0
+            )
 
             remoteViews = getRemoteView()
 
@@ -85,15 +90,20 @@ class TimingNotification(val timingService: TimingService, val times: ArrayList<
         isForeground = false
     }
 
-    fun update(timeSetName: String, timer: String, step: String, maxStep: String,
-               repeat: String, notifiactionButtonType_: NotifiactionButtonType) {
+    fun update(
+        timeSetName: String, timer: String, step: String, maxStep: String,
+        repeat: String, notifiactionButtonType_: NotifiactionButtonType
+    ) {
         "update $timeSetName $timer $step $maxStep $repeat $notifiactionButtonType_ ".i(TAG)
         notifiactionButtonType = notifiactionButtonType_
         remoteViews!!.run {
 
             setTextViewText(R.id.notiTvTimeSetName, timeSetName)
             setTextViewText(R.id.notiTvTimer, timer)
-            setTextViewText(R.id.notiTvRepeat, "$step / $maxStep / $repeat") // TODO distribute properties to each views with conditions
+            setTextViewText(
+                R.id.notiTvRepeat,
+                "$step / $maxStep / $repeat"
+            ) // TODO distribute properties to each views with conditions
 
             setViewVisibility(R.id.notiIvCtrlPlay, View.GONE)
             setViewVisibility(R.id.notiIvCtrlPause, View.GONE)
