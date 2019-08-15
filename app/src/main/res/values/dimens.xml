@@ -3,7 +3,8 @@
     <dimen name="toolbar_height">54dp</dimen>
     <dimen name="bottom_navigation_height">56dp</dimen>
 
-    <dimen name="proc_timeset_additional_info_tv_size">18dp</dimen>
-    <dimen name="proc_timeset_additional_info_iv_size">24dp</dimen>
-    <dimen name="proc_timeset_left_margin">68dp</dimen>
+    <dimen name="proc_timeset_additional_info_tv_size">11.5dp</dimen>
+    <dimen name="proc_timeset_additional_info_iv_size">34.5dp</dimen>
+    <dimen name="proc_timeset_left_margin">56.64dp</dimen>
+    <dimen name="proc_timeset_timebadge_height">29dp</dimen>
 </resources>

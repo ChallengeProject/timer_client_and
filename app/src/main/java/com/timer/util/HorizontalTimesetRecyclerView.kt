@@ -52,7 +52,7 @@ class HorizontalTimesetRecyclerView : RecyclerView {
 
                 /**
                  * get mid position of selected badge for draw skip view
-                 * adjust delay 100 ms for wait animation move delay time
+                 * adjust delay 150 ms for wait animation move delay time
                  * [latelyMidPosX] will use from outer place that use this recyclerview for set skip view's X position
                  */
                 postDelayed({
@@ -61,7 +61,7 @@ class HorizontalTimesetRecyclerView : RecyclerView {
 
                     latelyMidPosX = locationArr[0] + view.width/2
                     onBadgeSelectedListener?.invoke(latelyPos)
-                },100)
+                },150)
 
             }
 

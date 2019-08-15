@@ -1,28 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
-              android:layout_marginLeft="20dp"
-              android:layout_marginRight="20dp"
-              android:layout_width="80dp"
+              android:layout_marginLeft="14.5dp"
+              android:layout_marginRight="14.5dp"
+              android:layout_width="104dp"
               android:layout_height="wrap_content">
 
+    <!--android:layout_width="10.5dp"-->
     <ImageView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="7.5dp"
             android:visibility="invisible"
             android:id="@+id/ivTopIcon"
-            android:src="@drawable/ic_tmp"/>
+            android:src="@drawable/down_arrow"/>
     <TextView
             android:background="@drawable/bg_selected_badge"
+            android:textSize="@dimen/proc_timeset_additional_info_tv_size"
             android:textAlignment="center"
+            android:gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/proc_timeset_timebadge_height"
             android:id="@+id/tvName"/>
 
     <TextView
             android:textAlignment="center"
             android:textColor="#C2C2C2"
-            android:textSize="10dp"
+            android:textSize="@dimen/proc_timeset_additional_info_tv_size"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/tvBottomNumber"/>

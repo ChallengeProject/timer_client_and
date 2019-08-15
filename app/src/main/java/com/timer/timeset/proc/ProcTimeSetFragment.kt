@@ -52,7 +52,7 @@ class ProcTimeSetFragment : Fragment() {
             rvHTRV.addTimesetBadge(TimesetBadge(second = it, type = TimesetBadgeType.NORMAL))
         }
 
-        tvTopExplain.text = "기본음"
+        tvTopExplain.text = "시작 5초 전"
 
         tvTime.text = "01:20:00"
         tvTimeSetName.text = "타임셋명"
@@ -63,7 +63,7 @@ class ProcTimeSetFragment : Fragment() {
         tvBell.text = "기본음"
         tvComment.text = "코맨트"
 
-        btCancel.setOnClickListener { _ ->
+        btLeft.setOnClickListener { _ ->
             rvHTRV.showTopIconAndGetTopIconPos()
 
             showSkipView(rvHTRV.latelyMidPosX)

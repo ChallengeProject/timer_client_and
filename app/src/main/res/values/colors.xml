@@ -5,7 +5,13 @@
     <color name="colorAccent">#D81B60</color>
     <color name="navigationBarColor">#c2c7cc</color>
 
-    <color name="se_black">#000000</color>
+    <color name="se_black">#0a0a0a</color>
     <color name="se_white">#FFFFFF</color>
+    <color name="se_blue">#020873</color>
+    <color name="se_grayPushed">#9E9E9E</color>
+    <color name="se_gray">#dddddd</color>
+    <color name="se_deepGray">#646464</color>
+    <color name="se_red">#f24150</color>
+    <color name="se_redPushed">#C73743</color>
 
 </resources>
