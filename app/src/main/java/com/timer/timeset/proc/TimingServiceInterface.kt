@@ -45,7 +45,7 @@ class TimingServiceInterface(val ctx: Context) {
     }
 
     fun stop(){
-        service?.stop()
+        service?.stop(true)
     }
 
     fun addMin(){

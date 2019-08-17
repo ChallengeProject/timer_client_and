@@ -97,6 +97,10 @@ class ProcViewUpdater(val act: Activity) {
         }
     }
 
+    fun setBadgeFocus(pos :Int){
+        act.rvHTRV.setFocus(pos)
+    }
+
     // call from [ rvHTRV.onTouch listener in this class ] + alpha
     fun hideSkipMessage() {
         act.clSkipTimerMessage.visibility = View.INVISIBLE

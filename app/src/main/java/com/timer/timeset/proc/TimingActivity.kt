@@ -53,9 +53,10 @@ class TimingActivity : AppCompatActivity() {
         initBrd()
 
         // set end time
-        val allTime =  times.reduce { acc, i ->  acc+i }
-        if(endTimeStr.isEmpty()) endTimeStr = getEndTimeStringAfterSecond(readySec + allTime)
-        if(allTimeStr.isEmpty()) allTimeStr = allTime.x1000L().toTimeStr() // need to [if] for call from notification when remove activity status
+        val allTime = times.reduce { acc, i -> acc + i }
+        if (endTimeStr.isEmpty()) endTimeStr = getEndTimeStringAfterSecond(readySec + allTime)
+        if (allTimeStr.isEmpty()) allTimeStr =
+            allTime.x1000L().toTimeStr() // need to [if] for call from notification when remove activity status
 
     }
 
@@ -73,8 +74,6 @@ class TimingActivity : AppCompatActivity() {
             rvHTRV.addTimesetBadge(TimesetBadge(second = it, type = TimesetBadgeType.NORMAL))
         }
 
-//        tvTopNotification.text = "시작 5초 전"
-
         tvTime.text = "00:00:00"
         tvTimeSetName.text = "타임셋명"
 
@@ -85,19 +84,20 @@ class TimingActivity : AppCompatActivity() {
         tvComment.text = "코맨트"
     }
 
-    fun initBrd(){
+    fun initBrd() {
         timeBrd = object : BroadcastReceiver() {
             override fun onReceive(context: Context, intent: Intent) {
 
                 when (intent.action) {
-                    CMD_BRD.TIME -> updater.setTime( intent.getStringExtra(CMD_BRD.MSG) )
+                    CMD_BRD.TIME -> updater.setTime(intent.getStringExtra(CMD_BRD.MSG))
                     CMD_BRD.ROUND -> {
-                        val round = intent.getIntExtra(CMD_BRD.MSG,0)
-                        if(rvHTRV.getFocusPos() != round) {
-                            updater.hideSkipMessage()
-                            rvHTRV.setFocus(round)
-                            updater.showBottomDialogTimeEndMessage(round,times.size)
-                        }
+                        val round = intent.getIntExtra(CMD_BRD.MSG, 0)
+//                        if (rvHTRV.getFocusPos() != round) {
+                        updater.hideSkipMessage()
+//                        rvHTRV.setFocus(round)
+                        updater.setBadgeFocus(round)
+                        updater.showBottomDialogTimeEndMessage(round, times.size)
+//                        }
                     }
                     CMD_BRD.END -> {
 
@@ -105,30 +105,32 @@ class TimingActivity : AppCompatActivity() {
                         tvTime.text = "종료 브로드케스팅 받음"
                         endTimeStr = ""
                         allTimeStr = ""
+//                        procStatus = ProcStatus.READY
                         finish()
                     }
                     CMD_BRD.STOP -> {
 
                         // TODO
                         tvTime.text = times[0].x1000L().toTimeStr()
-                        if(TimingService.timingService != null) TimingService.timingService = null
+                        if (TimingService.timingService != null) TimingService.timingService = null
                         endTimeStr = ""
                         allTimeStr = ""
+//                        procStatus = ProcStatus.READY
                         finish()
                     }
                     CMD_BRD.REMAIN_SEC -> {
-                        val remainSecond = intent.getLongExtra(CMD_BRD.MSG,0)
+                        val remainSecond = intent.getLongExtra(CMD_BRD.MSG, 0)
                         "CMD_BRD.REMAIN_SEC : $remainSecond".i()
                         endTimeStr = getEndTimeStringAfterSecond(remainSecond.toInt())
                         updater.setEndTime(endTimeStr)
                     }
                     CMD_BRD.UPDATE_REPEAT_BTN -> {
-                        val turn = intent.getBooleanExtra(CMD_BRD.MSG,false)
+                        val turn = intent.getBooleanExtra(CMD_BRD.MSG, false)
                         isRepeat = turn
                         updater.setRepeatIcon(turn)
                     }
                     CMD_BRD.UPDATE_REPEAT_CNT -> {
-                        val repeatCnt = intent.getIntExtra(CMD_BRD.MSG,0)
+                        val repeatCnt = intent.getIntExtra(CMD_BRD.MSG, 0)
                         "CMD_BRD.UPDATE_REPEAT_CNT : $repeatCnt".i()
                         "CMD_BRD.UPDATE_REPEAT_CNT : $repeatCnt".toast()
 
@@ -141,10 +143,10 @@ class TimingActivity : AppCompatActivity() {
 
     fun initListener() {
 
-        // TODO : block push button before reading
+        // block rihgt button when pushed button in ready time
         btRight.setOnClickListener {
-            when(procStatus) {
-                ProcStatus.READY, ProcStatus.ING -> {
+            when (procStatus) {
+                ProcStatus.ING -> {
                     TimingService.timingService?.let { timingServiceInterface?.pause() }
                     procStatus = ProcStatus.PAUSE
                 }
@@ -152,15 +154,17 @@ class TimingActivity : AppCompatActivity() {
                     TimingService.timingService?.let { timingServiceInterface?.restart() }
                     procStatus = ProcStatus.ING
                 }
+                ProcStatus.READY -> "시작 준비에는 일시정지할 수 없습니다".toast()
             }
 
             updater.showBottomBtn(procStatus)
 
         }
 
-        // btLeft is Cancel button always
+        // btLeft is Cancel button always, finish app when pushed this button in ready time
         btLeft.setOnClickListener {
-            TimingService.timingService?.let { timingServiceInterface?.stop() }
+            if (procStatus == ProcStatus.READY) finish()
+            else TimingService.timingService?.let { timingServiceInterface?.stop() }
         }
 
         tvAddTime_.setOnClickListener {
@@ -183,9 +187,10 @@ class TimingActivity : AppCompatActivity() {
             updater.showSkipMessage(rvHTRV.latelyMidPosX)
         }
 
-        llSkipTimerMessageO.setOnClickListener{
+        llSkipTimerMessageO.setOnClickListener {
             moveTimeBadge(rvHTRV.getLatelyPos())
             updater.hideSkipMessage()
+
 
             procStatus = ProcStatus.ING
             updater.showBottomBtn(procStatus)
@@ -204,9 +209,11 @@ class TimingActivity : AppCompatActivity() {
 
     }
 
-    fun moveTimeBadge(pos:Int){
-        TimingService.timingService?.let { timingServiceInterface?.move(pos)}
-        addingMinute=0
+    fun moveTimeBadge(pos: Int) {
+        TimingService.timingService?.let { timingServiceInterface?.move(pos) }
+        updater.setBadgeFocus(rvHTRV.getLatelyPos())
+//        rvHTRV.setFocus(rvHTRV.getLatelyPos())
+        addingMinute = 0
         updater.setAddTime(addingMinute)
     }
 
@@ -226,6 +233,7 @@ class TimingActivity : AppCompatActivity() {
                     action = CMD_SERVICE.START_WITH_TIMERS
                 }
             startService(svcIntent)
+            updater.setBadgeFocus(0)
 
             procStatus = ProcStatus.ING
             return
@@ -263,7 +271,7 @@ class TimingActivity : AppCompatActivity() {
 
         // init view
 
-        with(updater){
+        with(updater) {
             setWholeTime(allTimeStr)
             setEndTime(endTimeStr)
             setAddTime(addingMinute)
@@ -286,10 +294,10 @@ class TimingActivity : AppCompatActivity() {
     }
 
 
-    fun getEndTimeStringAfterSecond(sec:Int) :String {
+    fun getEndTimeStringAfterSecond(sec: Int): String {
         val gCalendar = GregorianCalendar()
         format.calendar = gCalendar
-        gCalendar.add(Calendar.SECOND,sec)
+        gCalendar.add(Calendar.SECOND, sec)
         return format.format(gCalendar.time)
     }
 

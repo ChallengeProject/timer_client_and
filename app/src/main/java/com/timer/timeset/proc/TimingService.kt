@@ -101,7 +101,7 @@ class TimingService : Service() {
                     restart(StartType.RESTART)
                 }
                 CMD_SERVICE.STOP -> {
-                    stop()
+                    stop(true)
                 }
                 CMD_SERVICE.SOUND_OFF -> {
                     soundOff()
@@ -118,14 +118,14 @@ class TimingService : Service() {
     /**
      * service stop (not self stop) is only TimingActivity pass this method, broadcast
      */
-    fun stop() {
-        "stop".i(TAG)
+    fun stop(sendStopBrdMsg : Boolean) {
+        "stop , sendStopBrdMsg : $sendStopBrdMsg".i(TAG)
         cancelTimerStatus(CancleType.INIT_ARR_CNT)
         isPause = false
         stopSelf()
         timingService = null
 
-        sendBroadcast(Intent(CMD_BRD.STOP))
+        if(sendStopBrdMsg) sendBroadcast(Intent(CMD_BRD.STOP))
     }
 
     fun pause() {
@@ -183,23 +183,27 @@ class TimingService : Service() {
             override fun onFinished() {
                 isRunning = false
                 arrayCnt++
+
                 if (arrayCnt == times.size) {
                     if (isRepeat && repeatCnt < REPEAT_MAX_COUNT) {
-
                         move(0)
                         repeatCnt++
                         brdRepeatCount()
                     } else {
-                        cancelTimerStatus(CancleType.INIT_ARR_CNT)
-                        "sendBroadcast     END".i(TAG)
+                        stop(false)
+//                        cancelTimerStatus(CancleType.INIT_ARR_CNT)
+//                        "sendBroadcast     END".i(TAG)
                         sendBroadcast(Intent(CMD_BRD.END))
-                        stopSelf()
+//                        stopSelf()
                     }
 
                 } else {
                     cdt.cancel()
                     startTimer()
+                    brdRound()
                 }
+
+
             }
 
             override fun onTick(millisUntilFinished: Long) {
@@ -207,7 +211,7 @@ class TimingService : Service() {
                 val time = millisUntilFinished.toTimeStr()
                 "sendBroadcast     millisUntilFinished $millisUntilFinished     time $time".i(TAG)
 
-                brdTimeAndRound(time)
+                brdTime(time)
                 updateNotification(time, NotifiactionButtonType.PAUSE)
             }
         }
@@ -232,11 +236,14 @@ class TimingService : Service() {
      * call when rejoin activity after out activity
      */
     fun updateActViewNow() {
-        brdTimeAndRound(mTimer.toTimeStr())
+        brdTime(mTimer.toTimeStr())
     }
 
-    fun brdTimeAndRound(timeStr: String) {
+    fun brdTime(timeStr: String) {
         sendBroadcast(Intent(CMD_BRD.TIME).apply { putExtra(CMD_BRD.MSG, timeStr) })
+    }
+
+    fun brdRound(){
         sendBroadcast(Intent(CMD_BRD.ROUND).apply { putExtra(CMD_BRD.MSG, arrayCnt) })
     }
 

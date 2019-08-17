@@ -47,6 +47,7 @@ class HorizontalTimesetRecyclerView : RecyclerView {
 
     fun setFocus(pos: Int) {
         focusPos = pos
+        this.smoothScrollToPosition(pos)
         timesetBadgeAdapter.resetFocus(pos)
     }
 

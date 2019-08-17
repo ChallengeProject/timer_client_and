@@ -53,7 +53,7 @@ class MainFragment : Fragment(), BottomNavigationView.OnNavigationItemSelectedLi
                 val times = arrayListOf(
                     4,
                     5,
-                    4,
+                    8,
                     5
                 )
 

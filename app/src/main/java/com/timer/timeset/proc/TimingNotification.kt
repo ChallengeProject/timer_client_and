@@ -24,7 +24,7 @@ import com.timer.util.i
  *
  */
 
-class TimingNotification(val timingService: TimingService, val times: ArrayList<Int>) {
+class TimingNotification(val timingService: TimingService, val times_: ArrayList<Int>) {
 
     val TAG = "TimingNotication"
 
@@ -40,24 +40,31 @@ class TimingNotification(val timingService: TimingService, val times: ArrayList<
 
     lateinit var notifiactionButtonType: NotifiactionButtonType
 
+    companion object {
+        var times: ArrayList<Int>? = null // for toss previous times value to activity from notificaion
+    }
+
     init {
         notificationManager = timingService.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
     }
 
     fun showNotification() {
-//        "showNotification".i(TAG)
-
         if (!isForeground) {
 
-            "showNotification times ${times}".i()
+            times = times_
 
             val notificationIntent = Intent(timingService, TimingActivity::class.java).apply {
+                action = (Intent.ACTION_MAIN)
+                addCategory(Intent.CATEGORY_LAUNCHER)
                 putIntegerArrayListExtra(TimingActivity.TIMES, times)
             }
-            notificationIntent.action = "TIMING_NOTI_ACTION"
+//            notificationIntent.action = "TIMING_NOTI_ACTION"
+
+            // PendingIntent.FLAG_UPDATE_CURRENT :
+            // Flag indicating that if the described PendingIntent already exists, then keep it
             val pendingIntent = PendingIntent.getActivity(
                 timingService, 0,
-                notificationIntent, 0
+                notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT
             )
 
             remoteViews = getRemoteView()
@@ -85,7 +92,7 @@ class TimingNotification(val timingService: TimingService, val times: ArrayList<
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             timingService.stopForeground(NOTI_ID)
         } else {
-            timingService.stop() // TODO check using low version device
+            timingService.stop(true) // TODO check using low version device
         }
         isForeground = false
     }
