@@ -12,7 +12,6 @@ import com.timer.home.HomeFragment
 import com.timer.settings.SettingsFragment
 import com.timer.timeset.local.MyTimeSetListFragment
 import com.timer.timeset.remote.SharedTimeSetListFragment
-import com.timer.toolbar.ToolbarButtonType
 import com.timer.toolbar.ToolbarFragment
 import kotlinx.android.synthetic.main.fragment_main.*
 
