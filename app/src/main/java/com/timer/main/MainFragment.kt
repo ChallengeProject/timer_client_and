@@ -10,11 +10,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.timer.R
 import com.timer.home.HomeFragment
 import com.timer.settings.SettingsFragment
-import com.timer.timeset.local.LocalTimeSetListFragment
+import com.timer.timeset.local.MyTimeSetListFragment
 import com.timer.timeset.remote.SharedTimeSetListFragment
 import com.timer.toolbar.ToolbarButtonType
 import com.timer.toolbar.ToolbarFragment
-import com.timer.toolbar.`interface`.IToolbarClickListener
 import kotlinx.android.synthetic.main.fragment_main.*
 
 class MainFragment : Fragment(), BottomNavigationView.OnNavigationItemSelectedListener {
@@ -23,16 +22,20 @@ class MainFragment : Fragment(), BottomNavigationView.OnNavigationItemSelectedLi
     }
 
     private val homeFragment = HomeFragment()
-    private val localTimeSetListFragment = LocalTimeSetListFragment()
+    private val myTimeSetListFragment = MyTimeSetListFragment()
     private val sharedTimeSetListFragment = SharedTimeSetListFragment()
     private val settingsFragment = SettingsFragment()
-    private val toolbarClickListener = object : IToolbarClickListener {
-        override fun onClicked(type: ToolbarButtonType?) {
-            println("toolbarClickListener")
-        }
-    }
+//    private val toolbarClickListener = object : IToolbarClickListener {
+//        override fun onClicked(type: ToolbarButtonType?) {
+//            println("toolbarClickListener")
+//        }
+//    }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_main, container, false)
     }
 
@@ -45,22 +48,22 @@ class MainFragment : Fragment(), BottomNavigationView.OnNavigationItemSelectedLi
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_home -> changeFragment(homeFragment)
-            R.id.action_local_time_set -> changeFragment(localTimeSetListFragment)
+            R.id.action_my_time_set -> changeFragment(myTimeSetListFragment)
             R.id.action_shared_time_set -> changeFragment(sharedTimeSetListFragment)
         }
 
         return true
     }
 
-    private fun switchContents(type: ToolbarButtonType) {
-        when (type) {
-            ToolbarButtonType.SETTINGS -> changeFragmentWithFootstep(settingsFragment)
-            ToolbarButtonType.HOME -> changeFragment(homeFragment)
-//            R.id.timeSetDetailBtn ->
-            else -> {
-            }
-        }
-    }
+//    private fun switchContents(type: ToolbarButtonType) {
+//        when (type) {
+//            ToolbarButtonType.SETTINGS -> changeFragmentWithFootstep(settingsFragment)
+//            ToolbarButtonType.HOME -> changeFragment(homeFragment)
+////            R.id.timeSetDetailBtn ->
+//            else -> {
+//            }
+//        }
+//    }
 
     private fun changeFragment(fragment: Fragment) {
         fragmentManager?.beginTransaction()?.let {
