@@ -16,10 +16,7 @@ import com.timer.toolbar.ToolbarFragment
 import kotlinx.android.synthetic.main.fragment_main.*
 
 class MainFragment : Fragment(), BottomNavigationView.OnNavigationItemSelectedListener {
-    val toolbar by lazy {
-        childFragmentManager.findFragmentById(R.id.toolbar) as ToolbarFragment
-    }
-
+    private val toolbarFragment = ToolbarFragment()
     private val homeFragment = HomeFragment()
     private val myTimeSetListFragment = MyTimeSetListFragment()
     private val sharedTimeSetListFragment = SharedTimeSetListFragment()
@@ -42,13 +39,15 @@ class MainFragment : Fragment(), BottomNavigationView.OnNavigationItemSelectedLi
         super.onViewCreated(view, savedInstanceState)
         bottomNavigation.setOnNavigationItemSelectedListener(this)
         bottomNavigation.selectedItemId = R.id.action_home
+
+        changeFragment(R.id.toolbar, toolbarFragment)
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_home -> changeFragment(homeFragment)
-            R.id.action_my_time_set -> changeFragment(myTimeSetListFragment)
-            R.id.action_shared_time_set -> changeFragment(sharedTimeSetListFragment)
+            R.id.action_home -> changeFragment(R.id.contents, homeFragment)
+            R.id.action_my_time_set -> changeFragment(R.id.contents, myTimeSetListFragment)
+            R.id.action_shared_time_set -> changeFragment(R.id.contents, sharedTimeSetListFragment)
         }
 
         return true
@@ -64,9 +63,9 @@ class MainFragment : Fragment(), BottomNavigationView.OnNavigationItemSelectedLi
 //        }
 //    }
 
-    private fun changeFragment(fragment: Fragment) {
+    private fun changeFragment(containerId: Int, fragment: Fragment) {
         fragmentManager?.beginTransaction()?.let {
-            it.replace(R.id.contents, fragment)
+            it.replace(containerId, fragment)
             it.commit()
         }
     }
