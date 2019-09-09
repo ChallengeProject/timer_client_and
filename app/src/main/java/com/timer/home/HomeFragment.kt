@@ -7,6 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.timer.R
+import com.timer.main.MainActivity
+import com.timer.toolbar.ToolbarFragment.Initializer
+import com.timer.toolbar.model.ToolbarButtonType
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk27.coroutines.onClick
@@ -31,5 +34,22 @@ class HomeFragment : Fragment() {
             }
         }
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initToolbar()
+    }
+
+    private fun initToolbar() {
+        (activity as MainActivity).mainViewModel.setToolbarInitializer(
+            initializer = Initializer().enableButton(ToolbarButtonType.Search) {
+                // Search button click listener
+            }.enableButton(ToolbarButtonType.History) {
+                // History button click listener
+            }.enableButton(ToolbarButtonType.Settings) {
+                // Settings button click listener
+            })
+
     }
 }

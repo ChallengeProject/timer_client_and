@@ -8,14 +8,15 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.timer.R
 import com.timer.databinding.FragmentToolbarBinding
+import com.timer.toolbar.model.ToolbarAdditionalInfo
 import com.timer.toolbar.model.ToolbarButtonType
+import com.timer.toolbar.model.ToolbarElement
+import com.timer.toolbar.model.ToolbarTitle
 import kotlinx.android.synthetic.main.fragment_toolbar.*
 
 class ToolbarFragment : Fragment() {
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         val binding = DataBindingUtil.inflate<FragmentToolbarBinding>(
             inflater, R.layout.fragment_toolbar, container, false
@@ -23,46 +24,40 @@ class ToolbarFragment : Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        hideAll()
+    private fun setTitle(titleStr: String) {
+        title.text = titleStr
+        title.visibility = View.VISIBLE
     }
 
-    fun showBtn(vararg buttonType: ToolbarButtonType) {
-        hideAll()
-        buttonType.forEach { type ->
-            when (type) {
+    /*
+    ** info : version or date
+     */
+    private fun setAdditionalInfo(info: String) {
+        additionalInfo.text = info
+        additionalInfo.visibility = View.VISIBLE
+    }
 
-            }
+    private fun initButton(btn: View, buttonType: ToolbarButtonType, clickListener: (View) -> Unit) {
+        btn.tag = buttonType
+        btn.setOnClickListener { clickListener.invoke(it) }
+        btn.visibility = View.VISIBLE
+    }
+
+    private fun getButton(type: ToolbarButtonType): View {
+        return when (type) {
+            ToolbarButtonType.Back -> backBtn
+            ToolbarButtonType.Cancel -> cancelBtn
+            ToolbarButtonType.Delete -> deleteBtn
+            ToolbarButtonType.Search -> searchBtn
+            ToolbarButtonType.Share -> shareBtn
+            ToolbarButtonType.Home -> homeBtn
+            ToolbarButtonType.History -> historyBtn
+            ToolbarButtonType.Like -> likeBtn
+            ToolbarButtonType.Settings -> settingsBtn
+            ToolbarButtonType.Confirm -> confirmBtn
+            ToolbarButtonType.SearchCancel -> searchCancelBtn
         }
     }
-//
-//    private fun showBtnsTypeHome() {
-//        hideAll()
-//        searchBtn.visibility = View.VISIBLE
-//        historyBtn.visibility = View.VISIBLE
-//        settingsBtn.visibility = View.VISIBLE
-//        // show(ENUM, ENUM, ENUM, ENUM)으로 변경
-//    }
-//
-//    private fun showBtnsTypeTimeSet() {
-//        hideAll()
-//        shareBtn.visibility = View.VISIBLE
-//        likeBtn.visibility = View.VISIBLE
-//        homeBtn.visibility = View.VISIBLE
-//    }
-//
-//    private fun showBtnsTypeTimeSetEdit() {
-//        hideAll()
-//        cancelBtn.visibility = View.VISIBLE
-//        title.visibility = View.VISIBLE
-//        confirmBtn.visibility = View.VISIBLE
-//    }
-//
-//    private fun showBtnsTypeSearch() {
-//        hideAll()
-//        searchArea.visibility = View.VISIBLE
-//    }
 
     private fun hideAll() {
         val gone = View.GONE
@@ -83,5 +78,35 @@ class ToolbarFragment : Fragment() {
 
         cancelBtn.visibility = gone
         confirmBtn.visibility = gone
+    }
+
+    class Initializer {
+        private val map = HashMap<ToolbarElement, Any>()
+
+        fun enableButton(buttonType: ToolbarButtonType, clickListener: (View) -> Unit): Initializer {
+            map[buttonType] = clickListener
+            return this
+        }
+
+        fun enableTitle(title: String): Initializer {
+            map[ToolbarTitle] = title
+            return this
+        }
+
+        fun enableAdditionalInfo(info: String): Initializer {
+            map[ToolbarAdditionalInfo] = info
+            return this
+        }
+
+        fun init(toolbar: ToolbarFragment) {
+            toolbar.hideAll()
+            val buttons = map.filter { it.key is ToolbarButtonType }.keys
+            buttons.forEach {
+                toolbar.initButton(toolbar.getButton(it as ToolbarButtonType), it, map[it] as (View) -> Unit)
+            }
+
+            map[ToolbarTitle]?.let { toolbar.setTitle(it as String) }
+            map[ToolbarAdditionalInfo]?.let { toolbar.setAdditionalInfo(it as String) }
+        }
     }
 }

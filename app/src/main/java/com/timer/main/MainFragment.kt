@@ -15,17 +15,13 @@ import com.timer.timeset.remote.SharedTimeSetListFragment
 import com.timer.toolbar.ToolbarFragment
 import kotlinx.android.synthetic.main.fragment_main.*
 
-class MainFragment : Fragment(), BottomNavigationView.OnNavigationItemSelectedListener {
+class MainFragment : Fragment(), MainView, BottomNavigationView.OnNavigationItemSelectedListener {
+
     private val toolbarFragment = ToolbarFragment()
     private val homeFragment = HomeFragment()
     private val myTimeSetListFragment = MyTimeSetListFragment()
     private val sharedTimeSetListFragment = SharedTimeSetListFragment()
     private val settingsFragment = SettingsFragment()
-//    private val toolbarClickListener = object : IToolbarClickListener {
-//        override fun onClicked(type: ToolbarButtonType?) {
-//            println("toolbarClickListener")
-//        }
-//    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,10 +33,13 @@ class MainFragment : Fragment(), BottomNavigationView.OnNavigationItemSelectedLi
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        bottomNavigation.setOnNavigationItemSelectedListener(this)
-        bottomNavigation.selectedItemId = R.id.action_home
 
         changeFragment(R.id.toolbar, toolbarFragment)
+
+        with(bottomNavigation) {
+            setOnNavigationItemSelectedListener(this@MainFragment)
+            selectedItemId = R.id.action_home
+        }
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -53,27 +52,13 @@ class MainFragment : Fragment(), BottomNavigationView.OnNavigationItemSelectedLi
         return true
     }
 
-//    private fun switchContents(type: ToolbarButtonType) {
-//        when (type) {
-//            ToolbarButtonType.SETTINGS -> changeFragmentWithFootstep(settingsFragment)
-//            ToolbarButtonType.HOME -> changeFragment(homeFragment)
-////            R.id.timeSetDetailBtn ->
-//            else -> {
-//            }
-//        }
-//    }
+    override fun setToolbarInitializer(initializer: ToolbarFragment.Initializer) {
+        initializer.init(toolbarFragment)
+    }
 
     private fun changeFragment(containerId: Int, fragment: Fragment) {
         fragmentManager?.beginTransaction()?.let {
             it.replace(containerId, fragment)
-            it.commit()
-        }
-    }
-
-    private fun changeFragmentWithFootstep(fragment: Fragment) {
-        fragmentManager?.beginTransaction()?.let {
-            it.replace(R.id.contents, fragment)
-            it.addToBackStack(null)
             it.commit()
         }
     }

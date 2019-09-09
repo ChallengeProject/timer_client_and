@@ -10,6 +10,7 @@ import com.timer.R
 
 class MainActivity : AppCompatActivity() {
     private val mainFragment = MainFragment()
+    val mainViewModel = MainViewModel(mainFragment)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
