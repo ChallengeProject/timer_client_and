@@ -34,4 +34,6 @@ dependencies {
     implementation deps.ktx
     implementation deps.recyclerview
     implementation deps.multidex
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
 }

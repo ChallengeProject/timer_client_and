@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".proc.ProcActivity">
+
+
+    <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="95dp"
+            android:text=""
+            android:textColor="#0a0a0a"
+            android:textSize="12dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/tvSubTitle"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="내 타임셋" />
+
+    <TextView
+            android:id="@+id/tvSubTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text=""
+            android:textColor="#0a0a0a"
+            android:textSize="10dp"
+            app:layout_constraintBottom_toTopOf="@id/tvTime"
+            app:layout_constraintLeft_toLeftOf="@id/tvTitle"
+            app:layout_constraintTop_toBottomOf="@id/tvTitle"
+            tools:text="시작 N초 전" />
+
+
+    <TextView
+            android:id="@+id/tvTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text=""
+            android:textColor="#0a0a0a"
+            android:textSize="50dp"
+            app:layout_constraintBottom_toTopOf="@id/ivWriteMemoBtn"
+            app:layout_constraintLeft_toLeftOf="@id/tvTitle"
+            app:layout_constraintTop_toBottomOf="@id/tvSubTitle"
+            tools:text="00:00:59" />
+
+    <ImageView
+            android:id="@+id/ivWriteMemoBtn"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_temp"
+            app:layout_constraintBottom_toTopOf="@id/tvTimesetTimeText"
+            app:layout_constraintLeft_toLeftOf="@id/tvTitle"
+            app:layout_constraintRight_toLeftOf="@id/ivRepeatBtn"
+            app:layout_constraintTop_toBottomOf="@id/tvTime" />
+
+
+    <ImageView
+            android:id="@+id/ivRepeatBtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="15dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_temp"
+            app:layout_constraintLeft_toRightOf="@id/ivWriteMemoBtn"
+            app:layout_constraintRight_toLeftOf="@id/ivAddMinuteBtn"
+            app:layout_constraintTop_toTopOf="@id/ivWriteMemoBtn" />
+
+
+    <ImageView
+            android:id="@+id/ivAddMinuteBtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="15dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_temp"
+            app:layout_constraintLeft_toRightOf="@id/ivRepeatBtn"
+            app:layout_constraintRight_toLeftOf="@id/tvAddCount"
+            app:layout_constraintTop_toTopOf="@id/ivWriteMemoBtn" />
+
+
+    <TextView
+            android:id="@+id/tvAddCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text=""
+            android:textColor="#0a0a0a"
+            android:textSize="12dp"
+            app:layout_constraintBottom_toBottomOf="@id/ivAddMinuteBtn"
+            app:layout_constraintLeft_toRightOf="@id/ivAddMinuteBtn"
+            app:layout_constraintTop_toTopOf="@id/ivAddMinuteBtn"
+            tools:text="x 3" />
+
+    <TextView
+            android:id="@+id/tvTimesetTimeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="65dp"
+            android:text="타임셋 시간"
+            android:textColor="#646464"
+            android:textSize="12dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/tvEndTimeText"
+            app:layout_constraintStart_toStartOf="@+id/tvTitle"
+            app:layout_constraintTop_toBottomOf="@+id/ivWriteMemoBtn" />
+
+    <TextView
+            android:id="@+id/tvTimesetTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:textColor="#646464"
+            android:textSize="12dp"
+            app:layout_constraintLeft_toRightOf="@id/tvTimesetTimeText"
+            app:layout_constraintTop_toTopOf="@id/tvTimesetTimeText"
+            tools:text="00:01:00" />
+
+
+    <TextView
+            android:id="@+id/tvEndTimeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="종료 예정"
+            android:textColor="#646464"
+            android:textSize="12dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/tvSoundText"
+            app:layout_constraintStart_toStartOf="@+id/tvTitle"
+            app:layout_constraintTop_toBottomOf="@+id/tvTimesetTimeText" />
+
+    <TextView
+            android:id="@+id/tvEndTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#646464"
+            android:textSize="12dp"
+            app:layout_constraintLeft_toRightOf="@id/tvEndTimeText"
+            app:layout_constraintStart_toStartOf="@+id/tvTimesetTime"
+            app:layout_constraintTop_toTopOf="@id/tvEndTimeText"
+            tools:text="9:42 AM" />
+
+    <TextView
+            android:id="@+id/tvSoundText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="사운드"
+            android:textColor="#646464"
+            android:textSize="12dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/tvCommentText"
+            app:layout_constraintStart_toStartOf="@+id/tvTitle"
+            app:layout_constraintTop_toBottomOf="@+id/tvEndTimeText" />
+
+    <TextView
+            android:id="@+id/tvSound"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#646464"
+            android:textSize="12dp"
+            app:layout_constraintLeft_toRightOf="@id/tvSoundText"
+            app:layout_constraintStart_toStartOf="@+id/tvTimesetTime"
+            app:layout_constraintTop_toTopOf="@id/tvSoundText"
+            tools:text="해당 타이머 사운드 노출" />
+
+    <TextView
+            android:id="@+id/tvCommentText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="코멘트"
+            android:textColor="#646464"
+            android:textSize="12dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/tvTitle"
+            app:layout_constraintTop_toBottomOf="@+id/tvSound" />
+
+    <TextView
+            android:id="@+id/tvComment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#646464"
+            android:textSize="12dp"
+            app:layout_constraintLeft_toRightOf="@id/tvCommentText"
+            app:layout_constraintStart_toStartOf="@+id/tvTimesetTime"
+            app:layout_constraintTop_toTopOf="@id/tvCommentText"
+            tools:text="해당 타이머 사운드 노출" />
+
+    <ImageView
+            android:id="@+id/btBottom1Btn"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginEnd="19dp"
+            android:layout_marginBottom="10dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_temp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btBottom2Btn"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+            android:id="@+id/btBottom2Btn"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_marginEnd="18dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_temp"
+            app:layout_constraintBottom_toBottomOf="@id/btBottom1Btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btBottom1Btn" />
+
+    <com.timer.proc.HorizontalProcList
+            android:id="@+id/rvBadges"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="-100dp"
+            android:layout_marginTop="73dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvCommentText" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
