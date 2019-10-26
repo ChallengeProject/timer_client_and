@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.timer.R
 import com.timer.home.HomeFragment
+import com.timer.proc.ProcActivity
 import com.timer.settings.SettingsFragment
 import com.timer.timeset.local.MyTimeSetListFragment
 import com.timer.timeset.remote.SharedTimeSetListFragment
@@ -45,7 +46,27 @@ class MainFragment : Fragment(), MainView, BottomNavigationView.OnNavigationItem
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_home -> changeFragment(R.id.contents, homeFragment)
-            R.id.action_my_time_set -> changeFragment(R.id.contents, myTimeSetListFragment)
+
+            R.id.action_my_time_set -> {
+
+
+//                //TODO remove codes
+                val times = arrayListOf(
+                    3,
+//                    4,
+//                    5,
+//                    8,
+                    5
+                )
+
+                val readySec = 5
+
+                ProcActivity.startProcActivity(this.activity!!, readySec, times)
+
+                // TODO open commecnt
+//                changeFragment(R.id.contents, myTimeSetListFragment)
+            }
+
             R.id.action_shared_time_set -> changeFragment(R.id.contents, sharedTimeSetListFragment)
         }
 

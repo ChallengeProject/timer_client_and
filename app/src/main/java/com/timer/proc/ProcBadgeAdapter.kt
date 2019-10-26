@@ -15,10 +15,10 @@ class ProcBadgeAdapter(
     val cb: (VH) -> Unit
 ) : RecyclerView.Adapter<ProcBadgeAdapter.VH>() {
 
-    companion object {
+//    companion object {
         private var items =
             mutableListOf(emptyProcBadge, emptyProcBadge, emptyProcBadge, emptyProcBadge)
-    }
+//    }
 
     /**
      * for Dispose of between empty's badge
@@ -26,6 +26,7 @@ class ProcBadgeAdapter(
      * with add button : 3
      */
     private var positionController = 2
+
 
     /**
      * add badge

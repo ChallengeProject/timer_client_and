@@ -6,4 +6,8 @@
     <color name="navigationBarColor">#c2c7cc</color>
 
     <color name="prime_black">#0a0a0a</color>
+
+    <color name="se_specific_pink">#f24150</color>
+    <color name="se_specific_black">#0a0a0a</color>
+    <color name="se_white">#ffffff</color>
 </resources>

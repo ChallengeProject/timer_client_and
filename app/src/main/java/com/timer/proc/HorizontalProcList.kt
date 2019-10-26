@@ -25,6 +25,9 @@ class HorizontalProcList : RecyclerView {
 
     var onBadgeSelectedListener: ((Int) -> Unit)? = null
 
+    private var latelyPos = 0
+
+
     constructor(context: Context) : this(context, null)
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(
@@ -71,9 +74,11 @@ class HorizontalProcList : RecyclerView {
         })
     }
 
+    fun getLatelyPos() = latelyPos
+
     fun setFocus(pos: Int) {
         "setFocus $pos".i()
-        val focusPos = pos + 1
+        val focusPos = pos + 2
         procBadgeAdapter.resetFocus(focusPos)
 
         moveBadge(focusPos)
@@ -87,12 +92,12 @@ class HorizontalProcList : RecyclerView {
 
     }
 
-    fun addHomeBadge(procBadge: ProcBadge) {
+    fun addBadge(procBadge: ProcBadge) {
         procBadgeAdapter.addBadge(procBadge)
         refreshListAndRecalc()
     }
 
-    fun addHomeBadges(homeBadges: Array<ProcBadge>) {
+    fun addBadges(homeBadges: Array<ProcBadge>) {
         homeBadges.forEach {
             procBadgeAdapter.addBadge(it)
         }

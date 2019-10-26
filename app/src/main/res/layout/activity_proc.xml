@@ -55,7 +55,7 @@
             android:layout_height="40dp"
             android:layout_marginTop="10dp"
             android:scaleType="fitXY"
-            android:src="@drawable/ic_temp"
+            android:src="@drawable/button_memo_activated"
             app:layout_constraintBottom_toTopOf="@id/tvTimesetTimeText"
             app:layout_constraintLeft_toLeftOf="@id/tvTitle"
             app:layout_constraintRight_toLeftOf="@id/ivRepeatBtn"
@@ -68,7 +68,7 @@
             android:layout_height="40dp"
             android:layout_marginStart="15dp"
             android:scaleType="fitXY"
-            android:src="@drawable/ic_temp"
+            android:src="@drawable/btn_repeat"
             app:layout_constraintLeft_toRightOf="@id/ivWriteMemoBtn"
             app:layout_constraintRight_toLeftOf="@id/ivAddMinuteBtn"
             app:layout_constraintTop_toTopOf="@id/ivWriteMemoBtn" />
@@ -80,7 +80,7 @@
             android:layout_height="40dp"
             android:layout_marginStart="15dp"
             android:scaleType="fitXY"
-            android:src="@drawable/ic_temp"
+            android:src="@drawable/button_1_ac"
             app:layout_constraintLeft_toRightOf="@id/ivRepeatBtn"
             app:layout_constraintRight_toLeftOf="@id/tvAddCount"
             app:layout_constraintTop_toTopOf="@id/ivWriteMemoBtn" />
@@ -195,27 +195,37 @@
             app:layout_constraintTop_toTopOf="@id/tvCommentText"
             tools:text="해당 타이머 사운드 노출" />
 
-    <ImageView
+    <TextView
             android:id="@+id/btBottom1Btn"
             android:layout_width="0dp"
             android:layout_height="45dp"
             android:layout_marginStart="18dp"
             android:layout_marginEnd="19dp"
             android:layout_marginBottom="10dp"
+            android:background="@drawable/bg_bottom_button_gray"
+            android:gravity="center"
             android:scaleType="fitXY"
-            android:src="@drawable/ic_temp"
+            android:text="취소"
+            android:textColor="@color/se_specific_pink"
+            android:textSize="15dp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/btBottom2Btn"
             app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintStart_toStartOf="parent" />
 
-    <ImageView
+    <TextView
             android:id="@+id/btBottom2Btn"
             android:layout_width="0dp"
             android:layout_height="45dp"
             android:layout_marginEnd="18dp"
+            android:background="@drawable/bg_bottom_button_gray"
+            android:gravity="center"
             android:scaleType="fitXY"
-            android:src="@drawable/ic_temp"
+            android:text="일시정지"
+            android:textColor="@color/se_specific_black"
+            android:textSize="15dp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/btBottom1Btn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/btBottom1Btn" />
