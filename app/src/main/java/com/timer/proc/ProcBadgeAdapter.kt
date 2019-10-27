@@ -1,13 +1,14 @@
 package com.timer.proc
 
 import android.content.Context
-import android.graphics.Color
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.timer.R
 import com.timer.proc.ProcBadge.Companion.emptyProcBadge
+import com.timer.se_util.App
 import kotlinx.android.synthetic.main.item_proc_badge.view.*
 
 class ProcBadgeAdapter(
@@ -15,9 +16,9 @@ class ProcBadgeAdapter(
     val cb: (VH) -> Unit
 ) : RecyclerView.Adapter<ProcBadgeAdapter.VH>() {
 
-//    companion object {
-        private var items =
-            mutableListOf(emptyProcBadge, emptyProcBadge, emptyProcBadge, emptyProcBadge)
+    //    companion object {
+    private var items =
+        mutableListOf(emptyProcBadge, emptyProcBadge, emptyProcBadge, emptyProcBadge)
 //    }
 
     /**
@@ -72,18 +73,32 @@ class ProcBadgeAdapter(
         when (items[position].type) {
             ProcBadgeType.EMPTY -> holder.itemView.visibility = View.INVISIBLE
             ProcBadgeType.NORMAL -> {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    holder.itemView.background =
+                        context.getDrawable(R.drawable.bg_timeset_times_gray_stroke)
+                } else {
+                    holder.itemView.background =
+                        context.resources.getDrawable(R.drawable.bg_timeset_times_gray_stroke)
+                }
                 holder.itemView.visibility = View.VISIBLE
                 holder.tvTime.text = items[position].getStringUsingFormat()
-                holder.tvTime.setTextColor(Color.BLACK)
-                holder.tvTime.setBackgroundColor(Color.GRAY)
+                holder.tvTime.setTextColor(context.resources.getColor(R.color.se_specific_gray))
+//                holder.tvTime.setBackgroundColor(Color.GRAY)
                 holder.tvTime.visibility = View.VISIBLE
                 holder.tvCount.text = "${position - 1}/${items.size - 4}"
             }
             ProcBadgeType.FOCUS -> {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    holder.itemView.background =
+                        context.getDrawable(R.drawable.bg_timeset_times_red_stroke)
+                } else {
+                    holder.itemView.background =
+                        context.resources.getDrawable(R.drawable.bg_timeset_times_red_stroke)
+                }
                 holder.itemView.visibility = View.VISIBLE
                 holder.tvTime.text = items[position].getStringUsingFormat()
-                holder.tvTime.setTextColor(Color.WHITE)
-                holder.tvTime.setBackgroundColor(Color.CYAN)
+                holder.tvTime.setTextColor(App.get.resources.getColor(R.color.se_specific_black))
+//                holder.tvTime.setBackgroundColor(Color.CYAN)
                 holder.tvTime.visibility = View.VISIBLE
                 holder.tvCount.text = "${position - 1}/${items.size - 4}"
             }

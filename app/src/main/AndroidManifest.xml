@@ -3,6 +3,8 @@
         xmlns:tools="http://schemas.android.com/tools"
         package="com.timer">
 
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
     <application
             android:name=".se_util.App"
             android:icon="@mipmap/ic_launcher"

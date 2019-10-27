@@ -5,14 +5,14 @@
         android:layout_height="70dp"
         android:layout_marginStart="5dp"
         android:layout_marginEnd="5dp"
-        android:background="#949494"
+        android:background="@drawable/bg_timeset_times_gray_stroke"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
     <ImageView
             android:layout_width="36dp"
             android:layout_height="36dp"
-            android:src="@drawable/ic_temp" />
+            android:src="@drawable/icon_timer" />
 
     <TextView
             android:id="@+id/tvCount"
@@ -27,6 +27,7 @@
             android:id="@+id/tvTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textStyle="bold"
             android:textColor="#0a0a0a"
             android:textSize="12dp"
             tools:text="00:00:59" />

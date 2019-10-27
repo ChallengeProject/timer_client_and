@@ -86,27 +86,30 @@ class ProcViewUpdater(val act: Activity) {
 //            else View.INVISIBLE
 //    }
 
-//    fun showSkipMessage(midPos: Int) {
+    fun showSkipMessage(/*midPos: Int*/) {
 //        with(act) {
 //            rvHTRV.showDownArrowAndUpdateDownArrowPos()
 //            clSkipTimerMessage.visibility = View.VISIBLE
+            act.ivSkipMessage.visibility = View.VISIBLE
+            act.ivSkipButton.visibility = View.VISIBLE
 //            var rst = deviceWidth - midPos - clSkipTimerMessage.width / 2
 //            if (rst + clSkipTimerMessage.width > deviceWidth) rst = deviceWidth - clSkipTimerMessage.width
 //            val p = clSkipTimerMessage.layoutParams as ViewGroup.MarginLayoutParams
 //            p.setMargins(0, 0, rst, 0)
 //            clSkipTimerMessage.requestLayout()
 //        }
-//    }
+    }
+
+    // call from [ rvHTRV.onTouch listener in this class ] + alpha
+    fun hideSkipMessage() {
+        act.ivSkipMessage.visibility = View.INVISIBLE
+        act.ivSkipButton.visibility = View.INVISIBLE
+//        act.rvHTRV.hideDownArrow()
+    }
 
     fun setBadgeFocus(pos :Int){
         act.rvBadges.setFocus(pos)
     }
-
-    // call from [ rvHTRV.onTouch listener in this class ] + alpha
-//    fun hideSkipMessage() {
-//        act.clSkipTimerMessage.visibility = View.INVISIBLE
-//        act.rvHTRV.hideDownArrow()
-//    }
 
 //    fun setAlarmAndComment(alarmText: String, commentText: String) {
 //        act.tvAlarm.text = alarmText

@@ -107,12 +107,10 @@ class TimingNotification(val procService: ProcService, val times_: ArrayList<Int
         notifiactionButtonType = notifiactionButtonType_
         remoteViews!!.run {
 
-            setTextViewText(R.id.notiTvTimeSetName, timeSetName)
             setTextViewText(R.id.notiTvTimer, timer)
-            setTextViewText(
-                R.id.notiTvRepeat,
-                "$step / $maxStep / $repeat"
-            ) // TODO distribute properties to each views with conditions
+
+            // TODO distribute properties to each views with conditions
+            setTextViewText(R.id.notiTvRepeat, "$${step+1}/$maxStep")
 
             setViewVisibility(R.id.notiIvCtrlPlay, View.GONE)
             setViewVisibility(R.id.notiIvCtrlPause, View.GONE)

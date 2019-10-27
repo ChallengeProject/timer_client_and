@@ -13,7 +13,7 @@ class HorizontalProcList : RecyclerView {
 
     var snapHelper: SnapHelper
     var linearLayoutManager: LinearLayoutManager
-    lateinit var procBadgeAdapter: ProcBadgeAdapter
+    var procBadgeAdapter: ProcBadgeAdapter
 
     var WHOLE_COUNT = 4
 
@@ -26,7 +26,6 @@ class HorizontalProcList : RecyclerView {
     var onBadgeSelectedListener: ((Int) -> Unit)? = null
 
     private var latelyPos = 0
-
 
     constructor(context: Context) : this(context, null)
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
@@ -47,8 +46,9 @@ class HorizontalProcList : RecyclerView {
             ProcBadgeAdapter(context) { vh ->
 
                 val pos = vh.adapterPosition
-                procBadgeAdapter.resetFocus(pos)
+//                procBadgeAdapter.resetFocus(pos) // does'nt show red radius
                 moveBadge(pos)
+                onBadgeSelectedListener?.invoke(pos)
             }
 
         this.adapter = procBadgeAdapter

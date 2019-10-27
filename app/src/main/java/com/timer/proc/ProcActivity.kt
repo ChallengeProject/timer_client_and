@@ -26,9 +26,9 @@ class ProcActivity : AppCompatActivity() {
 
         fun startProcActivity(context: Context, readySec: Int, times: ArrayList<Int>) {
 
-            context.startActivity(Intent(context, ProcActivity::class.java).apply{
-                putIntegerArrayListExtra(TIMES,times)
-                putExtra(READY_SEC,readySec)
+            context.startActivity(Intent(context, ProcActivity::class.java).apply {
+                putIntegerArrayListExtra(TIMES, times)
+                putExtra(READY_SEC, readySec)
             })
         }
 
@@ -71,7 +71,14 @@ class ProcActivity : AppCompatActivity() {
 //        times.forEach {
 //            rvBadges.addBadge(ProcBadge(count = -1, second = it, type = ProcBadgeType.NORMAL))
 //        }
-        rvBadges.addBadges(times.map { ProcBadge(count = -1, second = it, type = ProcBadgeType.NORMAL) }.toTypedArray())
+        rvBadges.addBadges(times.map {
+            ProcBadge(
+                count = -1,
+                second = it,
+                type = ProcBadgeType.NORMAL
+            )
+        }.toTypedArray())
+
 
         // init brd
         timeBrd = object : BroadcastReceiver() {
@@ -166,13 +173,13 @@ class ProcActivity : AppCompatActivity() {
         }
 
         ivWriteMemoBtn.setOnClickListener {
-//            updater.showMemoOnly()
+            //            updater.showMemoOnly()
         }
 
         rvBadges.onBadgeSelectedListener = { pos ->
             "onBadgeSelectedListener callback $pos".i(TAG)
-//            updater.hideSkipMessage()
-//            updater.showSkipMessage(rvHTRV.latelyMidPosX)
+            updater.hideSkipMessage()
+            updater.showSkipMessage()
         }
 
 //        llSkipTimerMessageO.setOnClickListener {
@@ -193,13 +200,12 @@ class ProcActivity : AppCompatActivity() {
 //        }
 
 
-
-
         // set end time
         val allTime = times.reduce { acc, i -> acc + i }
         if (endTimeStr.isEmpty()) endTimeStr = getEndTimeStringAfterSecond(readySec + allTime)
         if (allTimeStr.isEmpty()) allTimeStr =
-            allTime.x1000L().toTimeStr() // need to [if] for call from notification when remove activity status
+            allTime.x1000L()
+                .toTimeStr() // need to [if] for call from notification when remove activity status
 
 
     }
@@ -259,7 +265,6 @@ class ProcActivity : AppCompatActivity() {
     }
 
 
-
     override fun onResume() {
         super.onResume()
 
@@ -281,7 +286,10 @@ class ProcActivity : AppCompatActivity() {
 //        "onResume TimingService.timingService is null : ${TimingService.timingService == null}".i()
 
         ProcService.INSTANCE?.let {
-            Handler().postDelayed({ procServiceInterface?.updateActViewNow() }, 50) // wait for registReceiver
+            Handler().postDelayed(
+                { procServiceInterface?.updateActViewNow() },
+                50
+            ) // wait for registReceiver
         } ?: readying(readySec - 1)
 
 
@@ -295,11 +303,10 @@ class ProcActivity : AppCompatActivity() {
             showBottomBtn(procStatus)
         }
 
-
+//        updater.setBadgeFocus(0)
 
         procServiceInterface?.getRepeat()
     }
-
 
 
 }
