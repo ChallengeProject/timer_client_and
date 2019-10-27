@@ -46,6 +46,11 @@ class HorizontalProcList : RecyclerView {
             ProcBadgeAdapter(context) { vh ->
 
                 val pos = vh.adapterPosition
+
+                "ProcBadgeAdapter callback ${pos}".i()
+
+                latelyPos = pos
+
 //                procBadgeAdapter.resetFocus(pos) // does'nt show red radius
                 moveBadge(pos)
                 onBadgeSelectedListener?.invoke(pos)
@@ -74,7 +79,10 @@ class HorizontalProcList : RecyclerView {
         })
     }
 
-    fun getLatelyPos() = latelyPos
+    /**
+     * EMPTY 포함 position이므로 index로 사용시 -2 해야함
+     */
+    fun getLatelyPos() = latelyPos - 2
 
     fun setFocus(pos: Int) {
         "setFocus $pos".i()

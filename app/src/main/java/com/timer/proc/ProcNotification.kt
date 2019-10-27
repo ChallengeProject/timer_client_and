@@ -110,7 +110,7 @@ class TimingNotification(val procService: ProcService, val times_: ArrayList<Int
             setTextViewText(R.id.notiTvTimer, timer)
 
             // TODO distribute properties to each views with conditions
-            setTextViewText(R.id.notiTvRepeat, "$${step+1}/$maxStep")
+            setTextViewText(R.id.notiTvRepeat, "${step+1}/$maxStep")
 
             setViewVisibility(R.id.notiIvCtrlPlay, View.GONE)
             setViewVisibility(R.id.notiIvCtrlPause, View.GONE)

@@ -179,22 +179,22 @@ class ProcActivity : AppCompatActivity() {
         rvBadges.onBadgeSelectedListener = { pos ->
             "onBadgeSelectedListener callback $pos".i(TAG)
             updater.hideSkipMessage()
-            updater.showSkipMessage()
+            updater.showSkipMessage(pos)
         }
 
-//        llSkipTimerMessageO.setOnClickListener {
-//            moveTimeBadge(rvHTRV.getLatelyPos())
-//            updater.hideSkipMessage()
-//
-//
-//            procStatus = ProcStatus.ING
-//            updater.showBottomBtn(procStatus)
-//        }
+        ivSkipO.setOnClickListener {
 
-//        ivSkipTimerMessageX.setOnClickListener {
-//            updater.hideSkipMessage()
-//        }
-//
+            moveTimeBadge(rvBadges.getLatelyPos())
+            updater.hideSkipMessage()
+
+            procStatus = ProcStatus.ING
+            updater.showBottomBtn(procStatus)
+        }
+
+        ivSkipX.setOnClickListener {
+            updater.hideSkipMessage()
+        }
+
 //        ivBottomDialogO.setOnClickListener {
 //            updater.hideBottomDialog()
 //        }

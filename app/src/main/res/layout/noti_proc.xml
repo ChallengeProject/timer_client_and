@@ -47,7 +47,7 @@
 
 
     <ImageButton
-
+            android:scaleType="fitXY"
             android:id="@+id/notiIvCtrlPause"
             android:layout_width="36dp"
             android:layout_height="36dp"

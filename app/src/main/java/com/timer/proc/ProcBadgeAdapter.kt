@@ -71,7 +71,7 @@ class ProcBadgeAdapter(
          */
 
         when (items[position].type) {
-            ProcBadgeType.EMPTY -> holder.itemView.visibility = View.INVISIBLE
+            ProcBadgeType.EMPTY -> holder.itemView.visibility = View.VISIBLE
             ProcBadgeType.NORMAL -> {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     holder.itemView.background =

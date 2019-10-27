@@ -86,12 +86,15 @@ class ProcViewUpdater(val act: Activity) {
 //            else View.INVISIBLE
 //    }
 
-    fun showSkipMessage(/*midPos: Int*/) {
+    fun showSkipMessage(pos: Int) {
 //        with(act) {
 //            rvHTRV.showDownArrowAndUpdateDownArrowPos()
 //            clSkipTimerMessage.visibility = View.VISIBLE
-            act.ivSkipMessage.visibility = View.VISIBLE
-            act.ivSkipButton.visibility = View.VISIBLE
+            act.clSkipMessage.visibility = View.VISIBLE
+            act.ivSkipO.visibility = View.VISIBLE
+
+            act.tvSkipMessage.text = "${pos}번쨰 타이머부터 시작하시겠어요?"
+
 //            var rst = deviceWidth - midPos - clSkipTimerMessage.width / 2
 //            if (rst + clSkipTimerMessage.width > deviceWidth) rst = deviceWidth - clSkipTimerMessage.width
 //            val p = clSkipTimerMessage.layoutParams as ViewGroup.MarginLayoutParams
@@ -102,8 +105,8 @@ class ProcViewUpdater(val act: Activity) {
 
     // call from [ rvHTRV.onTouch listener in this class ] + alpha
     fun hideSkipMessage() {
-        act.ivSkipMessage.visibility = View.INVISIBLE
-        act.ivSkipButton.visibility = View.INVISIBLE
+        act.clSkipMessage.visibility = View.INVISIBLE
+        act.ivSkipO.visibility = View.INVISIBLE
 //        act.rvHTRV.hideDownArrow()
     }
 
