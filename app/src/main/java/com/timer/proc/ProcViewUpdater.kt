@@ -85,7 +85,6 @@ class ProcViewUpdater(val act: Activity) {
     fun hideSkipMessage() {
         act.clSkipMessage.visibility = View.INVISIBLE
         act.ivSkipO.visibility = View.INVISIBLE
-//        act.rvHTRV.hideDownArrow()
     }
 
     fun setBadgeFocus(pos: Int) {
@@ -97,25 +96,25 @@ class ProcViewUpdater(val act: Activity) {
 //        act.tvComment.text = commentText
 //    }
 
-//    private fun setBottomDialog(mainText: String, subText: String) {
-//        with(act) {
-//            rlBottomDialog.visibility = View.VISIBLE
-//            act.tvBottomDialogMainText.text = mainText
-//            act.tvBottomDialogSubText.text = subText
-//        }
-//    }
+    private fun setBottomDialog(mainText: String, subText: String) {
+        with(act) {
+            clBottomAlarm.visibility = View.VISIBLE
+            act.tvBottomAlarmMainTitle.text = mainText
+            act.tvBottomAlarmSubTitle.text = subText
+        }
+    }
 
-//    fun showBottomDialogTimeEndMessage(curCnt: Int, lastCnt: Int) {
-//        setBottomDialog("${curCnt}번째 타이머 종료", "$curCnt/$lastCnt")
-//    }
+    fun showBottomDialogTimeEndMessage(curCnt: Int, lastCnt: Int) {
+        setBottomDialog("${curCnt}번째 타이머 종료", "$curCnt/$lastCnt")
+    }
 
-//    fun showBottomDialogRepeatEndMessage(repeatCnt: Int) {
-//        setBottomDialog("반복 타임셋 종료", "${repeatCnt}회 반복")
-//    }
+    fun showBottomDialogRepeatEndMessage(repeatCnt: Int) {
+        setBottomDialog("반복 타임셋 종료", "${repeatCnt}회 반복")
+    }
 
-//    fun hideBottomDialog() {
-//        act.rlBottomDialog.visibility = View.INVISIBLE
-//    }
+    fun hideBottomDialog() {
+        act.clBottomAlarm.visibility = View.INVISIBLE
+    }
 
     private fun setBottomButtonText(leftStr: String, rightStr: String) {
         act.btBottom1Btn.visibility = View.VISIBLE

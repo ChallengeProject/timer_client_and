@@ -2,12 +2,19 @@ package com.timer.proc
 
 import android.app.Service
 import android.content.Intent
+import android.media.MediaPlayer
 import android.os.Binder
 import android.os.IBinder
 import com.timer.proc.ProcActivity.Companion.TIMES
+import com.timer.se_util.BellManager
 import com.timer.se_util.i
 import com.timer.se_util.toTimeStr
 import com.timer.se_util.x1000L
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
+import java.util.concurrent.TimeUnit
 
 
 /**
@@ -63,6 +70,9 @@ class ProcService : Service() {
     var repeatCnt = 0
 
     val binder = ProcServiceBinder()
+    var mediaPlayer: MediaPlayer? = null
+
+    val compositeDisposable = CompositeDisposable()
 
     inner class ProcServiceBinder : Binder() {
         internal val service: ProcService
@@ -77,6 +87,8 @@ class ProcService : Service() {
         super.onCreate()
         INSTANCE = this
         isRunning = false
+
+
     }
 
 
@@ -116,14 +128,14 @@ class ProcService : Service() {
     /**
      * service stop (not self stop) is only TimingActivity pass this method, broadcast
      */
-    fun stop(sendStopBrdMsg : Boolean) {
+    fun stop(sendStopBrdMsg: Boolean) {
         "stop , sendStopBrdMsg : $sendStopBrdMsg".i(TAG)
         cancelTimerStatus(CancleType.INIT_ARR_CNT)
         isPause = false
         stopSelf()
         INSTANCE = null
 
-        if(sendStopBrdMsg) sendBroadcast(Intent(CMD_BRD.STOP))
+        if (sendStopBrdMsg) sendBroadcast(Intent(CMD_BRD.STOP))
     }
 
     fun pause() {
@@ -181,6 +193,8 @@ class ProcService : Service() {
             override fun onFinished() {
                 isRunning = false
                 arrayCnt++
+
+                playSound()
 
                 if (arrayCnt == times.size) {
                     if (isRepeat && repeatCnt < REPEAT_MAX_COUNT) {
@@ -242,7 +256,7 @@ class ProcService : Service() {
         sendBroadcast(Intent(CMD_BRD.TIME).apply { putExtra(CMD_BRD.MSG, timeStr) })
     }
 
-    fun brdRound(){
+    fun brdRound() {
         sendBroadcast(Intent(CMD_BRD.ROUND).apply { putExtra(CMD_BRD.MSG, arrayCnt) })
     }
 
@@ -262,6 +276,9 @@ class ProcService : Service() {
     override fun onDestroy() {
         super.onDestroy()
 
+        compositeDisposable.clear()
+        stopSound() // TODO 이줄 안넣으면 compositeDisposable 이거때매 stop 안되서 무한소리, 이거넣으면 마지막에 소리안남
+
         isRunning = false
 //        cancelTimerStatus(CancleType.INIT_ARR_CNT)
         INSTANCE = null
@@ -278,6 +295,24 @@ class ProcService : Service() {
 
     fun brdRepeatCount() {
         sendBroadcast(Intent(CMD_BRD.UPDATE_REPEAT_CNT).apply { putExtra(CMD_BRD.MSG, repeatCnt) })
+    }
+
+    fun playSound() {
+        mediaPlayer = MediaPlayer.create(this, BellManager.getBasicBells(this)[0].second)
+        mediaPlayer?.start()
+
+        compositeDisposable.add( Observable
+            .timer(2000,TimeUnit.MILLISECONDS)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                stopSound()
+            }
+        )
+    }
+
+    fun stopSound(){
+        mediaPlayer?.stop()
     }
 
     enum class CancleType {

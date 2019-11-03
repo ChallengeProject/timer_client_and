@@ -73,12 +73,11 @@ class ProcActivity : AppCompatActivity() {
                     CMD_BRD.TIME -> updater.setTime(intent.getStringExtra(CMD_BRD.MSG))
                     CMD_BRD.ROUND -> {
                         val round = intent.getIntExtra(CMD_BRD.MSG, 0)
-//                        if (rvHTRV.getFocusPos() != round) { //
-//                        updater.hideSkipMessage()
-//                        rvHTRV.setFocus(round) //
+//                        if (rvHTRV.getFocusPos() != round) {
+                        updater.hideSkipMessage()
                         updater.setBadgeFocus(round)
-//                        updater.showBottomDialogTimeEndMessage(round, times.size)
-//                        } //
+                        updater.showBottomDialogTimeEndMessage(round, times.size)
+//                        }
                     }
                     CMD_BRD.END -> {
 
@@ -112,10 +111,9 @@ class ProcActivity : AppCompatActivity() {
                     }
                     CMD_BRD.UPDATE_REPEAT_CNT -> {
                         val repeatCnt = intent.getIntExtra(CMD_BRD.MSG, 0)
+                        updater.showBottomDialogRepeatEndMessage(repeatCnt)
                         "CMD_BRD.UPDATE_REPEAT_CNT : $repeatCnt".i()
-                        "CMD_BRD.UPDATE_REPEAT_CNT : $repeatCnt".toast()
 
-                        // TODO show and hide
                     }
                 }
             }
@@ -142,9 +140,12 @@ class ProcActivity : AppCompatActivity() {
                 }
                 ProcStatus.READY -> "시작 준비 중에는 일시정지할 수 없습니다".toast()
             }
-
             updater.showBottomBtn(procStatus)
+        }
 
+        ivBottomAlarmClear.setOnClickListener {
+            updater.hideBottomDialog()
+            procServiceInterface?.stopSound()
         }
 
         ivAddMinuteBtn.setOnClickListener {
@@ -228,7 +229,7 @@ class ProcActivity : AppCompatActivity() {
         }
 
         Handler().postDelayed({
-            readying(cnt - 1)
+            readying(cnt-1)
         }, 1000)
     }
 
@@ -272,7 +273,7 @@ class ProcActivity : AppCompatActivity() {
                 { procServiceInterface?.updateActViewNow() },
                 50
             ) // wait for registReceiver
-        } ?: readying(readySec - 1)
+        } ?: readying(readySec)
 
 
         /// initView

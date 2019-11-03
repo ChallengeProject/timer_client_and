@@ -50,16 +50,18 @@ class MainFragment : Fragment(), MainView, BottomNavigationView.OnNavigationItem
             R.id.action_my_time_set -> {
 
 
-//                //TODO remove codes
+//                // TODO remove codes aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
                 val times = arrayListOf(
-                    10,
-                    8,
-                    5,
+                    2,
+                    4
+//                    3,
+//                    4,
+//                    5,
 //                    8,
-                    5
+//                    5
                 )
 
-                val readySec = 5
+                val readySec = 2
 
                 ProcActivity.startProcActivity(this.activity!!, readySec, times)
 

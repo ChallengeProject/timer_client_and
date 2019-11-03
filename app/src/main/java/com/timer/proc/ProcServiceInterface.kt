@@ -64,6 +64,9 @@ class ProcServiceInterface(val ctx: Context) {
         service?.brdIsRepeat()
     }
 
+    fun stopSound(){
+        service?.stopSound()
+    }
 
 
 
