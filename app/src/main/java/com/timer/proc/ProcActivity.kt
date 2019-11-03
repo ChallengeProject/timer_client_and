@@ -56,29 +56,14 @@ class ProcActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_proc)
 
-//        rvBadges.addHomeBadge(ProcBadge(count = 0, second = k++, type = ProcBadgeType.NORMAL))
-//        tvTimesetTimeText.setOnClickListener { rvBadges.setFocus(1) }
-
         updater = ProcViewUpdater(this)
 
         // init properties
         times = intent.getIntegerArrayListExtra(TIMES)
         readySec = intent.getIntExtra(READY_SEC, 5)
-        "initProperties ${readySec} , ${times}".i()
-
 
         // init view
-//        times.forEach {
-//            rvBadges.addBadge(ProcBadge(count = -1, second = it, type = ProcBadgeType.NORMAL))
-//        }
-        rvBadges.addBadges(times.map {
-            ProcBadge(
-                count = -1,
-                second = it,
-                type = ProcBadgeType.NORMAL
-            )
-        }.toTypedArray())
-
+        lsshlv.showLeftSideSnappyHorizontalListView(times)
 
         // init brd
         timeBrd = object : BroadcastReceiver() {
@@ -155,7 +140,7 @@ class ProcActivity : AppCompatActivity() {
                     ProcService.INSTANCE?.let { procServiceInterface?.restart() }
                     procStatus = ProcStatus.ING
                 }
-                ProcStatus.READY -> "시작 준비에는 일시정지할 수 없습니다".toast()
+                ProcStatus.READY -> "시작 준비 중에는 일시정지할 수 없습니다".toast()
             }
 
             updater.showBottomBtn(procStatus)
@@ -176,15 +161,20 @@ class ProcActivity : AppCompatActivity() {
             //            updater.showMemoOnly()
         }
 
-        rvBadges.onBadgeSelectedListener = { pos ->
-            "onBadgeSelectedListener callback $pos".i(TAG)
+        lsshlv.setSelectedBadgeListener { item ->
+            "onBadgeSelectedListener callback ${item.index}".i(TAG)
             updater.hideSkipMessage()
-            updater.showSkipMessage(pos)
+            updater.showSkipMessage(item.index)
         }
 
         ivSkipO.setOnClickListener {
 
-            moveTimeBadge(rvBadges.getLatelyPos())
+            if(procStatus == ProcStatus.READY ) {
+                "시작 준비 중에는 타임셋 전환을 할 수 없습니다".toast()
+                return@setOnClickListener
+            }
+
+            moveTimeBadge(lsshlv.curIndex)
             updater.hideSkipMessage()
 
             procStatus = ProcStatus.ING
@@ -195,25 +185,19 @@ class ProcActivity : AppCompatActivity() {
             updater.hideSkipMessage()
         }
 
-//        ivBottomDialogO.setOnClickListener {
-//            updater.hideBottomDialog()
-//        }
-
-
         // set end time
         val allTime = times.reduce { acc, i -> acc + i }
         if (endTimeStr.isEmpty()) endTimeStr = getEndTimeStringAfterSecond(readySec + allTime)
         if (allTimeStr.isEmpty()) allTimeStr =
             allTime.x1000L()
                 .toTimeStr() // need to [if] for call from notification when remove activity status
-
-
     }
 
     fun moveTimeBadge(pos: Int) {
         ProcService.INSTANCE?.let { procServiceInterface?.move(pos) }
-        updater.setBadgeFocus(rvBadges.getLatelyPos())
-//        rvHTRV.setFocus(rvHTRV.getLatelyPos())
+
+        lsshlv.setFocus(pos)
+
         addingMinute = 0
         updater.setAddTime(addingMinute)
     }
@@ -283,8 +267,6 @@ class ProcActivity : AppCompatActivity() {
 
         procServiceInterface = ProcServiceInterface(this)
 
-//        "onResume TimingService.timingService is null : ${TimingService.timingService == null}".i()
-
         ProcService.INSTANCE?.let {
             Handler().postDelayed(
                 { procServiceInterface?.updateActViewNow() },
@@ -294,7 +276,6 @@ class ProcActivity : AppCompatActivity() {
 
 
         /// initView
-
         with(updater) {
             setWholeTime(allTimeStr)
             setEndTime(endTimeStr)
@@ -302,8 +283,6 @@ class ProcActivity : AppCompatActivity() {
             setRepeatIcon(isRepeat)
             showBottomBtn(procStatus)
         }
-
-//        updater.setBadgeFocus(0)
 
         procServiceInterface?.getRepeat()
     }

@@ -52,8 +52,8 @@ class MainFragment : Fragment(), MainView, BottomNavigationView.OnNavigationItem
 
 //                //TODO remove codes
                 val times = arrayListOf(
-                    3,
-                    4,
+                    10,
+                    8,
                     5,
 //                    8,
                     5

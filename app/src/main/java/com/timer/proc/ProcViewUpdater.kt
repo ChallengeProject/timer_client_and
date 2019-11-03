@@ -1,7 +1,6 @@
 package com.timer.proc
 
 import android.app.Activity
-import android.graphics.Point
 import android.os.Build
 import android.view.View
 import com.timer.R
@@ -9,18 +8,7 @@ import kotlinx.android.synthetic.main.activity_proc.*
 
 class ProcViewUpdater(val act: Activity) {
 
-    var deviceWidth = -1
-
     init {
-        val display = act.windowManager.defaultDisplay
-        val size = Point()
-        display.getSize(size)
-        deviceWidth = size.x
-
-//        act.rvHTRV.onTouch { v, event ->
-//            hideSkipMessage()
-//        }
-
     }
 
     private fun setSubtitle(visible: Int, str: String) {
@@ -36,7 +24,7 @@ class ProcViewUpdater(val act: Activity) {
 
     fun setSubtitleReadyCnt(cnt: Int) {
         setSubtitle(View.VISIBLE, "시작 ${cnt}초 전")
-        if(cnt == 0) hideSubtitle()
+        if (cnt == 0) hideSubtitle()
     }
 
     fun hideSubtitle() {
@@ -67,7 +55,7 @@ class ProcViewUpdater(val act: Activity) {
     }
 
     fun setAddTime(min: Int) {
-        if(min==0) {
+        if (min == 0) {
             hideAddTime()
             return
         }
@@ -87,20 +75,10 @@ class ProcViewUpdater(val act: Activity) {
 //    }
 
     fun showSkipMessage(pos: Int) {
-//        with(act) {
-//            rvHTRV.showDownArrowAndUpdateDownArrowPos()
-//            clSkipTimerMessage.visibility = View.VISIBLE
-            act.clSkipMessage.visibility = View.VISIBLE
-            act.ivSkipO.visibility = View.VISIBLE
+        act.clSkipMessage.visibility = View.VISIBLE
+        act.ivSkipO.visibility = View.VISIBLE
 
-            act.tvSkipMessage.text = "${pos}번쨰 타이머부터 시작하시겠어요?"
-
-//            var rst = deviceWidth - midPos - clSkipTimerMessage.width / 2
-//            if (rst + clSkipTimerMessage.width > deviceWidth) rst = deviceWidth - clSkipTimerMessage.width
-//            val p = clSkipTimerMessage.layoutParams as ViewGroup.MarginLayoutParams
-//            p.setMargins(0, 0, rst, 0)
-//            clSkipTimerMessage.requestLayout()
-//        }
+        act.tvSkipMessage.text = "${pos + 1}번쨰 타이머부터 시작하시겠어요?"
     }
 
     // call from [ rvHTRV.onTouch listener in this class ] + alpha
@@ -110,8 +88,8 @@ class ProcViewUpdater(val act: Activity) {
 //        act.rvHTRV.hideDownArrow()
     }
 
-    fun setBadgeFocus(pos :Int){
-        act.rvBadges.setFocus(pos)
+    fun setBadgeFocus(pos: Int) {
+        act.lsshlv.setFocus(pos)
     }
 
 //    fun setAlarmAndComment(alarmText: String, commentText: String) {
@@ -158,7 +136,7 @@ class ProcViewUpdater(val act: Activity) {
         } else {
             act.btBottom2Btn.setTextColor(act.resources.getColor(R.color.se_specific_black))
         }
-        setSubtitle(View.INVISIBLE,"")
+        setSubtitle(View.INVISIBLE, "")
     }
 
     private fun setCancelAndRestartStatus() {
@@ -172,7 +150,7 @@ class ProcViewUpdater(val act: Activity) {
         } else {
             act.btBottom2Btn.setTextColor(act.resources.getColor(R.color.se_white))
         }
-        setSubtitle(View.VISIBLE,"일시정지")
+        setSubtitle(View.VISIBLE, "일시정지")
     }
 
     fun showBottomBtn(procStatus: ProcStatus) {

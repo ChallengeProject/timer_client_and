@@ -84,11 +84,8 @@ class ProcService : Service() {
 
         INSTANCE = this
         "onStartCommand".i()
-
         intent?.run {
-
             "action : $action".i()
-
             when (action) {
                 CMD_SERVICE.START_WITH_TIMERS -> {
                     times = intent.getIntegerArrayListExtra(TIMES)
@@ -226,7 +223,7 @@ class ProcService : Service() {
         timingNotification.update(
             "내타임셋",
             time,
-            arrayCnt.toString(),
+            arrayCnt,
             times.size.toString(),
             repeatCnt.toString(),
             nbType
@@ -238,6 +235,7 @@ class ProcService : Service() {
      */
     fun updateActViewNow() {
         brdTime(mTimer.toTimeStr())
+        brdRound()
     }
 
     fun brdTime(timeStr: String) {

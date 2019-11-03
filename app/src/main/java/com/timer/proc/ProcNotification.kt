@@ -100,7 +100,7 @@ class TimingNotification(val procService: ProcService, val times_: ArrayList<Int
     }
 
     fun update(
-        timeSetName: String, timer: String, step: String, maxStep: String,
+        timeSetName: String, timer: String, step: Int, maxStep: String,
         repeat: String, notifiactionButtonType_: NotifiactionButtonType
     ) {
         "update $timeSetName $timer $step $maxStep $repeat $notifiactionButtonType_ ".i(TAG)

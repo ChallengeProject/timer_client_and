@@ -230,11 +230,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/btBottom1Btn" />
 
-    <com.timer.proc.HorizontalProcList
-            android:id="@+id/rvBadges"
+    <com.timer.proc.LeftSideSnappyHorizontalListView
+            android:id="@+id/lsshlv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="-160dp"
             android:layout_marginTop="73dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -247,7 +246,7 @@
             android:layout_marginBottom="5dp"
             android:background="@drawable/sse_talkbox"
             android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@id/rvBadges"
+            app:layout_constraintBottom_toTopOf="@id/lsshlv"
             app:layout_constraintStart_toStartOf="@+id/tvTitle"
             tools:visibility="visible">
 
