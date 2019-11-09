@@ -58,19 +58,19 @@ class ProcExceedService : Service() {
         intent?.run {
             "action : $action".i()
             when (action) {
-                CMD_SERVICE.START_WITH_TIMERS -> {
+                CMD_EXCEED_SERVICE.START_WITH_TIMERS -> {
                     timeSet = intent.getParcelableExtra(ProcActivity.TIME_SET)
-                    procNotification.showNotification()
-                    "CMD_SERVICE.START_WITH_TIMERS times : ${timeSet.times.asSequence().map { it.seconds }.toList()}.to".i()
+                    procNotification.showNotification(NotificationUsingActivity.EXCEED_ACTIVITY)
+                    "CMD_EXCEED_SERVICE.START_WITH_TIMERS times : ${timeSet.times.asSequence().map { it.seconds }.toList()}.to".i()
                     restart()
                 }
-                CMD_SERVICE.PAUSE -> {
+                CMD_EXCEED_SERVICE.PAUSE -> {
                     pause()
                 }
-                CMD_SERVICE.RESTART -> {
+                CMD_EXCEED_SERVICE.RESTART -> {
                     restart()
                 }
-                CMD_SERVICE.STOP -> {
+                CMD_EXCEED_SERVICE.STOP -> {
                     stop(true)
                 }
             }

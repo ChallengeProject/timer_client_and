@@ -26,7 +26,7 @@ import com.timer.se_util.i
  *
  */
 
-class ProcNotification(val procService: Service, val times_: ArrayList<Int>) {
+class ProcNotification(val service: Service, val times_: ArrayList<Int>) {
 
     val TAG = "TimingNotication"
 
@@ -42,6 +42,8 @@ class ProcNotification(val procService: Service, val times_: ArrayList<Int>) {
 
     lateinit var notifiactionButtonType: NotifiactionButtonType
 
+    lateinit var notificationUsingActivity: NotificationUsingActivity
+
     companion object {
         var times: ArrayList<Int>? =
             null // for toss previous times value to activity from notificaion
@@ -52,31 +54,46 @@ class ProcNotification(val procService: Service, val times_: ArrayList<Int>) {
 
     init {
         notificationManager =
-            procService.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            service.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
     }
 
-    fun showNotification() {
+    fun showNotification(notificationUsingActivity_: NotificationUsingActivity) {
+
+        notificationUsingActivity = notificationUsingActivity_
+
         if (!isForeground) {
 
             times = times_
 
-            val notificationIntent = Intent(procService, ProcActivity::class.java).apply {
-                action = (Intent.ACTION_MAIN)
-                addCategory(Intent.CATEGORY_LAUNCHER)
-                putIntegerArrayListExtra(ProcActivity.TIMES_FOR_NOTIFIACTION, times)
-            }
+            val notificationIntent: Intent =
+                if (notificationUsingActivity == NotificationUsingActivity.PROC_ACTIVITY) {
+
+                    Intent(service, ProcActivity::class.java).apply {
+                        action = (Intent.ACTION_MAIN)
+                        addCategory(Intent.CATEGORY_LAUNCHER)
+                        putIntegerArrayListExtra(ProcActivity.TIMES_FOR_NOTIFIACTION, times)
+                    }
+                } else { //if (notificationUsingActivity == NotificationUsingActivity.EXCEED_ACTIVITY) {
+
+                    Intent(service, ProcExceedActivity::class.java).apply {
+                        action = (Intent.ACTION_MAIN)
+                        addCategory(Intent.CATEGORY_LAUNCHER)
+                        putIntegerArrayListExtra(ProcExceedActivity.TIMES_FOR_NOTIFIACTION, times)
+                    }
+                }
+
 //            notificationIntent.action = "TIMING_NOTI_ACTION"
 
             // PendingIntent.FLAG_UPDATE_CURRENT :
             // Flag indicating that if the described PendingIntent already exists, then keep it
             val pendingIntent = PendingIntent.getActivity(
-                procService, 0,
+                service, 0,
                 notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT
             )
 
             remoteViews = getRemoteView()
 
-            val notification = NotificationCompat.Builder(procService, App.CHANNEL_ID)
+            val notification = NotificationCompat.Builder(service, App.CHANNEL_ID)
                 .setContentText("...")
                 .setSmallIcon(R.drawable.ic_temp)
                 .setContentIntent(pendingIntent)
@@ -86,7 +103,7 @@ class ProcNotification(val procService: Service, val times_: ArrayList<Int>) {
                 .build()
 
             isForeground = true
-            procService.startForeground(NOTI_ID, notification)
+            service.startForeground(NOTI_ID, notification)
             noti = notification
         }
 
@@ -97,9 +114,15 @@ class ProcNotification(val procService: Service, val times_: ArrayList<Int>) {
         if (noti != null) noti = null
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            procService.stopForeground(NOTI_ID)
+            service.stopForeground(NOTI_ID)
         } else {
-            (procService as ProcService).stop(true) // TODO check using low version device
+
+            if (notificationUsingActivity == NotificationUsingActivity.PROC_ACTIVITY) {
+                (service as ProcService).stop(true)
+            } else { //if (notificationUsingActivity == NotificationUsingActivity.EXCEED_ACTIVITY) {
+                (service as ProcExceedService).stop(true)
+            }
+
         }
         isForeground = false
     }
@@ -114,11 +137,11 @@ class ProcNotification(val procService: Service, val times_: ArrayList<Int>) {
 
             setTextViewText(R.id.notiTvTimer, timer)
 
-            if(step == EXCEED_TEXT && maxStep == EXCEED_TEXT.toString()) {
+            if (step == EXCEED_TEXT && maxStep == EXCEED_TEXT.toString()) {
                 setTextViewText(R.id.notiTvRepeat, "초과 기록")
-                setTextColor(R.id.notiTvRepeat,  Color.parseColor("#f24150")) // 0xfff24150
+                setTextColor(R.id.notiTvRepeat, Color.parseColor("#f24150")) // 0xfff24150
             } else {
-                setTextViewText(R.id.notiTvRepeat, "${step+1}/$maxStep")
+                setTextViewText(R.id.notiTvRepeat, "${step + 1}/$maxStep")
             }
 
             setViewVisibility(R.id.notiIvCtrlPlay, View.GONE)
@@ -126,10 +149,7 @@ class ProcNotification(val procService: Service, val times_: ArrayList<Int>) {
 
             when (notifiactionButtonType_) {
                 NotifiactionButtonType.PLAY -> setViewVisibility(R.id.notiIvCtrlPlay, View.VISIBLE)
-                NotifiactionButtonType.PAUSE -> setViewVisibility(
-                    R.id.notiIvCtrlPause,
-                    View.VISIBLE
-                )
+                NotifiactionButtonType.PAUSE -> setViewVisibility(R.id.notiIvCtrlPause, View.VISIBLE)
             }
 
         }
@@ -138,14 +158,22 @@ class ProcNotification(val procService: Service, val times_: ArrayList<Int>) {
     }
 
     fun getRemoteView(): RemoteViews {
-        val remoteViews = RemoteViews(procService.packageName, R.layout.noti_proc)
+        val remoteViews = RemoteViews(service.packageName, R.layout.noti_proc)
 
         val playPendingIntent =
-            PendingIntent.getService(procService, 0, Intent(CMD_SERVICE.RESTART), 0)
+            if (notificationUsingActivity == NotificationUsingActivity.PROC_ACTIVITY)
+                PendingIntent.getService(service, 0, Intent(CMD_PROC_SERVICE.RESTART), 0)
+            else PendingIntent.getService(service, 0, Intent(CMD_EXCEED_SERVICE.RESTART), 0)
         val pausePendingIntent =
-            PendingIntent.getService(procService, 0, Intent(CMD_SERVICE.PAUSE), 0)
+            if (notificationUsingActivity == NotificationUsingActivity.PROC_ACTIVITY)
+                PendingIntent.getService(service, 0, Intent(CMD_PROC_SERVICE.PAUSE), 0)
+            else PendingIntent.getService(service, 0, Intent(CMD_EXCEED_SERVICE.PAUSE), 0)
+
         val stopPendingIntent =
-            PendingIntent.getService(procService, 0, Intent(CMD_SERVICE.STOP), 0)
+            if (notificationUsingActivity == NotificationUsingActivity.PROC_ACTIVITY)
+                PendingIntent.getService(service, 0, Intent(CMD_PROC_SERVICE.STOP), 0)
+            else PendingIntent.getService(service, 0, Intent(CMD_EXCEED_SERVICE.STOP), 0)
+
 
         remoteViews.setOnClickPendingIntent(R.id.notiIvCtrlPlay, playPendingIntent)
         remoteViews.setOnClickPendingIntent(R.id.notiIvCtrlPause, pausePendingIntent)
@@ -160,5 +188,9 @@ enum class NotifiactionButtonType {
     PLAY,
     PAUSE,
     SPEAKER,
+}
 
+enum class NotificationUsingActivity {
+    PROC_ACTIVITY,
+    EXCEED_ACTIVITY
 }

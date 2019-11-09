@@ -25,7 +25,7 @@ import java.util.concurrent.TimeUnit
  * LOGIC :
  *
  * 1. start service from TimingAct after readying
- * 2. start timer & show notification when bring CMD_SERVICE.START_WITH_TIMERS cmd from TimingAct
+ * 2. start timer & show notification when bring CMD_PROC_SERVICE.START_WITH_TIMERS cmd from TimingAct
  * 3. get commands when running timer & Adjust command and send command & value to ACT or NOTI
  *
  * Last. cancelTimerStatus() & isPause = false & procService = null & sendBroadcast(Intent(CMD_BRD.STOP)) from STOP commands
@@ -103,18 +103,18 @@ class ProcService : Service() {
         intent?.run {
             "action : $action".i()
             when (action) {
-                CMD_SERVICE.START_WITH_TIMERS -> {
+                CMD_PROC_SERVICE.START_WITH_TIMERS -> {
                     timeSet = intent.getParcelableExtra(ProcActivity.TIME_SET)
-                    "CMD_SERVICE.START_WITH_TIMERS times : ${timeSet.times.asSequence().map { it.seconds }.toList()}.to".i()
+                    "CMD_PROC_SERVICE.START_WITH_TIMERS times : ${timeSet.times.asSequence().map { it.seconds }.toList()}.to".i()
                     restart(StartType.INIT)
                 }
-                CMD_SERVICE.PAUSE -> {
+                CMD_PROC_SERVICE.PAUSE -> {
                     pause()
                 }
-                CMD_SERVICE.RESTART -> {
+                CMD_PROC_SERVICE.RESTART -> {
                     restart(StartType.RESTART)
                 }
-                CMD_SERVICE.STOP -> {
+                CMD_PROC_SERVICE.STOP -> {
                     stop(true)
                 }
             }
@@ -144,7 +144,7 @@ class ProcService : Service() {
 
     fun restart(startType: StartType) {
 
-        if (!isRunning && !isPause) procNotification.showNotification()
+        if (!isRunning && !isPause) procNotification.showNotification(NotificationUsingActivity.PROC_ACTIVITY)
 
         if (startType == StartType.INIT)
             mTimer = timeSet.times[0].seconds.x1000L()
@@ -205,8 +205,10 @@ class ProcService : Service() {
                         stop(false)
 //                        cancelTimerStatus(CancleType.INIT_ARR_CNT)
 //                        "sendBroadcast     END".i(TAG)
+
                         sendBroadcast(Intent(CMD_BRD.END))
 //                        stopSelf()
+
                     }
 
                 } else {
@@ -277,7 +279,6 @@ class ProcService : Service() {
 
         stopSound() // 마지막 소리 안나는건 endActivity에서 진행
         compositeDisposable.clear()
-
         isRunning = false
 //        cancelTimerStatus(CancleType.INIT_ARR_CNT)
         INSTANCE = null

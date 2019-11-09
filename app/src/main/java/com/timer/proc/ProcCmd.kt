@@ -18,12 +18,21 @@ object CMD_BRD {
 
 }
 
-object CMD_SERVICE {
-    const val PAUSE = "PAUSE"
-    const val RESTART = "RESTART"
-    const val STOP = "STOP"
-    const val SOUND_OFF = "SOUND_OFF"
-    const val START_WITH_TIMERS = "START_WITH_TIMERS"
+object CMD_PROC_SERVICE {
+    const val PAUSE = "PROC_PAUSE"
+    const val RESTART = "PROC_RESTART"
+    const val STOP = "PROC_STOP"
+    const val SOUND_OFF = "PROC_SOUND_OFF"
+    const val START_WITH_TIMERS = "PROC_START_WITH_TIMERS"
+
+}
+
+object CMD_EXCEED_SERVICE {
+    const val PAUSE = "EXCEED_PAUSE"
+    const val RESTART = "EXCEED_RESTART"
+    const val STOP = "EXCEED_STOP"
+    const val SOUND_OFF = "EXCEED_SOUND_OFF"
+    const val START_WITH_TIMERS = "EXCEED_START_WITH_TIMERS"
 
 }
 

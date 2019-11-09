@@ -41,12 +41,12 @@
                 android:enabled="true"
                 android:exported="true">
             <intent-filter>
-                <action android:name="RESTART" />
-                <action android:name="PAUSE" />
-                <action android:name="STOP" />
-                <action android:name="REMAIN_SEC" />
-                <action android:name="ROUND" />
-                <action android:name="REPEAT" />
+                <action android:name="PROC_RESTART" />
+                <action android:name="PROC_PAUSE" />
+                <action android:name="PROC_STOP" />
+                <action android:name="PROC_REMAIN_SEC" />
+                <action android:name="PROC_ROUND" />
+                <action android:name="PROC_REPEAT" />
             </intent-filter>
         </service>
 
@@ -55,9 +55,9 @@
                 android:enabled="true"
                 android:exported="true">
             <intent-filter>
-                <action android:name="RESTART" />
-                <action android:name="PAUSE" />
-                <action android:name="STOP" />
+                <action android:name="EXCEED_RESTART" />
+                <action android:name="EXCEED_PAUSE" />
+                <action android:name="EXCEED_STOP" />
             </intent-filter>
         </service>
     </application>

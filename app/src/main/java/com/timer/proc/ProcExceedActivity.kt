@@ -129,7 +129,7 @@ class ProcExceedActivity : AppCompatActivity() {
         svcIntent = Intent(this, ProcExceedService::class.java)
             .apply {
                 putExtra(TIME_SET, timeSet)
-                action = CMD_SERVICE.START_WITH_TIMERS
+                action = CMD_EXCEED_SERVICE.START_WITH_TIMERS
             }
         startService(svcIntent)
         updater.setBadgeFocus(0)

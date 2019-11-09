@@ -79,11 +79,9 @@ class ProcActivity : AppCompatActivity() {
                     CMD_BRD.TIME -> updater.setTime(intent.getStringExtra(CMD_BRD.MSG))
                     CMD_BRD.ROUND -> {
                         val round = intent.getIntExtra(CMD_BRD.MSG, 0)
-//                        if (rvHTRV.getFocusPos() != round) {
                         updater.hideSkipMessage()
                         updater.setBadgeFocus(round)
                         updater.showBottomDialogTimeEndMessage(round, timeSet.times.size)
-//                        }
                     }
                     CMD_BRD.END -> {
                         setResult(Activity.RESULT_OK, Intent().apply {
@@ -93,8 +91,6 @@ class ProcActivity : AppCompatActivity() {
                         finish()
                     }
                     CMD_BRD.STOP -> {
-
-                        // TODO
                         updater.setTime(timeSet.times[0].seconds.x1000L().toTimeStr())
                         if (ProcService.INSTANCE != null) ProcService.INSTANCE = null
                         endTimeStr = ""
@@ -222,7 +218,7 @@ class ProcActivity : AppCompatActivity() {
             svcIntent = Intent(this, ProcService::class.java)
                 .apply {
                     putExtra(TIME_SET, timeSet)
-                    action = CMD_SERVICE.START_WITH_TIMERS
+                    action = CMD_PROC_SERVICE.START_WITH_TIMERS
                 }
             startService(svcIntent)
             updater.setBadgeFocus(0)
@@ -291,8 +287,8 @@ class ProcActivity : AppCompatActivity() {
             setAddTime(addingMinute)
             setRepeatIcon(isRepeat)
             showBottomBtn(procStatus)
-//            setTimeSetTitle(timeSet.title)
-//            setContentToHalfTransparent(false)
+            setTimeSetTitle(timeSet.title)
+            setContentToHalfTransparent(false)
         }
 
         procServiceInterface?.getRepeat()

@@ -107,7 +107,7 @@ open class LeftSideSnappyHorizontalListView : LinearLayout {
                     i,
                     root,
                     root.findViewById(R.id.tvCount),
-                    root.findViewById(R.id.tvTime),
+                    root.findViewById(R.id.itemProcBadgeTvTime),
                     seconds[i],
                     Rect()
                 )
