@@ -4,14 +4,6 @@ import android.net.Uri
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
-//@Parcel
-//data class TimeSet @ParcelConstructor constructor(
-//    var title: String = "",
-//    val readySecond: Int,
-//    var times: List<Time>,
-//    val memo: String = ""
-//)
-
 @Parcelize
 data class TimeSet(
     var title: String = "",
@@ -39,3 +31,10 @@ data class Bell(
         USER
     }
 }
+
+@Parcelize
+data class UseInfo(
+    val ymdString : String,
+    val startTimeString : String,
+    val endTImeString :String
+) : Parcelable

@@ -5,6 +5,7 @@
 
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
             android:name=".se_util.App"
@@ -14,10 +15,11 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".proc.ExceedActivity"></activity>
         <activity
                 android:name=".proc.ProcEndActivity"
-                android:windowSoftInputMode="stateVisible|adjustResize"
-                android:theme="@style/Theme.Design.Light.NoActionBar" />
+                android:theme="@style/Theme.Design.Light.NoActionBar"
+                android:windowSoftInputMode="stateVisible|adjustResize" />
         <activity
                 android:name=".main.MainActivity"
                 android:theme="@style/Theme.Design.Light.NoActionBar">

@@ -18,7 +18,7 @@ object BellManager {
             val title = cursor.getString(RingtoneManager.TITLE_COLUMN_INDEX)
             val ringtoneURI = manager.getRingtoneUri(cursor.position)
 
-            "title $title ringtoneURI $ringtoneURI".i()
+//            "title $title ringtoneURI $ringtoneURI".i()
             bells.add(Pair(title, ringtoneURI))
         }
 

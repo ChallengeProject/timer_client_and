@@ -10,6 +10,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.timer.R
 import com.timer.home.HomeFragment
 import com.timer.proc.ProcActivity
+import com.timer.se_data.Bell
 import com.timer.se_data.Time
 import com.timer.se_data.TimeSet
 import com.timer.settings.SettingsFragment
@@ -51,14 +52,14 @@ class MainFragment : Fragment(), MainView, BottomNavigationView.OnNavigationItem
 
             R.id.action_my_time_set -> {
 
-
+                //aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
                 val timeSet = TimeSet(
-                    title= "이것은타이틀",
+                    title = "이것은타이틀",
                     readySecond = 2,
                     times = mutableListOf<Time>().apply {
-                        add(Time(4))
-                        add(Time(2))
-                        add(Time(3))
+                        add(Time(4, "11111"))
+                        add(Time(4, "222222", Bell(Bell.Type.SLIENT, null)))
+                        add(Time(3, "33333333"))
                     }
                 )
 

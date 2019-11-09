@@ -1,5 +1,6 @@
 package com.timer.proc
 
+import android.app.Activity
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -8,7 +9,9 @@ import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import com.timer.R
+import com.timer.main.MainActivity
 import com.timer.se_data.TimeSet
+import com.timer.se_data.UseInfo
 import com.timer.se_util.i
 import com.timer.se_util.toTimeStr
 import com.timer.se_util.toast
@@ -25,13 +28,19 @@ class ProcActivity : AppCompatActivity() {
         const val TIME_SET = "TIME_SET"
         const val TIMES_FOR_NOTIFIACTION = "TIMES_FOR_NOTIFIACTION"
 
+        const val RESP_TIME_SET = "RESP_TIME_SET"
+        const val RESP_USE_INFO = "RESP_USE_INFO"
+
         fun startProcActivity(context: Context, timeSet: TimeSet) {
-
-            context.startActivity(Intent(context, ProcActivity::class.java).apply {
-
-                putExtra(TIME_SET, timeSet)
-            })
+            (context as Activity).startActivityForResult(
+                Intent(context, ProcActivity::class.java).apply {
+                    putExtra(TIME_SET, timeSet)
+                },
+                MainActivity.PROC_ACTIVITY)
         }
+
+        lateinit var ymdString: String
+        lateinit var startTimeString: String
 
         lateinit var updater: ProcViewUpdater
 
@@ -62,6 +71,8 @@ class ProcActivity : AppCompatActivity() {
         // init properties
         timeSet = intent.getParcelableExtra(TIME_SET)
 
+        readySec = timeSet.readySecond
+
         // init view
         lsshlv.showLeftSideSnappyHorizontalListView(timeSet.times.asSequence().map { it.seconds }.toList())
 
@@ -87,8 +98,15 @@ class ProcActivity : AppCompatActivity() {
 //                        allTimeStr = ""
 //                        procStatus = ProcStatus.READY
 
+                        setResult(Activity.RESULT_OK, Intent().apply {
+                            putExtra(RESP_TIME_SET, timeSet)
+                            putExtra(RESP_USE_INFO, UseInfo(ymdString, startTimeString, getCurrentTimeString()))
+                        })
                         finish()
-                        ProcEndActivity.startProcEndActivity(baseContext)
+//                        ProcEndActivity.startProcEndActivity(
+//                            baseContext, timeSet,
+//                            UseInfo(ymdString, startTimeString, getCurrentTimeString())
+//                        )
                     }
                     CMD_BRD.STOP -> {
 
@@ -226,12 +244,24 @@ class ProcActivity : AppCompatActivity() {
             updater.setBadgeFocus(0)
 
             procStatus = ProcStatus.ING
+
+            Calendar.getInstance().run {
+                ymdString = "${get(Calendar.YEAR).toString().substring(2, 4)}. ${get(Calendar.MONTH) - 1}. ${get(Calendar.DATE)}"
+            }
+            startTimeString = getCurrentTimeString()
+
             return
         }
 
         Handler().postDelayed({
             readying(cnt - 1)
         }, 1000)
+    }
+
+    fun getCurrentTimeString(): String {
+        Calendar.getInstance().run {
+            return "${get(Calendar.HOUR)}:${get(Calendar.MINUTE)} ${if (get(Calendar.AM_PM) == 1) "PM" else "AM"}"
+        }
     }
 
     override fun onPause() {

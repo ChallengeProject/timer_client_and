@@ -16,7 +16,7 @@
             android:textColor="#0a0a0a"
             android:textSize="18dp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@id/tvMyTimesetText"
+            app:layout_constraintBottom_toTopOf="@id/tvTimesetTitle"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -33,7 +33,7 @@
             app:layout_constraintTop_toTopOf="@id/tvTimesetEndText" />
 
     <TextView
-            android:id="@+id/tvMyTimesetText"
+            android:id="@+id/tvTimesetTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="27dp"
@@ -55,7 +55,7 @@
             android:textSize="12dp"
             app:layout_constraintBottom_toTopOf="@id/etContent"
             app:layout_constraintLeft_toLeftOf="@id/tvTimesetEndText"
-            app:layout_constraintTop_toBottomOf="@id/tvMyTimesetText"
+            app:layout_constraintTop_toBottomOf="@id/tvTimesetTitle"
             tools:text="19.5.24 / 9:42 AM - 9:43 AM" />
 
     <EditText
@@ -130,12 +130,12 @@
             android:textSize="15dp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/bt2"
+            app:layout_constraintEnd_toStartOf="@id/btSave"
             app:layout_constraintStart_toStartOf="parent" />
 
 
     <Button
-            android:id="@+id/bt2"
+            android:id="@+id/btSave"
             android:layout_width="105dp"
             android:layout_height="45dp"
             android:background="@drawable/bg_bottom_button_gray"
@@ -144,13 +144,13 @@
             android:textSize="15dp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/btExceed"
-            app:layout_constraintEnd_toStartOf="@id/bt3"
+            app:layout_constraintEnd_toStartOf="@id/btRestart"
             app:layout_constraintStart_toEndOf="@id/btExceed"
 
             />
 
     <Button
-            android:id="@+id/bt3"
+            android:id="@+id/btRestart"
             android:layout_width="105dp"
             android:layout_height="45dp"
             android:layout_marginEnd="25dp"
@@ -161,7 +161,7 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/btExceed"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/bt2" />
+            app:layout_constraintStart_toEndOf="@id/btSave" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

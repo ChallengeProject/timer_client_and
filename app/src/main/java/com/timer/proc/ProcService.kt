@@ -1,10 +1,11 @@
 package com.timer.proc
 
 import android.app.Service
+import android.content.Context
 import android.content.Intent
 import android.media.MediaPlayer
-import android.os.Binder
-import android.os.IBinder
+import android.os.*
+import com.timer.se_data.Bell
 import com.timer.se_data.TimeSet
 import com.timer.se_util.BellManager
 import com.timer.se_util.i
@@ -196,9 +197,9 @@ class ProcService : Service() {
 
             override fun onFinished() {
                 isRunning = false
+                playSound(arrayCnt)
                 arrayCnt++
 
-                playSound()
 
                 if (arrayCnt == timeSet.times.size) {
                     if (isRepeat && repeatCnt < REPEAT_MAX_COUNT) {
@@ -280,7 +281,7 @@ class ProcService : Service() {
     override fun onDestroy() {
         super.onDestroy()
 
-        stopSound() // TODO 이줄 안넣으면 compositeDisposable 이거때매 stop 안되서 무한소리, 이거넣으면 마지막에 소리안남
+        stopSound() // 마지막 소리 안나는건 endActivity에서 진행
         compositeDisposable.clear()
 
         isRunning = false
@@ -301,10 +302,39 @@ class ProcService : Service() {
         sendBroadcast(Intent(CMD_BRD.UPDATE_REPEAT_CNT).apply { putExtra(CMD_BRD.MSG, repeatCnt) })
     }
 
-    fun playSound() {
-        mediaPlayer = MediaPlayer.create(this, BellManager.getBasicBells(this)[0].second)
-        mediaPlayer?.start()
+    // same to playSound in ProcEndActivity
+    fun playSound(arrayCnt: Int) {
 
+        when (timeSet.times[arrayCnt].bell.type) {
+            Bell.Type.DEFAULT -> {
+                mediaPlayer = MediaPlayer.create(this, BellManager.getBasicBells(this)[0].second)
+                mediaPlayer?.start()
+                runStopSoundTimer()
+            }
+            Bell.Type.SLIENT -> {
+
+            }
+            Bell.Type.VIBRATION -> {
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    (getSystemService(Context.VIBRATOR_SERVICE) as Vibrator)
+                        .vibrate(VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE))
+                } else {
+                    (getSystemService(Context.VIBRATOR_SERVICE) as Vibrator) .vibrate(1000)
+                }
+            }
+            Bell.Type.USER -> {
+                mediaPlayer = MediaPlayer.create(this, timeSet.times[arrayCnt].bell.uri)
+                mediaPlayer?.start()
+                runStopSoundTimer()
+            }
+
+        }
+
+
+    }
+
+    fun runStopSoundTimer() {
         compositeDisposable.add(Observable
             .timer(2000, TimeUnit.MILLISECONDS)
             .subscribeOn(Schedulers.io())
