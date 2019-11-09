@@ -8,21 +8,6 @@
 
 
 
-    <!-- this is first place -->
-    <TextView
-            android:id="@+id/tvTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text=""
-            android:textColor="#0a0a0a"
-            android:textSize="50dp"
-            app:layout_constraintBottom_toTopOf="@id/ivWriteMemoBtn"
-            app:layout_constraintLeft_toLeftOf="@id/tvTitle"
-            app:layout_constraintTop_toBottomOf="@id/tvSubTitle"
-            tools:text="00:00:59" />
-
-
     <ImageView
             android:id="@+id/ivRepeatBtn"
             android:layout_width="40dp"
@@ -366,5 +351,19 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+    <!-- this is second place -->
+    <TextView
+            android:id="@+id/tvTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text=""
+            android:textColor="#0a0a0a"
+            android:textSize="50dp"
+            app:layout_constraintBottom_toTopOf="@id/ivWriteMemoBtn"
+            app:layout_constraintLeft_toLeftOf="@id/tvTitle"
+            app:layout_constraintTop_toBottomOf="@id/tvSubTitle"
+            tools:text="00:00:59" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
