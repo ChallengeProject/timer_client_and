@@ -15,7 +15,9 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".proc.ExceedActivity"></activity>
+        <activity android:name=".proc.ProcExceedActivity"
+                android:launchMode="singleTask"
+                android:theme="@style/Theme.Design.Light.NoActionBar" />
         <activity
                 android:name=".proc.ProcEndActivity"
                 android:theme="@style/Theme.Design.Light.NoActionBar"
@@ -41,11 +43,21 @@
             <intent-filter>
                 <action android:name="RESTART" />
                 <action android:name="PAUSE" />
-                <action android:name="SOUND_OFF" />
                 <action android:name="STOP" />
                 <action android:name="REMAIN_SEC" />
                 <action android:name="ROUND" />
                 <action android:name="REPEAT" />
+            </intent-filter>
+        </service>
+
+        <service
+                android:name=".proc.ProcExceedService"
+                android:enabled="true"
+                android:exported="true">
+            <intent-filter>
+                <action android:name="RESTART" />
+                <action android:name="PAUSE" />
+                <action android:name="STOP" />
             </intent-filter>
         </service>
     </application>

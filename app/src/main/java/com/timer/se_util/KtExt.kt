@@ -6,6 +6,8 @@ import android.graphics.drawable.Drawable
 import android.os.Build
 import android.util.Log
 import android.widget.Toast
+import java.text.SimpleDateFormat
+import java.util.*
 import java.util.concurrent.TimeUnit
 
 fun Any.i(tag: String = "") {
@@ -68,3 +70,11 @@ fun Int.toDrawable(context: Context): Drawable {
     }
 }
 
+fun Int.toEndTimeStrAfterSec(): String {
+    val format = SimpleDateFormat("hh:mm a", Locale.US)
+
+    val gCalendar = GregorianCalendar()
+    format.calendar = gCalendar
+    gCalendar.add(Calendar.SECOND, this)
+    return format.format(gCalendar.time)
+}

@@ -58,8 +58,8 @@ class ProcService : Service() {
     lateinit var timeSet: TimeSet
     lateinit var cdt: PreciseCountdown
 
-    val timingNotification: TimingNotification by lazy {
-        TimingNotification(
+    val procNotification: ProcNotification by lazy {
+        ProcNotification(
             this,
             ArrayList(timeSet.times.asSequence().map { it.seconds }.toList())
         )
@@ -117,16 +117,9 @@ class ProcService : Service() {
                 CMD_SERVICE.STOP -> {
                     stop(true)
                 }
-                CMD_SERVICE.SOUND_OFF -> {
-                    soundOff()
-                }
             }
         }
         return super.onStartCommand(intent, flags, startId)
-    }
-
-    fun soundOff() {
-
     }
 
     /**
@@ -146,12 +139,12 @@ class ProcService : Service() {
         "pause".i(TAG)
         cancelTimerStatus(CancleType.NONE)
         isPause = true
-        updateNotification(mTimer.toTimeStr(), NotifiactionButtonType.PLAY)
+        updateNotification(mTimer.toTimeStr(), NotifiactionButtonType.PLAY) // PLAY is current pause status
     }
 
     fun restart(startType: StartType) {
 
-        if (!isRunning && !isPause) timingNotification.showNotification()
+        if (!isRunning && !isPause) procNotification.showNotification()
 
         if (startType == StartType.INIT)
             mTimer = timeSet.times[0].seconds.x1000L()
@@ -188,6 +181,8 @@ class ProcService : Service() {
 
         if (isRunning) return
 
+        // pause에서 온거면 pause시간 받아서 진행,
+        // 아니라면 round가 넘어가는거기 때문에 라운드 시간 받아 진행
         val insertTimer: Long = if (isPause) {
             isPause = false
             mTimer
@@ -239,12 +234,11 @@ class ProcService : Service() {
     }
 
     fun updateNotification(time: String, nbType: NotifiactionButtonType) {
-        timingNotification.update(
-            "내타임셋",
+        procNotification.update(
+            timeSet.title,
             time,
             arrayCnt,
             timeSet.times.size.toString(),
-            repeatCnt.toString(),
             nbType
         )
     }
@@ -273,7 +267,7 @@ class ProcService : Service() {
         isRunning = false
         if (cancleType == CancleType.INIT_ARR_CNT) {
 //            stopForeground(notiId)
-            timingNotification.removeNotification()
+            procNotification.removeNotification()
             arrayCnt = 0
         }
     }
@@ -309,7 +303,7 @@ class ProcService : Service() {
             Bell.Type.DEFAULT -> {
                 mediaPlayer = MediaPlayer.create(this, BellManager.getBasicBells(this)[0].second)
                 mediaPlayer?.start()
-                runStopSoundTimer()
+                runStopSoundCount()
             }
             Bell.Type.SLIENT -> {
 
@@ -326,7 +320,7 @@ class ProcService : Service() {
             Bell.Type.USER -> {
                 mediaPlayer = MediaPlayer.create(this, timeSet.times[arrayCnt].bell.uri)
                 mediaPlayer?.start()
-                runStopSoundTimer()
+                runStopSoundCount()
             }
 
         }
@@ -334,7 +328,7 @@ class ProcService : Service() {
 
     }
 
-    fun runStopSoundTimer() {
+    fun runStopSoundCount() {
         compositeDisposable.add(Observable
             .timer(2000, TimeUnit.MILLISECONDS)
             .subscribeOn(Schedulers.io())

@@ -8,8 +8,6 @@ import kotlinx.android.synthetic.main.activity_proc.*
 
 class ProcViewUpdater(val act: Activity) {
 
-    init {
-    }
 
     private fun setSubtitle(visible: Int, str: String) {
         act.tvSubTitle.apply {
@@ -37,6 +35,10 @@ class ProcViewUpdater(val act: Activity) {
 
     fun setTimeSetTitle(str: String) {
         act.tvTitle.text = str
+    }
+
+    fun setTimeColor(color: Int) {
+        act.tvTime.setTextColor(color)
     }
 
     fun setWholeTime(str: String) {
@@ -160,6 +162,13 @@ class ProcViewUpdater(val act: Activity) {
     fun hideBottomButton() {
         act.btBottom1Btn.visibility = View.GONE
         act.btBottom2Btn.visibility = View.GONE
+    }
+
+    fun setContentToHalfTransparent(isTransparent: Boolean) {
+
+        if(isTransparent) act.viewHalfTransparent.visibility = View.VISIBLE
+        else act.viewHalfTransparent.visibility = View.GONE
+
     }
 
 //    private fun showMemo() {

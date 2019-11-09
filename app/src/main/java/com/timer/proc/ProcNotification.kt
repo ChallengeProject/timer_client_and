@@ -3,8 +3,10 @@ package com.timer.proc
 import android.app.Notification
 import android.app.NotificationManager
 import android.app.PendingIntent
+import android.app.Service
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.os.Build
 import android.view.View
 import android.widget.RemoteViews
@@ -24,7 +26,7 @@ import com.timer.se_util.i
  *
  */
 
-class TimingNotification(val procService: ProcService, val times_: ArrayList<Int>) {
+class ProcNotification(val procService: Service, val times_: ArrayList<Int>) {
 
     val TAG = "TimingNotication"
 
@@ -43,6 +45,9 @@ class TimingNotification(val procService: ProcService, val times_: ArrayList<Int
     companion object {
         var times: ArrayList<Int>? =
             null // for toss previous times value to activity from notificaion
+
+        const val EXCEED_TEXT = -1
+
     }
 
     init {
@@ -94,23 +99,27 @@ class TimingNotification(val procService: ProcService, val times_: ArrayList<Int
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             procService.stopForeground(NOTI_ID)
         } else {
-            procService.stop(true) // TODO check using low version device
+            (procService as ProcService).stop(true) // TODO check using low version device
         }
         isForeground = false
     }
 
     fun update(
         timeSetName: String, timer: String, step: Int, maxStep: String,
-        repeat: String, notifiactionButtonType_: NotifiactionButtonType
+        notifiactionButtonType_: NotifiactionButtonType
     ) {
-        "update $timeSetName $timer $step $maxStep $repeat $notifiactionButtonType_ ".i(TAG)
+        "update $timeSetName $timer $step $maxStep $notifiactionButtonType_ ".i(TAG)
         notifiactionButtonType = notifiactionButtonType_
         remoteViews!!.run {
 
             setTextViewText(R.id.notiTvTimer, timer)
 
-            // TODO distribute properties to each views with conditions
-            setTextViewText(R.id.notiTvRepeat, "${step+1}/$maxStep")
+            if(step == EXCEED_TEXT && maxStep == EXCEED_TEXT.toString()) {
+                setTextViewText(R.id.notiTvRepeat, "초과 기록")
+                setTextColor(R.id.notiTvRepeat,  Color.parseColor("#f24150")) // 0xfff24150
+            } else {
+                setTextViewText(R.id.notiTvRepeat, "${step+1}/$maxStep")
+            }
 
             setViewVisibility(R.id.notiIvCtrlPlay, View.GONE)
             setViewVisibility(R.id.notiIvCtrlPause, View.GONE)

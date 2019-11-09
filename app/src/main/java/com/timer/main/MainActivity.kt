@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.timer.R
 import com.timer.proc.ProcActivity
 import com.timer.proc.ProcEndActivity
+import com.timer.proc.ProcExceedActivity
 import com.timer.se_data.TimeSet
 import com.timer.se_util.i
 
@@ -59,15 +60,15 @@ class MainActivity : AppCompatActivity() {
                 }
                 PROC_END_ACTIVITY -> {
                     val timeSet = data.getParcelableExtra<TimeSet>(ProcEndActivity.RESP_TIME_SET)
-                    when(data.getStringExtra(ProcEndActivity.RESP_TYPE)){
+                    when (data.getStringExtra(ProcEndActivity.RESP_TYPE)) {
 
                         ProcEndActivity.RESP_TYPE_EXCEED -> {
-
+                            ProcExceedActivity.startProcExceedActivity(this, timeSet)
                         }
-                        ProcEndActivity.RESP_TYPE_RESTART-> {
-                            ProcActivity.startProcActivity(this,timeSet)
+                        ProcEndActivity.RESP_TYPE_RESTART -> {
+                            ProcActivity.startProcActivity(this, timeSet)
                         }
-                        ProcEndActivity.RESP_TYPE_SAVE-> {
+                        ProcEndActivity.RESP_TYPE_SAVE -> {
 
                         }
                     }

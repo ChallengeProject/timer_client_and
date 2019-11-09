@@ -124,7 +124,7 @@ class ProcEndActivity : AppCompatActivity() {
             Bell.Type.DEFAULT -> {
                 mediaPlayer = MediaPlayer.create(this, BellManager.getBasicBells(this)[0].second)
                 mediaPlayer?.start()
-                runStopSoundTimer()
+                runStopSoundCount()
             }
             Bell.Type.SLIENT -> {
 
@@ -140,13 +140,13 @@ class ProcEndActivity : AppCompatActivity() {
             Bell.Type.USER -> {
                 mediaPlayer = MediaPlayer.create(this, timeSet.times.last().bell.uri)
                 mediaPlayer?.start()
-                runStopSoundTimer()
+                runStopSoundCount()
             }
 
         }
     }
 
-    fun runStopSoundTimer() {
+    fun runStopSoundCount() {
         compositeDisposable.add(Observable
             .timer(2000, TimeUnit.MILLISECONDS)
             .subscribeOn(Schedulers.io())

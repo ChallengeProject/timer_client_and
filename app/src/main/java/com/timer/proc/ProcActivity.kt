@@ -12,12 +12,8 @@ import com.timer.R
 import com.timer.main.MainActivity
 import com.timer.se_data.TimeSet
 import com.timer.se_data.UseInfo
-import com.timer.se_util.i
-import com.timer.se_util.toTimeStr
-import com.timer.se_util.toast
-import com.timer.se_util.x1000L
+import com.timer.se_util.*
 import kotlinx.android.synthetic.main.activity_proc.*
-import java.text.SimpleDateFormat
 import java.util.*
 
 class ProcActivity : AppCompatActivity() {
@@ -50,7 +46,6 @@ class ProcActivity : AppCompatActivity() {
         lateinit var timeBrd: BroadcastReceiver
         lateinit var svcIntent: Intent
         var procServiceInterface: ProcServiceInterface? = null
-        private val format = SimpleDateFormat("hh:mm a", Locale.US)
 
         // TODO : Connect sharedPreference this proerties
         private var endTimeStr = ""
@@ -91,22 +86,11 @@ class ProcActivity : AppCompatActivity() {
 //                        }
                     }
                     CMD_BRD.END -> {
-
-                        // TODO
-//                        tvTime.text = "종료 브로드케스팅 받음"
-//                        endTimeStr = ""
-//                        allTimeStr = ""
-//                        procStatus = ProcStatus.READY
-
                         setResult(Activity.RESULT_OK, Intent().apply {
                             putExtra(RESP_TIME_SET, timeSet)
                             putExtra(RESP_USE_INFO, UseInfo(ymdString, startTimeString, getCurrentTimeString()))
                         })
                         finish()
-//                        ProcEndActivity.startProcEndActivity(
-//                            baseContext, timeSet,
-//                            UseInfo(ymdString, startTimeString, getCurrentTimeString())
-//                        )
                     }
                     CMD_BRD.STOP -> {
 
@@ -121,7 +105,7 @@ class ProcActivity : AppCompatActivity() {
                     CMD_BRD.REMAIN_SEC -> {
                         val remainSecond = intent.getLongExtra(CMD_BRD.MSG, 0)
                         "CMD_BRD.REMAIN_SEC : $remainSecond".i()
-                        endTimeStr = getEndTimeStringAfterSecond(remainSecond.toInt())
+                        endTimeStr = remainSecond.toInt().toEndTimeStrAfterSec()
                         updater.setEndTime(endTimeStr)
                     }
                     CMD_BRD.UPDATE_REPEAT_BTN -> {
@@ -208,7 +192,7 @@ class ProcActivity : AppCompatActivity() {
 
         // set end time
         val allTime = timeSet.times.map { it.seconds }.reduce { acc, i -> acc + i }
-        if (endTimeStr.isEmpty()) endTimeStr = getEndTimeStringAfterSecond(readySec + allTime)
+        if (endTimeStr.isEmpty()) endTimeStr = (readySec + allTime).toEndTimeStrAfterSec()
         if (allTimeStr.isEmpty()) allTimeStr =
             allTime.x1000L()
                 .toTimeStr() // need to [if] for call from notification when remove activity status
@@ -245,6 +229,7 @@ class ProcActivity : AppCompatActivity() {
 
             procStatus = ProcStatus.ING
 
+            // for showing to endProcActivity
             Calendar.getInstance().run {
                 ymdString = "${get(Calendar.YEAR).toString().substring(2, 4)}. ${get(Calendar.MONTH) - 1}. ${get(Calendar.DATE)}"
             }
@@ -272,14 +257,6 @@ class ProcActivity : AppCompatActivity() {
 
         procServiceInterface?.unbindService()
     }
-
-    fun getEndTimeStringAfterSecond(sec: Int): String {
-        val gCalendar = GregorianCalendar()
-        format.calendar = gCalendar
-        gCalendar.add(Calendar.SECOND, sec)
-        return format.format(gCalendar.time)
-    }
-
 
     override fun onResume() {
         super.onResume()
@@ -314,6 +291,8 @@ class ProcActivity : AppCompatActivity() {
             setAddTime(addingMinute)
             setRepeatIcon(isRepeat)
             showBottomBtn(procStatus)
+//            setTimeSetTitle(timeSet.title)
+//            setContentToHalfTransparent(false)
         }
 
         procServiceInterface?.getRepeat()
