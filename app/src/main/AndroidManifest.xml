@@ -15,6 +15,10 @@
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
         <activity
+                android:name=".proc.ProcEndActivity"
+                android:windowSoftInputMode="stateVisible|adjustResize"
+                android:theme="@style/Theme.Design.Light.NoActionBar" />
+        <activity
                 android:name=".main.MainActivity"
                 android:theme="@style/Theme.Design.Light.NoActionBar">
             <intent-filter>
@@ -25,26 +29,23 @@
         </activity>
         <activity
                 android:name=".proc.ProcActivity"
-                android:theme="@style/Theme.Design.Light.NoActionBar"
-                android:launchMode="singleTask" />
+                android:launchMode="singleTask"
+                android:theme="@style/Theme.Design.Light.NoActionBar" />
 
         <service
                 android:name=".proc.ProcService"
                 android:enabled="true"
-                android:exported="true" >
-
+                android:exported="true">
             <intent-filter>
-                <action android:name="RESTART"/>
-                <action android:name="PAUSE"/>
-                <action android:name="SOUND_OFF"/>
-                <action android:name="STOP"/>
-                <action android:name="REMAIN_SEC"/>
-                <action android:name="ROUND"/>
-                <action android:name="REPEAT"/>
-
+                <action android:name="RESTART" />
+                <action android:name="PAUSE" />
+                <action android:name="SOUND_OFF" />
+                <action android:name="STOP" />
+                <action android:name="REMAIN_SEC" />
+                <action android:name="ROUND" />
+                <action android:name="REPEAT" />
             </intent-filter>
         </service>
-
     </application>
 
 </manifest>

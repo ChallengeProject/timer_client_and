@@ -10,6 +10,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.timer.R
 import com.timer.home.HomeFragment
 import com.timer.proc.ProcActivity
+import com.timer.se_data.Time
+import com.timer.se_data.TimeSet
 import com.timer.settings.SettingsFragment
 import com.timer.timeset.local.MyTimeSetListFragment
 import com.timer.timeset.remote.SharedTimeSetListFragment
@@ -50,20 +52,17 @@ class MainFragment : Fragment(), MainView, BottomNavigationView.OnNavigationItem
             R.id.action_my_time_set -> {
 
 
-//                // TODO remove codes aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-                val times = arrayListOf(
-                    2,
-                    4
-//                    3,
-//                    4,
-//                    5,
-//                    8,
-//                    5
+                val timeSet = TimeSet(
+                    title= "이것은타이틀",
+                    readySecond = 2,
+                    times = mutableListOf<Time>().apply {
+                        add(Time(4))
+                        add(Time(2))
+                        add(Time(3))
+                    }
                 )
 
-                val readySec = 2
-
-                ProcActivity.startProcActivity(this.activity!!, readySec, times)
+                ProcActivity.startProcActivity(this.activity!!, timeSet)
 
                 // TODO open commecnt
 //                changeFragment(R.id.contents, myTimeSetListFragment)

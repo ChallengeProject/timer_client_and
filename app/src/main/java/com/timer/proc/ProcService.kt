@@ -5,7 +5,7 @@ import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Binder
 import android.os.IBinder
-import com.timer.proc.ProcActivity.Companion.TIMES
+import com.timer.se_data.TimeSet
 import com.timer.se_util.BellManager
 import com.timer.se_util.i
 import com.timer.se_util.toTimeStr
@@ -54,11 +54,14 @@ class ProcService : Service() {
         var INSTANCE: ProcService? = null // check service is alive
     }
 
-    lateinit var times: ArrayList<Int>
+    lateinit var timeSet: TimeSet
     lateinit var cdt: PreciseCountdown
 
     val timingNotification: TimingNotification by lazy {
-        TimingNotification(this, times)
+        TimingNotification(
+            this,
+            ArrayList(timeSet.times.asSequence().map { it.seconds }.toList())
+        )
     }
 
     var arrayCnt = 0
@@ -100,8 +103,8 @@ class ProcService : Service() {
             "action : $action".i()
             when (action) {
                 CMD_SERVICE.START_WITH_TIMERS -> {
-                    times = intent.getIntegerArrayListExtra(TIMES)
-                    "CMD_SERVICE.START_WITH_TIMERS times : $times".i()
+                    timeSet = intent.getParcelableExtra(ProcActivity.TIME_SET)
+                    "CMD_SERVICE.START_WITH_TIMERS times : ${timeSet.times.asSequence().map { it.seconds }.toList()}.to".i()
                     restart(StartType.INIT)
                 }
                 CMD_SERVICE.PAUSE -> {
@@ -150,9 +153,10 @@ class ProcService : Service() {
         if (!isRunning && !isPause) timingNotification.showNotification()
 
         if (startType == StartType.INIT)
-            mTimer = times[0].x1000L()
+            mTimer = timeSet.times[0].seconds.x1000L()
 
-        val sumSecondWithOutMTime = times.drop(arrayCnt).reduce { cur, nxt -> cur + nxt }
+        val sumSecondWithOutMTime =
+            timeSet.times.asSequence().map { it.seconds }.drop(arrayCnt).reduce { cur, nxt -> cur + nxt }
 
         val remainSecond = mTimer / 1000 + sumSecondWithOutMTime
         sendBroadcast(Intent(CMD_BRD.REMAIN_SEC).apply { putExtra(CMD_BRD.MSG, remainSecond) })
@@ -171,7 +175,7 @@ class ProcService : Service() {
     fun move(pos: Int) {
         arrayCnt = pos
         pause()
-        mTimer = times[arrayCnt].x1000L() // set timer picked move
+        mTimer = timeSet.times[arrayCnt].seconds.x1000L() // set timer picked move
         restart(StartType.RESTART)
     }
 
@@ -186,7 +190,7 @@ class ProcService : Service() {
         val insertTimer: Long = if (isPause) {
             isPause = false
             mTimer
-        } else times[arrayCnt].x1000L()
+        } else timeSet.times[arrayCnt].seconds.x1000L()
 
         cdt = object : PreciseCountdown(insertTimer, 1000L) {
 
@@ -196,7 +200,7 @@ class ProcService : Service() {
 
                 playSound()
 
-                if (arrayCnt == times.size) {
+                if (arrayCnt == timeSet.times.size) {
                     if (isRepeat && repeatCnt < REPEAT_MAX_COUNT) {
                         move(0)
                         repeatCnt++
@@ -238,7 +242,7 @@ class ProcService : Service() {
             "내타임셋",
             time,
             arrayCnt,
-            times.size.toString(),
+            timeSet.times.size.toString(),
             repeatCnt.toString(),
             nbType
         )
@@ -276,8 +280,8 @@ class ProcService : Service() {
     override fun onDestroy() {
         super.onDestroy()
 
-        compositeDisposable.clear()
         stopSound() // TODO 이줄 안넣으면 compositeDisposable 이거때매 stop 안되서 무한소리, 이거넣으면 마지막에 소리안남
+        compositeDisposable.clear()
 
         isRunning = false
 //        cancelTimerStatus(CancleType.INIT_ARR_CNT)
@@ -301,8 +305,8 @@ class ProcService : Service() {
         mediaPlayer = MediaPlayer.create(this, BellManager.getBasicBells(this)[0].second)
         mediaPlayer?.start()
 
-        compositeDisposable.add( Observable
-            .timer(2000,TimeUnit.MILLISECONDS)
+        compositeDisposable.add(Observable
+            .timer(2000, TimeUnit.MILLISECONDS)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
@@ -311,7 +315,7 @@ class ProcService : Service() {
         )
     }
 
-    fun stopSound(){
+    fun stopSound() {
         mediaPlayer?.stop()
     }
 

@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import com.timer.R
+import com.timer.se_data.TimeSet
 import com.timer.se_util.i
 import com.timer.se_util.toTimeStr
 import com.timer.se_util.toast
@@ -21,20 +22,20 @@ class ProcActivity : AppCompatActivity() {
     val TAG = "ProcActivity"
 
     companion object {
-        val TIMES = "TIMES"
-        private val READY_SEC = "READY_SEC"
+        const val TIME_SET = "TIME_SET"
+        const val TIMES_FOR_NOTIFIACTION = "TIMES_FOR_NOTIFIACTION"
 
-        fun startProcActivity(context: Context, readySec: Int, times: ArrayList<Int>) {
+        fun startProcActivity(context: Context, timeSet: TimeSet) {
 
             context.startActivity(Intent(context, ProcActivity::class.java).apply {
-                putIntegerArrayListExtra(TIMES, times)
-                putExtra(READY_SEC, readySec)
+
+                putExtra(TIME_SET, timeSet)
             })
         }
 
         lateinit var updater: ProcViewUpdater
 
-        lateinit var times: ArrayList<Int>
+        lateinit var timeSet: TimeSet
         var readySec: Int = 5
         var canReady = true // exception of out when postDelay
         lateinit var timeBrd: BroadcastReceiver
@@ -59,11 +60,10 @@ class ProcActivity : AppCompatActivity() {
         updater = ProcViewUpdater(this)
 
         // init properties
-        times = intent.getIntegerArrayListExtra(TIMES)
-        readySec = intent.getIntExtra(READY_SEC, 5)
+        timeSet = intent.getParcelableExtra(TIME_SET)
 
         // init view
-        lsshlv.showLeftSideSnappyHorizontalListView(times)
+        lsshlv.showLeftSideSnappyHorizontalListView(timeSet.times.asSequence().map { it.seconds }.toList())
 
         // init brd
         timeBrd = object : BroadcastReceiver() {
@@ -76,22 +76,24 @@ class ProcActivity : AppCompatActivity() {
 //                        if (rvHTRV.getFocusPos() != round) {
                         updater.hideSkipMessage()
                         updater.setBadgeFocus(round)
-                        updater.showBottomDialogTimeEndMessage(round, times.size)
+                        updater.showBottomDialogTimeEndMessage(round, timeSet.times.size)
 //                        }
                     }
                     CMD_BRD.END -> {
 
                         // TODO
-                        tvTime.text = "종료 브로드케스팅 받음"
-                        endTimeStr = ""
-                        allTimeStr = ""
+//                        tvTime.text = "종료 브로드케스팅 받음"
+//                        endTimeStr = ""
+//                        allTimeStr = ""
 //                        procStatus = ProcStatus.READY
+
                         finish()
+                        ProcEndActivity.startProcEndActivity(baseContext)
                     }
                     CMD_BRD.STOP -> {
 
                         // TODO
-                        updater.setTime(times[0].x1000L().toTimeStr())
+                        updater.setTime(timeSet.times[0].seconds.x1000L().toTimeStr())
                         if (ProcService.INSTANCE != null) ProcService.INSTANCE = null
                         endTimeStr = ""
                         allTimeStr = ""
@@ -170,7 +172,7 @@ class ProcActivity : AppCompatActivity() {
 
         ivSkipO.setOnClickListener {
 
-            if(procStatus == ProcStatus.READY ) {
+            if (procStatus == ProcStatus.READY) {
                 "시작 준비 중에는 타임셋 전환을 할 수 없습니다".toast()
                 return@setOnClickListener
             }
@@ -187,7 +189,7 @@ class ProcActivity : AppCompatActivity() {
         }
 
         // set end time
-        val allTime = times.reduce { acc, i -> acc + i }
+        val allTime = timeSet.times.map { it.seconds }.reduce { acc, i -> acc + i }
         if (endTimeStr.isEmpty()) endTimeStr = getEndTimeStringAfterSecond(readySec + allTime)
         if (allTimeStr.isEmpty()) allTimeStr =
             allTime.x1000L()
@@ -206,7 +208,7 @@ class ProcActivity : AppCompatActivity() {
 
     fun readying(cnt: Int) {
 
-        updater.setTime(times[0].x1000L().toTimeStr())
+        updater.setTime(timeSet.times[0].seconds.x1000L().toTimeStr())
 
         procStatus = ProcStatus.READY
         updater.setSubtitleReadyCnt(cnt)
@@ -217,8 +219,7 @@ class ProcActivity : AppCompatActivity() {
             // start service from activity
             svcIntent = Intent(this, ProcService::class.java)
                 .apply {
-                    putIntegerArrayListExtra(TIMES, times)
-                    putExtra(READY_SEC, readySec)
+                    putExtra(TIME_SET, timeSet)
                     action = CMD_SERVICE.START_WITH_TIMERS
                 }
             startService(svcIntent)
@@ -229,7 +230,7 @@ class ProcActivity : AppCompatActivity() {
         }
 
         Handler().postDelayed({
-            readying(cnt-1)
+            readying(cnt - 1)
         }, 1000)
     }
 

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".proc.ProcEndActivity">
+
+    <TextView
+            android:id="@+id/tvTimesetEndText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="43dp"
+            android:text="타임셋 종료"
+            android:textColor="#0a0a0a"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/tvMyTimesetText"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ImageView
+            android:id="@+id/ivTimesetEndBtn"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginEnd="10dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/btn_close_big"
+            app:layout_constraintBottom_toBottomOf="@id/tvTimesetEndText"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvTimesetEndText" />
+
+    <TextView
+            android:id="@+id/tvMyTimesetText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="27dp"
+            android:text="내 타임셋"
+            android:textColor="#0a0a0a"
+            android:textSize="12dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/tvDateInfo"
+            app:layout_constraintLeft_toLeftOf="@id/tvTimesetEndText"
+            app:layout_constraintTop_toBottomOf="@id/tvTimesetEndText" />
+
+
+    <TextView
+            android:id="@+id/tvDateInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textColor="#0a0a0a"
+            android:textSize="12dp"
+            app:layout_constraintBottom_toTopOf="@id/etContent"
+            app:layout_constraintLeft_toLeftOf="@id/tvTimesetEndText"
+            app:layout_constraintTop_toBottomOf="@id/tvMyTimesetText"
+            tools:text="19.5.24 / 9:42 AM - 9:43 AM" />
+
+    <EditText
+            android:id="@+id/etContent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="13dp"
+            android:layout_marginRight="19dp"
+            android:background="@null"
+            android:gravity="top"
+            android:lines="6"
+            android:textColor="#0a0a0a"
+            android:textSize="15dp"
+            app:layout_constraintLeft_toLeftOf="@id/tvTimesetEndText"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvDateInfo" />
+
+    <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="#646464"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/etContent"
+            app:layout_constraintTop_toBottomOf="@id/etContent" />
+
+    <TextView
+            android:id="@+id/tvExceedErrorText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="작성 가능한 글자 수가 초과됐어요"
+            android:textColor="#f24150"
+            android:textSize="12dp"
+            android:visibility="invisible"
+            app:layout_constraintLeft_toLeftOf="@id/tvTimesetEndText"
+            app:layout_constraintTop_toBottomOf="@id/etContent"
+            tools:visibility="visible" />
+
+    <TextView
+            android:id="@+id/tvExceedNumberText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="/1000"
+            android:textColor="#0a0a0a"
+            android:textSize="12dp"
+            app:layout_constraintEnd_toEndOf="@id/etContent"
+            app:layout_constraintLeft_toRightOf="@id/tvExceedNumber"
+            app:layout_constraintRight_toRightOf="@id/etContent"
+            app:layout_constraintTop_toBottomOf="@id/etContent" />
+
+    <TextView
+            android:id="@+id/tvExceedNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="0"
+            android:textColor="#0a0a0a"
+            android:textSize="12dp"
+            app:layout_constraintRight_toLeftOf="@id/tvExceedNumberText"
+            app:layout_constraintTop_toBottomOf="@id/etContent" />
+
+    <Button
+            android:id="@+id/btExceed"
+            android:layout_width="105dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/bg_bottom_button_gray"
+            android:text="초과기록"
+            android:textColor="#f24150"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/bt2"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+    <Button
+            android:id="@+id/bt2"
+            android:layout_width="105dp"
+            android:layout_height="45dp"
+            android:background="@drawable/bg_bottom_button_gray"
+            android:text="저장"
+            android:textColor="#0a0a0a"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/btExceed"
+            app:layout_constraintEnd_toStartOf="@id/bt3"
+            app:layout_constraintStart_toEndOf="@id/btExceed"
+
+            />
+
+    <Button
+            android:id="@+id/bt3"
+            android:layout_width="105dp"
+            android:layout_height="45dp"
+            android:layout_marginEnd="25dp"
+            android:background="@drawable/bg_bottom_button_gray"
+            android:text="재시작"
+            android:textColor="#0a0a0a"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/btExceed"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/bt2" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

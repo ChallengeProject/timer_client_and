@@ -58,7 +58,7 @@ class TimingNotification(val procService: ProcService, val times_: ArrayList<Int
             val notificationIntent = Intent(procService, ProcActivity::class.java).apply {
                 action = (Intent.ACTION_MAIN)
                 addCategory(Intent.CATEGORY_LAUNCHER)
-                putIntegerArrayListExtra(ProcActivity.TIMES, times)
+                putIntegerArrayListExtra(ProcActivity.TIMES_FOR_NOTIFIACTION, times)
             }
 //            notificationIntent.action = "TIMING_NOTI_ACTION"
 
