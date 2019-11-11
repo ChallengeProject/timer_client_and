@@ -32,7 +32,8 @@ class ProcActivity : AppCompatActivity() {
                 Intent(context, ProcActivity::class.java).apply {
                     putExtra(TIME_SET, timeSet)
                 },
-                MainActivity.PROC_ACTIVITY)
+                MainActivity.PROC_ACTIVITY
+            )
         }
 
         lateinit var ymdString: String
@@ -43,11 +44,10 @@ class ProcActivity : AppCompatActivity() {
         lateinit var timeSet: TimeSet
         var readySec: Int = 5
         var canReady = true // exception of out when postDelay
-        lateinit var timeBrd: BroadcastReceiver
+        var timeBrd: BroadcastReceiver? = null
         lateinit var svcIntent: Intent
         var procServiceInterface: ProcServiceInterface? = null
 
-        // TODO : Connect sharedPreference this proerties
         private var endTimeStr = ""
         private var allTimeStr = ""
         private var addingMinute = 0
@@ -80,7 +80,7 @@ class ProcActivity : AppCompatActivity() {
                     CMD_BRD.ROUND -> {
                         val round = intent.getIntExtra(CMD_BRD.MSG, 0)
                         updater.hideSkipMessage()
-                        updater.setBadgeFocus(round)
+                        updater.setBadgeFocusAndCommentAndBell(timeSet.times[round],round)
                         updater.showBottomDialogTimeEndMessage(round, timeSet.times.size)
                     }
                     CMD_BRD.END -> {
@@ -88,15 +88,22 @@ class ProcActivity : AppCompatActivity() {
                             putExtra(RESP_TIME_SET, timeSet)
                             putExtra(RESP_USE_INFO, UseInfo(ymdString, startTimeString, getCurrentTimeString()))
                         })
+                        timeBrd?.let {
+                            unregisterReceiver(timeBrd)
+                        }
                         finish()
                     }
                     CMD_BRD.STOP -> {
                         updater.setTime(timeSet.times[0].seconds.x1000L().toTimeStr())
-                        if (ProcService.INSTANCE != null) ProcService.INSTANCE = null
+                        ProcService.INSTANCE = null
                         endTimeStr = ""
                         allTimeStr = ""
 //                        procStatus = ProcStatus.READY
-                        finish()
+
+                        timeBrd?.let {
+                            unregisterReceiver(timeBrd)
+                        }
+                        finish ()
                     }
                     CMD_BRD.REMAIN_SEC -> {
                         val remainSecond = intent.getLongExtra(CMD_BRD.MSG, 0)
@@ -192,12 +199,23 @@ class ProcActivity : AppCompatActivity() {
         if (allTimeStr.isEmpty()) allTimeStr =
             allTime.x1000L()
                 .toTimeStr() // need to [if] for call from notification when remove activity status
+
+        registerReceiver(timeBrd, IntentFilter().apply {
+            addAction(CMD_BRD.ROUND)
+            addAction(CMD_BRD.TIME)
+            addAction(CMD_BRD.END)
+            addAction(CMD_BRD.STOP)
+            addAction(CMD_BRD.REMAIN_SEC)
+            addAction(CMD_BRD.UPDATE_REPEAT_BTN)
+            addAction(CMD_BRD.UPDATE_REPEAT_CNT)
+
+        })
     }
 
     fun moveTimeBadge(pos: Int) {
         ProcService.INSTANCE?.let { procServiceInterface?.move(pos) }
 
-        lsshlv.setFocus(pos)
+        updater.setBadgeFocusAndCommentAndBell(timeSet.times[pos],pos)
 
         addingMinute = 0
         updater.setAddTime(addingMinute)
@@ -221,7 +239,7 @@ class ProcActivity : AppCompatActivity() {
                     action = CMD_PROC_SERVICE.START_WITH_TIMERS
                 }
             startService(svcIntent)
-            updater.setBadgeFocus(0)
+            updater.setBadgeFocusAndCommentAndBell(timeSet.times[0],0)
 
             procStatus = ProcStatus.ING
 
@@ -247,26 +265,22 @@ class ProcActivity : AppCompatActivity() {
 
     override fun onPause() {
         super.onPause()
-
         canReady = false
-        unregisterReceiver(timeBrd)
-
         procServiceInterface?.unbindService()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        try {
+            timeBrd?.let{
+                unregisterReceiver(timeBrd)
+            }
+        } catch (e:Exception){}
     }
 
     override fun onResume() {
         super.onResume()
-
-        registerReceiver(timeBrd, IntentFilter().apply {
-            addAction(CMD_BRD.ROUND)
-            addAction(CMD_BRD.TIME)
-            addAction(CMD_BRD.END)
-            addAction(CMD_BRD.STOP)
-            addAction(CMD_BRD.REMAIN_SEC)
-            addAction(CMD_BRD.UPDATE_REPEAT_BTN)
-            addAction(CMD_BRD.UPDATE_REPEAT_CNT)
-
-        })
 
         canReady = true
 

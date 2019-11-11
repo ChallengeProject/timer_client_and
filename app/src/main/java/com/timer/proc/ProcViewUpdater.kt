@@ -4,6 +4,8 @@ import android.app.Activity
 import android.os.Build
 import android.view.View
 import com.timer.R
+import com.timer.se_data.Bell
+import com.timer.se_data.Time
 import kotlinx.android.synthetic.main.activity_proc.*
 
 class ProcViewUpdater(val act: Activity) {
@@ -93,6 +95,25 @@ class ProcViewUpdater(val act: Activity) {
         act.lsshlv.setFocus(pos)
     }
 
+    fun setComment(comment: String) {
+        act.tvComment.text = comment
+    }
+
+    fun setBadgeFocusAndCommentAndBell(time: Time, round :Int){
+        setBadgeFocus(round)
+        setComment(time.comment)
+        setSound(time.bell)
+    }
+
+    fun setSound(bell: Bell) {
+        act.tvSound.text = when (bell.type) {
+            Bell.Type.SLIENT -> "무음"
+            Bell.Type.VIBRATION -> "진동"
+            Bell.Type.DEFAULT -> "기본음"
+            Bell.Type.USER -> "사용자 지정음"
+        }
+    }
+
 //    fun setAlarmAndComment(alarmText: String, commentText: String) {
 //        act.tvAlarm.text = alarmText
 //        act.tvComment.text = commentText
@@ -166,7 +187,7 @@ class ProcViewUpdater(val act: Activity) {
 
     fun setContentToHalfTransparent(isTransparent: Boolean) {
 
-        if(isTransparent) act.viewHalfTransparent.visibility = View.VISIBLE
+        if (isTransparent) act.viewHalfTransparent.visibility = View.VISIBLE
         else act.viewHalfTransparent.visibility = View.GONE
 
     }

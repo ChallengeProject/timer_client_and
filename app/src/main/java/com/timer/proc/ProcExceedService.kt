@@ -60,7 +60,7 @@ class ProcExceedService : Service() {
             when (action) {
                 CMD_EXCEED_SERVICE.START_WITH_TIMERS -> {
                     timeSet = intent.getParcelableExtra(ProcActivity.TIME_SET)
-                    procNotification.showNotification(NotificationUsingActivity.EXCEED_ACTIVITY)
+                    procNotification.showNotification(NotificationUsingActivity.EXCEED_ACTIVITY, timeSet)
                     "CMD_EXCEED_SERVICE.START_WITH_TIMERS times : ${timeSet.times.asSequence().map { it.seconds }.toList()}.to".i()
                     restart()
                 }
@@ -96,7 +96,7 @@ class ProcExceedService : Service() {
         disposable?.dispose()
         disposable = null
 
-        updateNotification((mTimer*1000).toTimeStr(), NotifiactionButtonType.PLAY)
+        updateNotification((mTimer * 1000).toTimeStr(), NotifiactionButtonType.PLAY)
     }
 
 
@@ -108,7 +108,7 @@ class ProcExceedService : Service() {
         "restart".i(TAG)
         startTimer()
 //        updateNotification(mTimer.toTimeStr(), NotifiactionButtonType.PAUSE)
-        updateNotification((mTimer*1000).toTimeStr(), NotifiactionButtonType.PAUSE)
+        updateNotification((mTimer * 1000).toTimeStr(), NotifiactionButtonType.PAUSE)
     }
 
     fun startTimer() {
@@ -127,8 +127,8 @@ class ProcExceedService : Service() {
                 "subscribe".i()
 
                 mTimer++
-                updateNotification((mTimer*1000).toTimeStr(), NotifiactionButtonType.PAUSE)
-                brdTime((mTimer*1000).toTimeStr())
+                updateNotification((mTimer * 1000).toTimeStr(), NotifiactionButtonType.PAUSE)
+                brdTime((mTimer * 1000).toTimeStr())
             }
     }
 

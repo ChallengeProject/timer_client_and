@@ -12,6 +12,7 @@ import android.view.View
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import com.timer.R
+import com.timer.se_data.TimeSet
 import com.timer.se_util.App
 import com.timer.se_util.i
 
@@ -45,8 +46,10 @@ class ProcNotification(val service: Service, val times_: ArrayList<Int>) {
     lateinit var notificationUsingActivity: NotificationUsingActivity
 
     companion object {
-        var times: ArrayList<Int>? =
-            null // for toss previous times value to activity from notificaion
+//        var times: ArrayList<Int>? =
+//            null // for toss previous times value to activity from notificaion
+
+        lateinit var timeSet: TimeSet
 
         const val EXCEED_TEXT = -1
 
@@ -57,30 +60,50 @@ class ProcNotification(val service: Service, val times_: ArrayList<Int>) {
             service.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
     }
 
-    fun showNotification(notificationUsingActivity_: NotificationUsingActivity) {
+    fun isProcAct(): Boolean {
+        return notificationUsingActivity == NotificationUsingActivity.PROC_ACTIVITY
+    }
+
+    fun showNotification(notificationUsingActivity_: NotificationUsingActivity, timeSet_: TimeSet) {
 
         notificationUsingActivity = notificationUsingActivity_
 
         if (!isForeground) {
 
-            times = times_
+//            times = times_
+            timeSet = timeSet_
 
-            val notificationIntent: Intent =
-                if (notificationUsingActivity == NotificationUsingActivity.PROC_ACTIVITY) {
+            val clazz =
+                if (isProcAct()) ProcActivity::class.java
+                else ProcExceedActivity::class.java
 
-                    Intent(service, ProcActivity::class.java).apply {
-                        action = (Intent.ACTION_MAIN)
-                        addCategory(Intent.CATEGORY_LAUNCHER)
-                        putIntegerArrayListExtra(ProcActivity.TIMES_FOR_NOTIFIACTION, times)
-                    }
-                } else { //if (notificationUsingActivity == NotificationUsingActivity.EXCEED_ACTIVITY) {
+            val extraKey =
+                if (isProcAct()) ProcActivity.TIMES_FOR_NOTIFIACTION
+                else ProcExceedActivity.TIMES_FOR_NOTIFIACTION
 
-                    Intent(service, ProcExceedActivity::class.java).apply {
-                        action = (Intent.ACTION_MAIN)
-                        addCategory(Intent.CATEGORY_LAUNCHER)
-                        putIntegerArrayListExtra(ProcExceedActivity.TIMES_FOR_NOTIFIACTION, times)
-                    }
-                }
+            val notificationIntent = Intent(service, clazz).apply {
+                action = (Intent.ACTION_MAIN)
+                addCategory(Intent.CATEGORY_LAUNCHER)
+                putIntegerArrayListExtra(extraKey, ArrayList(timeSet.times.map { it.seconds }.toList()))
+                putExtra(ProcActivity.TIME_SET, timeSet)
+            }
+
+//            val notificationIntent: Intent =
+//                if (notificationUsingActivity == NotificationUsingActivity.PROC_ACTIVITY) {
+//
+//                    Intent(service, ProcActivity::class.java).apply {
+//                        action = (Intent.ACTION_MAIN)
+//                        addCategory(Intent.CATEGORY_LAUNCHER)
+//                        putIntegerArrayListExtra(ProcActivity.TIMES_FOR_NOTIFIACTION, ArrayList(timeSet.times.map { it.seconds }.toList()))
+//                    }
+//                } else { //if (notificationUsingActivity == NotificationUsingActivity.EXCEED_ACTIVITY) {
+//
+//                    Intent(service, ProcExceedActivity::class.java).apply {
+//                        action = (Intent.ACTION_MAIN)
+//                        addCategory(Intent.CATEGORY_LAUNCHER)
+//                        putIntegerArrayListExtra(ProcExceedActivity.TIMES_FOR_NOTIFIACTION, ArrayList(timeSet.times.map { it.seconds }.toList()))
+//                    }
+//                }
 
 //            notificationIntent.action = "TIMING_NOTI_ACTION"
 
@@ -117,7 +140,7 @@ class ProcNotification(val service: Service, val times_: ArrayList<Int>) {
             service.stopForeground(NOTI_ID)
         } else {
 
-            if (notificationUsingActivity == NotificationUsingActivity.PROC_ACTIVITY) {
+            if (isProcAct()) {
                 (service as ProcService).stop(true)
             } else { //if (notificationUsingActivity == NotificationUsingActivity.EXCEED_ACTIVITY) {
                 (service as ProcExceedService).stop(true)
@@ -147,7 +170,7 @@ class ProcNotification(val service: Service, val times_: ArrayList<Int>) {
             setViewVisibility(R.id.notiIvCtrlPlay, View.GONE)
             setViewVisibility(R.id.notiIvCtrlPause, View.GONE)
 
-            when (notifiactionButtonType_) {
+            when (notifiactionButtonType) {
                 NotifiactionButtonType.PLAY -> setViewVisibility(R.id.notiIvCtrlPlay, View.VISIBLE)
                 NotifiactionButtonType.PAUSE -> setViewVisibility(R.id.notiIvCtrlPause, View.VISIBLE)
             }
@@ -161,17 +184,14 @@ class ProcNotification(val service: Service, val times_: ArrayList<Int>) {
         val remoteViews = RemoteViews(service.packageName, R.layout.noti_proc)
 
         val playPendingIntent =
-            if (notificationUsingActivity == NotificationUsingActivity.PROC_ACTIVITY)
-                PendingIntent.getService(service, 0, Intent(CMD_PROC_SERVICE.RESTART), 0)
+            if (isProcAct()) PendingIntent.getService(service, 0, Intent(CMD_PROC_SERVICE.RESTART), 0)
             else PendingIntent.getService(service, 0, Intent(CMD_EXCEED_SERVICE.RESTART), 0)
         val pausePendingIntent =
-            if (notificationUsingActivity == NotificationUsingActivity.PROC_ACTIVITY)
-                PendingIntent.getService(service, 0, Intent(CMD_PROC_SERVICE.PAUSE), 0)
+            if (isProcAct()) PendingIntent.getService(service, 0, Intent(CMD_PROC_SERVICE.PAUSE), 0)
             else PendingIntent.getService(service, 0, Intent(CMD_EXCEED_SERVICE.PAUSE), 0)
 
         val stopPendingIntent =
-            if (notificationUsingActivity == NotificationUsingActivity.PROC_ACTIVITY)
-                PendingIntent.getService(service, 0, Intent(CMD_PROC_SERVICE.STOP), 0)
+            if (isProcAct()) PendingIntent.getService(service, 0, Intent(CMD_PROC_SERVICE.STOP), 0)
             else PendingIntent.getService(service, 0, Intent(CMD_EXCEED_SERVICE.STOP), 0)
 
 

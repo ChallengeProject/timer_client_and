@@ -144,7 +144,7 @@ class ProcService : Service() {
 
     fun restart(startType: StartType) {
 
-        if (!isRunning && !isPause) procNotification.showNotification(NotificationUsingActivity.PROC_ACTIVITY)
+        if (!isRunning && !isPause) procNotification.showNotification(NotificationUsingActivity.PROC_ACTIVITY, timeSet)
 
         if (startType == StartType.INIT)
             mTimer = timeSet.times[0].seconds.x1000L()

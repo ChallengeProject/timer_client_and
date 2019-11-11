@@ -43,14 +43,13 @@ class ProcExceedActivity : AppCompatActivity() {
 
         lateinit var timeSet: TimeSet
 
-        lateinit var timeBrd: BroadcastReceiver
+        var timeBrd: BroadcastReceiver? = null
         lateinit var svcIntent: Intent
 
         var procExceedServiceInterface: ProcExceedServiceInterface? = null
 
         private val format = SimpleDateFormat("hh:mm a", Locale.US)
 
-        // TODO : Connect sharedPreference this proerties
         private var endTimeStr = ""
         private var allTimeStr = ""
         private var procStatus = ProcStatus.READY
@@ -75,21 +74,18 @@ class ProcExceedActivity : AppCompatActivity() {
                         intent.getStringExtra(CMD_BRD.MSG).i()
                         updater.setTime(intent.getStringExtra(CMD_BRD.MSG))
                     }
-                    CMD_BRD.END -> {
-                        setResult(Activity.RESULT_OK, Intent().apply {
-                            //                            putExtra(RESP_TIME_SET, timeSet)
-//                            putExtra(RESP_USE_INFO, UseInfo(ymdString, startTimeString, getCurrentTimeString()))
-                        })
-                        finish()
-                    }
                     CMD_BRD.STOP -> {
 
-                        // TODO
                         updater.setTime(timeSet.times[0].seconds.x1000L().toTimeStr())
-                        if (ProcExceedService.INSTANCE != null) ProcExceedService.INSTANCE = null
+                        ProcExceedService.INSTANCE = null
                         endTimeStr = ""
                         allTimeStr = ""
                         procStatus = ProcStatus.READY
+
+                        timeBrd?.let {
+                            unregisterReceiver(timeBrd)
+                        }
+
                         finish()
                     }
                 }
@@ -132,31 +128,36 @@ class ProcExceedActivity : AppCompatActivity() {
                 action = CMD_EXCEED_SERVICE.START_WITH_TIMERS
             }
         startService(svcIntent)
-        updater.setBadgeFocus(0)
+        updater.setBadgeFocusAndCommentAndBell(timeSet.times[0], 0)
 
         procStatus = ProcStatus.ING
 
-
+        registerReceiver(timeBrd, IntentFilter().apply {
+            addAction(CMD_BRD.TIME)
+            addAction(CMD_BRD.STOP)
+            addAction(CMD_BRD.REMAIN_SEC)
+        })
     }
 
     override fun onPause() {
         super.onPause()
-        unregisterReceiver(timeBrd)
         procExceedServiceInterface?.unbindService()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        try {
+            ProcActivity.timeBrd?.let {
+                unregisterReceiver(ProcActivity.timeBrd)
+            }
+        } catch (e: Exception) {
+        }
+
     }
 
     override fun onResume() {
         super.onResume()
-
-        registerReceiver(timeBrd, IntentFilter().apply {
-            addAction(CMD_BRD.ROUND)
-            addAction(CMD_BRD.TIME)
-            addAction(CMD_BRD.END)
-            addAction(CMD_BRD.STOP)
-            addAction(CMD_BRD.REMAIN_SEC)
-            addAction(CMD_BRD.UPDATE_REPEAT_BTN)
-            addAction(CMD_BRD.UPDATE_REPEAT_CNT)
-        })
 
         with(updater) {
             setWholeTime(allTimeStr)
