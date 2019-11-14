@@ -8,14 +8,13 @@ import android.content.IntentFilter
 import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.appcompat.app.AppCompatActivity
 import com.timer.R
 import com.timer.main.MainActivity
 import com.timer.se_data.TimeSet
-import com.timer.se_util.i
-import com.timer.se_util.toEndTimeStrAfterSec
-import com.timer.se_util.toTimeStr
-import com.timer.se_util.x1000L
+import com.timer.se_util.*
 import kotlinx.android.synthetic.main.activity_proc.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -113,8 +112,24 @@ class ProcExceedActivity : AppCompatActivity() {
         }
 
         ivWriteMemoBtn.setOnClickListener {
-            //            updater.showMemoOnly()
+            updater.showMemo(Preferencer.getCurrentMemo(this))
         }
+
+        ivCloseMemoBtn.setOnClickListener {
+            Preferencer.setCurrentMemo(this, etMemo.text.toString())
+            updater.hideMemo()
+        }
+
+        etMemo.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {}
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if(s!!.length > 1000) {
+                    etMemo.setText(s!!.substring(999,s!!.length-1))
+                }
+                updater.setMemoRemainByte(s!!.length)
+            }
+        })
 
         val allTime = timeSet.times.map { it.seconds }.reduce { acc, i -> acc + i }
         if (endTimeStr.isEmpty()) endTimeStr = (timeSet.readySecond + allTime).toEndTimeStrAfterSec()

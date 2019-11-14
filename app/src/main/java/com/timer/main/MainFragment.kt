@@ -13,6 +13,7 @@ import com.timer.proc.ProcActivity
 import com.timer.se_data.Bell
 import com.timer.se_data.Time
 import com.timer.se_data.TimeSet
+import com.timer.se_util.Preferencer
 import com.timer.settings.SettingsFragment
 import com.timer.timeset.local.MyTimeSetListFragment
 import com.timer.timeset.remote.SharedTimeSetListFragment
@@ -62,7 +63,7 @@ class MainFragment : Fragment(), MainView, BottomNavigationView.OnNavigationItem
                         add(Time(3, "33333333"))
                     }
                 )
-
+                Preferencer.setCurrentMemo(this.activity!!,"")
                 ProcActivity.startProcActivity(this.activity!!, timeSet)
 
                 // TODO open commecnt

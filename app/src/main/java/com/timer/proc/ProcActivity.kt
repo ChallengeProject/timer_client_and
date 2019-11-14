@@ -7,6 +7,8 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
 import android.os.Handler
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.appcompat.app.AppCompatActivity
 import com.timer.R
 import com.timer.main.MainActivity
@@ -80,7 +82,7 @@ class ProcActivity : AppCompatActivity() {
                     CMD_BRD.ROUND -> {
                         val round = intent.getIntExtra(CMD_BRD.MSG, 0)
                         updater.hideSkipMessage()
-                        updater.setBadgeFocusAndCommentAndBell(timeSet.times[round],round)
+                        updater.setBadgeFocusAndCommentAndBell(timeSet.times[round], round)
                         updater.showBottomDialogTimeEndMessage(round, timeSet.times.size)
                     }
                     CMD_BRD.END -> {
@@ -103,7 +105,7 @@ class ProcActivity : AppCompatActivity() {
                         timeBrd?.let {
                             unregisterReceiver(timeBrd)
                         }
-                        finish ()
+                        finish()
                     }
                     CMD_BRD.REMAIN_SEC -> {
                         val remainSecond = intent.getLongExtra(CMD_BRD.MSG, 0)
@@ -118,6 +120,7 @@ class ProcActivity : AppCompatActivity() {
                     }
                     CMD_BRD.UPDATE_REPEAT_CNT -> {
                         val repeatCnt = intent.getIntExtra(CMD_BRD.MSG, 0)
+                        updater.setSubtitleRepeatCnt(repeatCnt)
                         updater.showBottomDialogRepeatEndMessage(repeatCnt)
                         "CMD_BRD.UPDATE_REPEAT_CNT : $repeatCnt".i()
 
@@ -166,8 +169,24 @@ class ProcActivity : AppCompatActivity() {
         }
 
         ivWriteMemoBtn.setOnClickListener {
-            //            updater.showMemoOnly()
+            updater.showMemo(Preferencer.getCurrentMemo(this))
         }
+
+        ivCloseMemoBtn.setOnClickListener {
+            Preferencer.setCurrentMemo(this, etMemo.text.toString())
+            updater.hideMemo()
+        }
+
+        etMemo.addTextChangedListener(object : TextWatcher{
+            override fun afterTextChanged(s: Editable?) {}
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if(s!!.length > 1000) {
+                    etMemo.setText(s!!.substring(999,s!!.length-1))
+                }
+                updater.setMemoRemainByte(s!!.length)
+            }
+        })
 
         lsshlv.setSelectedBadgeListener { item ->
             "onBadgeSelectedListener callback ${item.index}".i(TAG)
@@ -215,7 +234,7 @@ class ProcActivity : AppCompatActivity() {
     fun moveTimeBadge(pos: Int) {
         ProcService.INSTANCE?.let { procServiceInterface?.move(pos) }
 
-        updater.setBadgeFocusAndCommentAndBell(timeSet.times[pos],pos)
+        updater.setBadgeFocusAndCommentAndBell(timeSet.times[pos], pos)
 
         addingMinute = 0
         updater.setAddTime(addingMinute)
@@ -239,7 +258,7 @@ class ProcActivity : AppCompatActivity() {
                     action = CMD_PROC_SERVICE.START_WITH_TIMERS
                 }
             startService(svcIntent)
-            updater.setBadgeFocusAndCommentAndBell(timeSet.times[0],0)
+            updater.setBadgeFocusAndCommentAndBell(timeSet.times[0], 0)
 
             procStatus = ProcStatus.ING
 
@@ -273,10 +292,11 @@ class ProcActivity : AppCompatActivity() {
         super.onDestroy()
 
         try {
-            timeBrd?.let{
+            timeBrd?.let {
                 unregisterReceiver(timeBrd)
             }
-        } catch (e:Exception){}
+        } catch (e: Exception) {
+        }
     }
 
     override fun onResume() {
@@ -307,6 +327,4 @@ class ProcActivity : AppCompatActivity() {
 
         procServiceInterface?.getRepeat()
     }
-
-
 }

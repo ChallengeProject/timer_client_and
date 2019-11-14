@@ -5,9 +5,9 @@ import android.content.Context
 import android.content.Intent
 import android.media.MediaPlayer
 import android.os.*
+import com.timer.R
 import com.timer.se_data.Bell
 import com.timer.se_data.TimeSet
-import com.timer.se_util.BellManager
 import com.timer.se_util.i
 import com.timer.se_util.toTimeStr
 import com.timer.se_util.x1000L
@@ -302,12 +302,12 @@ class ProcService : Service() {
 
         when (timeSet.times[arrayCnt].bell.type) {
             Bell.Type.DEFAULT -> {
-                mediaPlayer = MediaPlayer.create(this, BellManager.getBasicBells(this)[0].second)
+                mediaPlayer = MediaPlayer.create(this, R.raw.a_3)
                 mediaPlayer?.start()
                 runStopSoundCount()
             }
             Bell.Type.SLIENT -> {
-
+                // slient~
             }
             Bell.Type.VIBRATION -> {
 
@@ -315,7 +315,7 @@ class ProcService : Service() {
                     (getSystemService(Context.VIBRATOR_SERVICE) as Vibrator)
                         .vibrate(VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE))
                 } else {
-                    (getSystemService(Context.VIBRATOR_SERVICE) as Vibrator) .vibrate(1000)
+                    (getSystemService(Context.VIBRATOR_SERVICE) as Vibrator).vibrate(1000)
                 }
             }
             Bell.Type.USER -> {
@@ -331,7 +331,7 @@ class ProcService : Service() {
 
     fun runStopSoundCount() {
         compositeDisposable.add(Observable
-            .timer(2000, TimeUnit.MILLISECONDS)
+            .timer(3000, TimeUnit.MILLISECONDS)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {

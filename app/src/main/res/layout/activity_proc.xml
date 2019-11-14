@@ -6,8 +6,6 @@
         android:layout_height="match_parent"
         tools:context=".proc.ProcActivity">
 
-
-
     <ImageView
             android:id="@+id/ivRepeatBtn"
             android:layout_width="40dp"
@@ -19,7 +17,6 @@
             app:layout_constraintRight_toLeftOf="@id/ivAddMinuteBtn"
             app:layout_constraintTop_toTopOf="@id/ivWriteMemoBtn" />
 
-
     <ImageView
             android:id="@+id/ivAddMinuteBtn"
             android:layout_width="40dp"
@@ -30,7 +27,6 @@
             app:layout_constraintLeft_toRightOf="@id/ivRepeatBtn"
             app:layout_constraintRight_toLeftOf="@id/tvAddCount"
             app:layout_constraintTop_toTopOf="@id/ivWriteMemoBtn" />
-
 
     <TextView
             android:id="@+id/tvAddCount"
@@ -68,7 +64,6 @@
             app:layout_constraintLeft_toRightOf="@id/tvTimesetTimeText"
             app:layout_constraintTop_toTopOf="@id/tvTimesetTimeText"
             tools:text="00:01:00" />
-
 
     <TextView
             android:id="@+id/tvEndTimeText"
@@ -187,7 +182,6 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
     <ImageView
             android:id="@+id/ivSkipO"
             android:layout_width="50dp"
@@ -200,20 +194,19 @@
             app:layout_constraintTop_toTopOf="@id/clSkipMessage"
             tools:visibility="visible" />
 
-
     <View
-            android:visibility="gone"
             android:id="@+id/viewHalfTransparent"
-            android:background="#99FFFFFF"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:background="#99FFFFFF"
+            android:visibility="gone" />
 
     <TextView
             android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="60dp"
-            android:layout_marginTop="95dp"
+            android:layout_marginTop="60dp"
             android:text=""
             android:textColor="#0a0a0a"
             android:textSize="12dp"
@@ -227,10 +220,10 @@
             android:id="@+id/tvSubTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="5dp"
             android:text=""
             android:textColor="#0a0a0a"
-            android:textSize="10dp"
+            android:textSize="15dp"
             app:layout_constraintBottom_toTopOf="@id/tvTime"
             app:layout_constraintLeft_toLeftOf="@id/tvTitle"
             app:layout_constraintTop_toBottomOf="@id/tvTitle"
@@ -297,7 +290,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/btBottom1Btn" />
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/clBottomAlarm"
             android:layout_width="0dp"
@@ -310,7 +302,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent">
-
 
         <TextView
                 android:id="@+id/tvBottomAlarmMainTitle"
@@ -335,9 +326,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toRightOf="@id/tvBottomAlarmMainTitle"
                 app:layout_constraintRight_toLeftOf="@id/tvBottomAlarmSubTitle"
-                app:layout_constraintTop_toTopOf="parent"
-
-                />
+                app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
                 android:id="@+id/tvBottomAlarmSubTitle"
@@ -363,6 +352,104 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clMemo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#fafafa"
+            android:visibility="invisible"
+            tools:visibility="gone">
+
+        <TextView
+                android:id="@+id/tvMemoText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="60dp"
+                android:layout_marginTop="43dp"
+                android:text="메모 입력"
+                android:textColor="#0a0a0a"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/etMemo"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+                android:id="@+id/ivCloseMemoBtn"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginEnd="10dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/icon_close"
+                app:layout_constraintBottom_toBottomOf="@id/tvMemoText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvMemoText" />
+
+        <EditText
+                android:hint="메모를 입력하세요."
+                android:id="@+id/etMemo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="52dp"
+                android:layout_marginEnd="10dp"
+                android:background="@null"
+                android:gravity="top"
+                android:lines="10"
+                android:maxLength="1000"
+                android:textColor="#0a0a0a"
+                android:textSize="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tvMemoText"
+                app:layout_constraintTop_toBottomOf="@id/tvMemoText" />
+
+        <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="#646464"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/etMemo"
+                app:layout_constraintTop_toBottomOf="@id/etMemo" />
+
+
+        <TextView
+                android:id="@+id/tvExceedErrorText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="작성 가능한 글자 수가 초과됐어요"
+                android:textColor="#f24150"
+                android:textSize="12dp"
+                android:visibility="invisible"
+                app:layout_constraintLeft_toLeftOf="@id/tvMemoText"
+                app:layout_constraintTop_toBottomOf="@id/etMemo"
+                tools:visibility="visible" />
+
+        <TextView
+                android:id="@+id/tvExceedNumberText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="/1000"
+                android:textColor="#0a0a0a"
+                android:textSize="12dp"
+                app:layout_constraintEnd_toEndOf="@id/etMemo"
+                app:layout_constraintLeft_toRightOf="@id/tvExceedNumber"
+                app:layout_constraintRight_toRightOf="@id/etMemo"
+                app:layout_constraintTop_toBottomOf="@id/etMemo" />
+
+        <TextView
+                android:id="@+id/tvExceedNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="0"
+                android:textColor="#0a0a0a"
+                android:textSize="12dp"
+                app:layout_constraintRight_toLeftOf="@id/tvExceedNumberText"
+                app:layout_constraintTop_toBottomOf="@id/etMemo" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

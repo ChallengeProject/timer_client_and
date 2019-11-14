@@ -52,6 +52,7 @@ class MainActivity : AppCompatActivity() {
         if (resultCode == Activity.RESULT_OK && data != null) {
             when (requestCode) {
                 PROC_ACTIVITY -> {
+                    "PROC_ACTIVITY in Main".i()
                     ProcEndActivity.startProcEndActivity(
                         this,
                         data.getParcelableExtra(ProcActivity.RESP_TIME_SET),
@@ -59,6 +60,7 @@ class MainActivity : AppCompatActivity() {
                     )
                 }
                 PROC_END_ACTIVITY -> {
+                    "PROC_END_ACTIVITY in Main".i()
                     val timeSet = data.getParcelableExtra<TimeSet>(ProcEndActivity.RESP_TIME_SET)
                     when (data.getStringExtra(ProcEndActivity.RESP_TYPE)) {
 
@@ -69,13 +71,12 @@ class MainActivity : AppCompatActivity() {
                             ProcActivity.startProcActivity(this, timeSet)
                         }
                         ProcEndActivity.RESP_TYPE_SAVE -> {
-
+                            // TODO 저장 구체화되면 ㄱㄱ
                         }
                     }
-
                 }
                 PROC_EXCEED_ACTIVITY -> {
-
+                    "PROC_EXCEED_ACTIVITY in Main".i()
                 }
 
             }

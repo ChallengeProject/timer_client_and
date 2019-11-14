@@ -1,12 +1,16 @@
 package com.timer.proc
 
 import android.app.Activity
+import android.content.Context
+import android.graphics.Color
 import android.os.Build
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import com.timer.R
 import com.timer.se_data.Bell
 import com.timer.se_data.Time
 import kotlinx.android.synthetic.main.activity_proc.*
+
 
 class ProcViewUpdater(val act: Activity) {
 
@@ -180,43 +184,33 @@ class ProcViewUpdater(val act: Activity) {
         else if (procStatus == ProcStatus.PAUSE) setCancelAndRestartStatus()
     }
 
-    fun hideBottomButton() {
-        act.btBottom1Btn.visibility = View.GONE
-        act.btBottom2Btn.visibility = View.GONE
-    }
-
     fun setContentToHalfTransparent(isTransparent: Boolean) {
-
         if (isTransparent) act.viewHalfTransparent.visibility = View.VISIBLE
         else act.viewHalfTransparent.visibility = View.GONE
-
     }
 
-//    private fun showMemo() {
-//        with(act) {
-//            clMemoSpace.visibility = View.VISIBLE
-//            etMemo.setText("")
-//            tvExceedMessage.visibility = View.INVISIBLE
-//            tvRemainByte.text = "0"
-//        }
-//    }
+    fun showMemo(memo:String = "") {
+        with(act) {
+            clMemo.visibility = View.VISIBLE
+            etMemo.setText(memo)
+            tvExceedErrorText.visibility = View.INVISIBLE
+            tvExceedNumber.text = memo.length.toString()
+        }
+    }
 
-//    fun setMemoRemainByte(curByte: Int) {
-//        act.tvRemainByte.text = curByte.toString()
-//    }
+    fun setMemoRemainByte(curByte: Int) {
+        act.tvExceedNumber.text = curByte.toString()
+        if(curByte > 999) {
+            act.tvExceedNumber.setTextColor(Color.parseColor("#f24150"))
+            return
+        }
+        act.tvExceedNumber.setTextColor(Color.parseColor("#0a0a0a"))
+    }
 
-//    fun hideMemo() {
-//        act.clMemoSpace.visibility = View.INVISIBLE
-//    }
+    fun hideMemo() {
+        act.clMemo.visibility = View.GONE
 
-//    fun showMemoOnly() {
-//        showMemo()
-//        hideBottomButton()
-//    }
-
-//    fun showMemoWithBottomBtns(procStatus: ProcStatus) {
-//        showMemo()
-//        showBottomBtn(procStatus)
-//    }
-
+        val imm = act.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(act.clMemo.windowToken, 0)
+    }
 }

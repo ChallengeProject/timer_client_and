@@ -3,6 +3,7 @@ package com.timer.proc
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.media.MediaPlayer
 import android.os.Build
 import android.os.Bundle
@@ -16,7 +17,7 @@ import com.timer.main.MainActivity
 import com.timer.se_data.Bell
 import com.timer.se_data.TimeSet
 import com.timer.se_data.UseInfo
-import com.timer.se_util.BellManager
+import com.timer.se_util.Preferencer
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -72,14 +73,8 @@ class ProcEndActivity : AppCompatActivity() {
         ////////////////
         // init listener
 
-
-//        const val RESP_TIME_SET = "RESP_TIME_SET"
-//        const val RESP_TYPE = "RESP_WHAT"
-//        const val RESP_TYPE_EXCEED = "RESP_WHAT_EXCEED"
-//        const val RESP_TYPE_SAVE = "RESP_WHAT_SAVE"
-//        const val RESP_TYPE_RESTART = "RESP_WHAT_RESTART"
-
         ivTimesetEndBtn.setOnClickListener {
+            Preferencer.setCurrentMemo(this, etContent.text.toString())
             finish()
         }
 
@@ -89,25 +84,36 @@ class ProcEndActivity : AppCompatActivity() {
         }
 
         btRestart.setOnClickListener {
+            Preferencer.setCurrentMemo(this, etContent.text.toString())
             finishWithMessage(RESP_TYPE_RESTART)
         }
 
         btExceed.setOnClickListener {
+            Preferencer.setCurrentMemo(this, etContent.text.toString())
             finishWithMessage(RESP_TYPE_EXCEED)
         }
 
-        etContent.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
+        etContent.setText(Preferencer.getCurrentMemo(this))
 
-            }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
-
+        etContent.addTextChangedListener(object : TextWatcher{
+            override fun afterTextChanged(s: Editable?) {}
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            }
 
+                if(s!!.length > 1000) {
+                    etContent.setText(s.substring(999,s.length-1))
+                }
+
+                tvExceedNumber.text = s.length.toString()
+                if(s.length > 999) {
+                    tvExceedNumber.setTextColor(Color.parseColor("#f24150"))
+                    return
+                }
+                tvExceedNumber.setTextColor(Color.parseColor("#0a0a0a"))
+            }
         })
+
+
     }
 
     fun finishWithMessage(respType: String) {
@@ -122,7 +128,7 @@ class ProcEndActivity : AppCompatActivity() {
     fun playSound() {
         when (timeSet.times.last().bell.type) {
             Bell.Type.DEFAULT -> {
-                mediaPlayer = MediaPlayer.create(this, BellManager.getBasicBells(this)[0].second)
+                mediaPlayer = MediaPlayer.create(this, R.raw.a_3)
                 mediaPlayer?.start()
                 runStopSoundCount()
             }
@@ -148,7 +154,7 @@ class ProcEndActivity : AppCompatActivity() {
 
     fun runStopSoundCount() {
         compositeDisposable.add(Observable
-            .timer(2000, TimeUnit.MILLISECONDS)
+            .timer(3000, TimeUnit.MILLISECONDS)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {

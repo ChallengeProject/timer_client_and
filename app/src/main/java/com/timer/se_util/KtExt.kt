@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.res.Resources
 import android.graphics.drawable.Drawable
 import android.os.Build
+import android.text.Editable
 import android.util.Log
 import android.widget.Toast
 import java.text.SimpleDateFormat
@@ -13,6 +14,8 @@ import java.util.concurrent.TimeUnit
 fun Any.i(tag: String = "") {
     Log.i("$tag#$#", this.toString())
 }
+
+fun String.toEditable(): Editable = Editable.Factory.getInstance().newEditable(this)
 
 fun Long.toTimeStr(): String {
     return String.format(

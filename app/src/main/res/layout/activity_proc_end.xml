@@ -59,6 +59,7 @@
             tools:text="19.5.24 / 9:42 AM - 9:43 AM" />
 
     <EditText
+            android:hint="메모를 입력하세요."
             android:id="@+id/etContent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
