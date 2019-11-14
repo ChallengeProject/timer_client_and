@@ -15,13 +15,6 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".proc.ProcExceedActivity"
-                android:launchMode="singleTask"
-                android:theme="@style/Theme.Design.Light.NoActionBar" />
-        <activity
-                android:name=".proc.ProcEndActivity"
-                android:theme="@style/Theme.Design.Light.NoActionBar"
-                android:windowSoftInputMode="stateVisible|adjustResize" />
         <activity
                 android:name=".main.MainActivity"
                 android:theme="@style/Theme.Design.Light.NoActionBar">
@@ -31,6 +24,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
+<!--        ############-->
+        <activity
+                android:name=".proc.ProcExceedActivity"
+                android:launchMode="singleTask"
+                android:theme="@style/Theme.Design.Light.NoActionBar" />
+        <activity
+                android:name=".proc.ProcEndActivity"
+                android:theme="@style/Theme.Design.Light.NoActionBar"
+                android:windowSoftInputMode="stateVisible|adjustResize" />
         <activity
                 android:name=".proc.ProcActivity"
                 android:launchMode="singleTask"
@@ -60,6 +64,9 @@
                 <action android:name="EXCEED_STOP" />
             </intent-filter>
         </service>
+        <!--        ############-->
+
+
     </application>
 
 </manifest>
