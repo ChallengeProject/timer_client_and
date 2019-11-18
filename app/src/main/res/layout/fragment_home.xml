@@ -1,125 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_height="match_parent"
+        android:background="@color/ux_gray"
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
     <TextView
             android:id="@+id/preview"
-            android:layout_width="200dp"
-            android:layout_height="40dp"
-            android:background="#c8c8c8"
+            android:layout_width="260dp"
+            android:layout_height="49dp"
+            android:background="@drawable/rect_solid_white_stroke_gray_radius_25dp"
             android:gravity="center"
-            android:text="59"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="59" />
 
     <ImageButton
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginEnd="10dp"
-            android:background="@android:color/black"
+            android:id="@+id/clearBtn"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="@drawable/btn_clear"
             app:layout_constraintBottom_toBottomOf="@id/preview"
-            app:layout_constraintRight_toRightOf="@id/preview"
-            app:layout_constraintTop_toTopOf="@id/preview"/>
+            app:layout_constraintEnd_toEndOf="@id/preview"
+            app:layout_constraintTop_toTopOf="@id/preview" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/previewInfo"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/preview">
-
-        <ImageButton
-                android:id="@+id/repeatBtn"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:background="@android:color/black"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
-
-        <TextView
-                android:id="@+id/input"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#969696"
-                android:textSize="12dp"
-                android:visibility="gone"
-                app:layout_constraintLeft_toLeftOf="@id/repeatBtn"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="59"/>
-
-        <TextView
-                android:id="@+id/total"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingEnd="5dp"
-                android:text="전체"
-                android:textColor="#969696"
-                android:textSize="12dp"
-                app:layout_constraintLeft_toRightOf="@id/previewInfoGuideline"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="전체"/>
-
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="000:00:59"
-                android:textColor="#969696"
-                android:textSize="12dp"
-                app:layout_constraintLeft_toRightOf="@id/total"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="000:00:59"/>
-
-        <TextView
-                android:id="@+id/endTime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:paddingEnd="5dp"
-                android:text="종료"
-                android:textColor="#969696"
-                android:textSize="12dp"
-                app:layout_constraintLeft_toRightOf="@id/previewInfoGuideline"
-                app:layout_constraintTop_toBottomOf="@id/total"
-                tools:text="종료"/>
-
-        <TextView
-                android:id="@+id/time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="9:52 AM"
-                android:textColor="#969696"
-                android:textSize="12dp"
-                app:layout_constraintLeft_toRightOf="@id/endTime"
-                app:layout_constraintTop_toBottomOf="@id/total"
-                tools:text="9:52 AM"/>
-
-        <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/previewInfoGuideline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_begin="55dp"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <LinearLayout
-            android:id="@+id/container"
+    <TextView
+            android:id="@+id/total"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/previewInfo"/>
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toStartOf="@id/endTime"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/preview"
+            tools:text="타임셋 시간 00:00:59" />
+
+    <TextView
+            android:id="@+id/endTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/total"
+            app:layout_constraintTop_toBottomOf="@id/preview"
+            tools:text="종료 예정 9:42 AM" />
+
+    <GridView
+            android:id="@+id/keypadContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="40dp"
+            android:horizontalSpacing="50dp"
+            android:numColumns="3"
+            android:verticalSpacing="5dp"
+            app:layout_constraintTop_toBottomOf="@id/preview"
+            tools:listitem="@layout/item_keypad" />
+
+    <HorizontalScrollView
+            android:id="@+id/timerEditArea"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            app:layout_constraintBottom_toTopOf="@id/timerSettingArea"
+            app:layout_constraintTop_toBottomOf="@id/keypadContainer">
+
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:animateLayoutChanges="true">
+
+            <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="25dp"
+                    android:background="@drawable/button_nonrepeat" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:itemCount="2"
+                    tools:listitem="@layout/item_home_timer" />
+
+            <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="15dp"
+                    android:background="@drawable/badge_plus_timer" />
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <View
+            android:id="@+id/timerSettingArea"
+            android:layout_width="wrap_content"
+            android:layout_height="65dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/saveBtn"
+            android:layout_width="150dp"
+            android:layout_height="45dp"
+            android:background="@drawable/selector_rect_solid_lightgray_radius_5dp"
+            android:text="@string/save"
+            android:textColor="@color/ux_pink"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/timerSettingArea"
+            app:layout_constraintEnd_toStartOf="@id/startBtn"
+            app:layout_constraintStart_toStartOf="@id/timerSettingArea"
+            app:layout_constraintTop_toTopOf="@id/timerSettingArea" />
+
+    <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/startBtn"
+            android:layout_width="150dp"
+            android:layout_height="45dp"
+            android:background="@drawable/selector_rect_gradient_radius_5dp"
+            android:text="@string/start"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/timerSettingArea"
+            app:layout_constraintEnd_toEndOf="@id/timerSettingArea"
+            app:layout_constraintStart_toEndOf="@id/saveBtn"
+            app:layout_constraintTop_toTopOf="@id/timerSettingArea" />
 </androidx.constraintlayout.widget.ConstraintLayout>
