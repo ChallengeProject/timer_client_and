@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/action_local_time_set"
-          android:icon="@android:color/black"
-          android:title="@string/menu_local_time_set"/>
-    <item android:id="@+id/action_home"
-          android:icon="@android:color/black"
-          android:title="@string/menu_home"/>
-    <item android:id="@+id/action_shared_time_set"
-          android:icon="@android:color/black"
-          android:title="@string/menu_shared_time_set"/>
+    <item
+            android:id="@+id/action_my_time_set"
+            android:icon="@drawable/ic_my_time_set"
+            android:title="@string/menu_my_time_set" />
+    <item
+            android:id="@+id/action_home"
+            android:icon="@drawable/ic_bottom_home"
+            android:title="@string/menu_home" />
+    <item
+            android:id="@+id/action_shared_time_set"
+            android:icon="@drawable/ic_shared_time_set"
+            android:title="@string/menu_shared_time_set" />
 </menu>
