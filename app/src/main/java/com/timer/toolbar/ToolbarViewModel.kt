@@ -1,8 +1,8 @@
 package com.timer.toolbar
 
-import com.timer.toolbar.`interface`.NavigationView
+import com.timer.toolbar.`interface`.INavigationView
 
-class ToolbarViewModel(val view: NavigationView) {
+class ToolbarViewModel(val view: INavigationView) {
 
 
 }

@@ -2,11 +2,9 @@ package com.timer.main
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.timer.R
 import com.timer.home.HomeFragment
 import com.timer.settings.SettingsFragment
@@ -15,7 +13,7 @@ import com.timer.timeset.remote.SharedTimeSetListFragment
 import com.timer.toolbar.ToolbarFragment
 import kotlinx.android.synthetic.main.fragment_main.*
 
-class MainFragment : Fragment(), MainView, BottomNavigationView.OnNavigationItemSelectedListener {
+class MainFragment : Fragment(), MainView {
 
     private val toolbarFragment = ToolbarFragment()
     private val homeFragment = HomeFragment()
@@ -24,9 +22,7 @@ class MainFragment : Fragment(), MainView, BottomNavigationView.OnNavigationItem
     private val settingsFragment = SettingsFragment()
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_main, container, false)
     }
@@ -36,20 +32,15 @@ class MainFragment : Fragment(), MainView, BottomNavigationView.OnNavigationItem
 
         changeFragment(R.id.toolbar, toolbarFragment)
 
-        with(bottomNavigation) {
-            setOnNavigationItemSelectedListener(this@MainFragment)
-            selectedItemId = R.id.action_home
+        homeTabViewPager.apply {
+            adapter = HomeTabPagerAdapter(
+                fragmentManager,
+                listOf(myTimeSetListFragment, homeFragment, sharedTimeSetListFragment)
+            )
+                .apply {
+                    post { homeTabViewPager.currentItem = getItemPosition(homeFragment) }
+                }
         }
-    }
-
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.action_home -> changeFragment(R.id.contents, homeFragment)
-            R.id.action_my_time_set -> changeFragment(R.id.contents, myTimeSetListFragment)
-            R.id.action_shared_time_set -> changeFragment(R.id.contents, sharedTimeSetListFragment)
-        }
-
-        return true
     }
 
     override fun setToolbarInitializer(initializer: ToolbarFragment.Initializer) {
