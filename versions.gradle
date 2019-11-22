@@ -10,6 +10,11 @@ versions.ktx = '1.0.2'
 versions.recyclerview = '1.0.0'
 versions.multidex = '2.0.1'
 versions.gradle = '3.4.0'
+versions.parceler = '1.1.12'
+versions.rxandroid = '2.1.1'
+versions.junit = '4.12'
+versions.runner = '1.2.0'
+versions.espresso = '3.2.0'
 
 def deps = [:]
 
@@ -30,6 +35,13 @@ deps.ktx = "androidx.core:core-ktx:$versions.ktx"
 deps.recyclerview = "androidx.recyclerview:recyclerview:$versions.recyclerview"
 deps.multidex = "androidx.multidex:multidex:$versions.multidex"
 deps.gradle_plugin = "com.android.tools.build:gradle:$versions.gradle"
+
+deps.parceler_api = "org.parceler:parceler-api:$versions.parceler"
+deps.parceler = "org.parceler:parceler:$versions.parceler"
+deps.rxjava2 = "io.reactivex.rxjava2:rxandroid:$versions.rxandroid"
+deps.junit = "junit:junit:$versions.junit"
+deps.runner = "androidx.test:runner:$versions.runner"
+deps.espresso = "androidx.test.espresso:espresso-core:$versions.espresso"
 
 ext.deps = deps
 

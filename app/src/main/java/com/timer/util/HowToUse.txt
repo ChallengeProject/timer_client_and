@@ -3,7 +3,7 @@
         readySecond = 2,
         times = mutableListOf<Time>().apply {
             add(Time(4, "11111"))
-            add(Time(4, "222222", Bell(Bell.Type.SLIENT, null)))
+            add(Time(4, "222222", Bell(Bell.Type.SILENT, null)))
             add(Time(3, "33333333"))
         }
     )

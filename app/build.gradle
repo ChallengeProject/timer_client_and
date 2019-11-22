@@ -37,16 +37,12 @@ dependencies {
     implementation deps.ktx
     implementation deps.recyclerview
     implementation deps.multidex
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
 
-    implementation 'org.parceler:parceler-api:1.1.12'
-    annotationProcessor 'org.parceler:parceler:1.1.12'
+    implementation deps.parceler_api
+    annotationProcessor deps.parceler
+    implementation deps.rxjava2
+    testImplementation deps.junit
+    androidTestImplementation deps.runner
+    androidTestImplementation deps.espresso
 
-    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
-
-    // for test
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.2.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }

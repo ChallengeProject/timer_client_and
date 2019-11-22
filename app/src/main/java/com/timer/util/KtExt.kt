@@ -18,19 +18,14 @@ fun Any.i(tag: String = "") {
 fun String.toEditable(): Editable = Editable.Factory.getInstance().newEditable(this)
 
 fun Long.toTimeStr(): String {
+    val hours = TimeUnit.MILLISECONDS.toHours(this)
+    val minutes = TimeUnit.MILLISECONDS.toMinutes(this)
+
     return String.format(
         "%02d:%02d:%02d",
-        TimeUnit.MILLISECONDS.toHours(this),
-        TimeUnit.MILLISECONDS.toMinutes(this) - TimeUnit.HOURS.toMinutes(
-            TimeUnit.MILLISECONDS.toHours(
-                this
-            )
-        ),
-        TimeUnit.MILLISECONDS.toSeconds(this) - TimeUnit.MINUTES.toSeconds(
-            TimeUnit.MILLISECONDS.toMinutes(
-                this
-            )
-        )
+        hours,
+        minutes - TimeUnit.HOURS.toMinutes(hours),
+        TimeUnit.MILLISECONDS.toSeconds(this) - TimeUnit.MINUTES.toSeconds(minutes)
     )
 }
 
@@ -66,11 +61,8 @@ fun Int.toFormattingString(): String {
 }
 
 fun Int.toDrawable(context: Context): Drawable {
-    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-        context.getDrawable(this)
-    } else {
-        context.resources.getDrawable(this)
-    }
+    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) context.getDrawable(this)
+    else context.resources.getDrawable(this)
 }
 
 fun Int.toEndTimeStrAfterSec(): String {

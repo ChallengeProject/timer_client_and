@@ -3,7 +3,6 @@ package com.timer.proc
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.media.MediaPlayer
 import android.os.Build
 import android.os.Bundle
@@ -12,6 +11,7 @@ import android.os.Vibrator
 import android.text.Editable
 import android.text.TextWatcher
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.timer.R
 import com.timer.main.MainActivity
 import com.timer.se_data.Bell
@@ -48,6 +48,8 @@ class ProcEndActivity : AppCompatActivity() {
         const val RESP_TYPE_EXCEED = "RESP_WHAT_EXCEED"
         const val RESP_TYPE_SAVE = "RESP_WHAT_SAVE"
         const val RESP_TYPE_RESTART = "RESP_WHAT_RESTART"
+        private const val MAX_TEXT_LENGTH = 1000
+        private const val VIRATE_FREQUENCY = 1000L
 
         fun startProcEndActivity(context: Context, timeSet: TimeSet, useInfo: UseInfo) {
             (context as Activity).startActivityForResult(
@@ -95,21 +97,23 @@ class ProcEndActivity : AppCompatActivity() {
 
         etContent.setText(Preferencer.getCurrentMemo(this))
 
-        etContent.addTextChangedListener(object : TextWatcher{
+        etContent.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {}
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
 
-                if(s!!.length > 1000) {
-                    etContent.setText(s.substring(999,s.length-1))
+                s ?: return
+
+                if (s.length > MAX_TEXT_LENGTH) {
+                    etContent.setText(s.substring(MAX_TEXT_LENGTH - 1, s.length - 1))
                 }
 
                 tvExceedNumber.text = s.length.toString()
-                if(s.length > 999) {
-                    tvExceedNumber.setTextColor(Color.parseColor("#f24150"))
+                if (s.length > MAX_TEXT_LENGTH - 1) {
+                    tvExceedNumber.setTextColor(ContextCompat.getColor(baseContext, R.color.ux_pink))
                     return
                 }
-                tvExceedNumber.setTextColor(Color.parseColor("#0a0a0a"))
+                tvExceedNumber.setTextColor(ContextCompat.getColor(baseContext, R.color.prime_black))
             }
         })
 
@@ -132,15 +136,15 @@ class ProcEndActivity : AppCompatActivity() {
                 mediaPlayer?.start()
                 runStopSoundCount()
             }
-            Bell.Type.SLIENT -> {
+            Bell.Type.SILENT -> {
 
             }
             Bell.Type.VIBRATION -> {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     (getSystemService(Context.VIBRATOR_SERVICE) as Vibrator)
-                        .vibrate(VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE))
+                        .vibrate(VibrationEffect.createOneShot(VIRATE_FREQUENCY, VibrationEffect.DEFAULT_AMPLITUDE))
                 } else {
-                    (getSystemService(Context.VIBRATOR_SERVICE) as Vibrator).vibrate(1000)
+                    (getSystemService(Context.VIBRATOR_SERVICE) as Vibrator).vibrate(VIRATE_FREQUENCY)
                 }
             }
             Bell.Type.USER -> {
