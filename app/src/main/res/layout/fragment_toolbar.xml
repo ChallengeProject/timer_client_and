@@ -6,7 +6,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/toolbar_height">
+            android:layout_height="@dimen/toolbar_height"
+            android:background="@color/ux_gray"
+            android:paddingBottom="10dp">
 
         <TextView
                 android:id="@+id/title"
@@ -18,8 +20,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toRightOf="@id/leftBtnArea"
                 app:layout_constraintRight_toLeftOf="@id/rightBtnArea"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="타이틀"/>
+                tools:text="타이틀" />
 
         <LinearLayout
                 android:id="@+id/leftBtnArea"
@@ -28,15 +29,14 @@
                 android:layout_marginStart="10dp"
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintLeft_toLeftOf="parent">
 
             <ImageButton
                     android:id="@+id/backBtn"
                     android:layout_width="@dimen/icon_size"
                     android:layout_height="@dimen/icon_size"
                     android:background="@drawable/btn_back"
-                    tools:visibility="gone"/>
+                    tools:visibility="gone" />
 
             <TextView
                     android:id="@+id/cancelBtn"
@@ -45,7 +45,7 @@
                     android:text="@string/cancel"
                     android:textColor="@color/prime_black"
                     android:textSize="14.5dp"
-                    tools:visibility="gone"/>
+                    tools:visibility="gone" />
         </LinearLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -54,8 +54,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="5dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintRight_toRightOf="parent">
 
             <ImageButton
                     android:id="@+id/deleteBtn"
@@ -66,7 +65,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintRight_toLeftOf="@id/shareBtn"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:visibility="gone"/>
+                    tools:visibility="gone" />
 
             <ImageButton
                     android:id="@+id/searchBtn"
@@ -77,7 +76,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintRight_toLeftOf="@id/historyBtn"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:visibility="visible"/>
+                    tools:visibility="visible" />
 
             <ImageButton
                     android:id="@+id/shareBtn"
@@ -88,7 +87,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintRight_toLeftOf="@id/homeBtn"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:visibility="gone"/>
+                    tools:visibility="gone" />
 
             <ImageButton
                     android:id="@+id/homeBtn"
@@ -99,7 +98,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintRight_toLeftOf="@id/likeBtn"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:visibility="gone"/>
+                    tools:visibility="gone" />
 
             <ImageButton
                     android:id="@+id/historyBtn"
@@ -110,7 +109,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintRight_toLeftOf="@id/settingsBtn"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:visibility="visible"/>
+                    tools:visibility="visible" />
 
             <ImageButton
                     android:id="@+id/likeBtn"
@@ -121,7 +120,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:visibility="gone"/>
+                    tools:visibility="gone" />
 
             <ImageButton
                     android:id="@+id/settingsBtn"
@@ -132,7 +131,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:visibility="visible"/>
+                    tools:visibility="visible" />
 
             <TextView
                     android:id="@+id/confirmBtn"
@@ -144,7 +143,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:visibility="gone"/>
+                    tools:visibility="gone" />
 
             <TextView
                     android:id="@+id/additionalInfo"
@@ -155,7 +154,7 @@
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="최신 버전입니다!"
-                    tools:visibility="gone"/>
+                    tools:visibility="gone" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
@@ -170,13 +169,13 @@
             <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="@dimen/icon_size"
                     android:layout_height="@dimen/icon_size"
-                    android:src="@drawable/btn_search"/>
+                    android:src="@drawable/btn_search" />
 
             <EditText
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:inputType="text"/>
+                    android:inputType="text" />
 
             <TextView
                     android:id="@+id/searchCancelBtn"
@@ -184,7 +183,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/cancel"
                     android:textColor="@color/prime_black"
-                    android:textSize="14.5dp"/>
+                    android:textSize="14.5dp" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
