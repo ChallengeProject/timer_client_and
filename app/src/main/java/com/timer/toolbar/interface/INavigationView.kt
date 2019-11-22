@@ -1,4 +1,4 @@
 package com.timer.toolbar.`interface`
 
-interface NavigationView {
+interface INavigationView {
 }
