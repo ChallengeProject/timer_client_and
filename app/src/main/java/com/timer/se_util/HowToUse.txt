@@ -1,0 +1,11 @@
+    val timeSet = TimeSet(
+        title = "이것은타이틀",
+        readySecond = 2,
+        times = mutableListOf<Time>().apply {
+            add(Time(4, "11111"))
+            add(Time(4, "222222", Bell(Bell.Type.SLIENT, null)))
+            add(Time(3, "33333333"))
+        }
+    )
+    Preferencer.setCurrentMemo(this.activity!!, "")
+    ProcActivity.startProcActivity(this.activity!!, timeSet)

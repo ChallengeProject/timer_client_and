@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/Desktop-timer_client_and.iml" filepath="$PROJECT_DIR$/Desktop-timer_client_and.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/timer_client_and.iml" filepath="$PROJECT_DIR$/.idea/timer_client_and.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/timer_client_and-app.iml" filepath="$PROJECT_DIR$/app/timer_client_and-app.iml" />
     </modules>
   </component>
 </project>
