@@ -1,4 +1,4 @@
-package com.timer.timeset.detail
+package com.timer.hometab.timeset.detail
 
 import androidx.fragment.app.Fragment
 

@@ -119,7 +119,8 @@
             app:layout_constraintBottom_toBottomOf="@id/timerSettingArea"
             app:layout_constraintEnd_toStartOf="@id/startBtn"
             app:layout_constraintStart_toStartOf="@id/timerSettingArea"
-            app:layout_constraintTop_toTopOf="@id/timerSettingArea" />
+            app:layout_constraintTop_toTopOf="@id/timerSettingArea"
+            android:visibility="gone"/>
 
     <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/startBtn"
@@ -132,5 +133,6 @@
             app:layout_constraintBottom_toBottomOf="@id/timerSettingArea"
             app:layout_constraintEnd_toEndOf="@id/timerSettingArea"
             app:layout_constraintStart_toEndOf="@id/saveBtn"
-            app:layout_constraintTop_toTopOf="@id/timerSettingArea" />
+            app:layout_constraintTop_toTopOf="@id/timerSettingArea"
+            android:visibility="gone"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,6 +10,7 @@ versions.ktx = '1.0.2'
 versions.recyclerview = '1.0.0'
 versions.multidex = '2.0.1'
 versions.gradle = '3.4.0'
+versions.room = '2.1.0-alpha06'
 
 def deps = [:]
 
@@ -22,6 +23,13 @@ def anko = [:]
 anko.anko = "org.jetbrains.anko:anko:$versions.anko"
 anko.constraint_layout = "org.jetbrains.anko:anko-constraint-layout:$versions.anko"
 deps.anko = anko
+
+def room = [:]
+room.runtime = "androidx.room:room-runtime:$versions.room"
+room.compiler = "androidx.room:room-compiler:$versions.room"
+room.rxjava2 = "androidx.room:room-rxjava2:$versions.room"
+room.testing = "androidx.room:room-testing:$versions.room"
+deps.room = room
 
 deps.material = "com.google.android.material:material:$versions.material"
 deps.appcompat = "androidx.appcompat:appcompat:$versions.appcompat"

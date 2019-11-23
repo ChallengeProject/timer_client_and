@@ -29,6 +29,9 @@ dependencies {
     implementation deps.anko.anko
     implementation deps.anko.constraint_layout
 
+    implementation deps.room.runtime
+    annotationProcessor deps.room.compiler
+
     implementation deps.material
     implementation deps.constraint_layout
     implementation deps.ktx

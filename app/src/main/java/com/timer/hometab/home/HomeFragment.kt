@@ -1,4 +1,4 @@
-package com.timer.home
+package com.timer.hometab.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,13 +7,14 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import com.timer.R
-import com.timer.main.MainActivity
-import com.timer.toolbar.ToolbarFragment.Initializer
-import com.timer.toolbar.model.ToolbarButtonType
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment() {
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
@@ -21,7 +22,6 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initKeypad()
         initTimerEditArea()
-        initToolbar()
     }
 
     private fun initKeypad() {
@@ -32,16 +32,5 @@ class HomeFragment : Fragment() {
 
     private fun initTimerEditArea() {
 
-    }
-
-    private fun initToolbar() {
-        (activity as MainActivity).mainViewModel.setToolbarInitializer(
-            initializer = Initializer().enableButton(ToolbarButtonType.Search) {
-                // Search button click listener
-            }.enableButton(ToolbarButtonType.History) {
-                // History button click listener
-            }.enableButton(ToolbarButtonType.Settings) {
-                // Settings button click listener
-            })
     }
 }

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -13,41 +12,9 @@
             android:layout_height="@dimen/toolbar_height"
             tools:layout="@layout/fragment_toolbar" />
 
-    <androidx.viewpager.widget.ViewPager
-            android:id="@+id/homeTabViewPager"
+    <FrameLayout
+            android:id="@+id/contentFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        <com.google.android.material.tabs.TabLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                app:tabIndicatorHeight="3dp"
-                app:tabGravity="fill">
-
-            <com.google.android.material.tabs.TabItem
-                    android:id="@+id/tab_my_time_set"
-                    style="@style/HomeTabTextAppearance"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:icon="@drawable/ic_my_time_set"
-                    android:text="@string/menu_my_time_set" />
-
-            <com.google.android.material.tabs.TabItem
-                    android:id="@+id/tab_home"
-                    style="@style/HomeTabTextAppearance"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:icon="@drawable/ic_bottom_home"
-                    android:text="@string/menu_home" />
-
-            <com.google.android.material.tabs.TabItem
-                    android:id="@+id/tab_shared_time_set"
-                    style="@style/HomeTabTextAppearance"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:icon="@drawable/ic_shared_time_set"
-                    android:text="@string/menu_shared_time_set" />
-        </com.google.android.material.tabs.TabLayout>
-    </androidx.viewpager.widget.ViewPager>
+            android:layout_height="match_parent"
+            tools:layout="@layout/fragment_tab"/>
 </LinearLayout>

@@ -1,4 +1,4 @@
-package com.timer.timeset.local
+package com.timer.hometab.timeset.remote
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,11 +9,11 @@ import org.jetbrains.anko.support.v4.UI
 import org.jetbrains.anko.textView
 import org.jetbrains.anko.verticalLayout
 
-class MyTimeSetListFragment : Fragment() {
+class SharedTimeSetListFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return UI {
             verticalLayout {
-                textView("MyTimeSetListFragment")
+                textView("SHARED_TIME_SET_LIST_FRAGMENT")
             }
         }.view
     }
