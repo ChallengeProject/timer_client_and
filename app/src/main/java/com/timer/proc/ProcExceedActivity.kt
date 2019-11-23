@@ -5,12 +5,12 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.timer.R
 import com.timer.main.MainActivity
 import com.timer.se_data.TimeSet
@@ -52,6 +52,7 @@ class ProcExceedActivity : AppCompatActivity() {
         private var endTimeStr = ""
         private var allTimeStr = ""
         private var procStatus = ProcStatus.READY
+        private const val MAX_TEXT_LENGTH = 1000
 
     }
 
@@ -124,10 +125,11 @@ class ProcExceedActivity : AppCompatActivity() {
             override fun afterTextChanged(s: Editable?) {}
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if(s!!.length > 1000) {
-                    etMemo.setText(s!!.substring(999,s!!.length-1))
+                s ?: return
+                if (s.length > MAX_TEXT_LENGTH) {
+                    etMemo.setText(s.substring(MAX_TEXT_LENGTH - 1, s.length - 1))
                 }
-                updater.setMemoRemainByte(s!!.length)
+                updater.setMemoRemainByte(s.length)
             }
         })
 
@@ -194,7 +196,7 @@ class ProcExceedActivity : AppCompatActivity() {
             setRepeatIcon(false)
             showBottomBtn(procStatus)
             setTimeSetTitle(timeSet.title)
-            setTimeColor(Color.parseColor("#f24150")) // 0xfff24150
+            setTimeColor(ContextCompat.getColor(baseContext, R.color.ux_pink))
             setContentToHalfTransparent(true)
         }
 

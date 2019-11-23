@@ -29,6 +29,8 @@ class ProcActivity : AppCompatActivity() {
         const val RESP_TIME_SET = "RESP_TIME_SET"
         const val RESP_USE_INFO = "RESP_USE_INFO"
 
+        private const val MAX_TEXT_LENGTH = 1000
+
         fun startProcActivity(context: Context, timeSet: TimeSet) {
             (context as Activity).startActivityForResult(
                 Intent(context, ProcActivity::class.java).apply {
@@ -177,14 +179,15 @@ class ProcActivity : AppCompatActivity() {
             updater.hideMemo()
         }
 
-        etMemo.addTextChangedListener(object : TextWatcher{
+        etMemo.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {}
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if(s!!.length > 1000) {
-                    etMemo.setText(s!!.substring(999,s!!.length-1))
+                s ?: return
+                if (s.length > MAX_TEXT_LENGTH) {
+                    etMemo.setText(s.substring(MAX_TEXT_LENGTH - 1, s.length - 1))
                 }
-                updater.setMemoRemainByte(s!!.length)
+                updater.setMemoRemainByte(s.length)
             }
         })
 

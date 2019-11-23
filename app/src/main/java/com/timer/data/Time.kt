@@ -25,7 +25,7 @@ data class Bell(
     var uri: Uri?
 ) : Parcelable {
     enum class Type {
-        SLIENT,
+        SILENT,
         VIBRATION,
         DEFAULT,
         USER

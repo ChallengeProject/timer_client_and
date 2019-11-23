@@ -2,10 +2,10 @@ package com.timer.proc
 
 import android.app.Activity
 import android.content.Context
-import android.graphics.Color
 import android.os.Build
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.core.content.ContextCompat
 import com.timer.R
 import com.timer.se_data.Bell
 import com.timer.se_data.Time
@@ -14,6 +14,9 @@ import kotlinx.android.synthetic.main.activity_proc.*
 
 class ProcViewUpdater(val act: Activity) {
 
+    companion object {
+        private const val MAX_TEXT_LENGTH = 1000
+    }
 
     private fun setSubtitle(visible: Int, str: String) {
         act.tvSubTitle.apply {
@@ -76,12 +79,6 @@ class ProcViewUpdater(val act: Activity) {
         act.tvAddCount.text = ""
     }
 
-//    fun setWriteMsgVisible(b: Boolean) {
-//        act.llMemoWriteMessage.visibility =
-//            if (b) View.VISIBLE
-//            else View.INVISIBLE
-//    }
-
     fun showSkipMessage(pos: Int) {
         act.clSkipMessage.visibility = View.VISIBLE
         act.ivSkipO.visibility = View.VISIBLE
@@ -103,7 +100,7 @@ class ProcViewUpdater(val act: Activity) {
         act.tvComment.text = comment
     }
 
-    fun setBadgeFocusAndCommentAndBell(time: Time, round :Int){
+    fun setBadgeFocusAndCommentAndBell(time: Time, round: Int) {
         setBadgeFocus(round)
         setComment(time.comment)
         setSound(time.bell)
@@ -111,17 +108,13 @@ class ProcViewUpdater(val act: Activity) {
 
     fun setSound(bell: Bell) {
         act.tvSound.text = when (bell.type) {
-            Bell.Type.SLIENT -> "무음"
+            Bell.Type.SILENT -> "무음"
             Bell.Type.VIBRATION -> "진동"
             Bell.Type.DEFAULT -> "기본음"
             Bell.Type.USER -> "사용자 지정음"
         }
     }
 
-//    fun setAlarmAndComment(alarmText: String, commentText: String) {
-//        act.tvAlarm.text = alarmText
-//        act.tvComment.text = commentText
-//    }
 
     private fun setBottomDialog(mainText: String, subText: String) {
         with(act) {
@@ -172,9 +165,9 @@ class ProcViewUpdater(val act: Activity) {
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            act.btBottom2Btn.setTextColor(act.getColor(R.color.se_white))
+            act.btBottom2Btn.setTextColor(act.getColor(R.color.ux_white))
         } else {
-            act.btBottom2Btn.setTextColor(act.resources.getColor(R.color.se_white))
+            act.btBottom2Btn.setTextColor(act.resources.getColor(R.color.ux_white))
         }
         setSubtitle(View.VISIBLE, "일시정지")
     }
@@ -189,7 +182,7 @@ class ProcViewUpdater(val act: Activity) {
         else act.viewHalfTransparent.visibility = View.GONE
     }
 
-    fun showMemo(memo:String = "") {
+    fun showMemo(memo: String = "") {
         with(act) {
             clMemo.visibility = View.VISIBLE
             etMemo.setText(memo)
@@ -200,11 +193,12 @@ class ProcViewUpdater(val act: Activity) {
 
     fun setMemoRemainByte(curByte: Int) {
         act.tvExceedNumber.text = curByte.toString()
-        if(curByte > 999) {
-            act.tvExceedNumber.setTextColor(Color.parseColor("#f24150"))
+        if (curByte > MAX_TEXT_LENGTH - 1) {
+            act.tvExceedNumber.setTextColor(ContextCompat.getColor(act.baseContext, R.color.ux_pink))
             return
         }
-        act.tvExceedNumber.setTextColor(Color.parseColor("#0a0a0a"))
+        act.tvExceedNumber.setTextColor(ContextCompat.getColor(act.baseContext, R.color.ux_pink))
+
     }
 
     fun hideMemo() {

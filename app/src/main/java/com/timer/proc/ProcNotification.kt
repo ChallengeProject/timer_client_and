@@ -6,11 +6,11 @@ import android.app.PendingIntent
 import android.app.Service
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.os.Build
 import android.view.View
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
+import androidx.core.content.ContextCompat
 import com.timer.R
 import com.timer.se_data.TimeSet
 import com.timer.se_util.App
@@ -162,7 +162,7 @@ class ProcNotification(val service: Service, val times_: ArrayList<Int>) {
 
             if (step == EXCEED_TEXT && maxStep == EXCEED_TEXT.toString()) {
                 setTextViewText(R.id.notiTvRepeat, "초과 기록")
-                setTextColor(R.id.notiTvRepeat, Color.parseColor("#f24150")) // 0xfff24150
+                setTextColor(R.id.notiTvRepeat, ContextCompat.getColor(service.baseContext, R.color.ux_pink))
             } else {
                 setTextViewText(R.id.notiTvRepeat, "${step + 1}/$maxStep")
             }

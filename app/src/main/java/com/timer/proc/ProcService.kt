@@ -49,10 +49,11 @@ class ProcService : Service() {
 
     val TAG = "procService#$#"
 
-    val REPEAT_MAX_COUNT = 99
 
     companion object {
         var INSTANCE: ProcService? = null // check service is alive
+        private const val REPEAT_MAX_COUNT = 99
+        private const val VIRATE_FREQUENCY = 1000L
     }
 
     lateinit var timeSet: TimeSet
@@ -306,16 +307,16 @@ class ProcService : Service() {
                 mediaPlayer?.start()
                 runStopSoundCount()
             }
-            Bell.Type.SLIENT -> {
-                // slient~
+            Bell.Type.SILENT -> {
+                // silent ~
             }
             Bell.Type.VIBRATION -> {
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     (getSystemService(Context.VIBRATOR_SERVICE) as Vibrator)
-                        .vibrate(VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE))
+                        .vibrate(VibrationEffect.createOneShot(VIRATE_FREQUENCY, VibrationEffect.DEFAULT_AMPLITUDE))
                 } else {
-                    (getSystemService(Context.VIBRATOR_SERVICE) as Vibrator).vibrate(1000)
+                    (getSystemService(Context.VIBRATOR_SERVICE) as Vibrator).vibrate(VIRATE_FREQUENCY)
                 }
             }
             Bell.Type.USER -> {
