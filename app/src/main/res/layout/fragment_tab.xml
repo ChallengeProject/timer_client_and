@@ -23,7 +23,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:icon="@drawable/ic_my_time_set"
-                    android:text="@string/menu_my_time_set" />
+                    android:text="@string/my_time_set" />
 
             <com.google.android.material.tabs.TabItem
                     android:id="@+id/tab_home"
@@ -31,7 +31,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:icon="@drawable/ic_bottom_home"
-                    android:text="@string/menu_home" />
+                    android:text="@string/home" />
 
             <com.google.android.material.tabs.TabItem
                     android:id="@+id/tab_shared_time_set"
@@ -39,7 +39,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:icon="@drawable/ic_shared_time_set"
-                    android:text="@string/menu_shared_time_set" />
+                    android:text="@string/shared_time_set" />
         </com.google.android.material.tabs.TabLayout>
     </androidx.viewpager.widget.ViewPager>
 </androidx.constraintlayout.widget.ConstraintLayout>

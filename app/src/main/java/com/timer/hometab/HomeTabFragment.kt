@@ -16,7 +16,7 @@ import com.timer.toolbar.ToolbarFragment
 import com.timer.toolbar.model.ToolbarButtonType
 import kotlinx.android.synthetic.main.fragment_tab.*
 
-class TabFragment : Fragment() {
+class HomeTabFragment : Fragment() {
     private val homeFragment = HomeFragment()
     private val myTimeSetListFragment = MyTimeSetListFragment()
     private val sharedTimeSetListFragment = SharedTimeSetListFragment()
@@ -39,10 +39,9 @@ class TabFragment : Fragment() {
             initializer = ToolbarFragment.Initializer().enableButton(ToolbarButtonType.Search) {
                 // Search button click listener
             }.enableButton(ToolbarButtonType.History) {
-                fragmentManager?.beginTransaction()
-                    ?.hide(this)
-                    ?.show(HistoryListFragment())
-                    ?.addToBackStack("HOME")
+                activity?.supportFragmentManager?.beginTransaction()
+                    ?.replace(R.id.contentFragment, HistoryListFragment())
+                    ?.addToBackStack(null)
                     ?.commit()
             }.enableButton(ToolbarButtonType.Settings) {
                 // Settings button click listener
@@ -51,13 +50,8 @@ class TabFragment : Fragment() {
 
     private fun initTabViewPager() {
         tabViewPager.apply {
-            adapter = HomeTabPagerAdapter(
-                fragmentManager,
-                listOf(myTimeSetListFragment, homeFragment, sharedTimeSetListFragment)
-            )
-                .apply {
-                    post { tabViewPager.currentItem = getItemPosition(homeFragment) }
-                }
+            adapter = HomeTabPagerAdapter(fragmentManager, listOf(myTimeSetListFragment, homeFragment, sharedTimeSetListFragment))
+                .apply { post { tabViewPager.currentItem = getItemPosition(homeFragment) } }
         }
     }
 }

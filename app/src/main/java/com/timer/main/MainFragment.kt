@@ -6,12 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.timer.R
-import com.timer.hometab.TabFragment
+import com.timer.hometab.HomeTabFragment
 import com.timer.toolbar.ToolbarFragment
 
 class MainFragment : Fragment(), MainView {
     private val toolbarFragment = ToolbarFragment()
-    private val tabFragment = TabFragment()
+    private val homeTabFragment = HomeTabFragment()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -23,7 +23,7 @@ class MainFragment : Fragment(), MainView {
         super.onViewCreated(view, savedInstanceState)
 
         changeFragment(R.id.toolbar, toolbarFragment)
-        changeFragment(R.id.contentFragment, tabFragment)
+        changeFragment(R.id.contentFragment, homeTabFragment)
     }
 
     override fun setToolbarInitializer(initializer: ToolbarFragment.Initializer) {

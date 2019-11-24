@@ -19,4 +19,6 @@ class HomeTabPagerAdapter(fm: FragmentManager?, private val fragments: List<Frag
     override fun getCount(): Int {
         return HOME_TABS_COUNT
     }
+
+    override fun getPageTitle(position: Int): CharSequence? = fragments[position].tag
 }

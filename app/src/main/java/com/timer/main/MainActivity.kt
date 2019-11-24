@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun addMainFragment() {
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.add(R.id.keypadContainer, mainFragment)
+        transaction.add(R.id.main, mainFragment)
         transaction.commit()
     }
 }
