@@ -1,49 +1,34 @@
 package com.timer.timeset.local
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import io.reactivex.disposables.CompositeDisposable
+import com.timer.data.AppDatabase
+import com.timer.data.History
+import com.timer.util.VMHelper
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlin.random.Random
 
-class HistoryViewModel(application: Application/*, val db: AppDatabase*/) : AndroidViewModel(application) {
+class HistoryViewModel(application: Application, val db: AppDatabase) : VMHelper(application) {
 
-
-    private val compositeDisposable = CompositeDisposable()
-
-    val observableHistories = MutableLiveData<List<String>>()
+    val observableHistories = MutableLiveData<List<History>>()
     val observableText = MutableLiveData<String>()
-
-    var k = 0
 
     fun refreshItems() {
 
-        // TODO set Room
-//        compositeDisposable.add(
-//            db.timeSetDao()
-//                .selectAll()
-//                .subscribe({
-//                    it.e()
-//                }, {
-//
-//                })
-//        )
-
-        observableHistories.value = listOf(
-            "AA" + Random(k++).nextInt(100),
-            "BB" + Random(k++).nextInt(100),
-            "CC" + Random(k++).nextInt(100),
-            "DD" + Random(k++).nextInt(100),
-            "EE" + Random(k++).nextInt(100),
-            "FF" + Random(k++).nextInt(100),
-            "GG" + Random(k++).nextInt(100)
+        addDisposable(
+            db.historyDao()
+                .selectAll()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    observableHistories.value = it
+                }, {
+                    it.printStackTrace()
+                })
         )
 
-        observableText.value = "텍스트 갱신"
-    }
-
-    override fun onCleared() {
-        super.onCleared()
+        observableText.value = "텍스트 갱신 : ${Random(1234).nextInt()}"
     }
 
 

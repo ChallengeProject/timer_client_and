@@ -11,13 +11,19 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.timer.R
+import com.timer.data.AppDatabase
 import com.timer.se_util.e
 
 class MyTimeSetListFragment : Fragment() {
 
     private lateinit var fragHistoryRvContent: RecyclerView
     private val hisotryViewModel by lazy {
-        ViewModelProviders.of(requireActivity()).get(HistoryViewModel::class.java)
+        ViewModelProviders.of(
+            requireActivity(), HistoryViewModel(
+                requireActivity().application,
+                AppDatabase.getInstance(requireContext())
+            ).create()
+        ).get(HistoryViewModel::class.java)
     }
 
     private val historyAdapter by lazy {

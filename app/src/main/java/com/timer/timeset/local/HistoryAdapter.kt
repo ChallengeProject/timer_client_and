@@ -28,7 +28,7 @@ class HistoryAdapter(val context: Context, private val hisotryViewModel: History
             it.e()
         })
         hisotryViewModel.observableHistories.observe(myTimeSetListFragment, Observer {
-            submitList(it)
+            submitList(it.map { history -> history.content })
         })
     }
 

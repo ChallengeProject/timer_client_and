@@ -26,6 +26,22 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         addMainFragment()
+
+
+/////////////// 임시 데이터 생성, 원래는 뷰모델에 있을코드
+//        Single.just(AppDatabase.getInstance(this))
+//            .subscribeOn(Schedulers.io())
+//            .subscribe { db->
+//                db.historyDao().insert(History(content = "aaaaaaaaaaaaaaaa"))
+//                db.historyDao().insert(History(content = "bbbbbbbbbbbbbbbb"))
+//                db.historyDao().insert(History(content = "ccccccccccccccc"))
+//                db.historyDao().insert(History(content = "ddddddddddddddd"))
+//                db.historyDao().insert(History(content = "eeeeeeeeeeeeee"))
+//                db.historyDao().insert(History(content = "fffffffffffffffff"))
+//                db.historyDao().insert(History(content = "ggggggggggggggggg"))
+//                db.historyDao().insert(History(content = "hhhhhhhhhhhhhhhhh"))
+//                db.historyDao().insert(History(content = "iiiiiiiiiiiiiiiiiii"))
+//            }
     }
 
     private fun addMainFragment() {
@@ -33,6 +49,7 @@ class MainActivity : AppCompatActivity() {
         transaction.add(R.id.keypadContainer, mainFragment)
         transaction.commit()
     }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

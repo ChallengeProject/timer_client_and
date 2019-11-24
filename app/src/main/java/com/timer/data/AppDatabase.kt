@@ -4,22 +4,21 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.timer.se_data.TimeSet
 
-@Database(entities = arrayOf(TimeSet::class), version = 1)
+@Database(entities = [History::class], version = 2)
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun timeSetDao(): TimeSetDao
+    abstract fun historyDao(): HistoryDao
 
     companion object {
         private var INSTANCE: AppDatabase? = null
 
-        fun getInstance(context: Context): AppDatabase? {
+        fun getInstance(context: Context): AppDatabase {
             if (INSTANCE == null) {
                 synchronized(AppDatabase::class) {
-                    INSTANCE = Room.databaseBuilder(context.applicationContext, AppDatabase::class.java, "your_db.db").build()
+                    INSTANCE = Room.databaseBuilder(context.applicationContext, AppDatabase::class.java, "2min.db").build()
                 }
             }
-            return INSTANCE
+            return INSTANCE!!
         }
     }
 }
