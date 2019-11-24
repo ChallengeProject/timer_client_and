@@ -1,6 +1,0 @@
-<resources>
-    <string name="app_name">Timer</string>
-    <string name="menu_home">홈</string>
-    <string name="menu_local_time_set">로컬 타임셋</string>
-    <string name="menu_shared_time_set">공유된 타임셋</string>
-</resources>
