@@ -15,6 +15,7 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".timeset.local.HistoryActivity"></activity>
         <activity
                 android:name=".main.MainActivity"
                 android:theme="@style/Theme.Design.Light.NoActionBar">
@@ -23,10 +24,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-
-<!--        ############-->
+        </activity> <!-- ############ -->
         <activity
                 android:name=".proc.ProcExceedActivity"
                 android:launchMode="singleTask"
@@ -53,7 +51,6 @@
                 <action android:name="PROC_REPEAT" />
             </intent-filter>
         </service>
-
         <service
                 android:name=".proc.ProcExceedService"
                 android:enabled="true"
@@ -64,9 +61,6 @@
                 <action android:name="EXCEED_STOP" />
             </intent-filter>
         </service>
-        <!--        ############-->
-
-
     </application>
 
 </manifest>

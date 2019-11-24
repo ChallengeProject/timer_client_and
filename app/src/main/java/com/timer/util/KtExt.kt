@@ -15,6 +15,10 @@ fun Any.i(tag: String = "") {
     Log.i("$tag#$#", this.toString())
 }
 
+fun Any.e(tag: String = "") {
+    Log.e("$tag#$#", this.toString())
+}
+
 fun String.toEditable(): Editable = Editable.Factory.getInstance().newEditable(this)
 
 fun Long.toTimeStr(): String {

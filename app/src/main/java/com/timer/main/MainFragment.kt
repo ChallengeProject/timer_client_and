@@ -34,7 +34,7 @@ class MainFragment : Fragment(), MainView {
 
         homeTabViewPager.apply {
             adapter = HomeTabPagerAdapter(
-                fragmentManager,
+                fragmentManager!!,
                 listOf(myTimeSetListFragment, homeFragment, sharedTimeSetListFragment)
             )
                 .apply {

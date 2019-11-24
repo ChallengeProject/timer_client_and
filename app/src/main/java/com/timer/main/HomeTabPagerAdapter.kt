@@ -4,7 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 
-class HomeTabPagerAdapter(fm: FragmentManager?, private val fragments: List<Fragment>) :
+class HomeTabPagerAdapter(fm: FragmentManager, private val fragments: List<Fragment>) :
     FragmentPagerAdapter(fm) {
     companion object {
         const val HOME_TABS_COUNT = 3

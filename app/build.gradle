@@ -19,9 +19,14 @@ android {
         }
     }
     dataBinding.enabled = true
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
     androidExtensions {
         experimental = true
     }
+
 }
 
 dependencies {
@@ -39,10 +44,19 @@ dependencies {
     implementation deps.multidex
 
     implementation deps.parceler_api
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     annotationProcessor deps.parceler
     implementation deps.rxjava2
     testImplementation deps.junit
     androidTestImplementation deps.runner
     androidTestImplementation deps.espresso
+
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
+    implementation "androidx.room:room-runtime:2.2.2"
+    implementation "androidx.room:room-compiler:2.2.2"
+    annotationProcessor "androidx.room:room-compiler:2.2.2"
 
 }
