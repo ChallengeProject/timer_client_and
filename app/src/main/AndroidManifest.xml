@@ -3,20 +3,66 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="kr.co.seoft.two_min">
 
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
+        android:theme="@style/Theme.Design.Light.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.home.HomeActivity">
+        <activity android:name=".ui.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
+        <!--        ############-->
+        <activity
+            android:name=".ui.proc.ProcExceedActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/Theme.Design.Light.NoActionBar" />
+        <activity
+            android:name=".ui.proc.ProcEndActivity"
+            android:theme="@style/Theme.Design.Light.NoActionBar"
+            android:windowSoftInputMode="stateVisible|adjustResize" />
+        <activity
+            android:name=".ui.proc.ProcActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/Theme.Design.Light.NoActionBar" />
+
+        <service
+            android:name=".ui.proc.ProcService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="PROC_RESTART" />
+                <action android:name="PROC_PAUSE" />
+                <action android:name="PROC_STOP" />
+                <action android:name="PROC_REMAIN_SEC" />
+                <action android:name="PROC_ROUND" />
+                <action android:name="PROC_REPEAT" />
+            </intent-filter>
+        </service>
+
+        <service
+            android:name=".ui.proc.ProcExceedService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="EXCEED_RESTART" />
+                <action android:name="EXCEED_PAUSE" />
+                <action android:name="EXCEED_STOP" />
+            </intent-filter>
+        </service>
+        <!--        ############-->
     </application>
 
 </manifest>

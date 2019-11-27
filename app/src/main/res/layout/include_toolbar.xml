@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/titlebarHeight"
+    android:orientation="vertical">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/incAbl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:elevation="0dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/basicGray"
+            android:theme="?attr/actionBarTheme"
+            app:navigationIcon="@drawable/btn_back"
+            app:title="거래 기록"
+            app:titleTextColor="@color/basicBlack" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+</LinearLayout>
