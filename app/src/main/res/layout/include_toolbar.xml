@@ -15,11 +15,11 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/basicGray"
+            android:background="@color/ux_gray"
             android:theme="?attr/actionBarTheme"
             app:navigationIcon="@drawable/btn_back"
-            app:title="거래 기록"
-            app:titleTextColor="@color/basicBlack" />
+            app:title=""
+            app:titleTextColor="@color/ux_black" />
 
     </com.google.android.material.appbar.AppBarLayout>
 

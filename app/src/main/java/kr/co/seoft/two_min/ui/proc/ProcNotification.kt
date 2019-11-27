@@ -6,7 +6,6 @@ import android.app.PendingIntent
 import android.app.Service
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.os.Build
 import android.view.View
 import android.widget.RemoteViews
@@ -14,6 +13,7 @@ import androidx.core.app.NotificationCompat
 import kr.co.seoft.two_min.R
 import kr.co.seoft.two_min.data.TimeSet
 import kr.co.seoft.two_min.util.App
+import kr.co.seoft.two_min.util.SC
 import kr.co.seoft.two_min.util.e
 
 
@@ -84,7 +84,10 @@ class ProcNotification(val service: Service, val times_: ArrayList<Int>) {
             val notificationIntent = Intent(service, clazz).apply {
                 action = (Intent.ACTION_MAIN)
                 addCategory(Intent.CATEGORY_LAUNCHER)
-                putIntegerArrayListExtra(extraKey, ArrayList(timeSet.times.map { it.seconds }.toList()))
+                putIntegerArrayListExtra(
+                    extraKey,
+                    ArrayList(timeSet.times.map { it.seconds }.toList())
+                )
                 putExtra(ProcActivity.TIME_SET, timeSet)
             }
 
@@ -162,7 +165,7 @@ class ProcNotification(val service: Service, val times_: ArrayList<Int>) {
 
             if (step == EXCEED_TEXT && maxStep == EXCEED_TEXT.toString()) {
                 setTextViewText(R.id.notiTvRepeat, "초과 기록")
-                setTextColor(R.id.notiTvRepeat, Color.parseColor("#f24150")) // 0xfff24150
+                setTextColor(R.id.notiTvRepeat, SC.color(R.color.ux_pink))
             } else {
                 setTextViewText(R.id.notiTvRepeat, "${step + 1}/$maxStep")
             }
@@ -172,7 +175,10 @@ class ProcNotification(val service: Service, val times_: ArrayList<Int>) {
 
             when (notifiactionButtonType) {
                 NotifiactionButtonType.PLAY -> setViewVisibility(R.id.notiIvCtrlPlay, View.VISIBLE)
-                NotifiactionButtonType.PAUSE -> setViewVisibility(R.id.notiIvCtrlPause, View.VISIBLE)
+                NotifiactionButtonType.PAUSE -> setViewVisibility(
+                    R.id.notiIvCtrlPause,
+                    View.VISIBLE
+                )
             }
 
         }
@@ -184,7 +190,12 @@ class ProcNotification(val service: Service, val times_: ArrayList<Int>) {
         val remoteViews = RemoteViews(service.packageName, R.layout.noti_proc)
 
         val playPendingIntent =
-            if (isProcAct()) PendingIntent.getService(service, 0, Intent(CMD_PROC_SERVICE.RESTART), 0)
+            if (isProcAct()) PendingIntent.getService(
+                service,
+                0,
+                Intent(CMD_PROC_SERVICE.RESTART),
+                0
+            )
             else PendingIntent.getService(service, 0, Intent(CMD_EXCEED_SERVICE.RESTART), 0)
         val pausePendingIntent =
             if (isProcAct()) PendingIntent.getService(service, 0, Intent(CMD_PROC_SERVICE.PAUSE), 0)

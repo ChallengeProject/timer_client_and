@@ -3,7 +3,6 @@ package kr.co.seoft.two_min.ui.proc
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.media.MediaPlayer
 import android.os.Build
 import android.os.Bundle
@@ -23,6 +22,7 @@ import kr.co.seoft.two_min.data.TimeSet
 import kr.co.seoft.two_min.data.UseInfo
 import kr.co.seoft.two_min.ui.main.MainActivity
 import kr.co.seoft.two_min.util.Preferencer
+import kr.co.seoft.two_min.util.SC
 import java.util.concurrent.TimeUnit
 
 class ProcEndActivity : AppCompatActivity() {
@@ -106,10 +106,10 @@ class ProcEndActivity : AppCompatActivity() {
 
                 tvExceedNumber.text = s.length.toString()
                 if(s.length > 999) {
-                    tvExceedNumber.setTextColor(Color.parseColor("#f24150"))
+                    tvExceedNumber.setTextColor(SC.color(R.color.ux_pink))
                     return
                 }
-                tvExceedNumber.setTextColor(Color.parseColor("#0a0a0a"))
+                tvExceedNumber.setTextColor(SC.color(R.color.ux_black))
             }
         })
 

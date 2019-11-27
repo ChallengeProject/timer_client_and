@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">two-min</string>
+    <string name="apply_whole"><u>전체적용</u></string>
 </resources>

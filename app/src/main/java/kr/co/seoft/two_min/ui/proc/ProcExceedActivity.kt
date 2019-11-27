@@ -5,7 +5,6 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import android.text.Editable
@@ -194,7 +193,7 @@ class ProcExceedActivity : AppCompatActivity() {
             setRepeatIcon(false)
             showBottomBtn(procStatus)
             setTimeSetTitle(timeSet.title)
-            setTimeColor(Color.parseColor("#f24150")) // 0xfff24150
+            setTimeColor(SC.color(R.color.ux_pink))
             setContentToHalfTransparent(true)
         }
 

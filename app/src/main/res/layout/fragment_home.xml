@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/ux_gray"
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/fragClTopTime"
+        android:layout_width="215dp"
+        android:layout_height="50dp"
+        android:background="@drawable/bg_home_top_text"
+        app:layout_constraintBottom_toTopOf="@id/fragHomeTvSub"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/fragHomeTvMain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/ux_black"
+            android:textSize="24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="00:00:59" />
+
+        <ImageView
+            android:id="@+id/fragHomeIvMainClear"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/btn_clear__"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/fragHomeTvSub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/ux_black"
+        app:layout_constraintBottom_toTopOf="@id/fragHomeLlNumberPad"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragClTopTime"
+        tools:text="타임셋 시간 00:00:59       종료 예정 9:42 AM" />
+
+    <LinearLayout
+        android:id="@+id/fragHomeLlNumberPad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragHomeTvSub">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/fragHomeTv1"
+                style="@style/MainNumberPad"
+                android:text="1" />
+
+            <Space style="@style/MainNumberPadSpaceWidth" />
+
+            <TextView
+                android:id="@+id/fragHomeTv2"
+                style="@style/MainNumberPad"
+                android:text="2" />
+
+            <Space style="@style/MainNumberPadSpaceWidth" />
+
+            <TextView
+                android:id="@+id/fragHomeTv3"
+                style="@style/MainNumberPad"
+                android:text="3" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/fragHomeTv4"
+                style="@style/MainNumberPad"
+                android:text="4" />
+
+            <Space style="@style/MainNumberPadSpaceWidth" />
+
+            <TextView
+                android:id="@+id/fragHomeTv5"
+                style="@style/MainNumberPad"
+                android:text="5" />
+
+            <Space style="@style/MainNumberPadSpaceWidth" />
+
+            <TextView
+                android:id="@+id/fragHomeTv6"
+                style="@style/MainNumberPad"
+                android:text="6" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/fragHomeTv7"
+                style="@style/MainNumberPad"
+                android:text="7" />
+
+            <Space style="@style/MainNumberPadSpaceWidth" />
+
+            <TextView
+                android:id="@+id/fragHomeTv8"
+                style="@style/MainNumberPad"
+                android:text="8" />
+
+            <Space style="@style/MainNumberPadSpaceWidth" />
+
+            <TextView
+                android:id="@+id/fragHomeTv9"
+                style="@style/MainNumberPad"
+                android:text="9" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/fragHomeTvCancel"
+                style="@style/MainNumberPad"
+                android:text="취소" />
+
+            <Space style="@style/MainNumberPadSpaceWidth" />
+
+            <TextView
+                android:id="@+id/fragHomeTv0"
+                style="@style/MainNumberPad"
+                android:text="0" />
+
+            <Space style="@style/MainNumberPadSpaceWidth" />
+
+            <TextView
+                android:id="@+id/fragHomeTvBack"
+                style="@style/MainNumberPad"
+                android:text="ㄴ"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="65dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/fragHomeTvHour"
+                style="@style/MainNumberPad"
+                android:text="시"
+                android:textStyle="bold" />
+
+            <Space style="@style/MainNumberPadSpaceWidth" />
+
+            <TextView
+                android:id="@+id/fragHomeTvMinute"
+                style="@style/MainNumberPad"
+                android:text="분"
+                android:textStyle="bold" />
+
+            <Space style="@style/MainNumberPadSpaceWidth" />
+
+            <TextView
+                android:id="@+id/fragHomeTvSecond"
+                style="@style/MainNumberPad"
+                android:text="초"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <kr.co.seoft.two_min.ui.main.home.MiddleTransformSnappyRecyclerView
+        android:id="@+id/fragHomeRv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragHomeLlNumberPad" />
+
+    <View
+        android:id="@+id/fragHomeViewTransparent"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#CCFFFFFF"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@id/fragHomeRv"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/fragHomeLlTimeInfo"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="15dp"
+        android:background="#DBFFE6"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/fragHomeRv"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <EditText
+            android:id="@+id/fragHomeEtContent"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@null"
+            android:gravity="top"
+            android:hint="코멘트를 입력하실 수 있어요"
+            android:lines="9"
+            android:textColor="@color/text_hint_gray"
+            android:textSize="15dp"
+            app:layout_constraintLeft_toLeftOf="@id/tvTimesetEndText"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvDateInfo" />
+
+        <TextView
+            android:id="@+id/fragHomeTvContentLength"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="right"
+            android:textColor="@color/ux_black"
+            android:textSize="12dp"
+
+            tools:text="0/100bytes" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/ux_gray" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="15dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/icon_sound" />
+
+            <TextView
+                android:id="@+id/fragHomeTvSilent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:gravity="center"
+                android:text="무음"
+                android:textColor="@color/ux_black"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/fragHomeTvVibrate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:gravity="center"
+                android:text="진동"
+                android:textColor="@color/ux_black"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/fragHomeTvBasicBell"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="기본음"
+                android:textColor="@color/ux_black"
+                android:textSize="15dp" />
+
+
+            <TextView
+                android:id="@+id/fragHomeTvSetWhole"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="10dp"
+                android:gravity="right|center_vertical"
+                android:text="전체적용"
+                android:textColor="@color/ux_black"
+                android:textSize="15dp"
+                android:textStyle="" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/ux_gray" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="15dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/icon_timer_" />
+
+            <TextView
+                android:id="@+id/fragHomeTvTimerPosition"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:gravity="center"
+                android:text="1번째 타이머"
+                android:textColor="@color/ux_black"
+                android:textSize="15dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="right"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/fragHomeIvTimeSetDelete"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="?android:attr/selectableItemBackgroundBorderless"
+                    android:gravity="right|center_vertical"
+                    android:src="@drawable/btn_timer_delete"
+                    android:text="전체적용"
+                    android:textColor="@color/ux_black"
+                    android:textSize="15dp"
+                    android:textStyle="" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:visibility="gone"
+        android:id="@+id/fragHomeIvCloseTimeInfo"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/icon_close"
+        app:layout_constraintBottom_toTopOf="@id/fragHomeLlTimeInfo"
+        app:layout_constraintRight_toRightOf="@id/fragHomeLlTimeInfo" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

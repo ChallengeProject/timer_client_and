@@ -9,13 +9,11 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.include_toolbar.*
 import kr.co.seoft.two_min.R
 import kr.co.seoft.two_min.data.TimeSet
 import kr.co.seoft.two_min.ui.ActivityHelper
-import kr.co.seoft.two_min.ui.main.home.HomeBadge
-import kr.co.seoft.two_min.ui.main.home.HomeBadgeCallbackType
-import kr.co.seoft.two_min.ui.main.home.HomeBadgeType
-import kr.co.seoft.two_min.ui.main.home.MiddleTransformSnappyRecyclerView
+import kr.co.seoft.two_min.ui.main.home.HomeFragment
 import kr.co.seoft.two_min.ui.proc.ProcActivity
 import kr.co.seoft.two_min.ui.proc.ProcEndActivity
 import kr.co.seoft.two_min.ui.proc.ProcExceedActivity
@@ -38,7 +36,7 @@ class MainActivity : ActivityHelper() {
 
         initToolbar()
         initView()
-
+        initListener()
 
 
 //        ProcActivity.startProcActivity(this,TimeSet(
@@ -58,9 +56,11 @@ class MainActivity : ActivityHelper() {
             override fun createFragment(position: Int): Fragment {
                 return when (position) {
                     0 -> {
-                        SizeFragment1.newInstance()
+                        toolbar.setTitle("")
+                        HomeFragment.newInstance()
                     }
                     else -> {
+                        toolbar.setTitle("내 타임셋")
                         SizeFragment2.newInstance()
                     }
                 }
@@ -71,17 +71,14 @@ class MainActivity : ActivityHelper() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
 
-
-                if(position == 0) {
+                if (position == 0) {
                     actHomeViewTabLayoutLine1.visibility = View.VISIBLE
                     actHomeViewTabLayoutLine2.visibility = View.INVISIBLE
                 } else {
                     actHomeViewTabLayoutLine1.visibility = View.INVISIBLE
                     actHomeViewTabLayoutLine2.visibility = View.VISIBLE
                 }
-
             }
-
         })
 
         actHomeTablayout.getTabAt(0)?.setIcon(R.drawable.dummy)
@@ -90,16 +87,35 @@ class MainActivity : ActivityHelper() {
         TabLayoutMediator(actHomeTablayout, actHomeViewPager) { tab, position ->
             when (position) {
                 0 -> {
-                    tab.text  = "Size"
+                    tab.text = "Size"
                     tab.setIcon(R.drawable.dummy)
                 }
                 else -> {
-                    tab.text  = "Template"
+                    tab.text = "Template"
                     tab.setIcon(R.drawable.btn_back)
                 }
             }
         }.attach()
 
+    }
+
+    fun initListener() {
+
+        actMainBtBottom1Btn.setOnClickListener {
+
+        }
+
+        actMainBtBottom2Btn.setOnClickListener {
+
+        }
+    }
+
+    fun showBottomButtons() {
+        actHomeLlBottomButtons.visibility = View.VISIBLE
+    }
+
+    fun hideBottomButtons() {
+        actHomeLlBottomButtons.visibility = View.INVISIBLE
     }
 
 
@@ -162,11 +178,6 @@ class MainActivity : ActivityHelper() {
             R.id.main_home_history -> {
                 "main_home_history".toaste(this)
 //                actHomeViewPager.isUserInputEnabled =false
-
-
-
-
-
             }
             android.R.id.home -> {
                 "android.R.id.home".toaste(this)
@@ -179,38 +190,6 @@ class MainActivity : ActivityHelper() {
         menuInflater.inflate(R.menu.main_home, menu)
         return true
     }
-}
-
-class SizeFragment1 : Fragment() {
-
-    companion object {
-        fun newInstance() = SizeFragment1()
-    }
-
-    lateinit var middleTransformSnappyRv: MiddleTransformSnappyRecyclerView
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.size1, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        middleTransformSnappyRv = view.findViewById(R.id.middleTransformSnappyRv)
-
-        var k = 0
-
-        middleTransformSnappyRv.onBadgeSelectedListener = { type, pos ->
-            if(type == HomeBadgeCallbackType.ADD_PUSH)
-                middleTransformSnappyRv.addHomeBadge( HomeBadge( second = k++, type = HomeBadgeType.NORMAL ) )
-        }
-
-    }
-
 }
 
 class SizeFragment2 : Fragment() {

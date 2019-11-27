@@ -2,14 +2,13 @@ package kr.co.seoft.two_min.ui.proc
 
 import android.app.Activity
 import android.content.Context
-import android.graphics.Color
-import android.os.Build
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import kotlinx.android.synthetic.main.activity_proc.*
 import kr.co.seoft.two_min.R
 import kr.co.seoft.two_min.data.Bell
 import kr.co.seoft.two_min.data.Time
+import kr.co.seoft.two_min.util.SC
 
 
 class ProcViewUpdater(val act: Activity) {
@@ -103,7 +102,7 @@ class ProcViewUpdater(val act: Activity) {
         act.tvComment.text = comment
     }
 
-    fun setBadgeFocusAndCommentAndBell(time: Time, round :Int){
+    fun setBadgeFocusAndCommentAndBell(time: Time, round: Int) {
         setBadgeFocus(round)
         setComment(time.comment)
         setSound(time.bell)
@@ -153,29 +152,15 @@ class ProcViewUpdater(val act: Activity) {
     private fun setCancelAndPauseStatus() {
         setBottomButtonText("취소", "일시정지")
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            act.btBottom2Btn.background = act.getDrawable(R.drawable.bg_bottom_button_gray)
-        }
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            act.btBottom2Btn.setTextColor(act.getColor(R.color.prime_black))
-        } else {
-            act.btBottom2Btn.setTextColor(act.resources.getColor(R.color.prime_black))
-        }
+        act.btBottom2Btn.background = act.getDrawable(R.drawable.bg_bottom_button_gray)
+        act.btBottom2Btn.setTextColor(SC.color(R.color.ux_black))
         setSubtitle(View.INVISIBLE, "")
     }
 
     private fun setCancelAndRestartStatus() {
         setBottomButtonText("취소", "시작")
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            act.btBottom2Btn.background = act.getDrawable(R.drawable.bg_bottom_button_red)
-        }
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            act.btBottom2Btn.setTextColor(act.getColor(R.color.se_white))
-        } else {
-            act.btBottom2Btn.setTextColor(act.resources.getColor(R.color.se_white))
-        }
+        act.btBottom2Btn.background = act.getDrawable(R.drawable.bg_bottom_button_red)
+        act.btBottom2Btn.setTextColor(SC.color(R.color.white))
         setSubtitle(View.VISIBLE, "일시정지")
     }
 
@@ -189,7 +174,7 @@ class ProcViewUpdater(val act: Activity) {
         else act.viewHalfTransparent.visibility = View.GONE
     }
 
-    fun showMemo(memo:String = "") {
+    fun showMemo(memo: String = "") {
         with(act) {
             clMemo.visibility = View.VISIBLE
             etMemo.setText(memo)
@@ -200,11 +185,11 @@ class ProcViewUpdater(val act: Activity) {
 
     fun setMemoRemainByte(curByte: Int) {
         act.tvExceedNumber.text = curByte.toString()
-        if(curByte > 999) {
-            act.tvExceedNumber.setTextColor(Color.parseColor("#f24150"))
+        if (curByte > 999) {
+            act.tvExceedNumber.setTextColor(SC.color(R.color.ux_black))
             return
         }
-        act.tvExceedNumber.setTextColor(Color.parseColor("#0a0a0a"))
+        act.tvExceedNumber.setTextColor(SC.color(R.color.ux_black))
     }
 
     fun hideMemo() {
