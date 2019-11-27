@@ -12,6 +12,10 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kr.co.seoft.two_min.R
 import kr.co.seoft.two_min.data.TimeSet
 import kr.co.seoft.two_min.ui.ActivityHelper
+import kr.co.seoft.two_min.ui.main.home.HomeBadge
+import kr.co.seoft.two_min.ui.main.home.HomeBadgeCallbackType
+import kr.co.seoft.two_min.ui.main.home.HomeBadgeType
+import kr.co.seoft.two_min.ui.main.home.MiddleTransformSnappyRecyclerView
 import kr.co.seoft.two_min.ui.proc.ProcActivity
 import kr.co.seoft.two_min.ui.proc.ProcEndActivity
 import kr.co.seoft.two_min.ui.proc.ProcExceedActivity
@@ -153,9 +157,16 @@ class MainActivity : ActivityHelper() {
         when (item.itemId) {
             R.id.main_home_setting -> {
                 "main_home_setting".toaste(this)
+//                actHomeViewPager.isUserInputEnabled =true
             }
             R.id.main_home_history -> {
                 "main_home_history".toaste(this)
+//                actHomeViewPager.isUserInputEnabled =false
+
+
+
+
+
             }
             android.R.id.home -> {
                 "android.R.id.home".toaste(this)
@@ -176,6 +187,8 @@ class SizeFragment1 : Fragment() {
         fun newInstance() = SizeFragment1()
     }
 
+    lateinit var middleTransformSnappyRv: MiddleTransformSnappyRecyclerView
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -183,6 +196,21 @@ class SizeFragment1 : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.size1, container, false)
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        middleTransformSnappyRv = view.findViewById(R.id.middleTransformSnappyRv)
+
+        var k = 0
+
+        middleTransformSnappyRv.onBadgeSelectedListener = { type, pos ->
+            if(type == HomeBadgeCallbackType.ADD_PUSH)
+                middleTransformSnappyRv.addHomeBadge( HomeBadge( second = k++, type = HomeBadgeType.NORMAL ) )
+        }
+
+    }
+
 }
 
 class SizeFragment2 : Fragment() {
