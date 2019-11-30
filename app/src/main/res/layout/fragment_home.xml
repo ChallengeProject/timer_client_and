@@ -171,10 +171,10 @@
 
             <Space style="@style/MainNumberPadSpaceWidth" />
 
-            <TextView
-                android:id="@+id/fragHomeTvBack"
+            <ImageView
+                android:id="@+id/fragHomeIvBack"
                 style="@style/MainNumberPad"
-                android:text="ㄴ"
+                android:src="@drawable/btn_back"
                 android:textStyle="bold" />
 
         </LinearLayout>

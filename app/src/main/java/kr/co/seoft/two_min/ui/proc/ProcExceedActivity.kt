@@ -197,7 +197,7 @@ class ProcExceedActivity : AppCompatActivity() {
             setRepeatIcon(false)
             showBottomBtn(procStatus)
             setTimeSetTitle(timeSet.title)
-            setTimeColor(SC.color(R.color.ux_pink))
+            setTimeColor(R.color.ux_pink.color())
             setContentToHalfTransparent(true)
         }
 

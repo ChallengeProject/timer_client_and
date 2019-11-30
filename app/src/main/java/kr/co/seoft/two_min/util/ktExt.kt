@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.annotation.IdRes
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -90,9 +91,9 @@ fun Int.dimen(context: Context): Int {
 }
 
 fun Int.toFormattingString(): String {
-    var hour = this / 3600
-    var min = this / 60 % 60
-    var second_ = this % 60
+    val hour = this / 3600
+    val min = this / 60 % 60
+    val second_ = this % 60
 
     return "${if (hour < 10) "0$hour" else hour}:${if (min < 10) "0$min" else min}:${if (second_ < 10) "0$second_" else second_}"
 }
@@ -125,3 +126,5 @@ fun Boolean.setVisibleOrGone(): Int {
 }
 
 inline fun <reified T> Gson.fromJson(json: String) = this.fromJson<T>(json, object: TypeToken<T>() {}.type)
+
+fun Int.color() = ContextCompat.getColor(App.get, this)

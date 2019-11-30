@@ -13,6 +13,7 @@ import gun0912.tedkeyboardobserver.TedKeyboardObserver
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.include_toolbar.*
 import kr.co.seoft.two_min.R
+import kr.co.seoft.two_min.data.AppDatabase
 import kr.co.seoft.two_min.data.TimeSet
 import kr.co.seoft.two_min.ui.ActivityHelper
 import kr.co.seoft.two_min.ui.main.home.HomeFragment
@@ -33,6 +34,9 @@ class MainActivity : ActivityHelper() {
     override val layoutResourceId = R.layout.activity_main
 
     var showStatusBottomButtons = false
+
+    val db by lazy { AppDatabase.getDatabase(this) }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -168,10 +172,10 @@ class MainActivity : ActivityHelper() {
                     when (data.getStringExtra(ProcEndActivity.RESP_TYPE)) {
 
                         ProcEndActivity.RESP_TYPE_EXCEED -> {
-                            ProcExceedActivity.startProcExceedActivity(this, timeSet,3)
+                            ProcExceedActivity.startProcExceedActivity(this, timeSet, 3)
                         }
                         ProcEndActivity.RESP_TYPE_RESTART -> {
-                            ProcActivity.startProcActivity(this, timeSet,3)
+                            ProcActivity.startProcActivity(this, timeSet, 3)
                         }
                         ProcEndActivity.RESP_TYPE_SAVE -> {
                             // TODO 저장 구체화되면 ㄱㄱ

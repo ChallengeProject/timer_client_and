@@ -23,7 +23,7 @@ import kr.co.seoft.two_min.data.TimeSet
 import kr.co.seoft.two_min.data.UseInfo
 import kr.co.seoft.two_min.ui.main.MainActivity
 import kr.co.seoft.two_min.util.Preferencer
-import kr.co.seoft.two_min.util.SC
+import kr.co.seoft.two_min.util.color
 import java.util.concurrent.TimeUnit
 
 class ProcEndActivity : AppCompatActivity() {
@@ -107,10 +107,10 @@ class ProcEndActivity : AppCompatActivity() {
 
                 tvExceedNumber.text = s.length.toString()
                 if(s.length > 999) {
-                    tvExceedNumber.setTextColor(SC.color(R.color.ux_pink))
+                    tvExceedNumber.setTextColor(R.color.ux_pink.color())
                     return
                 }
-                tvExceedNumber.setTextColor(SC.color(R.color.ux_black))
+                tvExceedNumber.setTextColor(R.color.ux_black.color())
             }
         })
 

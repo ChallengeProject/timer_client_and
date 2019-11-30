@@ -8,7 +8,7 @@ import kotlinx.android.synthetic.main.activity_proc.*
 import kr.co.seoft.two_min.R
 import kr.co.seoft.two_min.data.Bell
 import kr.co.seoft.two_min.data.Time
-import kr.co.seoft.two_min.util.SC
+import kr.co.seoft.two_min.util.color
 
 
 class ProcViewUpdater(val act: Activity) {
@@ -153,14 +153,14 @@ class ProcViewUpdater(val act: Activity) {
         setBottomButtonText("취소", "일시정지")
 
         act.btBottom2Btn.background = act.getDrawable(R.drawable.bg_bottom_button_gray)
-        act.btBottom2Btn.setTextColor(SC.color(R.color.ux_black))
+        act.btBottom2Btn.setTextColor(R.color.ux_black.color())
         setSubtitle(View.INVISIBLE, "")
     }
 
     private fun setCancelAndRestartStatus() {
         setBottomButtonText("취소", "시작")
         act.btBottom2Btn.background = act.getDrawable(R.drawable.bg_bottom_button_red)
-        act.btBottom2Btn.setTextColor(SC.color(R.color.white))
+        act.btBottom2Btn.setTextColor(R.color.white.color())
         setSubtitle(View.VISIBLE, "일시정지")
     }
 
@@ -186,10 +186,10 @@ class ProcViewUpdater(val act: Activity) {
     fun setMemoRemainByte(curByte: Int) {
         act.tvExceedNumber.text = curByte.toString()
         if (curByte > 999) {
-            act.tvExceedNumber.setTextColor(SC.color(R.color.ux_black))
+            act.tvExceedNumber.setTextColor(R.color.ux_black.color())
             return
         }
-        act.tvExceedNumber.setTextColor(SC.color(R.color.ux_black))
+        act.tvExceedNumber.setTextColor(R.color.ux_black.color())
     }
 
     fun hideMemo() {

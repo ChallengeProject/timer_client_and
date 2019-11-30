@@ -13,7 +13,7 @@ import androidx.core.app.NotificationCompat
 import kr.co.seoft.two_min.R
 import kr.co.seoft.two_min.data.TimeSet
 import kr.co.seoft.two_min.util.App
-import kr.co.seoft.two_min.util.SC
+import kr.co.seoft.two_min.util.color
 import kr.co.seoft.two_min.util.e
 
 
@@ -165,7 +165,7 @@ class ProcNotification(val service: Service, val times_: ArrayList<Int>) {
 
             if (step == EXCEED_TEXT && maxStep == EXCEED_TEXT.toString()) {
                 setTextViewText(R.id.notiTvRepeat, "초과 기록")
-                setTextColor(R.id.notiTvRepeat, SC.color(R.color.ux_pink))
+                setTextColor(R.id.notiTvRepeat, R.color.ux_pink.color())
             } else {
                 setTextViewText(R.id.notiTvRepeat, "${step + 1}/$maxStep")
             }

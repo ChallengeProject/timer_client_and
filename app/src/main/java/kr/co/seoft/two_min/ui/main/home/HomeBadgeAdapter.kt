@@ -11,12 +11,12 @@ import kr.co.seoft.two_min.R
 
 class HomeBadgeAdapter(
     val context: Context,
-    val cb: (HomeBadgeCallbackType, VH) -> Unit
+    private val cb: (HomeBadgeCallbackType, VH) -> Unit
 ) : RecyclerView.Adapter<HomeBadgeAdapter.VH>() {
 
     private var items = mutableListOf(
         HomeBadge(0, HomeBadgeType.REPEAT_OFF),
-        HomeBadge(0, HomeBadgeType.NORMAL),
+        HomeBadge(0, HomeBadgeType.FOCUS),
         HomeBadge(0, HomeBadgeType.ADD)
     )
 

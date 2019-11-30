@@ -9,6 +9,7 @@ import kotlinx.android.synthetic.main.fragment_home.*
 import kr.co.seoft.two_min.R
 import kr.co.seoft.two_min.data.Bell
 import kr.co.seoft.two_min.data.Time
+import kr.co.seoft.two_min.util.color
 import kr.co.seoft.two_min.util.toEditable
 import kr.co.seoft.two_min.util.toTimeStr
 import kr.co.seoft.two_min.util.x1000L
@@ -66,6 +67,16 @@ class HomeFragUpdater(val f: HomeFragment) {
             ContextCompat.getDrawable(f.requireContext(), R.drawable.bg_timeset_times_red_stroke)
         f.act.setTransparentToolbarAndBottoms(true)
 
+    }
+
+    fun setEnable(tv: TextView, isEnable: Boolean) {
+        if(isEnable) {
+            tv.isClickable = true
+            tv.setTextColor(R.color.ux_black.color())
+        } else {
+            tv.isClickable = false
+            tv.setTextColor(R.color.text_hint_gray.color())
+        }
     }
 
     fun hideTimeInfo() {
