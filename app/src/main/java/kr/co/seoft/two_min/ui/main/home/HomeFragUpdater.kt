@@ -36,13 +36,10 @@ class HomeFragUpdater(val f: HomeFragment) {
     }
 
     fun setSubText(str1: String, str2: String) {
-        f.fragHomeTvSub.text = "$str1        $str2"
+        f.fragHomeTvSub.text = "타임셋 시간 $str1        종료 예정 $str2"
     }
 
-    fun showTimeInfo(index: Int) {
-
-        //TODO 뷰모델에서 인덱스 대비 가져와야댐
-        val time = Time(123, "Aa", Bell(Bell.Type.DEFAULT, null))
+    fun showTimeInfo(index: Int, time:Time) {
 
         f.fragHomeLlTimeInfo.visibility = View.VISIBLE
         f.fragHomeIvCloseTimeInfo.visibility = View.VISIBLE

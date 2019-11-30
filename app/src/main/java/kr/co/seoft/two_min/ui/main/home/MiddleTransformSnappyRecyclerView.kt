@@ -57,9 +57,15 @@ class MiddleTransformSnappyRecyclerView : RecyclerView {
                     if (pos >= curPos) this.smoothScrollToPosition(pos + 1)
                     else this.smoothScrollToPosition(pos - 1)
 
+                    if (type == HomeBadgeCallbackType.NORMAL_PUSH) {
+                        onBadgeSelectedListener?.invoke(type, pos)
+                    }
+
                     return@HomeBadgeAdapter
                 } else if (type == HomeBadgeCallbackType.LONG_PUSH) {
                     itemTouchHelper.startDrag(vh)
+                } else if (type == HomeBadgeCallbackType.FOCUS_PUSH) {
+                    onBadgeSelectedListener?.invoke(type, pos)
                 }
             }
 
@@ -139,5 +145,8 @@ class MiddleTransformSnappyRecyclerView : RecyclerView {
 
     fun getBadges() = homeBadgeAdapter.getBadges()
     fun getBadge(index: Int) = homeBadgeAdapter.getBadge(index)
+    fun removeZeroSecondBadge() {
+        homeBadgeAdapter.removeZeroSecondBadge()
+    }
 
 }

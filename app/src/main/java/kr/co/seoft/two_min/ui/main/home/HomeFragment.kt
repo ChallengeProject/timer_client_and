@@ -174,6 +174,22 @@ class HomeFragment : Fragment() {
                 updater.setMainTextAndEtc(mainSecond)
                 updateWholeAndRemainTime()
 
+            } else if (type == HomeBadgeCallbackType.NORMAL_PUSH) {
+                resetMainAndSubSecond(fragHomeRv.getBadge(pos).second.toLong())
+                updater.setMainTextAndEtc(mainSecond)
+                updateWholeAndRemainTime()
+
+                /**
+                 * NORMAL_PUSH 상황이라서 ADD 작업은 포커싱해제타이밍이며 마지막 뱃지말고 처음~중간 부분 뱃지도 작업이 끝난상황이라서
+                 * 00:00:00 인애들을 걸러내도됨
+                 */
+                fragHomeRv.removeZeroSecondBadge()
+
+            } else if (type == HomeBadgeCallbackType.FOCUS_PUSH) {
+
+//                updater.showTimeInfo(pos,fragHomeRv.getBadge(pos))
+
+                "HomeBadgeCallbackType.FOCUS_PUSH".e()
             }
         }
 
@@ -204,8 +220,8 @@ class HomeFragment : Fragment() {
 
     }
 
-    fun resetMainAndSubSecond(){
-        mainSecond = 0
+    private fun resetMainAndSubSecond(newMainSecond: Long = 0L) {
+        mainSecond = newMainSecond
         subSecond = ""
     }
 

@@ -20,7 +20,7 @@ class HomeBadgeAdapter(
         HomeBadge(0, HomeBadgeType.ADD_SHOW)
     )
 
-    fun resetBadges(){
+    fun resetBadges() {
         items = mutableListOf(
             HomeBadge(0, HomeBadgeType.REPEAT_OFF),
             HomeBadge(0, HomeBadgeType.FOCUS),
@@ -57,13 +57,13 @@ class HomeBadgeAdapter(
         return VH(LayoutInflater.from(context).inflate(R.layout.item_home_badge, parent, false), cb)
     }
 
-    fun hideAddButton(){
-        items[items.size-1]= items.last().copy(type = HomeBadgeType.ADD_HIDE)
+    fun hideAddButton() {
+        items[items.size - 1] = items.last().copy(type = HomeBadgeType.ADD_HIDE)
         notifyDataSetChanged()
     }
 
-    fun showAddButton(){
-        items[items.size-1]= items.last().copy(type = HomeBadgeType.ADD_SHOW)
+    fun showAddButton() {
+        items[items.size - 1] = items.last().copy(type = HomeBadgeType.ADD_SHOW)
         notifyDataSetChanged()
     }
 
@@ -77,7 +77,12 @@ class HomeBadgeAdapter(
     }
 
     fun onItemMoved(from: Int, to: Int) {
-        if (from == to || items[to].type == HomeBadgeType.EMPTY || items[to].type == HomeBadgeType.ADD_SHOW) {
+        if (from == to || items[to].type == HomeBadgeType.EMPTY
+            || items[to].type == HomeBadgeType.ADD_SHOW
+            || items[to].type == HomeBadgeType.ADD_HIDE
+            || items[to].type == HomeBadgeType.REPEAT_OFF
+            || items[to].type == HomeBadgeType.REPEAT_ON
+        ) {
             return
         }
 
@@ -115,6 +120,11 @@ class HomeBadgeAdapter(
         return null
     }
 
+    fun removeZeroSecondBadge() {
+        items.removeAll { it.second == 0 && it.type == HomeBadgeType.NORMAL }
+
+    }
+
     inner class VH(view: View, cb: (HomeBadgeCallbackType, VH) -> Unit) :
         RecyclerView.ViewHolder(view) {
 
@@ -133,11 +143,9 @@ class HomeBadgeAdapter(
 
                 when (items[adapterPosition].type) {
                     HomeBadgeType.NORMAL -> cb.invoke(HomeBadgeCallbackType.NORMAL_PUSH, this)
+                    HomeBadgeType.FOCUS -> cb.invoke(HomeBadgeCallbackType.FOCUS_PUSH, this)
                     HomeBadgeType.ADD_SHOW -> cb.invoke(HomeBadgeCallbackType.ADD_PUSH, this)
-                    HomeBadgeType.REPEAT_OFF -> cb.invoke(
-                        HomeBadgeCallbackType.REPEAT_OFF_PUSH,
-                        this
-                    )
+                    HomeBadgeType.REPEAT_OFF -> cb.invoke(HomeBadgeCallbackType.REPEAT_OFF_PUSH, this)
                     HomeBadgeType.REPEAT_ON -> cb.invoke(HomeBadgeCallbackType.REPEAT_ON_PUSH, this)
                 }
             }

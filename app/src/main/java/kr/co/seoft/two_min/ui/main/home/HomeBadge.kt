@@ -27,6 +27,7 @@ enum class HomeBadgeCallbackType {
     NORMAL_PUSH,
     LONG_PUSH,
     ADD_PUSH,
+    FOCUS_PUSH,
     REPEAT_ON_PUSH,
     REPEAT_OFF_PUSH,
 }
