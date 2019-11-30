@@ -56,12 +56,12 @@
         app:tabIndicatorHeight="0dp" />
 
     <LinearLayout
-        android:visibility="gone"
         android:id="@+id/actHomeLlBottomButtons"
         android:layout_width="match_parent"
-        android:background="@color/ux_gray"
         android:layout_height="0dp"
+        android:background="@color/ux_gray"
         android:orientation="horizontal"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="@id/actHomeLlTabLayoutLine">
 
@@ -96,5 +96,25 @@
             android:textStyle="bold" />
 
     </LinearLayout>
+
+    <View
+        android:id="@+id/actMainViewTransparentTop"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#CCFFFFFF"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@id/actHomeViewPager"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <View
+        android:id="@+id/actMainViewTransparentBottom"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#CCFFFFFF"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/actHomeViewPager" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,13 +2,18 @@ package kr.co.seoft.two_min.ui.main.home
 
 import android.graphics.Paint
 import android.view.View
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.fragment_home.*
 import kr.co.seoft.two_min.R
 import kr.co.seoft.two_min.data.Bell
 import kr.co.seoft.two_min.data.Time
 import kr.co.seoft.two_min.util.toEditable
+import kr.co.seoft.two_min.util.toTimeStr
+import kr.co.seoft.two_min.util.x1000L
 
+// TODO 뷰모델도받자 데이터가져와야되서
 class HomeFragUpdater(val f: HomeFragment) {
 
     fun setMainText(str: String) {
@@ -28,6 +33,8 @@ class HomeFragUpdater(val f: HomeFragment) {
     }
 
     fun showTimeInfo(index: Int) {
+
+        //TODO 뷰모델에서 인덱스 대비 가져와야댐
         val time = Time(123, "Aa", Bell(Bell.Type.DEFAULT, null))
 
         f.fragHomeLlTimeInfo.visibility = View.VISIBLE
@@ -53,12 +60,19 @@ class HomeFragUpdater(val f: HomeFragment) {
                 setBottomLineToVibrate()
             }
         }
+
+        f.fragHomeIncSelectedHomeBadge.findViewById<TextView>(R.id.itemHomeBadgeTvTime).text = time.seconds.x1000L().toTimeStr()
+        f.fragHomeIncSelectedHomeBadge.findViewById<LinearLayout>(R.id.itemHomeBadgellContent).background =
+            ContextCompat.getDrawable(f.requireContext(), R.drawable.bg_timeset_times_red_stroke)
+        f.act.setTransparentToolbarAndBottoms(true)
+
     }
 
     fun hideTimeInfo() {
         f.fragHomeLlTimeInfo.visibility = View.INVISIBLE
         f.fragHomeIvCloseTimeInfo.visibility = View.INVISIBLE
         f.fragHomeViewTransparent.visibility = View.INVISIBLE
+        f.act.setTransparentToolbarAndBottoms(false)
     }
 
     fun setBottomLineToSlient() {

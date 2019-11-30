@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_home.*
 import kr.co.seoft.two_min.R
+import kr.co.seoft.two_min.ui.main.MainActivity
 
 class HomeFragment : Fragment() {
 
@@ -33,7 +34,9 @@ class HomeFragment : Fragment() {
         )
     }
 
-    lateinit var rv: MiddleTransformSnappyRecyclerView
+    val act by lazy {
+        activity as MainActivity
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,14 +48,25 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        fragHomeViewTransparent.setOnClickListener {  } // for prevent touch
+        fragHomeViewTransparent.setOnClickListener { /*pass*/ }
 
-        fragHomeTv1.setOnClickListener { updater.showTimeInfo(0) }
-        fragHomeTv2.setOnClickListener { updater.hideTimeInfo() }
+        fragHomeTv1.setOnClickListener {
+            updater.showTimeInfo(0)
+        }
+        fragHomeTv2.setOnClickListener {
+        }
         fragHomeTv3.setOnClickListener { updater.setBottomLineClearToAllBellType() }
         fragHomeTv4.setOnClickListener { updater.setBottomLineToVibrate() }
         fragHomeTv5.setOnClickListener { updater.setBottomLineToSlient() }
-        fragHomeTv6.setOnClickListener {  }
+        fragHomeTv6.setOnClickListener {
+            act.setShowBottomButtons(true)
+        }
+        fragHomeTv7.setOnClickListener {
+            act.setShowBottomButtons(false)
+        }
+        fragHomeIvCloseTimeInfo.setOnClickListener {
+            updater.hideTimeInfo()
+        }
 
 
 //        fragHomeTvTime

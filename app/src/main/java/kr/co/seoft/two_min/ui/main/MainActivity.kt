@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
+import gun0912.tedkeyboardobserver.BaseKeyboardObserver
+import gun0912.tedkeyboardobserver.TedKeyboardObserver
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.include_toolbar.*
 import kr.co.seoft.two_min.R
@@ -17,9 +19,8 @@ import kr.co.seoft.two_min.ui.main.home.HomeFragment
 import kr.co.seoft.two_min.ui.proc.ProcActivity
 import kr.co.seoft.two_min.ui.proc.ProcEndActivity
 import kr.co.seoft.two_min.ui.proc.ProcExceedActivity
-import kr.co.seoft.two_min.util.i
-import kr.co.seoft.two_min.util.setupActionBar
-import kr.co.seoft.two_min.util.toaste
+import kr.co.seoft.two_min.util.*
+
 
 class MainActivity : ActivityHelper() {
 
@@ -30,6 +31,8 @@ class MainActivity : ActivityHelper() {
     }
 
     override val layoutResourceId = R.layout.activity_main
+
+    var showStatusBottomButtons = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -100,7 +103,6 @@ class MainActivity : ActivityHelper() {
     }
 
     fun initListener() {
-
         actMainBtBottom1Btn.setOnClickListener {
 
         }
@@ -108,16 +110,42 @@ class MainActivity : ActivityHelper() {
         actMainBtBottom2Btn.setOnClickListener {
 
         }
+        actMainViewTransparentTop.setOnClickListener { /*pass*/ }
+        actMainViewTransparentBottom.setOnClickListener { /*pass*/ }
+
+        TedKeyboardObserver(this).listen(object : BaseKeyboardObserver.OnKeyboardListener {
+            override fun onKeyboardChange(isShow: Boolean) {
+                if (isShow) {
+
+                    "isShow".e()
+
+                    setShowTabLayout(false)
+                    actHomeLlBottomButtons.visibility = View.INVISIBLE
+                } else {
+                    "isShow nnnnn".e()
+                    setShowTabLayout(true)
+                    if (showStatusBottomButtons) actHomeLlBottomButtons.visibility = View.VISIBLE
+                }
+            }
+
+        })
+
     }
 
-    fun showBottomButtons() {
-        actHomeLlBottomButtons.visibility = View.VISIBLE
+    fun setTransparentToolbarAndBottoms(isTransparent: Boolean) {
+        actMainViewTransparentTop.visibility = isTransparent.setVisible()
+        actMainViewTransparentBottom.visibility = isTransparent.setVisible()
     }
 
-    fun hideBottomButtons() {
-        actHomeLlBottomButtons.visibility = View.INVISIBLE
+    fun setShowBottomButtons(isShow: Boolean) {
+        showStatusBottomButtons = isShow
+        actHomeLlBottomButtons.visibility = isShow.setVisibleOrGone()
     }
 
+    fun setShowTabLayout(isShow: Boolean) {
+        actHomeLlTabLayoutLine.visibility = isShow.setVisibleOrGone()
+        actHomeTablayout.visibility = isShow.setVisibleOrGone()
+    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -190,6 +218,7 @@ class MainActivity : ActivityHelper() {
         menuInflater.inflate(R.menu.main_home, menu)
         return true
     }
+
 }
 
 class SizeFragment2 : Fragment() {

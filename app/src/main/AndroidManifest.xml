@@ -15,7 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Design.Light.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.main.MainActivity">
+        <activity android:name=".ui.main.MainActivity"
+            android:windowSoftInputMode="adjustResize|adjustPan"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

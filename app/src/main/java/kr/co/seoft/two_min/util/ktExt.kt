@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable
 import android.os.Build
 import android.text.Editable
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.annotation.IdRes
 import androidx.appcompat.app.ActionBar
@@ -109,4 +110,14 @@ fun Int.toEndTimeStrAfterSec(): String {
     format.calendar = gCalendar
     gCalendar.add(Calendar.SECOND, this)
     return format.format(gCalendar.time)
+}
+
+fun Boolean.setVisible(): Int {
+    return if(this) View.VISIBLE
+    else View.INVISIBLE
+}
+
+fun Boolean.setVisibleOrGone(): Int {
+    return if(this) View.VISIBLE
+    else View.GONE
 }
