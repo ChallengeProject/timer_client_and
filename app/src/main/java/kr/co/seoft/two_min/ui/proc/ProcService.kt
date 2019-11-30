@@ -4,6 +4,7 @@ import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.media.MediaPlayer
+import android.net.Uri
 import android.os.*
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -319,7 +320,7 @@ class ProcService : Service() {
                 }
             }
             Bell.Type.USER -> {
-                mediaPlayer = MediaPlayer.create(this, timeSet.times[arrayCnt].bell.uri)
+                mediaPlayer = MediaPlayer.create(this, Uri.parse(timeSet.times[arrayCnt].bell.uriStr))
                 mediaPlayer?.start()
                 runStopSoundCount()
             }

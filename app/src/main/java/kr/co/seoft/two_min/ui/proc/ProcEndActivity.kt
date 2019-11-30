@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.media.MediaPlayer
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.VibrationEffect
@@ -144,7 +145,7 @@ class ProcEndActivity : AppCompatActivity() {
                 }
             }
             Bell.Type.USER -> {
-                mediaPlayer = MediaPlayer.create(this, timeSet.times.last().bell.uri)
+                mediaPlayer = MediaPlayer.create(this, Uri.parse(timeSet.times.last().bell.uriStr))
                 mediaPlayer?.start()
                 runStopSoundCount()
             }

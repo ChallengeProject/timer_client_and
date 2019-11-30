@@ -168,7 +168,7 @@ class MainActivity : ActivityHelper() {
                     when (data.getStringExtra(ProcEndActivity.RESP_TYPE)) {
 
                         ProcEndActivity.RESP_TYPE_EXCEED -> {
-                            ProcExceedActivity.startProcExceedActivity(this, timeSet)
+                            ProcExceedActivity.startProcExceedActivity(this, timeSet,3)
                         }
                         ProcEndActivity.RESP_TYPE_RESTART -> {
                             ProcActivity.startProcActivity(this, timeSet,3)
