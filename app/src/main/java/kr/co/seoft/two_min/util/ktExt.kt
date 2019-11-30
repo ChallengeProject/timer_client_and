@@ -98,6 +98,14 @@ fun Int.toFormattingString(): String {
     return "${if (hour < 10) "0$hour" else hour}:${if (min < 10) "0$min" else min}:${if (second_ < 10) "0$second_" else second_}"
 }
 
+fun Long.toFormattingString(): String {
+    val hour = this / 3600
+    val min = this / 60 % 60
+    val second_ = this % 60
+
+    return "${if (hour < 10) "0$hour" else hour}:${if (min < 10) "0$min" else min}:${if (second_ < 10) "0$second_" else second_}"
+}
+
 fun Int.toDrawable(context: Context): Drawable {
     return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
         context.getDrawable(this)
@@ -125,6 +133,6 @@ fun Boolean.setVisibleOrGone(): Int {
     else View.GONE
 }
 
-inline fun <reified T> Gson.fromJson(json: String) = this.fromJson<T>(json, object: TypeToken<T>() {}.type)
+inline fun <reified T> Gson.jsonToObject(json: String) = this.fromJson<T>(json, object: TypeToken<T>() {}.type)
 
 fun Int.color() = ContextCompat.getColor(App.get, this)

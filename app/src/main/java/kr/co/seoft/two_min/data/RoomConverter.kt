@@ -2,7 +2,7 @@ package kr.co.seoft.two_min.data
 
 import androidx.room.TypeConverter
 import com.google.gson.Gson
-import kr.co.seoft.two_min.util.fromJson
+import kr.co.seoft.two_min.util.jsonToObject
 
 class RoomConverter{
 
@@ -15,7 +15,7 @@ class RoomConverter{
             if(str.isNullOrEmpty()){
                 return emptyList()
             }
-            return gson.fromJson<List<Time>>(str)
+            return gson.jsonToObject<List<Time>>(str)
         }
 
         @JvmStatic

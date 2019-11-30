@@ -17,7 +17,8 @@ enum class HomeBadgeType {
     EMPTY,
     FOCUS,
     NORMAL,
-    ADD,
+    ADD_SHOW,
+    ADD_HIDE,
     REPEAT_ON,
     REPEAT_OFF
 }

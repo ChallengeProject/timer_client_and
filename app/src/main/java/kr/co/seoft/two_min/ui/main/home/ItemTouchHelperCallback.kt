@@ -8,11 +8,11 @@ import kr.co.seoft.two_min.util.i
 
 // ref : http://dudmy.net/android/2018/05/02/drag-and-swipe-recyclerview , https://github.com/dudmy/blog-sample
 class ItemTouchHelperCallback(
-    val moveCb: (RecyclerView.ViewHolder, RecyclerView.ViewHolder) -> Unit,
-    val endCb: (Int) -> Unit
+    private val moveCb: (RecyclerView.ViewHolder, RecyclerView.ViewHolder) -> Unit,
+    private val endCb: (Int) -> Unit
 ) : ItemTouchHelper.Callback() {
 
-    var isMoved = false
+    private var isMoved = false
 
     override fun getMovementFlags(
         recyclerView: RecyclerView,

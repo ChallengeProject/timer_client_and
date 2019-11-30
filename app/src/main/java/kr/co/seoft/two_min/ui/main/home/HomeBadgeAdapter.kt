@@ -17,16 +17,26 @@ class HomeBadgeAdapter(
     private var items = mutableListOf(
         HomeBadge(0, HomeBadgeType.REPEAT_OFF),
         HomeBadge(0, HomeBadgeType.FOCUS),
-        HomeBadge(0, HomeBadgeType.ADD)
+        HomeBadge(0, HomeBadgeType.ADD_SHOW)
     )
+
+    fun resetBadges(){
+        items = mutableListOf(
+            HomeBadge(0, HomeBadgeType.REPEAT_OFF),
+            HomeBadge(0, HomeBadgeType.FOCUS),
+            HomeBadge(0, HomeBadgeType.ADD_SHOW)
+        )
+    }
 
     /**
      * for Dispose of between empty's badge
-     * default : 2
+     * default : 1
      * with add button : 3
      * 이 숫자가 [size-positionController] 에 아이템이 들어간다는거
+     * 기존에 normal 왼쪽 오른쪽에 dummy를 여러개뒀을때 const화가 필요해서 추가하긴했음
+     * 안정화시 삭제 예정
      */
-    private var positionController = 2
+    private var positionController = 1
 
     /**
      * add badge
@@ -36,11 +46,25 @@ class HomeBadgeAdapter(
         items.add(items.size - positionController, homeBadge)
     }
 
+    fun setBadge(index: Int, homeBadge: HomeBadge) {
+        items[index] = homeBadge
+    }
+
     fun getBadges() = items
     fun getBadge(pos: Int) = items[pos]
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
         return VH(LayoutInflater.from(context).inflate(R.layout.item_home_badge, parent, false), cb)
+    }
+
+    fun hideAddButton(){
+        items[items.size-1]= items.last().copy(type = HomeBadgeType.ADD_HIDE)
+        notifyDataSetChanged()
+    }
+
+    fun showAddButton(){
+        items[items.size-1]= items.last().copy(type = HomeBadgeType.ADD_SHOW)
+        notifyDataSetChanged()
     }
 
     /**
@@ -53,7 +77,7 @@ class HomeBadgeAdapter(
     }
 
     fun onItemMoved(from: Int, to: Int) {
-        if (from == to || items[to].type == HomeBadgeType.EMPTY || items[to].type == HomeBadgeType.ADD) {
+        if (from == to || items[to].type == HomeBadgeType.EMPTY || items[to].type == HomeBadgeType.ADD_SHOW) {
             return
         }
 
@@ -81,6 +105,16 @@ class HomeBadgeAdapter(
         }
     }
 
+    fun findFocusBadge(): Int? {
+
+        for (i in 0 until items.size) {
+            if (items[i].type == HomeBadgeType.FOCUS) {
+                return i
+            }
+        }
+        return null
+    }
+
     inner class VH(view: View, cb: (HomeBadgeCallbackType, VH) -> Unit) :
         RecyclerView.ViewHolder(view) {
 
@@ -88,18 +122,18 @@ class HomeBadgeAdapter(
         // http://dudmy.net/android/2017/06/23/consider-of-recyclerview/
         // > onBindViewHolder 에 listener 성능 저하, onCreateViewHolder 혹은 RecyclerView.ViewHolder내 callback 처리
 
-        val itemHomeBadgellContent = view.itemHomeBadgellContent
-        val itemHomeBadgeIvAdd = view.itemHomeBadgeIvAdd
-        val itemHomeBadgeIvRepeat = view.itemHomeBadgeIvRepeat
-        val itemHomeBadgeTvTime = view.itemHomeBadgeTvTime
-        val itemHomeBadgeTvCount = view.itemHomeBadgeTvCount
+        private val itemHomeBadgellContent = view.itemHomeBadgellContent
+        private val itemHomeBadgeIvAdd = view.itemHomeBadgeIvAdd
+        private val itemHomeBadgeIvRepeat = view.itemHomeBadgeIvRepeat
+        private val itemHomeBadgeTvTime = view.itemHomeBadgeTvTime
+        private val itemHomeBadgeTvCount = view.itemHomeBadgeTvCount
 
         init {
             itemView.setOnClickListener {
 
                 when (items[adapterPosition].type) {
                     HomeBadgeType.NORMAL -> cb.invoke(HomeBadgeCallbackType.NORMAL_PUSH, this)
-                    HomeBadgeType.ADD -> cb.invoke(HomeBadgeCallbackType.ADD_PUSH, this)
+                    HomeBadgeType.ADD_SHOW -> cb.invoke(HomeBadgeCallbackType.ADD_PUSH, this)
                     HomeBadgeType.REPEAT_OFF -> cb.invoke(
                         HomeBadgeCallbackType.REPEAT_OFF_PUSH,
                         this
@@ -109,9 +143,11 @@ class HomeBadgeAdapter(
             }
 
             itemView.setOnLongClickListener {
-                if (items[adapterPosition].type == HomeBadgeType.NORMAL) {
+                if (items[adapterPosition].type == HomeBadgeType.NORMAL
+                    || items[adapterPosition].type == HomeBadgeType.FOCUS
+                ) {
                     cb.invoke(HomeBadgeCallbackType.LONG_PUSH, this)
-                    removeFocus()
+//                    removeFocus()
                 }
                 false
             }
@@ -148,8 +184,11 @@ class HomeBadgeAdapter(
                 HomeBadgeType.REPEAT_OFF -> {
                     visibleViews(true, false, false, true)
                 }
-                HomeBadgeType.ADD -> {
+                HomeBadgeType.ADD_SHOW -> {
                     visibleViews(true, false, true, false)
+                }
+                HomeBadgeType.ADD_HIDE -> {
+                    visibleViews(true, false, false, false)
                 }
                 HomeBadgeType.EMPTY -> {
                     visibleViews(false, false, false, false)

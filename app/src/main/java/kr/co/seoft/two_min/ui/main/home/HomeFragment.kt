@@ -10,6 +10,7 @@ import kotlinx.android.synthetic.main.fragment_home.*
 import kr.co.seoft.two_min.R
 import kr.co.seoft.two_min.ui.main.MainActivity
 import kr.co.seoft.two_min.util.e
+import kr.co.seoft.two_min.util.toEndTimeStrAfterSec
 import kr.co.seoft.two_min.util.toFormattingString
 
 class HomeFragment : Fragment() {
@@ -17,7 +18,7 @@ class HomeFragment : Fragment() {
     companion object {
         fun newInstance() = HomeFragment()
 
-        val MAX_SECOND = 360000
+        const val MAX_SECOND = 360000
 
     }
 
@@ -26,49 +27,14 @@ class HomeFragment : Fragment() {
             .get(HomeViewModel::class.java)
     }
 
-    var mainSecond = 0
+    var mainSecond = 0L
     var subSecond = ""
 
-    fun pushedNumber(num: Int, isBackKey: Boolean = false) {
-        if (!isBackKey && num == 0 && subSecond.isEmpty()) return
-        if (subSecond.length <= 1 && isBackKey) {
-            subSecond = ""
-            fragHomeTvSub.text = ""
-            return
-        }
-        val tmpStr = if (subSecond.isEmpty()) "" else subSecond
-        val curMixedStr = if (isBackKey) subSecond.substring(0, subSecond.length - 1) else "$tmpStr$num"
-        val curSumSecond = curMixedStr.toLong()
-        "curSumSecond $curSumSecond".e()
-
-        if (sumSecond(hour = curSumSecond) + sumSecond(hour = 1) > MAX_SECOND) {
-            updater.setEnable(fragHomeTvHour, false)
-        } else {
-            updater.setEnable(fragHomeTvHour, true)
-        }
-
-        if (sumSecond(minute = curSumSecond) + sumSecond(minute = 1) > MAX_SECOND) {
-            updater.setEnable(fragHomeTvMinute, false)
-        } else {
-            updater.setEnable(fragHomeTvMinute, true)
-        }
-
-        if (curSumSecond > MAX_SECOND) {
-            subSecond = (MAX_SECOND - mainSecond - 1).toString()
-        } else {
-            subSecond = curMixedStr
-        }
-
-        fragHomeTvSub.text = "+$subSecond"
-    }
-
-    fun sumSecond(hour: Long = 0, minute: Long = 0, second: Long = 0) = hour * 60 * 60 + minute * 60 + second
-
-    val updater by lazy {
+    private val updater by lazy {
         HomeFragUpdater(this)
     }
 
-    val numberBtns by lazy {
+    private val numberBtns by lazy {
         arrayOf(
             fragHomeTv0,
             fragHomeTv1,
@@ -102,9 +68,8 @@ class HomeFragment : Fragment() {
         initView()
     }
 
-    fun initView() {
-        fragHomeTvMain.text = mainSecond.toFormattingString()
-
+    private fun initView() {
+        updater.setMainTextAndEtc(mainSecond)
     }
 
     private fun initObservable() {
@@ -112,11 +77,44 @@ class HomeFragment : Fragment() {
 
     }
 
-    fun setResultSecond(sec: Int) {
+    private fun pushedNumber(num: Int, isBackKey: Boolean = false) {
+        if (!isBackKey && num == 0 && subSecond.isEmpty()) return
+        if (subSecond.length <= 1 && isBackKey) {
+            subSecond = ""
+            fragHomeTvSub.text = ""
+            return
+        }
+        val tmpStr = if (subSecond.isEmpty()) "" else subSecond
+        val curMixedStr = if (isBackKey) subSecond.substring(0, subSecond.length - 1) else "$tmpStr$num"
+        val curSumSecond = curMixedStr.toLong()
+        "curSumSecond $curSumSecond".e()
 
-        fragHomeTvMain.text = sec.toFormattingString()
-        fragHomeRv
+        updater.setEnable(fragHomeTvHour, sumSecond(hour = curSumSecond) + sumSecond(hour = 1) <= MAX_SECOND - mainSecond)
+        updater.setEnable(fragHomeTvMinute, sumSecond(minute = curSumSecond) + sumSecond(minute = 1) <= MAX_SECOND - mainSecond)
 
+        if (curSumSecond > MAX_SECOND - mainSecond) subSecond = (MAX_SECOND - mainSecond - 1).toString()
+        else subSecond = curMixedStr
+
+        fragHomeTvSub.text = "+$subSecond"
+    }
+
+    private fun sumSecond(hour: Long = 0, minute: Long = 0, second: Long = 0) = hour * 60 * 60 + minute * 60 + second
+
+    private fun addMainSecond(sec: Long) {
+        mainSecond += sec
+        updater.setMainTextAndEtc(mainSecond)
+        fragHomeRv.setFocusingBadge(fragHomeRv.getFocusingBadge().copy(second = mainSecond.toInt()))
+        subSecond = ""
+        updateWholeAndRemainTime()
+    }
+
+    private fun updateWholeAndRemainTime() {
+        val wholeSumSecond = fragHomeRv.getBadges()
+            .asSequence()
+            .filter { it.type == HomeBadgeType.NORMAL || it.type == HomeBadgeType.FOCUS }
+            .sumBy { it.second }
+
+        updater.setSubText(wholeSumSecond.toFormattingString(), wholeSumSecond.toEndTimeStrAfterSec())
     }
 
     private fun initListener() {
@@ -133,7 +131,12 @@ class HomeFragment : Fragment() {
         }
 
         fragHomeTvCancel.setOnClickListener {
-            // TODO
+            // TODO 다이얼로그로 해야됨
+
+            resetMainAndSubSecond()
+            updater.setMainTextAndEtc(mainSecond)
+            updater.setSubText(subSecond)
+            fragHomeRv.resetBadges()
         }
 
         fragHomeIvBack.setOnClickListener {
@@ -142,15 +145,36 @@ class HomeFragment : Fragment() {
         }
 
         fragHomeTvHour.setOnClickListener {
-            setResultSecond(sumSecond(hour = subSecond.toLong(), second = mainSecond.toLong()).toInt())
+            if (subSecond.isEmpty()) return@setOnClickListener
+            addMainSecond(sumSecond(hour = subSecond.toLong()))
         }
 
         fragHomeTvMinute.setOnClickListener {
-            setResultSecond(sumSecond(minute = subSecond.toLong(), second = mainSecond.toLong()).toInt())
+            if (subSecond.isEmpty()) return@setOnClickListener
+            addMainSecond(sumSecond(minute = subSecond.toLong()))
         }
 
         fragHomeTvSecond.setOnClickListener {
-            setResultSecond(mainSecond + subSecond.toInt())
+            if (subSecond.isEmpty()) return@setOnClickListener
+            addMainSecond(subSecond.toLong())
+        }
+
+        fragHomeIvMainClear.setOnClickListener {
+            resetMainAndSubSecond()
+            updater.setMainTextAndEtc(mainSecond)
+            fragHomeRv.setFocusingBadge(fragHomeRv.getFocusingBadge().copy(second = mainSecond.toInt()))
+            updateWholeAndRemainTime()
+        }
+
+        fragHomeRv.onBadgeSelectedListener = { type, pos ->
+            if (type == HomeBadgeCallbackType.ADD_PUSH) {
+                fragHomeRv.addHomeBadge()
+
+                resetMainAndSubSecond()
+                updater.setMainTextAndEtc(mainSecond)
+                updateWholeAndRemainTime()
+
+            }
         }
 
 //        fragHomeTvTime
@@ -178,18 +202,12 @@ class HomeFragment : Fragment() {
 //        fragHomeTvCloseTimeInfo
 
 
-        fragHomeRv.onBadgeSelectedListener = { type, pos ->
-            if (type == HomeBadgeCallbackType.ADD_PUSH) {
-                fragHomeRv.addHomeBadge(
-                    HomeBadge(
-                        second = 11,
-                        type = HomeBadgeType.NORMAL
-                    )
-                )
-            }
-        }
     }
 
+    fun resetMainAndSubSecond(){
+        mainSecond = 0
+        subSecond = ""
+    }
 
 }
 

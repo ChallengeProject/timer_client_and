@@ -9,20 +9,26 @@ import kotlinx.android.synthetic.main.fragment_home.*
 import kr.co.seoft.two_min.R
 import kr.co.seoft.two_min.data.Bell
 import kr.co.seoft.two_min.data.Time
-import kr.co.seoft.two_min.util.color
-import kr.co.seoft.two_min.util.toEditable
-import kr.co.seoft.two_min.util.toTimeStr
-import kr.co.seoft.two_min.util.x1000L
+import kr.co.seoft.two_min.util.*
 
 // TODO 뷰모델도받자 데이터가져와야되서
 class HomeFragUpdater(val f: HomeFragment) {
 
-    fun setMainText(str: String) {
-        f.fragHomeTvMain.text = str
+    fun setMainTextAndEtc(time: Long) {
+        if(time == 0L) {
+            f.fragHomeRv.hideAddButton()
+            setMainTextClearBtnVisible(false)
+        }
+        else {
+            f.fragHomeRv.showAddButton()
+            setMainTextClearBtnVisible(true)
+        }
+
+        f.fragHomeTvMain.text = time.toFormattingString()
     }
 
     fun setMainTextClearBtnVisible(b: Boolean) {
-        f.fragHomeIvMainClear.visibility = if (b) View.VISIBLE else View.INVISIBLE
+        f.fragHomeIvMainClear.visibility = b.setVisible()
     }
 
     fun setSubText(str: String) {
@@ -30,7 +36,7 @@ class HomeFragUpdater(val f: HomeFragment) {
     }
 
     fun setSubText(str1: String, str2: String) {
-        f.fragHomeTvSub.text = "$str1     $str2"
+        f.fragHomeTvSub.text = "$str1        $str2"
     }
 
     fun showTimeInfo(index: Int) {

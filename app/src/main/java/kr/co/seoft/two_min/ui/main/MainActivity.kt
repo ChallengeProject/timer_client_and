@@ -45,6 +45,8 @@ class MainActivity : ActivityHelper() {
         initView()
         initListener()
 
+        // TODO 다른대
+        actHomeViewPager.isUserInputEnabled = false
 
 //        ProcActivity.startProcActivity(this,TimeSet(
 //            "AA",5,
@@ -120,13 +122,9 @@ class MainActivity : ActivityHelper() {
         TedKeyboardObserver(this).listen(object : BaseKeyboardObserver.OnKeyboardListener {
             override fun onKeyboardChange(isShow: Boolean) {
                 if (isShow) {
-
-                    "isShow".e()
-
                     setShowTabLayout(false)
                     actHomeLlBottomButtons.visibility = View.INVISIBLE
                 } else {
-                    "isShow nnnnn".e()
                     setShowTabLayout(true)
                     if (showStatusBottomButtons) actHomeLlBottomButtons.visibility = View.VISIBLE
                 }
