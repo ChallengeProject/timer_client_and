@@ -24,15 +24,17 @@ class ProcActivity : AppCompatActivity() {
 
     companion object {
         const val TIME_SET = "TIME_SET"
+        const val READY_COUNT = "READY_COUNT"
         const val TIMES_FOR_NOTIFIACTION = "TIMES_FOR_NOTIFIACTION"
 
         const val RESP_TIME_SET = "RESP_TIME_SET"
         const val RESP_USE_INFO = "RESP_USE_INFO"
 
-        fun startProcActivity(context: Context, timeSet: TimeSet) {
+        fun startProcActivity(context: Context, timeSet: TimeSet, readyCount: Int) {
             (context as Activity).startActivityForResult(
                 Intent(context, ProcActivity::class.java).apply {
                     putExtra(TIME_SET, timeSet)
+                    putExtra(READY_COUNT, readyCount)
                 },
                 MainActivity.PROC_ACTIVITY
             )
@@ -68,7 +70,7 @@ class ProcActivity : AppCompatActivity() {
         // init properties
         timeSet = intent.getParcelableExtra(TIME_SET)
 
-        readySec = timeSet.readySecond
+        readySec = intent.getIntExtra(READY_COUNT, 5)
 
         // init view
         lsshlv.showLeftSideSnappyHorizontalListView(timeSet.times.asSequence().map { it.seconds }.toList())
@@ -177,12 +179,12 @@ class ProcActivity : AppCompatActivity() {
             updater.hideMemo()
         }
 
-        etMemo.addTextChangedListener(object : TextWatcher{
+        etMemo.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {}
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if(s!!.length > 1000) {
-                    etMemo.setText(s!!.substring(999,s!!.length-1))
+                if (s!!.length > 1000) {
+                    etMemo.setText(s!!.substring(999, s!!.length - 1))
                 }
                 updater.setMemoRemainByte(s!!.length)
             }

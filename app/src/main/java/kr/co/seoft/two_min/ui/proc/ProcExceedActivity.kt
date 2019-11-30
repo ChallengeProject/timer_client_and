@@ -26,12 +26,14 @@ class ProcExceedActivity : AppCompatActivity() {
     companion object {
         const val TIME_SET = "TIME_SET"
         const val TIMES_FOR_NOTIFIACTION = "TIMES_FOR_NOTIFIACTION"
+        const val READY_COUNT = "READY_COUNT"
         const val RESP_TIME_SET = "RESP_TIME_SET"
 
-        fun startProcExceedActivity(context: Context, timeSet: TimeSet) {
+        fun startProcExceedActivity(context: Context, timeSet: TimeSet, readyCount: Int) {
             (context as Activity).startActivityForResult(
                 Intent(context, ProcExceedActivity::class.java).apply {
                     putExtra(TIME_SET, timeSet)
+                    putExtra(ProcActivity.READY_COUNT, readyCount)
                 },
                 MainActivity.PROC_EXCEED_ACTIVITY
             )
@@ -51,6 +53,7 @@ class ProcExceedActivity : AppCompatActivity() {
         private var endTimeStr = ""
         private var allTimeStr = ""
         private var procStatus = ProcStatus.READY
+        private var readyCount = 5
 
     }
 
@@ -60,6 +63,7 @@ class ProcExceedActivity : AppCompatActivity() {
 
         updater = ProcViewUpdater(this)
         timeSet = intent.getParcelableExtra(TIME_SET)
+        readyCount = intent.getIntExtra(READY_COUNT, 5)
 
         lsshlv.showLeftSideSnappyHorizontalListView(timeSet.times.asSequence().map { it.seconds }.toList())
 
@@ -123,15 +127,15 @@ class ProcExceedActivity : AppCompatActivity() {
             override fun afterTextChanged(s: Editable?) {}
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if(s!!.length > 1000) {
-                    etMemo.setText(s!!.substring(999,s!!.length-1))
+                if (s!!.length > 1000) {
+                    etMemo.setText(s!!.substring(999, s!!.length - 1))
                 }
                 updater.setMemoRemainByte(s!!.length)
             }
         })
 
         val allTime = timeSet.times.map { it.seconds }.reduce { acc, i -> acc + i }
-        if (endTimeStr.isEmpty()) endTimeStr = (timeSet.readySecond + allTime).toEndTimeStrAfterSec()
+        if (endTimeStr.isEmpty()) endTimeStr = (readyCount + allTime).toEndTimeStrAfterSec()
         if (allTimeStr.isEmpty()) allTimeStr =
             allTime.x1000L()
                 .toTimeStr() // need to [if] for call from notification when remove activity status

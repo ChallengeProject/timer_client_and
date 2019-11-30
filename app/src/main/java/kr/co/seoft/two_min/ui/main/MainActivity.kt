@@ -171,7 +171,7 @@ class MainActivity : ActivityHelper() {
                             ProcExceedActivity.startProcExceedActivity(this, timeSet)
                         }
                         ProcEndActivity.RESP_TYPE_RESTART -> {
-                            ProcActivity.startProcActivity(this, timeSet)
+                            ProcActivity.startProcActivity(this, timeSet,3)
                         }
                         ProcEndActivity.RESP_TYPE_SAVE -> {
                             // TODO 저장 구체화되면 ㄱㄱ

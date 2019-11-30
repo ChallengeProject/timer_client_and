@@ -7,7 +7,6 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class TimeSet(
     var title: String = "",
-    val readySecond: Int,
     var times: List<Time>,
     val memo: String = ""
 ) : Parcelable
