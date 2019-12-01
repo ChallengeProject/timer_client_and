@@ -4,6 +4,8 @@ package kr.co.seoft.two_min.ui.main.home
 import android.content.Context
 import android.util.AttributeSet
 import androidx.recyclerview.widget.*
+import kr.co.seoft.two_min.data.Bell
+import kr.co.seoft.two_min.data.Time
 
 class MiddleTransformSnappyRecyclerView : RecyclerView {
 
@@ -108,15 +110,17 @@ class MiddleTransformSnappyRecyclerView : RecyclerView {
         homeBadgeAdapter.notifyDataSetChanged()
     }
 
+    @Deprecated("될수있으면 CRUD일은 homeBadgeAdapter에서 직접하게 하기위해 안정화후 삭제 예정")
     fun setFocusingBadge(homeBadge: HomeBadge) {
         homeBadgeAdapter.setBadge(focusingPos, homeBadge)
         homeBadgeAdapter.notifyDataSetChanged()
     }
-    fun hideAddButton(){
-       homeBadgeAdapter.hideAddButton()
+
+    fun hideAddButton() {
+        homeBadgeAdapter.hideAddButton()
     }
 
-    fun showAddButton(){
+    fun showAddButton() {
         homeBadgeAdapter.showAddButton()
     }
 
@@ -129,7 +133,7 @@ class MiddleTransformSnappyRecyclerView : RecyclerView {
     }
 
     fun addHomeBadge() {
-        homeBadgeAdapter.addBadge(HomeBadge(second = 0, type = HomeBadgeType.NORMAL))
+        homeBadgeAdapter.addBadge(HomeBadge(time = Time(0), type = HomeBadgeType.NORMAL))
         homeBadgeAdapter.notifyDataSetChanged()
     }
 
@@ -145,8 +149,45 @@ class MiddleTransformSnappyRecyclerView : RecyclerView {
 
     fun getBadges() = homeBadgeAdapter.getBadges()
     fun getBadge(index: Int) = homeBadgeAdapter.getBadge(index)
+
+    fun removeFoucsingBadge() {
+
+        if (homeBadgeAdapter.itemCount <= 3) {
+            homeBadgeAdapter.setSecond(0,1)
+            return
+        }
+
+        homeBadgeAdapter.removeBadge(focusingPos)
+        homeBadgeAdapter.findFocusBadge()?.let {
+            focusingPos = it
+        }
+//        // 마지막 뱃지 삭제할경우 index를 그전으로
+        if (focusingPos >= homeBadgeAdapter.itemCount - 1) focusingPos--
+
+        homeBadgeAdapter.resetFocus(focusingPos)
+    }
+
     fun removeZeroSecondBadge() {
         homeBadgeAdapter.removeZeroSecondBadge()
+        homeBadgeAdapter.findFocusBadge()?.let {
+            focusingPos = it
+        }
+    }
+
+    fun setBellType(bellType: Bell.Type) {
+        homeBadgeAdapter.setBellType(bellType, focusingPos)
+    }
+
+    fun setCurPosBellTypeToWhole() {
+        homeBadgeAdapter.setCurPosBellTypeToWhole(focusingPos)
+    }
+
+    fun setComment(comment: String) {
+        homeBadgeAdapter.setComment(comment, focusingPos)
+    }
+
+    fun setSecond(second: Int) {
+        homeBadgeAdapter.setSecond(second, focusingPos)
     }
 
 }

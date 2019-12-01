@@ -1,13 +1,15 @@
 package kr.co.seoft.two_min.ui.main.home
 
+import kr.co.seoft.two_min.data.Time
+
 data class HomeBadge(
-    var second: Int,
+    var time: Time,
     var type: HomeBadgeType
 ) {
     fun getStringUsingFormat(): String {
-        var hour = second / 3600
-        var min = second / 60 % 60
-        var second_ = second % 60
+        var hour = time.seconds / 3600
+        var min = time.seconds / 60 % 60
+        var second_ = time.seconds % 60
 
         return "${if(hour<10) "0$hour" else hour}:${if(min<10) "0$min" else min}:${if(second_<10) "0$second_" else second_}"
     }

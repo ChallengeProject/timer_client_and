@@ -361,7 +361,7 @@
             android:layout_height="match_parent"
             android:background="#fafafa"
             android:visibility="invisible"
-            tools:visibility="gone">
+            tools:visibility="visible">
 
         <TextView
                 android:id="@+id/tvMemoText"

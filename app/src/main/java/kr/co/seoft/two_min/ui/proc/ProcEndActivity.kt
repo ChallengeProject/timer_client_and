@@ -96,6 +96,16 @@ class ProcEndActivity : AppCompatActivity() {
 
         etContent.setText(Preferencer.getCurrentMemo(this))
 
+
+        //TODO proc end exceed main-home 하나로 통합하기
+//        EditTextLenthExceedCheckUtil.checkAndBlockExceed(
+//            etContent,
+//            tvExceedNumber,
+//            1000,
+//            R.color.ux_black,
+//            R.color.ux_pink
+//        )
+
         etContent.addTextChangedListener(object : TextWatcher{
             override fun afterTextChanged(s: Editable?) {}
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}

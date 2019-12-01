@@ -8,24 +8,27 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_home_badge.view.*
 import kr.co.seoft.two_min.R
+import kr.co.seoft.two_min.data.Bell
+import kr.co.seoft.two_min.data.Time
+import kr.co.seoft.two_min.util.e
 
 class HomeBadgeAdapter(
     val context: Context,
     private val cb: (HomeBadgeCallbackType, VH) -> Unit
 ) : RecyclerView.Adapter<HomeBadgeAdapter.VH>() {
 
-    private var items = mutableListOf(
-        HomeBadge(0, HomeBadgeType.REPEAT_OFF),
-        HomeBadge(0, HomeBadgeType.FOCUS),
-        HomeBadge(0, HomeBadgeType.ADD_SHOW)
-    )
+    companion object {
+        val INIT_HOME_BADGES = mutableListOf(
+            HomeBadge(Time(0), HomeBadgeType.REPEAT_OFF),
+            HomeBadge(Time(0), HomeBadgeType.FOCUS),
+            HomeBadge(Time(0), HomeBadgeType.ADD_SHOW)
+        )
+    }
+
+    private var items = INIT_HOME_BADGES.map{it.copy()}.toMutableList()
 
     fun resetBadges() {
-        items = mutableListOf(
-            HomeBadge(0, HomeBadgeType.REPEAT_OFF),
-            HomeBadge(0, HomeBadgeType.FOCUS),
-            HomeBadge(0, HomeBadgeType.ADD_SHOW)
-        )
+        items = INIT_HOME_BADGES.map{it.copy()}.toMutableList()
     }
 
     /**
@@ -58,13 +61,18 @@ class HomeBadgeAdapter(
     }
 
     fun hideAddButton() {
-        items[items.size - 1] = items.last().copy(type = HomeBadgeType.ADD_HIDE)
+        items.last().type = HomeBadgeType.ADD_HIDE
         notifyDataSetChanged()
     }
 
     fun showAddButton() {
-        items[items.size - 1] = items.last().copy(type = HomeBadgeType.ADD_SHOW)
+        items.last().type = HomeBadgeType.ADD_SHOW
         notifyDataSetChanged()
+    }
+
+
+    fun setBellType(bellType: Bell.Type, position: Int) {
+        items[position].time.bell.type = bellType
     }
 
     /**
@@ -121,8 +129,26 @@ class HomeBadgeAdapter(
     }
 
     fun removeZeroSecondBadge() {
-        items.removeAll { it.second == 0 && it.type == HomeBadgeType.NORMAL }
+        items.removeAll { it.time.seconds == 0 && it.type == HomeBadgeType.NORMAL }
+    }
 
+    fun removeBadge(position: Int){
+
+        "removeBadge $position".e()
+        items.removeAt(position)
+    }
+
+    fun setCurPosBellTypeToWhole(position: Int) {
+        val curBellType = items[position].time.bell.type
+        items.forEach { it.time.bell.type = curBellType }
+    }
+
+    fun setComment(comment: String, position: Int) {
+        items[position].time.comment = comment
+    }
+
+    fun setSecond(second: Int, pos: Int) {
+        items[pos].time.seconds = second
     }
 
     inner class VH(view: View, cb: (HomeBadgeCallbackType, VH) -> Unit) :
@@ -155,7 +181,6 @@ class HomeBadgeAdapter(
                     || items[adapterPosition].type == HomeBadgeType.FOCUS
                 ) {
                     cb.invoke(HomeBadgeCallbackType.LONG_PUSH, this)
-//                    removeFocus()
                 }
                 false
             }

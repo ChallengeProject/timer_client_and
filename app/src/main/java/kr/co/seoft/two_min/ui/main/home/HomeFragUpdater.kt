@@ -8,18 +8,38 @@ import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.fragment_home.*
 import kr.co.seoft.two_min.R
 import kr.co.seoft.two_min.data.Bell
-import kr.co.seoft.two_min.data.Time
 import kr.co.seoft.two_min.util.*
 
-// TODO 뷰모델도받자 데이터가져와야되서
 class HomeFragUpdater(val f: HomeFragment) {
 
+    fun initSet(){
+        f.fragHomeTvCancel.visibility = View.INVISIBLE
+        f.fragHomeTvHour.visibility = View.INVISIBLE
+        f.fragHomeTvMinute.visibility = View.INVISIBLE
+        f.fragHomeTvSecond.visibility = View.INVISIBLE
+        setMainTextAndEtc(0)
+    }
+
+    fun showRv(){
+        f.fragHomeRv.visibility = View.VISIBLE
+    }
+
+    fun hideRv(){
+        f.fragHomeRv.visibility = View.INVISIBLE
+    }
+
+    fun showControllButton(){
+        f.fragHomeTvCancel.visibility = View.VISIBLE
+        f.fragHomeTvHour.visibility = View.VISIBLE
+        f.fragHomeTvMinute.visibility = View.VISIBLE
+        f.fragHomeTvSecond.visibility = View.VISIBLE
+    }
+
     fun setMainTextAndEtc(time: Long) {
-        if(time == 0L) {
+        if (time == 0L) {
             f.fragHomeRv.hideAddButton()
             setMainTextClearBtnVisible(false)
-        }
-        else {
+        } else {
             f.fragHomeRv.showAddButton()
             setMainTextClearBtnVisible(true)
         }
@@ -39,16 +59,18 @@ class HomeFragUpdater(val f: HomeFragment) {
         f.fragHomeTvSub.text = "타임셋 시간 $str1        종료 예정 $str2"
     }
 
-    fun showTimeInfo(index: Int, time:Time) {
+    fun showTimeInfo(index: Int, homeBadges: MutableList<HomeBadge>) {
+
+        val time = homeBadges[index].time
 
         f.fragHomeLlTimeInfo.visibility = View.VISIBLE
         f.fragHomeIvCloseTimeInfo.visibility = View.VISIBLE
         f.fragHomeViewTransparent.visibility = View.VISIBLE
 
         f.fragHomeEtContent.text = time.comment.toEditable()
-        f.fragHomeTvContentLength.text = "${time.comment.length}/100 bytes"
+        f.fragHomeTvContentLength.text = "${time.comment.length}"
 
-        f.fragHomeTvTimerPosition.text = "${index + 1}번째 타이머"
+        f.fragHomeTvTimerPosition.text = "${index}번째 타이머"
 
         f.fragHomeTvSetWhole.paintFlags = (f.fragHomeTvSetWhole.paintFlags or Paint.UNDERLINE_TEXT_FLAG)
 
@@ -66,6 +88,7 @@ class HomeFragUpdater(val f: HomeFragment) {
         }
 
         f.fragHomeIncSelectedHomeBadge.findViewById<TextView>(R.id.itemHomeBadgeTvTime).text = time.seconds.x1000L().toTimeStr()
+        f.fragHomeIncSelectedHomeBadge.findViewById<TextView>(R.id.itemHomeBadgeTvCount).text = "${index}/${homeBadges.size - 2}"
         f.fragHomeIncSelectedHomeBadge.findViewById<LinearLayout>(R.id.itemHomeBadgellContent).background =
             ContextCompat.getDrawable(f.requireContext(), R.drawable.bg_timeset_times_red_stroke)
         f.act.setTransparentToolbarAndBottoms(true)
@@ -73,7 +96,7 @@ class HomeFragUpdater(val f: HomeFragment) {
     }
 
     fun setEnable(tv: TextView, isEnable: Boolean) {
-        if(isEnable) {
+        if (isEnable) {
             tv.isClickable = true
             tv.setTextColor(R.color.ux_black.color())
         } else {

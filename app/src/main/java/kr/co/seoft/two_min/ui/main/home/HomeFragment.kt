@@ -1,6 +1,8 @@
 package kr.co.seoft.two_min.ui.main.home
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,8 +10,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.fragment_home.*
 import kr.co.seoft.two_min.R
+import kr.co.seoft.two_min.data.Bell
 import kr.co.seoft.two_min.ui.main.MainActivity
-import kr.co.seoft.two_min.util.e
+import kr.co.seoft.two_min.util.color
 import kr.co.seoft.two_min.util.toEndTimeStrAfterSec
 import kr.co.seoft.two_min.util.toFormattingString
 
@@ -69,16 +72,19 @@ class HomeFragment : Fragment() {
     }
 
     private fun initView() {
-        updater.setMainTextAndEtc(mainSecond)
+//        updater.initSet()
+//        updater.hideRv()
     }
 
     private fun initObservable() {
-
 
     }
 
     private fun pushedNumber(num: Int, isBackKey: Boolean = false) {
         if (!isBackKey && num == 0 && subSecond.isEmpty()) return
+
+        updater.showControllButton()
+
         if (subSecond.length <= 1 && isBackKey) {
             subSecond = ""
             fragHomeTvSub.text = ""
@@ -87,7 +93,6 @@ class HomeFragment : Fragment() {
         val tmpStr = if (subSecond.isEmpty()) "" else subSecond
         val curMixedStr = if (isBackKey) subSecond.substring(0, subSecond.length - 1) else "$tmpStr$num"
         val curSumSecond = curMixedStr.toLong()
-        "curSumSecond $curSumSecond".e()
 
         updater.setEnable(fragHomeTvHour, sumSecond(hour = curSumSecond) + sumSecond(hour = 1) <= MAX_SECOND - mainSecond)
         updater.setEnable(fragHomeTvMinute, sumSecond(minute = curSumSecond) + sumSecond(minute = 1) <= MAX_SECOND - mainSecond)
@@ -103,16 +108,17 @@ class HomeFragment : Fragment() {
     private fun addMainSecond(sec: Long) {
         mainSecond += sec
         updater.setMainTextAndEtc(mainSecond)
-        fragHomeRv.setFocusingBadge(fragHomeRv.getFocusingBadge().copy(second = mainSecond.toInt()))
+        fragHomeRv.setSecond(mainSecond.toInt())
         subSecond = ""
         updateWholeAndRemainTime()
+        updater.showRv()
     }
 
     private fun updateWholeAndRemainTime() {
         val wholeSumSecond = fragHomeRv.getBadges()
             .asSequence()
             .filter { it.type == HomeBadgeType.NORMAL || it.type == HomeBadgeType.FOCUS }
-            .sumBy { it.second }
+            .sumBy { it.time.seconds }
 
         updater.setSubText(wholeSumSecond.toFormattingString(), wholeSumSecond.toEndTimeStrAfterSec())
     }
@@ -121,6 +127,7 @@ class HomeFragment : Fragment() {
         fragHomeViewTransparent.setOnClickListener { /*pass*/ }
 
         fragHomeIvCloseTimeInfo.setOnClickListener {
+            fragHomeRv.setComment(fragHomeEtContent.text.toString())
             updater.hideTimeInfo()
         }
 
@@ -162,8 +169,12 @@ class HomeFragment : Fragment() {
         fragHomeIvMainClear.setOnClickListener {
             resetMainAndSubSecond()
             updater.setMainTextAndEtc(mainSecond)
-            fragHomeRv.setFocusingBadge(fragHomeRv.getFocusingBadge().copy(second = mainSecond.toInt()))
+            fragHomeRv.setSecond(mainSecond.toInt())
             updateWholeAndRemainTime()
+
+//            if (fragHomeRv.getBadges().size <= 3) {
+//                updater.initSet()
+//            }
         }
 
         fragHomeRv.onBadgeSelectedListener = { type, pos ->
@@ -175,7 +186,7 @@ class HomeFragment : Fragment() {
                 updateWholeAndRemainTime()
 
             } else if (type == HomeBadgeCallbackType.NORMAL_PUSH) {
-                resetMainAndSubSecond(fragHomeRv.getBadge(pos).second.toLong())
+                resetMainAndSubSecond(fragHomeRv.getBadge(pos).time.seconds.toLong())
                 updater.setMainTextAndEtc(mainSecond)
                 updateWholeAndRemainTime()
 
@@ -186,38 +197,70 @@ class HomeFragment : Fragment() {
                 fragHomeRv.removeZeroSecondBadge()
 
             } else if (type == HomeBadgeCallbackType.FOCUS_PUSH) {
-
-//                updater.showTimeInfo(pos,fragHomeRv.getBadge(pos))
-
-                "HomeBadgeCallbackType.FOCUS_PUSH".e()
+                updater.showTimeInfo(pos, fragHomeRv.getBadges())
             }
         }
 
-//        fragHomeTvTime
-//
-//        fragHomeIvClear.setOnClickListener { "fragHomeIvClear.setOnClickListener ".e() }
-//        fragHomeTvEtc
-//        fragHomeLlNumberPad
-//
-
-//
-//        fragHomeRv
-//        fragHomeViewTransparent
-//        fragHomeLlTimeInfo
-//        fragHomeEtContent
-//        fragHomeTvContentLength
-//
-//        fragHomeTvSilent
-//        fragHomeTvVibrate
-//        fragHomeTvBasicBell
-//        fragHomeTvSetWhole
-//
-//        fragHomeTvTimerPosition
-//        fragHomeIvTimeDelete
-//
-//        fragHomeTvCloseTimeInfo
 
 
+
+        fragHomeEtContent.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {}
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (s!!.length > 100) {
+                    fragHomeEtContent.setText(s.substring(99, s.length - 1))
+                }
+                fragHomeTvContentLength.text = s.length.toString()
+                if (s.length > 99) {
+                    fragHomeTvContentLength.setTextColor(R.color.ux_pink.color())
+                    return
+                }
+                fragHomeTvContentLength.setTextColor(R.color.ux_black.color())
+            }
+        })
+
+        fragHomeTvSilent.setOnClickListener {
+            updater.setBottomLineClearToAllBellType()
+            updater.setBottomLineToSlient()
+            fragHomeRv.setBellType(Bell.Type.SLIENT)
+        }
+
+        fragHomeTvVibrate.setOnClickListener {
+            updater.setBottomLineClearToAllBellType()
+            updater.setBottomLineToVibrate()
+            fragHomeRv.setBellType(Bell.Type.VIBRATION)
+        }
+
+        fragHomeTvBasicBell.setOnClickListener {
+            updater.setBottomLineClearToAllBellType()
+            updater.setBottomLineToBasicBell()
+            fragHomeRv.setBellType(Bell.Type.DEFAULT)
+        }
+
+        fragHomeTvSetWhole.setOnClickListener {
+            fragHomeRv.setCurPosBellTypeToWhole()
+        }
+
+        fragHomeIvTimeSetDelete.setOnClickListener {
+
+            fragHomeRv.removeFoucsingBadge()
+            updater.hideTimeInfo()
+
+            resetMainAndSubSecond(fragHomeRv.getFocusingBadge().time.seconds.toLong())
+
+//            if (fragHomeRv.getBadges().size <= 3) {
+//                updater.initSet()
+//                updater.hideRv()
+//                updater.setMainTextAndEtc(0)
+//            } else {
+//                updater.setMainTextAndEtc(mainSecond)
+//            }
+
+            updater.setMainTextAndEtc(mainSecond)
+            updater.setSubText(subSecond)
+            updateWholeAndRemainTime()
+        }
     }
 
     private fun resetMainAndSubSecond(newMainSecond: Long = 0L) {
