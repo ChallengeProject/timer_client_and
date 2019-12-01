@@ -12,36 +12,38 @@ import kr.co.seoft.two_min.util.*
 
 class HomeFragUpdater(val f: HomeFragment) {
 
-    fun initSet(){
-        f.fragHomeTvCancel.visibility = View.INVISIBLE
-        f.fragHomeTvHour.visibility = View.INVISIBLE
-        f.fragHomeTvMinute.visibility = View.INVISIBLE
-        f.fragHomeTvSecond.visibility = View.INVISIBLE
-        setMainTextAndEtc(0)
-    }
-
-    fun showRv(){
-        f.fragHomeRv.visibility = View.VISIBLE
-    }
-
-    fun hideRv(){
-        f.fragHomeRv.visibility = View.INVISIBLE
-    }
-
-    fun showControllButton(){
+    fun showControlButton() {
         f.fragHomeTvCancel.visibility = View.VISIBLE
         f.fragHomeTvHour.visibility = View.VISIBLE
         f.fragHomeTvMinute.visibility = View.VISIBLE
         f.fragHomeTvSecond.visibility = View.VISIBLE
     }
 
-    fun setMainTextAndEtc(time: Long) {
-        if (time == 0L) {
-            f.fragHomeRv.hideAddButton()
-            setMainTextClearBtnVisible(false)
-        } else {
-            f.fragHomeRv.showAddButton()
-            setMainTextClearBtnVisible(true)
+    fun hideControlButton() {
+        f.fragHomeTvCancel.visibility = View.INVISIBLE
+        f.fragHomeTvHour.visibility = View.INVISIBLE
+        f.fragHomeTvMinute.visibility = View.INVISIBLE
+        f.fragHomeTvSecond.visibility = View.INVISIBLE
+        setMainTextAndEtc(0, false)
+    }
+
+    fun showRv() {
+        f.fragHomeRv.visibility = View.VISIBLE
+    }
+
+    fun hideRv() {
+        f.fragHomeRv.visibility = View.INVISIBLE
+    }
+
+    fun setMainTextAndEtc(time: Long, setShowAddFromTimeValue: Boolean = true) {
+        if (setShowAddFromTimeValue) {
+            if (time == 0L) {
+                f.fragHomeRv.hideAddButton()
+                setMainTextClearBtnVisible(false)
+            } else {
+                f.fragHomeRv.showAddButton()
+                setMainTextClearBtnVisible(true)
+            }
         }
 
         f.fragHomeTvMain.text = time.toFormattingString()

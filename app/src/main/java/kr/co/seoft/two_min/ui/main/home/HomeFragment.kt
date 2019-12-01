@@ -72,8 +72,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun initView() {
-//        updater.initSet()
-//        updater.hideRv()
+        checkViewVisibleAndSet()
     }
 
     private fun initObservable() {
@@ -82,8 +81,6 @@ class HomeFragment : Fragment() {
 
     private fun pushedNumber(num: Int, isBackKey: Boolean = false) {
         if (!isBackKey && num == 0 && subSecond.isEmpty()) return
-
-        updater.showControllButton()
 
         if (subSecond.length <= 1 && isBackKey) {
             subSecond = ""
@@ -101,6 +98,8 @@ class HomeFragment : Fragment() {
         else subSecond = curMixedStr
 
         fragHomeTvSub.text = "+$subSecond"
+
+        checkViewVisibleAndSet()
     }
 
     private fun sumSecond(hour: Long = 0, minute: Long = 0, second: Long = 0) = hour * 60 * 60 + minute * 60 + second
@@ -144,11 +143,14 @@ class HomeFragment : Fragment() {
             updater.setMainTextAndEtc(mainSecond)
             updater.setSubText(subSecond)
             fragHomeRv.resetBadges()
+
+            checkViewVisibleAndSet()
         }
 
         fragHomeIvBack.setOnClickListener {
             if (subSecond.isEmpty()) return@setOnClickListener
             pushedNumber(0, true)
+            checkViewVisibleAndSet()
         }
 
         fragHomeTvHour.setOnClickListener {
@@ -172,9 +174,7 @@ class HomeFragment : Fragment() {
             fragHomeRv.setSecond(mainSecond.toInt())
             updateWholeAndRemainTime()
 
-//            if (fragHomeRv.getBadges().size <= 3) {
-//                updater.initSet()
-//            }
+            checkViewVisibleAndSet()
         }
 
         fragHomeRv.onBadgeSelectedListener = { type, pos ->
@@ -195,6 +195,7 @@ class HomeFragment : Fragment() {
                  * 00:00:00 인애들을 걸러내도됨
                  */
                 fragHomeRv.removeZeroSecondBadge()
+                checkViewVisibleAndSet()
 
             } else if (type == HomeBadgeCallbackType.FOCUS_PUSH) {
                 updater.showTimeInfo(pos, fragHomeRv.getBadges())
@@ -249,23 +250,39 @@ class HomeFragment : Fragment() {
 
             resetMainAndSubSecond(fragHomeRv.getFocusingBadge().time.seconds.toLong())
 
-//            if (fragHomeRv.getBadges().size <= 3) {
-//                updater.initSet()
-//                updater.hideRv()
-//                updater.setMainTextAndEtc(0)
-//            } else {
-//                updater.setMainTextAndEtc(mainSecond)
-//            }
-
             updater.setMainTextAndEtc(mainSecond)
             updater.setSubText(subSecond)
             updateWholeAndRemainTime()
+
+            checkViewVisibleAndSet()
         }
     }
 
     private fun resetMainAndSubSecond(newMainSecond: Long = 0L) {
         mainSecond = newMainSecond
         subSecond = ""
+    }
+
+    fun checkViewVisibleAndSet(){
+
+//        return
+        if(fragHomeRv.getBadges().size <= 3) {
+
+            if(subSecond == ""){
+                updater.hideControlButton()
+            } else {
+                updater.showControlButton()
+            }
+
+            if(mainSecond == 0L) {
+                updater.hideRv()
+            } else {
+                updater.showRv()
+            }
+        }
+
+
+
     }
 
 }
