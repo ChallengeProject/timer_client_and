@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/preview_on_share"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/button_share"
+        android:title="preview_share" />
+
+    <item
+        android:id="@+id/preview_on_like"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/button_bookmark"
+        android:title="preview_like"/>
+</menu>

@@ -4,30 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.save.SaveActivity">
+    tools:context=".ui.preview.PreviewActivity">
 
     <include
-        android:id="@+id/actSaveIncToolbar"
+        android:id="@+id/actPreviewIncToolbar"
         layout="@layout/include_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
 
-        android:id="@+id/actSaveClContent"
+        android:id="@+id/actPreviewClContent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
         android:layout_marginLeft="60dp"
         android:layout_marginTop="15dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/actSaveIncToolbar"
+        app:layout_constraintTop_toBottomOf="@id/actPreviewIncToolbar"
 
         >
 
-        <EditText
-            android:id="@+id/actSaveEtTitle"
-            android:lines="1"
+        <TextView
+            android:id="@+id/actPreviewTvTitle"
             android:hint="무제 타임셋"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -39,40 +38,20 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="내 타임셋" />
 
-
-        <ImageView
-            android:id="@+id/actSaveIvClose"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:layout_marginEnd="10dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/icon_close"
-            app:layout_constraintBottom_toBottomOf="@id/actSaveEtTitle"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@id/actSaveEtTitle" />
-
-        <View
-            android:id="@+id/actSaveViewLine"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="13dp"
-            android:background="@color/ux_pink"
-            app:layout_constraintTop_toBottomOf="@id/actSaveEtTitle" />
-
         <TextView
-            android:id="@+id/actSaveTvTimeSetTimeText"
+            android:id="@+id/actPreviewTvTimeSetTimeText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="17dp"
+            android:layout_marginTop="118dp"
             android:text="타임셋 시간"
             android:textColor="@color/ux_dark_gray"
             android:textSize="15dp"
             android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/actSaveViewLine" />
+            app:layout_constraintTop_toBottomOf="@id/actPreviewTvTitle" />
 
         <TextView
-            android:id="@+id/actSaveTvExpectEndText"
+            android:id="@+id/actPreviewTvExpectEndText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="17dp"
@@ -81,10 +60,10 @@
             android:textSize="15dp"
             android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/actSaveTvTimeSetTimeText" />
+            app:layout_constraintTop_toBottomOf="@id/actPreviewTvTimeSetTimeText" />
 
         <TextView
-            android:id="@+id/actSaveTvSoundText"
+            android:id="@+id/actPreviewTvSoundText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="17dp"
@@ -93,10 +72,10 @@
             android:textSize="15dp"
             android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/actSaveTvExpectEndText" />
+            app:layout_constraintTop_toBottomOf="@id/actPreviewTvExpectEndText" />
 
         <TextView
-            android:id="@+id/actSaveTvCommnetText"
+            android:id="@+id/actPreviewTvCommnetText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="17dp"
@@ -105,45 +84,45 @@
             android:textSize="15dp"
             android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/actSaveTvSoundText" />
+            app:layout_constraintTop_toBottomOf="@id/actPreviewTvSoundText" />
 
 
         <TextView
-            android:id="@+id/actSaveTvTimeSetTime"
+            android:id="@+id/actPreviewTvTimeSetTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:textColor="@color/ux_dark_gray"
             android:textSize="15dp"
-            app:layout_constraintLeft_toRightOf="@id/actSaveTvTimeSetTimeText"
-            app:layout_constraintTop_toTopOf="@id/actSaveTvTimeSetTimeText"
+            app:layout_constraintLeft_toRightOf="@id/actPreviewTvTimeSetTimeText"
+            app:layout_constraintTop_toTopOf="@id/actPreviewTvTimeSetTimeText"
             tools:text="00:01:00" />
 
 
         <TextView
-            android:id="@+id/actSaveTvExpectEnd"
+            android:id="@+id/actPreviewTvExpectEnd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="17dp"
             android:textColor="@color/ux_dark_gray"
             android:textSize="15dp"
-            app:layout_constraintLeft_toLeftOf="@id/actSaveTvTimeSetTime"
-            app:layout_constraintTop_toBottomOf="@id/actSaveTvTimeSetTime"
+            app:layout_constraintLeft_toLeftOf="@id/actPreviewTvTimeSetTime"
+            app:layout_constraintTop_toBottomOf="@id/actPreviewTvTimeSetTime"
             tools:text="9:42 AM" />
 
         <TextView
-            android:id="@+id/actSaveTvSound"
+            android:id="@+id/actPreviewTvSound"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="17dp"
             android:textColor="@color/ux_dark_gray"
             android:textSize="15dp"
-            app:layout_constraintLeft_toLeftOf="@id/actSaveTvExpectEnd"
-            app:layout_constraintTop_toBottomOf="@id/actSaveTvExpectEnd"
+            app:layout_constraintLeft_toLeftOf="@id/actPreviewTvExpectEnd"
+            app:layout_constraintTop_toBottomOf="@id/actPreviewTvExpectEnd"
             tools:text="해당 타이머 사운드 노출" />
 
         <TextView
-            android:id="@+id/actSaveTvComment"
+            android:id="@+id/actPreviewTvComment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="17dp"
@@ -151,21 +130,21 @@
             android:scrollbars="vertical"
             android:textColor="@color/ux_dark_gray"
             android:textSize="15dp"
-            app:layout_constraintLeft_toLeftOf="@id/actSaveTvSound"
-            app:layout_constraintTop_toBottomOf="@id/actSaveTvSound"
+            app:layout_constraintLeft_toLeftOf="@id/actPreviewTvSound"
+            app:layout_constraintTop_toBottomOf="@id/actPreviewTvSound"
             tools:text="해당 타이머 코맨트 노출\n3줄까지..." />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <kr.co.seoft.two_min.ui.proc.LeftSideSnappyHorizontalListView
-        android:id="@+id/actSaveLsshlv"
+        android:id="@+id/actPreviewLsshlv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/actSaveClContent" />
+        app:layout_constraintTop_toBottomOf="@id/actPreviewClContent" />
 
 
     <LinearLayout
-        android:id="@+id/actSaveLlBottomButtons"
+        android:id="@+id/actPreviewLlBottomButtons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/ux_gray"
@@ -173,7 +152,7 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <TextView
-            android:id="@+id/actSaveBtBottom1Btn"
+            android:id="@+id/actPreviewBtBottom1Btn"
             android:layout_width="100dp"
             android:layout_height="45dp"
             android:layout_marginStart="18dp"
@@ -183,13 +162,13 @@
             android:background="@drawable/bg_bottom_button_gray"
             android:gravity="center"
             android:scaleType="fitXY"
-            android:text="취소"
+            android:text="편집"
             android:textColor="@color/ux_pink"
             android:textSize="15dp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/actSaveBtBottom2Btn"
+            android:id="@+id/actPreviewBtBottom2Btn"
             android:layout_width="100dp"
             android:layout_height="45dp"
             android:layout_marginEnd="18dp"
@@ -197,7 +176,7 @@
             android:background="@drawable/bg_bottom_button_red"
             android:gravity="center"
             android:scaleType="fitXY"
-            android:text="완료"
+            android:text="시작"
             android:textColor="@color/white"
             android:textSize="15dp"
             android:textStyle="bold" />

@@ -10,6 +10,8 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import gun0912.tedkeyboardobserver.BaseKeyboardObserver
 import gun0912.tedkeyboardobserver.TedKeyboardObserver
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.include_toolbar.*
 import kr.co.seoft.two_min.R
@@ -17,6 +19,7 @@ import kr.co.seoft.two_min.data.AppDatabase
 import kr.co.seoft.two_min.data.TimeSet
 import kr.co.seoft.two_min.ui.ActivityHelper
 import kr.co.seoft.two_min.ui.main.home.HomeFragment
+import kr.co.seoft.two_min.ui.preview.PreviewActivity
 import kr.co.seoft.two_min.ui.proc.ProcActivity
 import kr.co.seoft.two_min.ui.proc.ProcEndActivity
 import kr.co.seoft.two_min.ui.proc.ProcExceedActivity
@@ -30,6 +33,8 @@ class MainActivity : ActivityHelper() {
         const val PROC_ACTIVITY = 1111
         const val PROC_END_ACTIVITY = 1112
         const val PROC_EXCEED_ACTIVITY = 1113
+        const val SAVE_ACTIVITY = 1114
+        const val PREVIEW_ACTIVITY = 1115
     }
 
     override val layoutResourceId = R.layout.activity_main
@@ -172,8 +177,6 @@ class MainActivity : ActivityHelper() {
                         data.getParcelableExtra(ProcActivity.RESP_TIME_SET),
                         data.getParcelableExtra(ProcActivity.RESP_USE_INFO)
                     )
-                    homeFragment.updater.hideControlButton()
-                    homeFragment.updater.hideRv()
                 }
                 PROC_END_ACTIVITY -> {
                     "PROC_END_ACTIVITY in Main".i()
@@ -192,7 +195,25 @@ class MainActivity : ActivityHelper() {
                     }
                 }
                 PROC_EXCEED_ACTIVITY -> {
-                    "PROC_EXCEED_ACTIVITY in Main".i()
+
+                }
+                SAVE_ACTIVITY -> {
+                    val timeSetId = data.getLongExtra(SaveActivity.RESP_TIME_SET_ID, 0L)
+                    PreviewActivity.startSaveActivity(this, timeSetId)
+                }
+                PREVIEW_ACTIVITY -> {
+                    val timeSetId = data.getLongExtra(PreviewActivity.RESP_TIME_SET_ID_FOR_START, 0L)
+
+                    AppDatabase.getDatabase(this).timeSetDao().getTimeSetById(timeSetId)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe({
+                            startProc(it)
+                        }, {
+                            it.printStackTrace()
+                        })
+
+
                 }
 
             }

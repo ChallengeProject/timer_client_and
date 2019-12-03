@@ -1,5 +1,6 @@
 package kr.co.seoft.two_min.ui.save
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -13,6 +14,7 @@ import kr.co.seoft.two_min.R
 import kr.co.seoft.two_min.data.AppDatabase
 import kr.co.seoft.two_min.data.TimeSet
 import kr.co.seoft.two_min.ui.ActivityHelper
+import kr.co.seoft.two_min.ui.main.MainActivity
 import kr.co.seoft.two_min.util.*
 
 class SaveActivity : ActivityHelper() {
@@ -22,12 +24,14 @@ class SaveActivity : ActivityHelper() {
     companion object {
 
         const val EXTRA_TIME_SET = "EXTRA_TIME_SET"
+        const val RESP_TIME_SET_ID = "RESP_TIME_SET_ID"
 
         fun startSaveActivity(context: Context, timeSet: TimeSet) {
-            context.startActivity(
+            (context as Activity).startActivityForResult(
                 Intent(context, SaveActivity::class.java).apply {
                     putExtra(EXTRA_TIME_SET, timeSet)
-                })
+                }, MainActivity.SAVE_ACTIVITY
+            )
         }
 
     }
@@ -77,12 +81,13 @@ class SaveActivity : ActivityHelper() {
             AppDatabase.getDatabase(this).timeSetDao()
                 .insertTimeSet(timeSet.apply { title = actSaveEtTitle.text.toString() })
                 .subscribeOn(Schedulers.io())
-                .flatMap {
-                    AppDatabase.getDatabase(this).timeSetDao().getTimeSetById(it)
-                }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    it.e()
+                    setResult(
+                        Activity.RESULT_OK,
+                        Intent().apply { putExtra(RESP_TIME_SET_ID, it) }
+                    )
+                    finish()
                 }, {
                     it.printStackTrace()
                 })

@@ -142,12 +142,7 @@ class HomeFragment : Fragment() {
         fragHomeTvCancel.setOnClickListener {
             // TODO 다이얼로그로 해야됨
 
-            resetMainAndSubSecond()
-            updater.setMainTextAndEtc(mainSecond)
-            updater.setSubText(subSecond)
-            fragHomeRv.resetBadges()
-
-            checkViewVisibleAndSet()
+            resetAll()
         }
 
         fragHomeIvBack.setOnClickListener {
@@ -292,7 +287,7 @@ class HomeFragment : Fragment() {
             memo = "THIS_IS_MEMO",
             timeSetId = 0
         )
-
+        resetAll()
         act.startProc(timeSet)
     }
 
@@ -308,10 +303,17 @@ class HomeFragment : Fragment() {
             memo = "THIS_IS_MEMO",
             timeSetId = 0
         )
-
+        resetAll()
         act.startSave(timeSet)
     }
 
+    fun resetAll() {
+        resetMainAndSubSecond()
+        updater.setMainTextAndEtc(mainSecond)
+        updater.setSubText(subSecond)
+        fragHomeRv.resetBadges()
+        checkViewVisibleAndSet()
+    }
 
 }
 

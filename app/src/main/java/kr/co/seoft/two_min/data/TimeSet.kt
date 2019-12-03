@@ -13,7 +13,7 @@ data class TimeSet(
     val memo: String = "",
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "time_set_id")
-    val timeSetId: Int = 0
+    val timeSetId: Long = 0
 ) : Parcelable
 
 @Parcelize
@@ -37,7 +37,7 @@ data class Time(
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "time_id")
-    val timeId: Int = 0
+    val timeId: Long = 0
 ) : Parcelable
 
 @Parcelize
@@ -57,7 +57,7 @@ data class Bell(
     var uriStr: String? = null,
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "bell_id")
-    val bellId: Int = 0
+    val bellId: Long = 0
 ) : Parcelable {
     enum class Type(key: Int) {
         SLIENT(0),
