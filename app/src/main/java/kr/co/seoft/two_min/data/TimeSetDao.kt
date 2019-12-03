@@ -8,8 +8,11 @@ import io.reactivex.Single
 @Dao
 interface TimeSetDao {
     @Insert
-    fun insertTimeSet(time: TimeSet)
+    fun insertTimeSet(time: TimeSet): Single<Long>
 
     @Query("SELECT * FROM time_set")
     fun getTimeSets(): Single<List<TimeSet>>
+
+    @Query("SELECT * FROM time_set WHERE time_set_id=:id")
+    fun getTimeSetById(id: Long): Single<TimeSet>
 }

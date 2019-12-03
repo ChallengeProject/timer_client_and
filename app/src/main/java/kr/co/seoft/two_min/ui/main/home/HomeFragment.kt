@@ -11,7 +11,9 @@ import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.fragment_home.*
 import kr.co.seoft.two_min.R
 import kr.co.seoft.two_min.data.Bell
+import kr.co.seoft.two_min.data.TimeSet
 import kr.co.seoft.two_min.ui.main.MainActivity
+import kr.co.seoft.two_min.util.KeyboardUtil
 import kr.co.seoft.two_min.util.color
 import kr.co.seoft.two_min.util.toEndTimeStrAfterSec
 import kr.co.seoft.two_min.util.toFormattingString
@@ -33,7 +35,7 @@ class HomeFragment : Fragment() {
     var mainSecond = 0L
     var subSecond = ""
 
-    private val updater by lazy {
+    val updater by lazy {
         HomeFragUpdater(this)
     }
 
@@ -128,6 +130,7 @@ class HomeFragment : Fragment() {
         fragHomeIvCloseTimeInfo.setOnClickListener {
             fragHomeRv.setComment(fragHomeEtContent.text.toString())
             updater.hideTimeInfo()
+            KeyboardUtil.hideSoftKeyBoard(act, fragHomeEtContent)
         }
 
         numberBtns.forEach { tv ->
@@ -202,9 +205,6 @@ class HomeFragment : Fragment() {
             }
         }
 
-
-
-
         fragHomeEtContent.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {}
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -263,27 +263,55 @@ class HomeFragment : Fragment() {
         subSecond = ""
     }
 
-    fun checkViewVisibleAndSet(){
+    private fun checkViewVisibleAndSet() {
+        if (fragHomeRv.getBadges().size <= 3) {
 
-//        return
-        if(fragHomeRv.getBadges().size <= 3) {
-
-            if(subSecond == ""){
+            if (subSecond == "") {
                 updater.hideControlButton()
             } else {
                 updater.showControlButton()
             }
 
-            if(mainSecond == 0L) {
+            if (mainSecond == 0L) {
                 updater.hideRv()
             } else {
                 updater.showRv()
             }
         }
-
-
-
     }
+
+    fun requestProc() {
+
+        val timeSet = TimeSet(
+            title = "THIS_IS_TITLE",
+            times = fragHomeRv.getBadges()
+                .asSequence()
+                .filter { it.type == HomeBadgeType.NORMAL || it.type == HomeBadgeType.FOCUS }
+                .map { it.time }
+                .toList(),
+            memo = "THIS_IS_MEMO",
+            timeSetId = 0
+        )
+
+        act.startProc(timeSet)
+    }
+
+    fun requestSave() {
+
+        val timeSet = TimeSet(
+            title = "THIS_IS_TITLE",
+            times = fragHomeRv.getBadges()
+                .asSequence()
+                .filter { it.type == HomeBadgeType.NORMAL || it.type == HomeBadgeType.FOCUS }
+                .map { it.time }
+                .toList(),
+            memo = "THIS_IS_MEMO",
+            timeSetId = 0
+        )
+
+        act.startSave(timeSet)
+    }
+
 
 }
 

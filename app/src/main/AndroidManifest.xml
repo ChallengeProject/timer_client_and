@@ -16,18 +16,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Design.Light.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.main.MainActivity"
-            android:windowSoftInputMode="adjustResize|adjustPan"
-            >
+        <activity android:name=".ui.save.SaveActivity"
+            android:windowSoftInputMode="stateHidden"
+            />
+        <activity
+            android:name=".ui.main.MainActivity"
+            android:windowSoftInputMode="adjustResize|adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-
-        <!--        ############-->
+        </activity> <!-- ############ -->
         <activity
             android:name=".ui.proc.ProcExceedActivity"
             android:launchMode="singleTask"
@@ -54,7 +54,6 @@
                 <action android:name="PROC_REPEAT" />
             </intent-filter>
         </service>
-
         <service
             android:name=".ui.proc.ProcExceedService"
             android:enabled="true"
@@ -65,7 +64,6 @@
                 <action android:name="EXCEED_STOP" />
             </intent-filter>
         </service>
-        <!--        ############-->
     </application>
 
 </manifest>

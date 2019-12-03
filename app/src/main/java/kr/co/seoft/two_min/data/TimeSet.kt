@@ -65,6 +65,15 @@ data class Bell(
         DEFAULT(2),
         USER(3)
     }
+
+    fun bellTypeToString(): String {
+        return when (type) {
+            Type.SLIENT -> "무음"
+            Type.VIBRATION -> "진동"
+            Type.DEFAULT -> "기본음"
+            else -> "기본음"
+        }
+    }
 }
 
 @Parcelize

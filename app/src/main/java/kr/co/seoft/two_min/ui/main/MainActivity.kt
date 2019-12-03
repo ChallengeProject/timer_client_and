@@ -20,6 +20,7 @@ import kr.co.seoft.two_min.ui.main.home.HomeFragment
 import kr.co.seoft.two_min.ui.proc.ProcActivity
 import kr.co.seoft.two_min.ui.proc.ProcEndActivity
 import kr.co.seoft.two_min.ui.proc.ProcExceedActivity
+import kr.co.seoft.two_min.ui.save.SaveActivity
 import kr.co.seoft.two_min.util.*
 
 
@@ -37,6 +38,9 @@ class MainActivity : ActivityHelper() {
 
     val db by lazy { AppDatabase.getDatabase(this) }
 
+    val homeFragment by lazy {
+        HomeFragment.newInstance()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,18 +49,19 @@ class MainActivity : ActivityHelper() {
         initView()
         initListener()
 
-        // TODO 다른대
-        actHomeViewPager.isUserInputEnabled = false
+    }
 
-//        ProcActivity.startProcActivity(this,TimeSet(
-//            "AA",5,
-//            listOf(Time(3),Time(3), Time(3))
-//        ))
+    fun startProc(timeSet: TimeSet) {
+        ProcActivity.startProcActivity(this, timeSet, 5)
+    }
 
-
+    fun startSave(timeSet: TimeSet) {
+        SaveActivity.startSaveActivity(this, timeSet)
     }
 
     private fun initView() {
+
+
         actHomeViewPager.adapter = object : FragmentStateAdapter(this) {
             override fun getItemCount(): Int {
                 return 2
@@ -66,7 +71,7 @@ class MainActivity : ActivityHelper() {
                 return when (position) {
                     0 -> {
                         toolbar.setTitle("")
-                        HomeFragment.newInstance()
+                        homeFragment
                     }
                     else -> {
                         toolbar.setTitle("내 타임셋")
@@ -110,11 +115,11 @@ class MainActivity : ActivityHelper() {
 
     fun initListener() {
         actMainBtBottom1Btn.setOnClickListener {
-
+            homeFragment.requestSave()
         }
 
         actMainBtBottom2Btn.setOnClickListener {
-
+            homeFragment.requestProc()
         }
         actMainViewTransparentTop.setOnClickListener { /*pass*/ }
         actMainViewTransparentBottom.setOnClickListener { /*pass*/ }
@@ -132,6 +137,10 @@ class MainActivity : ActivityHelper() {
 
         })
 
+    }
+
+    fun setLockViewpager(isLock: Boolean) {
+        actHomeViewPager.isUserInputEnabled = !isLock
     }
 
     fun setTransparentToolbarAndBottoms(isTransparent: Boolean) {
@@ -163,6 +172,8 @@ class MainActivity : ActivityHelper() {
                         data.getParcelableExtra(ProcActivity.RESP_TIME_SET),
                         data.getParcelableExtra(ProcActivity.RESP_USE_INFO)
                     )
+                    homeFragment.updater.hideControlButton()
+                    homeFragment.updater.hideRv()
                 }
                 PROC_END_ACTIVITY -> {
                     "PROC_END_ACTIVITY in Main".i()

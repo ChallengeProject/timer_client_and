@@ -25,14 +25,19 @@ class HomeFragUpdater(val f: HomeFragment) {
         f.fragHomeTvMinute.visibility = View.INVISIBLE
         f.fragHomeTvSecond.visibility = View.INVISIBLE
         setMainTextAndEtc(0, false)
+        setSubText("")
     }
 
     fun showRv() {
         f.fragHomeRv.visibility = View.VISIBLE
+        f.act.setShowBottomButtons(true)
+        f.act.setLockViewpager(true)
     }
 
     fun hideRv() {
         f.fragHomeRv.visibility = View.INVISIBLE
+        f.act.setShowBottomButtons(false)
+        f.act.setLockViewpager(false)
     }
 
     fun setMainTextAndEtc(time: Long, setShowAddFromTimeValue: Boolean = true) {
@@ -94,7 +99,6 @@ class HomeFragUpdater(val f: HomeFragment) {
         f.fragHomeIncSelectedHomeBadge.findViewById<LinearLayout>(R.id.itemHomeBadgellContent).background =
             ContextCompat.getDrawable(f.requireContext(), R.drawable.bg_timeset_times_red_stroke)
         f.act.setTransparentToolbarAndBottoms(true)
-
     }
 
     fun setEnable(tv: TextView, isEnable: Boolean) {

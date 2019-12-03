@@ -76,7 +76,7 @@
             android:background="@drawable/bg_bottom_button_gray"
             android:gravity="center"
             android:scaleType="fitXY"
-            android:text="취소"
+            android:text="저장"
             android:textColor="@color/ux_pink"
             android:textSize="15dp"
             android:textStyle="bold" />
