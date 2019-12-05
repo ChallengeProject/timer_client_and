@@ -183,6 +183,7 @@ class HomeFragment : Fragment() {
                 updater.setMainTextAndEtc(mainSecond)
                 updateWholeAndRemainTime()
 
+                checkViewVisibleAndSet()
             } else if (type == HomeBadgeCallbackType.NORMAL_PUSH) {
                 resetMainAndSubSecond(fragHomeRv.getBadge(pos).time.seconds.toLong())
                 updater.setMainTextAndEtc(mainSecond)
@@ -259,13 +260,14 @@ class HomeFragment : Fragment() {
     }
 
     private fun checkViewVisibleAndSet() {
+
         if (fragHomeRv.getBadges().size <= 3) {
 
-            if (subSecond == "") {
-                updater.hideControlButton()
-            } else {
-                updater.showControlButton()
-            }
+//            if (subSecond == "") {
+//                updater.hideControlButton()
+//            } else {
+//                updater.showControlButton()
+//            }
 
             if (mainSecond == 0L) {
                 updater.hideRv()
@@ -273,6 +275,13 @@ class HomeFragment : Fragment() {
                 updater.showRv()
             }
         }
+
+        if (subSecond == "") {
+            updater.hideControlButton()
+        } else {
+            updater.showControlButton()
+        }
+
     }
 
     fun requestProc() {
