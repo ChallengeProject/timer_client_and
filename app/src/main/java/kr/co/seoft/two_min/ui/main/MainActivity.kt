@@ -22,6 +22,7 @@ import kr.co.seoft.two_min.data.TimeSet
 import kr.co.seoft.two_min.ui.ActivityHelper
 import kr.co.seoft.two_min.ui.main.home.HomeFragment
 import kr.co.seoft.two_min.ui.main.mytimeset.MyTimeSetFragment
+import kr.co.seoft.two_min.ui.manage.ManageActivity
 import kr.co.seoft.two_min.ui.preview.PreviewActivity
 import kr.co.seoft.two_min.ui.proc.ProcActivity
 import kr.co.seoft.two_min.ui.proc.ProcEndActivity
@@ -242,6 +243,9 @@ class MainActivity : ActivityHelper() {
             }
             R.id.main_home_history -> {
                 "main_home_history".toaste(this)
+
+                ManageActivity.startSaveActivity(this)
+
 //                actHomeViewPager.isUserInputEnabled =false
             }
             android.R.id.home -> {

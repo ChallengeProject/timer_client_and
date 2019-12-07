@@ -78,13 +78,13 @@ class MiddleTransformSnappyRecyclerView : RecyclerView {
         this.onFlingListener = null
         snapHelper.attachToRecyclerView(this)
 
-        itemTouchHelper = ItemTouchHelper(ItemTouchHelperCallback({ from, to ->
+        itemTouchHelper = ItemTouchHelper(HomeItemTouchHelperCallback({ from, to ->
 
             // 다음 if문 : 첫번째 마지막번째 버튼들있는 count에서 예외처리
             if (from.adapterPosition == 0 || to.adapterPosition == homeBadgeAdapter.itemCount
                 || to.adapterPosition == 0 || from.adapterPosition == homeBadgeAdapter.itemCount
             ) {
-                return@ItemTouchHelperCallback
+                return@HomeItemTouchHelperCallback
             }
 
             homeBadgeAdapter.onItemMoved(from.adapterPosition, to.adapterPosition)

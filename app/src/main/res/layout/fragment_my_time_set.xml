@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--    https://black-jin0427.tistory.com/164-->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:descendantFocusability="blocksDescendants"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="60dp"
+                android:layout_marginTop="50dp"
+                android:text="주로 쓰는 타임셋을 모아보세요,\n시간을 관리하는 데 도움이 될 거에요 :)"
+                android:textColor="@color/ux_black" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="80dp"
+                android:text="저장한 타임셋"
+                android:textColor="@color/ux_black"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/fragMyTimeSetClEmptyLayout"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/bg_radius_20_white"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_marginTop="40dp"
+                    android:src="@drawable/big_plus"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="30dp"
+                    android:text="타임셋을 추가해보세요!"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <TextView
+                android:id="@+id/fragMyTimeSetTvSaveTimeSetManage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/bg_radius_20_blue"
+                android:drawableEnd="@drawable/icon_close"
+                android:gravity="center_vertical"
+                android:paddingLeft="20dp"
+                android:paddingTop="2dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="2dp"
+                android:text="저장한 타임셋 관리"
+                android:textColor="@color/white"
+                android:visibility="gone" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/fragMyTimeSetClSaveTimeSetFirstItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/bg_radius_20_pink"
+                android:paddingBottom="17dp"
+                android:visibility="gone">
+
+
+                <TextView
+                    android:id="@+id/fragMyTimeSetTvSaveTimeSetFirstItemWholeTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="30dp"
+                    android:textColor="@color/white"
+                    android:textSize="24dp"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="HH:MM:SS" />
+
+                <TextView
+                    android:id="@+id/fragMyTimeSetTvSaveTimeSetFirstItemEndTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:textColor="@color/ux_light_gray"
+                    android:textSize="12dp"
+                    app:layout_constraintBottom_toBottomOf="@id/fragMyTimeSetTvSaveTimeSetFirstItemWholeTime"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/fragMyTimeSetTvSaveTimeSetFirstItemWholeTime"
+                    tools:text="종료 예정 HH:MM PM" />
+
+
+                <TextView
+                    android:id="@+id/fragMyTimeSetTvSaveTimeSetFirstItemTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:textColor="@color/ux_light_gray"
+                    android:textSize="12dp"
+                    app:layout_constraintBottom_toBottomOf="@id/fragMyTimeSetIvSaveTimeSetFirstItemClockIcon"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/fragMyTimeSetIvSaveTimeSetFirstItemClockIcon"
+                    tools:text="타임셋명" />
+
+                <ImageView
+                    android:id="@+id/fragMyTimeSetIvSaveTimeSetFirstItemClockIcon"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_marginTop="33dp"
+                    android:src="@drawable/icon_timer_"
+                    app:layout_constraintRight_toLeftOf="@id/fragMyTimeSetTvSaveTimeSetFirstItemTimeCount"
+                    app:layout_constraintTop_toBottomOf="@id/fragMyTimeSetTvSaveTimeSetFirstItemWholeTime" />
+
+                <TextView
+                    android:id="@+id/fragMyTimeSetTvSaveTimeSetFirstItemTimeCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:text="N"
+                    android:textColor="@color/ux_light_gray"
+                    android:textSize="12dp"
+                    app:layout_constraintBottom_toBottomOf="@id/fragMyTimeSetIvSaveTimeSetFirstItemClockIcon"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/fragMyTimeSetIvSaveTimeSetFirstItemClockIcon" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/fragMyTimeSetRvSaveTimeSet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:visibility="gone"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:spanCount="2" />
+
+            <TextView
+                android:id="@+id/fragMyTimeSetTvSaveTimeSetMore"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/bg_radius_20_gray"
+                android:drawableEnd="@drawable/icon_close"
+                android:gravity="center_vertical"
+                android:paddingLeft="20dp"
+                android:paddingTop="2dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="2dp"
+                android:text="저장한 시간 모두보기"
+                android:textColor="@color/ux_pink"
+                android:visibility="gone" />
+
+
+            <TextView
+                android:id="@+id/fragMyTimeSetTvLikeTimeSetText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="80dp"
+                android:text="즐겨찾는 타임셋"
+                android:textColor="@color/ux_black"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/fragMyTimeSetTvLikeTimeSetManage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/bg_radius_20_blue"
+                android:drawableEnd="@drawable/icon_close"
+                android:gravity="center_vertical"
+                android:paddingLeft="20dp"
+                android:paddingTop="2dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="2dp"
+                android:text="즐겨찾는 타임셋 관리"
+                android:textColor="@color/white"
+                android:visibility="gone" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/fragMyTimeSetRvLikeTimeSet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/fragMyTimeSetTvLikeTimeSetMore"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/bg_radius_20_gray"
+                android:drawableEnd="@drawable/icon_close"
+                android:gravity="center_vertical"
+                android:paddingLeft="20dp"
+                android:paddingTop="2dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="2dp"
+                android:text="즐겨찾는 시간 모두보기"
+                android:textColor="@color/ux_pink"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

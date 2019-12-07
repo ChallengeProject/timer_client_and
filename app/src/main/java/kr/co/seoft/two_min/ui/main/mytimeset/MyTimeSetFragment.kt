@@ -86,7 +86,7 @@ class MyTimeSetFragment : Fragment() {
         super.onResume()
 
         compositeDisposable.add(
-            AppDatabase.getDatabase(requireContext()).timeSetDao().getSaveTimeSets()
+            AppDatabase.getDatabase(requireContext()).timeSetDao().getTimeSetsOrderBySave()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({

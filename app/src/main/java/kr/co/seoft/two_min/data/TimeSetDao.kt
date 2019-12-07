@@ -1,8 +1,7 @@
 package kr.co.seoft.two_min.data
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
+import androidx.room.OnConflictStrategy.REPLACE
 import io.reactivex.Single
 
 @Dao
@@ -13,9 +12,15 @@ interface TimeSetDao {
     @Query("SELECT * FROM time_set")
     fun getTimeSets(): Single<List<TimeSet>>
 
-    @Query("SELECT * FROM time_set ORDER BY likeOrder DESC, time_set_id ASC")
-    fun getSaveTimeSets(): Single<List<TimeSet>>
+    @Query("SELECT * FROM time_set ORDER BY saveOrder ASC, time_set_id DESC")
+    fun getTimeSetsOrderBySave(): Single<List<TimeSet>>
 
     @Query("SELECT * FROM time_set WHERE time_set_id=:id")
     fun getTimeSetById(id: Long): Single<TimeSet>
+
+    @Update(onConflict = REPLACE)
+    fun updateTimeSet(timeSet: TimeSet)
+
+    @Delete
+    fun deleteTimeSet(timeSet: TimeSet)
 }
