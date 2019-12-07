@@ -11,10 +11,18 @@ data class TimeSet(
     var title: String = "",
     var times: List<Time>,
     val memo: String = "",
+    var saveOrder:Int = -1,
+    var likeOrder:Int = -1,
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "time_set_id")
     val timeSetId: Long = 0
-) : Parcelable
+) : Parcelable {
+
+    var wholeTime: Int = 0
+        get() {
+            return times.map { it.seconds }.reduce { acc, i -> acc + i }
+        }
+}
 
 @Parcelize
 @Entity(

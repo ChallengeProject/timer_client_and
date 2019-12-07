@@ -215,7 +215,7 @@ class ProcActivity : AppCompatActivity() {
         }
 
         // set end time
-        val allTime = timeSet.times.map { it.seconds }.reduce { acc, i -> acc + i }
+        val allTime = timeSet.wholeTime
         if (endTimeStr.isEmpty()) endTimeStr = (readySec + allTime).toEndTimeStrAfterSec()
         if (allTimeStr.isEmpty()) allTimeStr =
             allTime.x1000L()

@@ -3,7 +3,9 @@ package kr.co.seoft.two_min.ui.main
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.view.*
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
@@ -19,6 +21,7 @@ import kr.co.seoft.two_min.data.AppDatabase
 import kr.co.seoft.two_min.data.TimeSet
 import kr.co.seoft.two_min.ui.ActivityHelper
 import kr.co.seoft.two_min.ui.main.home.HomeFragment
+import kr.co.seoft.two_min.ui.main.mytimeset.MyTimeSetFragment
 import kr.co.seoft.two_min.ui.preview.PreviewActivity
 import kr.co.seoft.two_min.ui.proc.ProcActivity
 import kr.co.seoft.two_min.ui.proc.ProcEndActivity
@@ -80,7 +83,7 @@ class MainActivity : ActivityHelper() {
                     }
                     else -> {
                         toolbar.setTitle("내 타임셋")
-                        SizeFragment2.newInstance()
+                        MyTimeSetFragment.newInstance()
                     }
                 }
             }
@@ -253,19 +256,4 @@ class MainActivity : ActivityHelper() {
         return true
     }
 
-}
-
-class SizeFragment2 : Fragment() {
-
-    companion object {
-        fun newInstance() = SizeFragment2()
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.size2, container, false)
-    }
 }

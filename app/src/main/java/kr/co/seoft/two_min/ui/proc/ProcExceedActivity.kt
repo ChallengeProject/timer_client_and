@@ -134,7 +134,7 @@ class ProcExceedActivity : AppCompatActivity() {
             }
         })
 
-        val allTime = timeSet.times.map { it.seconds }.reduce { acc, i -> acc + i }
+        val allTime = timeSet.wholeTime
         if (endTimeStr.isEmpty()) endTimeStr = (readyCount + allTime).toEndTimeStrAfterSec()
         if (allTimeStr.isEmpty()) allTimeStr =
             allTime.x1000L()
