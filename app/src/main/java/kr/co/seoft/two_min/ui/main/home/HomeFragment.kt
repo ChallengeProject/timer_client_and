@@ -22,9 +22,7 @@ class HomeFragment : Fragment() {
 
     companion object {
         fun newInstance() = HomeFragment()
-
         const val MAX_SECOND = 360000
-
     }
 
     val vm by lazy {
@@ -306,7 +304,7 @@ class HomeFragment : Fragment() {
             title = "THIS_IS_TITLE",
             times = fragHomeRv.getBadges()
                 .asSequence()
-                .filter { it.type == HomeBadgeType.NORMAL || it.type == HomeBadgeType.FOCUS }
+                .filter { (it.type == HomeBadgeType.NORMAL || it.type == HomeBadgeType.FOCUS) && it.time.seconds != 0 }
                 .map { it.time }
                 .toList(),
             memo = "THIS_IS_MEMO",

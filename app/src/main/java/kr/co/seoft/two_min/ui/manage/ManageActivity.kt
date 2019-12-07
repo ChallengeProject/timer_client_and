@@ -18,22 +18,21 @@ import kr.co.seoft.two_min.data.AppDatabase
 import kr.co.seoft.two_min.data.TimeSet
 import kr.co.seoft.two_min.ui.ActivityHelper
 import kr.co.seoft.two_min.util.dpToPx
-import kr.co.seoft.two_min.util.e
 import java.util.*
 
 class ManageActivity : ActivityHelper() {
-
 
     override val layoutResourceId = R.layout.activity_manage
 
     companion object {
 
-        const val EXTRA_TIME_SET_ID = "EXTRA_TIME_SET_ID"
-        const val RESP_TIME_SET_ID_FOR_START = "RESP_TIME_SET_ID_FOR_START"
+        private const val EXTRA_IS_LIKE_TIME_SET = "EXTRA_IS_LIKE_TIME_SET"
 
-        fun startSaveActivity(context: Context) {
+        fun startSaveActivity(context: Context, isLikeTimeSet: Boolean) {
             (context as Activity).startActivity(
-                Intent(context, ManageActivity::class.java)
+                Intent(context, ManageActivity::class.java).apply {
+                    putExtra(EXTRA_IS_LIKE_TIME_SET, isLikeTimeSet)
+                }
             )
         }
     }
@@ -46,6 +45,9 @@ class ManageActivity : ActivityHelper() {
 
     private var compositeDisposable = CompositeDisposable()
 
+    val isLikeTimeSet by lazy {
+        intent.getBooleanExtra(EXTRA_IS_LIKE_TIME_SET, false)
+    }
 
     private val curAdapter by lazy {
         ManageAdapter(true) { type, vh ->
@@ -92,14 +94,24 @@ class ManageActivity : ActivityHelper() {
         }
 
         actManageTvOk.setOnClickListener {
-
             Single.fromCallable {
-                val dao = AppDatabase.getDatabase(this).timeSetDao()
-                curTimeSets.forEachIndexed { index, timeSet ->
-                    dao.updateTimeSet(timeSet.apply { saveOrder = index })
-                }
-                removeTimeSets.forEach {
-                    dao.deleteTimeSet(it)
+
+                if (isLikeTimeSet) {
+                    val dao = AppDatabase.getDatabase(this).timeSetDao()
+                    curTimeSets.forEachIndexed { index, timeSet ->
+                        dao.updateTimeSet(timeSet.apply { likeOrder = index })
+                    }
+                    removeTimeSets.forEach {
+                        dao.updateTimeSet(it.apply { likeOrder = -1 })
+                    }
+                } else {
+                    val dao = AppDatabase.getDatabase(this).timeSetDao()
+                    curTimeSets.forEachIndexed { index, timeSet ->
+                        dao.updateTimeSet(timeSet.apply { saveOrder = index })
+                    }
+                    removeTimeSets.forEach {
+                        dao.deleteTimeSet(it)
+                    }
                 }
             }
                 .subscribeOn(Schedulers.io())
@@ -126,7 +138,6 @@ class ManageActivity : ActivityHelper() {
         })
         curItemTouchHelper.attachToRecyclerView(actManageRvCurrent)
 
-
         actManageRvRemove.adapter = removeAdapter
         actManageRvRemove.addItemDecoration(object : RecyclerView.ItemDecoration() {
             override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
@@ -141,22 +152,32 @@ class ManageActivity : ActivityHelper() {
     }
 
     private fun initTimeSets() {
-        compositeDisposable.add(
-            AppDatabase.getDatabase(this).timeSetDao().getTimeSetsOrderBySave()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    curTimeSets = it.toMutableList()
 
-                    curTimeSets.forEach {
-                        it.e()
-                    }
-
-                    curAdapter.submitList(curTimeSets)
-                }, {
-                    it.printStackTrace()
-                })
-        )
+        if (isLikeTimeSet) {
+            compositeDisposable.add(
+                AppDatabase.getDatabase(this).timeSetDao().getTimeSetsOrderByLike()
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe({
+                        curTimeSets = it.toMutableList()
+                        curAdapter.submitList(curTimeSets)
+                    }, {
+                        it.printStackTrace()
+                    })
+            )
+        } else {
+            compositeDisposable.add(
+                AppDatabase.getDatabase(this).timeSetDao().getTimeSetsOrderBySave()
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe({
+                        curTimeSets = it.toMutableList()
+                        curAdapter.submitList(curTimeSets)
+                    }, {
+                        it.printStackTrace()
+                    })
+            )
+        }
 
         removeAdapter.submitList(removeTimeSets)
     }

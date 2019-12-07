@@ -6,15 +6,15 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.item_save_time_set.view.*
+import kotlinx.android.synthetic.main.item_like_time_set.view.*
 import kr.co.seoft.two_min.R
 import kr.co.seoft.two_min.data.TimeSet
 import kr.co.seoft.two_min.util.toEndTimeStrAfterSec
 import kr.co.seoft.two_min.util.toTimeStr
 import kr.co.seoft.two_min.util.x1000L
 
-class SaveTimeSetAdapter(private val cb: (TimeSet) -> Unit) :
-    ListAdapter<TimeSet, SaveTimeSetAdapter.ItemVH>(object : DiffUtil.ItemCallback<TimeSet>() {
+class LikeTimeSetAdapter(private val cb: (TimeSet) -> Unit) :
+    ListAdapter<TimeSet, LikeTimeSetAdapter.ItemVH>(object : DiffUtil.ItemCallback<TimeSet>() {
         override fun areItemsTheSame(oldItem: TimeSet, newItem: TimeSet): Boolean {
             return oldItem.timeSetId == newItem.timeSetId
         }
@@ -27,7 +27,7 @@ class SaveTimeSetAdapter(private val cb: (TimeSet) -> Unit) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemVH {
         return ItemVH(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_save_time_set, parent, false),
+                .inflate(R.layout.item_like_time_set, parent, false),
             cb
         )
     }
@@ -38,10 +38,10 @@ class SaveTimeSetAdapter(private val cb: (TimeSet) -> Unit) :
 
     class ItemVH(itemView: View, private val cb: (TimeSet) -> Unit) : RecyclerView.ViewHolder(itemView) {
 
-        val tvWholeTime = itemView.itemSaveTimeSetTvWholeTime
-        val tvEndTime = itemView.itemSaveTimeSetTvEndTime
-        val tvTitle = itemView.itemSaveTimeSetTvTitle
-        val tvTimeCount = itemView.itemSaveTimeSetTvTimeCount
+        val tvWholeTime = itemView.itemLikeTimeSetTvWholeTime
+        val tvEndTime = itemView.itemLikeTimeSetTvEndTime
+        val tvTitle = itemView.itemLikeTimeSetTvTitle
+        val tvTimeCount = itemView.itemLikeTimeSetTvTimeCount
 
         fun bind(timeSet: TimeSet) {
             tvWholeTime.text = timeSet.wholeTime.x1000L().toTimeStr()

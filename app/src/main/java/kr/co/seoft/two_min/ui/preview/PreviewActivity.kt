@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -19,10 +20,11 @@ import kr.co.seoft.two_min.util.*
 
 class PreviewActivity : ActivityHelper() {
 
-
     override val layoutResourceId = R.layout.activity_preview
 
     companion object {
+
+        private const val TAG = "PreviewActivity"
 
         const val EXTRA_TIME_SET_ID = "EXTRA_TIME_SET_ID"
         const val RESP_TIME_SET_ID_FOR_START = "RESP_TIME_SET_ID_FOR_START"
@@ -39,7 +41,7 @@ class PreviewActivity : ActivityHelper() {
 
     lateinit var timeSet: TimeSet
     private val compositeDisposable = CompositeDisposable()
-    var isOn = false
+    var isLikeOn = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,6 +83,9 @@ class PreviewActivity : ActivityHelper() {
         actPreviewTvSound.text = timeSet.times[0].bell.bellTypeToString()
         actPreviewTvComment.text = timeSet.times[0].comment
 
+        isLikeOn = (timeSet.likeOrder != -1)
+        invalidateOptionsMenu()
+
         actPreviewLsshlv.showLeftSideSnappyHorizontalListView(timeSet.times.asSequence().map { it.seconds }.toList())
     }
 
@@ -94,20 +99,6 @@ class PreviewActivity : ActivityHelper() {
 
             setResult(Activity.RESULT_OK, Intent().apply { putExtra(RESP_TIME_SET_ID_FOR_START, timeSet.timeSetId) })
             finish()
-//            compositeDisposable.add(
-//                AppDatabase.getDatabase(this).timeSetDao()
-//                    .insertTimeSet(timeSet.apply { title = actPreviewTvTitle.text.toString() })
-//                    .subscribeOn(Schedulers.io())
-//                    .flatMap {
-//                        AppDatabase.getDatabase(this).timeSetDao().getTimeSetById(it)
-//                    }
-//                    .observeOn(AndroidSchedulers.mainThread())
-//                    .subscribe({
-//                        it.e()
-//                    }, {
-//                        it.printStackTrace()
-//                    })
-//            )
         }
 
         actPreviewLsshlv.setSelectedBadgeListener { item ->
@@ -127,7 +118,7 @@ class PreviewActivity : ActivityHelper() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        if (isOn) {
+        if (isLikeOn) {
             menuInflater.inflate(R.menu.preview_on, menu)
         } else {
             menuInflater.inflate(R.menu.preview_off, menu)
@@ -146,22 +137,39 @@ class PreviewActivity : ActivityHelper() {
                 "preview_off_share".toaste(this)
             }
             R.id.preview_off_like -> {
-                isOn = !isOn
+                isLikeOn = !isLikeOn
                 invalidateOptionsMenu()
-
-                "preview_off_like".toaste(this)
+                saveLikeToDatabase(true)
             }
             R.id.preview_on_share -> {
                 "preview_on_share".toaste(this)
             }
             R.id.preview_on_like -> {
-                isOn = !isOn
+                isLikeOn = !isLikeOn
                 invalidateOptionsMenu()
-
-                "preview_on_like".toaste(this)
+                saveLikeToDatabase(false)
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun saveLikeToDatabase(isLike: Boolean) {
+        compositeDisposable.add(
+            Single.fromCallable {
+                AppDatabase.getDatabase(this)
+                    .timeSetDao()
+                    .updateTimeSet(timeSet.apply {
+                        likeOrder = if (isLike) 0 else -1
+                    })
+            }
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    "like done".i(TAG)
+                }, {
+                    it.printStackTrace()
+                })
+        )
     }
 
     override fun onDestroy() {

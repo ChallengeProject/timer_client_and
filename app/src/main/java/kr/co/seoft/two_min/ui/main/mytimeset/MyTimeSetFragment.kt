@@ -14,7 +14,12 @@ import kotlinx.android.synthetic.main.fragment_my_time_set.*
 import kr.co.seoft.two_min.R
 import kr.co.seoft.two_min.data.AppDatabase
 import kr.co.seoft.two_min.data.TimeSet
-import kr.co.seoft.two_min.util.*
+import kr.co.seoft.two_min.ui.main.MainActivity
+import kr.co.seoft.two_min.ui.manage.ManageActivity
+import kr.co.seoft.two_min.util.dpToPx
+import kr.co.seoft.two_min.util.toEndTimeStrAfterSec
+import kr.co.seoft.two_min.util.toTimeStr
+import kr.co.seoft.two_min.util.x1000L
 
 
 class MyTimeSetFragment : Fragment() {
@@ -24,6 +29,9 @@ class MyTimeSetFragment : Fragment() {
         fun newInstance() = MyTimeSetFragment()
     }
 
+    val act by lazy {
+        activity as MainActivity
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,17 +41,17 @@ class MyTimeSetFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_my_time_set, container, false)
     }
 
-    val saveTimeSetAdapter by lazy {
+    private val saveTimeSetAdapter by lazy {
         SaveTimeSetAdapter {
-            it.e()
+            act.startPreviewActivity(it.timeSetId)
         }
     }
 
-//    val adapter2 by lazy {
-//        SaveTimeSetAdapter()
-//    }
-
-    var list2 = mutableListOf<String>()
+    private val likeTimeSetAdapter by lazy {
+        LikeTimeSetAdapter {
+            act.startPreviewActivity(it.timeSetId)
+        }
+    }
 
     var compositeDisposable = CompositeDisposable()
 
@@ -63,23 +71,14 @@ class MyTimeSetFragment : Fragment() {
             }
         })
 
+        fragMyTimeSetRvLikeTimeSet.adapter = likeTimeSetAdapter
+        fragMyTimeSetRvLikeTimeSet.addItemDecoration(object : RecyclerView.ItemDecoration() {
+            override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+                outRect.bottom = 10.dpToPx()
+            }
+        })
 
-//        rv1.layoutManager = LinearLayoutManager(requireContext()).apply {
-//            orientation = LinearLayoutManager.VERTICAL
-//        }
-//        rv2.layoutManager = LinearLayoutManager(requireContext())
-//
-//        rv1.adapter = adapter1
-//        rv2.adapter = adapter2
-//
-//        btTest.setOnClickListener {
-//
-//            list1.add(Random.nextInt().toString())
-//            list2.add(Random.nextInt().toString())
-//            adapter1.submitList(list1.toMutableList())
-//            adapter2.submitList(list2.toMutableList())
-//        }
-
+        initListener()
     }
 
     override fun onResume() {
@@ -91,24 +90,43 @@ class MyTimeSetFragment : Fragment() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     initSaveTimeSet(it)
-
                 }, {
                     it.printStackTrace()
                 })
         )
 
+        compositeDisposable.add(
+            AppDatabase.getDatabase(requireContext()).timeSetDao().getTimeSetsOrderByLike()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    initLikeTimeSet(it)
+                }, {
+                    it.printStackTrace()
+                })
+        )
     }
 
-    fun initSaveTimeSet(timeSets: List<TimeSet>) {
+    fun initListener(){
+
+        fragMyTimeSetTvSaveTimeSetManage.setOnClickListener {
+            ManageActivity.startSaveActivity(requireContext(),false)
+        }
+
+        fragMyTimeSetTvLikeTimeSetManage.setOnClickListener {
+            ManageActivity.startSaveActivity(requireContext(),true)
+        }
+
+
+    }
+
+    private fun initSaveTimeSet(timeSets: List<TimeSet>) {
         if (timeSets.isEmpty()) {
             fragMyTimeSetClEmptyLayout.visibility = View.VISIBLE
             fragMyTimeSetTvSaveTimeSetManage.visibility = View.GONE
             fragMyTimeSetClSaveTimeSetFirstItem.visibility = View.GONE
             fragMyTimeSetRvSaveTimeSet.visibility = View.GONE
             fragMyTimeSetTvSaveTimeSetMore.visibility = View.GONE
-//            fragMyTimeSetTvLikeTimeSetText.visibility = View.GONE
-//            fragMyTimeSetTvLikeTimeSetManage.visibility = View.GONE
-//            fragMyTimeSetRvLikeTimeSet.visibility = View.GONE
         } else {
             fragMyTimeSetClEmptyLayout.visibility = View.GONE
             fragMyTimeSetTvSaveTimeSetManage.visibility = View.VISIBLE
@@ -121,12 +139,6 @@ class MyTimeSetFragment : Fragment() {
                 fragMyTimeSetTvSaveTimeSetMore.visibility = View.GONE
             }
 
-
-//            fragMyTimeSetTvLikeTimeSetText.visibility = View.VISIBLE
-//            fragMyTimeSetTvLikeTimeSetManage.visibility = View.VISIBLE
-//            fragMyTimeSetRvLikeTimeSet.visibility = View.VISIBLE
-//            fragMyTimeSetTvLikeTimeSetCheck.visibility = View.VISIBLE
-
             timeSets.first().run {
                 fragMyTimeSetTvSaveTimeSetFirstItemTimeCount.text = this.times.size.toString()
                 fragMyTimeSetTvSaveTimeSetFirstItemEndTime.text = "종료 예정 ${this.wholeTime.toEndTimeStrAfterSec()}"
@@ -134,13 +146,35 @@ class MyTimeSetFragment : Fragment() {
                 fragMyTimeSetTvSaveTimeSetFirstItemWholeTime.text = this.wholeTime.x1000L().toTimeStr()
             }
 
+            fragMyTimeSetClSaveTimeSetFirstItem.setOnClickListener {
+                act.startPreviewActivity(timeSets[0].timeSetId)
+            }
+
             saveTimeSetAdapter.submitList(timeSets.drop(1).take(8))
         }
 
     }
 
-    fun initLikeTimeSet() {
+    private fun initLikeTimeSet(likeTimeSets: List<TimeSet>) {
 
+        if (likeTimeSets.isEmpty()) {
+            fragMyTimeSetTvLikeTimeSetText.visibility = View.GONE
+            fragMyTimeSetTvLikeTimeSetManage.visibility = View.GONE
+            fragMyTimeSetRvLikeTimeSet.visibility = View.GONE
+            return
+        } else {
+            fragMyTimeSetTvLikeTimeSetText.visibility = View.VISIBLE
+            fragMyTimeSetTvLikeTimeSetManage.visibility = View.VISIBLE
+            fragMyTimeSetRvLikeTimeSet.visibility = View.VISIBLE
+        }
+
+        if (likeTimeSets.size >= 11) {
+            fragMyTimeSetTvLikeTimeSetMore.visibility = View.VISIBLE
+        } else {
+            fragMyTimeSetTvLikeTimeSetMore.visibility = View.GONE
+        }
+
+        likeTimeSetAdapter.submitList(likeTimeSets.take(10))
     }
 
 

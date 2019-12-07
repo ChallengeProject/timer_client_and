@@ -13,6 +13,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import gun0912.tedkeyboardobserver.BaseKeyboardObserver
 import gun0912.tedkeyboardobserver.TedKeyboardObserver
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.include_toolbar.*
@@ -22,7 +23,6 @@ import kr.co.seoft.two_min.data.TimeSet
 import kr.co.seoft.two_min.ui.ActivityHelper
 import kr.co.seoft.two_min.ui.main.home.HomeFragment
 import kr.co.seoft.two_min.ui.main.mytimeset.MyTimeSetFragment
-import kr.co.seoft.two_min.ui.manage.ManageActivity
 import kr.co.seoft.two_min.ui.preview.PreviewActivity
 import kr.co.seoft.two_min.ui.proc.ProcActivity
 import kr.co.seoft.two_min.ui.proc.ProcEndActivity
@@ -50,6 +50,8 @@ class MainActivity : ActivityHelper() {
     val homeFragment by lazy {
         HomeFragment.newInstance()
     }
+
+    private var compositeDisposable = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -203,27 +205,28 @@ class MainActivity : ActivityHelper() {
                 }
                 SAVE_ACTIVITY -> {
                     val timeSetId = data.getLongExtra(SaveActivity.RESP_TIME_SET_ID, 0L)
-                    PreviewActivity.startSaveActivity(this, timeSetId)
+                    startPreviewActivity(timeSetId)
                 }
                 PREVIEW_ACTIVITY -> {
                     val timeSetId = data.getLongExtra(PreviewActivity.RESP_TIME_SET_ID_FOR_START, 0L)
-
-                    AppDatabase.getDatabase(this).timeSetDao().getTimeSetById(timeSetId)
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe({
-                            startProc(it)
-                        }, {
-                            it.printStackTrace()
-                        })
-
-
+                    compositeDisposable.add(
+                        AppDatabase.getDatabase(this).timeSetDao().getTimeSetById(timeSetId)
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe({
+                                startProc(it)
+                            }, {
+                                it.printStackTrace()
+                            })
+                    )
                 }
 
             }
         }
+    }
 
-
+    fun startPreviewActivity(timeSetId: Long) {
+        PreviewActivity.startSaveActivity(this, timeSetId)
     }
 
     private fun initToolbar() {
@@ -239,12 +242,12 @@ class MainActivity : ActivityHelper() {
         when (item.itemId) {
             R.id.main_home_setting -> {
                 "main_home_setting".toaste(this)
-//                actHomeViewPager.isUserInputEnabled =true
+
+
             }
             R.id.main_home_history -> {
                 "main_home_history".toaste(this)
 
-                ManageActivity.startSaveActivity(this)
 
 //                actHomeViewPager.isUserInputEnabled =false
             }
@@ -258,6 +261,11 @@ class MainActivity : ActivityHelper() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main_home, menu)
         return true
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        compositeDisposable.clear()
     }
 
 }
