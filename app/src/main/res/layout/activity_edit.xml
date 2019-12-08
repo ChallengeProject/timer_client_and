@@ -5,68 +5,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/ux_gray"
-    tools:context=".ui.main.MainActivity">
+    tools:context=".ui.edit.EditActivity">
+
 
     <include
-        android:id="@+id/actMainIncToolbar"
+        android:id="@+id/actEditIncToolbar"
         layout="@layout/include_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/actMainViewPager"
+    <FrameLayout
+        android:id="@+id/actEditFrag"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/actMainLlTabLayoutLine"
-        app:layout_constraintTop_toBottomOf="@id/actMainIncToolbar"
-        app:tabMode="scrollable" />
+        app:layout_constraintBottom_toTopOf="@id/actEditLlBottomButtons"
+        app:layout_constraintTop_toBottomOf="@id/actEditIncToolbar"   />
 
 
     <LinearLayout
-        android:id="@+id/actMainLlTabLayoutLine"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@id/actMainTablayout"
-        app:layout_constraintTop_toBottomOf="@id/actMainViewPager">
-
-        <View
-            android:id="@+id/actMainViewTabLayoutLine1"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_weight="1"
-            android:background="#123123" />
-
-        <View
-            android:id="@+id/actMainViewTabLayoutLine2"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_weight="1"
-            android:background="#456456" />
-
-    </LinearLayout>
-
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/actMainTablayout"
+        android:id="@+id/actEditLlBottomButtons"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:tabIndicatorHeight="0dp" />
-
-    <LinearLayout
-        android:id="@+id/actMainLlBottomButtons"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
         android:background="@color/ux_gray"
         android:orientation="horizontal"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="@id/actMainLlTabLayoutLine">
+        app:layout_constraintBottom_toBottomOf="parent" >
 
         <TextView
-            android:id="@+id/actMainBtBottom1Btn"
+            android:id="@+id/actEditBtBottom1Btn"
             android:layout_width="100dp"
             android:layout_height="45dp"
             android:layout_marginStart="18dp"
@@ -76,13 +41,13 @@
             android:background="@drawable/bg_bottom_button_gray"
             android:gravity="center"
             android:scaleType="fitXY"
-            android:text="저장"
+            android:text="취소"
             android:textColor="@color/ux_pink"
             android:textSize="15dp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/actMainBtBottom2Btn"
+            android:id="@+id/actEditBtBottom2Btn"
             android:layout_width="100dp"
             android:layout_height="45dp"
             android:layout_marginEnd="18dp"
@@ -90,31 +55,32 @@
             android:background="@drawable/bg_bottom_button_red"
             android:gravity="center"
             android:scaleType="fitXY"
-            android:text="시작"
+            android:text="완료"
             android:textColor="@color/white"
             android:textSize="15dp"
             android:textStyle="bold" />
 
     </LinearLayout>
 
+
     <View
-        android:id="@+id/actMainViewTransparentTop"
+        android:id="@+id/actEditViewTransparentTop"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="#CCFFFFFF"
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@id/actMainViewPager"
+        app:layout_constraintBottom_toTopOf="@id/actEditFrag"
         app:layout_constraintTop_toTopOf="parent" />
 
 
     <View
-        android:id="@+id/actMainViewTransparentBottom"
+        android:id="@+id/actEditViewTransparentBottom"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="#CCFFFFFF"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/actMainViewPager" />
+        app:layout_constraintTop_toBottomOf="@id/actEditFrag" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

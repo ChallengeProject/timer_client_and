@@ -104,6 +104,13 @@ class MiddleTransformSnappyRecyclerView : RecyclerView {
 
     fun getFocusingBadge() = homeBadgeAdapter.getBadge(focusingPos)
 
+    fun initPositionAndFocusAndFirstValueForLoadTimeSets(second:Int){
+        homeBadgeAdapter.setSecond(second,1)
+        homeBadgeAdapter.resetFocus(1)
+        this.smoothScrollToPosition(1)
+
+    }
+
     fun resetBadges() {
         focusingPos = 1
         homeBadgeAdapter.resetBadges()
@@ -137,7 +144,7 @@ class MiddleTransformSnappyRecyclerView : RecyclerView {
         homeBadgeAdapter.notifyDataSetChanged()
     }
 
-    fun addHomeBadges(homeBadges: Array<HomeBadge>) {
+    fun addHomeBadges(homeBadges: List<HomeBadge>) {
         homeBadges.forEach {
             if (it.type == HomeBadgeType.NORMAL) homeBadgeAdapter.addBadge(it)
         }

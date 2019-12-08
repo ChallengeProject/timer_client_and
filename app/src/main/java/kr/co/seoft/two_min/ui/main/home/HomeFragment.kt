@@ -8,15 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_home.*
 import kr.co.seoft.two_min.R
 import kr.co.seoft.two_min.data.Bell
 import kr.co.seoft.two_min.data.TimeSet
+import kr.co.seoft.two_min.ui.ActivityHelperForFrag
 import kr.co.seoft.two_min.ui.main.MainActivity
-import kr.co.seoft.two_min.util.KeyboardUtil
-import kr.co.seoft.two_min.util.color
-import kr.co.seoft.two_min.util.toEndTimeStrAfterSec
-import kr.co.seoft.two_min.util.toFormattingString
+import kr.co.seoft.two_min.util.*
 
 class HomeFragment : Fragment() {
 
@@ -53,7 +52,7 @@ class HomeFragment : Fragment() {
     }
 
     val act by lazy {
-        activity as MainActivity
+        activity as ActivityHelperForFrag
     }
 
     override fun onCreateView(
@@ -260,13 +259,6 @@ class HomeFragment : Fragment() {
     private fun checkViewVisibleAndSet() {
 
         if (fragHomeRv.getBadges().size <= 3) {
-
-//            if (subSecond == "") {
-//                updater.hideControlButton()
-//            } else {
-//                updater.showControlButton()
-//            }
-
             if (mainSecond == 0L) {
                 updater.hideRv()
             } else {
@@ -320,6 +312,20 @@ class HomeFragment : Fragment() {
         updater.setSubText(subSecond)
         fragHomeRv.resetBadges()
         checkViewVisibleAndSet()
+    }
+
+    fun loadTimeSet(timeSet: TimeSet) {
+        updater.showRv()
+        val firstTimeSecond = timeSet.times.first().seconds
+        mainSecond = firstTimeSecond.toLong()
+        fragHomeRv.initPositionAndFocusAndFirstValueForLoadTimeSets(firstTimeSecond)
+        updater.setMainTextAndEtc(firstTimeSecond.toLong(), true)
+
+        fragHomeRv.addHomeBadges(
+            timeSet.times.drop(1).map {
+                HomeBadge(it, HomeBadgeType.NORMAL)
+            }.toList()
+        )
     }
 
 }

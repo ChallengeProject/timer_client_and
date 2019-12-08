@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.include_toolbar.*
 import kr.co.seoft.two_min.R
 import kr.co.seoft.two_min.data.AppDatabase
 import kr.co.seoft.two_min.data.TimeSet
-import kr.co.seoft.two_min.ui.ActivityHelper
+import kr.co.seoft.two_min.ui.ActivityHelperForFrag
 import kr.co.seoft.two_min.ui.main.home.HomeFragment
 import kr.co.seoft.two_min.ui.main.mytimeset.MyTimeSetFragment
 import kr.co.seoft.two_min.ui.preview.PreviewActivity
@@ -31,7 +31,7 @@ import kr.co.seoft.two_min.ui.save.SaveActivity
 import kr.co.seoft.two_min.util.*
 
 
-class MainActivity : ActivityHelper() {
+class MainActivity : ActivityHelperForFrag() {
 
     companion object {
         const val PROC_ACTIVITY = 1111
@@ -44,8 +44,6 @@ class MainActivity : ActivityHelper() {
     override val layoutResourceId = R.layout.activity_main
 
     var showStatusBottomButtons = false
-
-    val db by lazy { AppDatabase.getDatabase(this) }
 
     val homeFragment by lazy {
         HomeFragment.newInstance()
@@ -62,18 +60,9 @@ class MainActivity : ActivityHelper() {
 
     }
 
-    fun startProc(timeSet: TimeSet) {
-        ProcActivity.startProcActivity(this, timeSet, 5)
-    }
-
-    fun startSave(timeSet: TimeSet) {
-        SaveActivity.startSaveActivity(this, timeSet)
-    }
-
     private fun initView() {
 
-
-        actHomeViewPager.adapter = object : FragmentStateAdapter(this) {
+        actMainViewPager.adapter = object : FragmentStateAdapter(this) {
             override fun getItemCount(): Int {
                 return 2
             }
@@ -92,24 +81,24 @@ class MainActivity : ActivityHelper() {
             }
         }
 
-        actHomeViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+        actMainViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
 
                 if (position == 0) {
-                    actHomeViewTabLayoutLine1.visibility = View.VISIBLE
-                    actHomeViewTabLayoutLine2.visibility = View.INVISIBLE
+                    actMainViewTabLayoutLine1.visibility = View.VISIBLE
+                    actMainViewTabLayoutLine2.visibility = View.INVISIBLE
                 } else {
-                    actHomeViewTabLayoutLine1.visibility = View.INVISIBLE
-                    actHomeViewTabLayoutLine2.visibility = View.VISIBLE
+                    actMainViewTabLayoutLine1.visibility = View.INVISIBLE
+                    actMainViewTabLayoutLine2.visibility = View.VISIBLE
                 }
             }
         })
 
-        actHomeTablayout.getTabAt(0)?.setIcon(R.drawable.dummy)
-        actHomeTablayout.getTabAt(1)?.setIcon(R.drawable.dummy)
+        actMainTablayout.getTabAt(0)?.setIcon(R.drawable.dummy)
+        actMainTablayout.getTabAt(1)?.setIcon(R.drawable.dummy)
 
-        TabLayoutMediator(actHomeTablayout, actHomeViewPager) { tab, position ->
+        TabLayoutMediator(actMainTablayout, actMainViewPager) { tab, position ->
             when (position) {
                 0 -> {
                     tab.text = "Size"
@@ -139,10 +128,10 @@ class MainActivity : ActivityHelper() {
             override fun onKeyboardChange(isShow: Boolean) {
                 if (isShow) {
                     setShowTabLayout(false)
-                    actHomeLlBottomButtons.visibility = View.INVISIBLE
+                    actMainLlBottomButtons.visibility = View.INVISIBLE
                 } else {
                     setShowTabLayout(true)
-                    if (showStatusBottomButtons) actHomeLlBottomButtons.visibility = View.VISIBLE
+                    if (showStatusBottomButtons) actMainLlBottomButtons.visibility = View.VISIBLE
                 }
             }
 
@@ -150,23 +139,31 @@ class MainActivity : ActivityHelper() {
 
     }
 
-    fun setLockViewpager(isLock: Boolean) {
-        actHomeViewPager.isUserInputEnabled = !isLock
+    override fun setLockViewpager(isLock: Boolean) {
+        actMainViewPager.isUserInputEnabled = !isLock
     }
 
-    fun setTransparentToolbarAndBottoms(isTransparent: Boolean) {
+    override fun setShowBottomButtons(isShow: Boolean) {
+        showStatusBottomButtons = isShow
+        actMainLlBottomButtons.visibility = isShow.setVisibleOrGone()
+    }
+
+    override fun startProc(timeSet: TimeSet) {
+        ProcActivity.startProcActivity(this, timeSet, 5)
+    }
+
+    override fun startSave(timeSet: TimeSet) {
+        SaveActivity.startSaveActivity(this, timeSet)
+    }
+
+    override fun setTransparentToolbarAndBottoms(isTransparent: Boolean) {
         actMainViewTransparentTop.visibility = isTransparent.setVisible()
         actMainViewTransparentBottom.visibility = isTransparent.setVisible()
     }
 
-    fun setShowBottomButtons(isShow: Boolean) {
-        showStatusBottomButtons = isShow
-        actHomeLlBottomButtons.visibility = isShow.setVisibleOrGone()
-    }
-
     fun setShowTabLayout(isShow: Boolean) {
-        actHomeLlTabLayoutLine.visibility = isShow.setVisibleOrGone()
-        actHomeTablayout.visibility = isShow.setVisibleOrGone()
+        actMainLlTabLayoutLine.visibility = isShow.setVisibleOrGone()
+        actMainTablayout.visibility = isShow.setVisibleOrGone()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -249,7 +246,7 @@ class MainActivity : ActivityHelper() {
                 "main_home_history".toaste(this)
 
 
-//                actHomeViewPager.isUserInputEnabled =false
+//                actMainViewPager.isUserInputEnabled =false
             }
             android.R.id.home -> {
                 "android.R.id.home".toaste(this)

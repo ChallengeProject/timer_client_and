@@ -12,9 +12,12 @@ import android.view.animation.Animation
 import android.view.animation.Transformation
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.view.forEach
+import androidx.core.view.size
 import kotlinx.android.synthetic.main.left_side_snappy_horizontal_list_view.view.*
 import kr.co.seoft.two_min.R
 import kr.co.seoft.two_min.util.dpToPx
+import kr.co.seoft.two_min.util.e
 import kr.co.seoft.two_min.util.toDrawable
 import kr.co.seoft.two_min.util.toFormattingString
 import java.lang.Math.pow
@@ -88,6 +91,9 @@ open class LeftSideSnappyHorizontalListView : LinearLayout {
     }
 
     fun showLeftSideSnappyHorizontalListView(seconds: List<Int>) {
+
+        // clear before draw, remove skip index [1] because 1 index is  spLeftMargin
+        lsshlvRoot.removeViews(1, lsshlvRoot.size - 1)
 
         this.itemCount = seconds.size
 

@@ -24,7 +24,7 @@ class HomeFragUpdater(val f: HomeFragment) {
         f.fragHomeTvHour.visibility = View.INVISIBLE
         f.fragHomeTvMinute.visibility = View.INVISIBLE
         f.fragHomeTvSecond.visibility = View.INVISIBLE
-        setMainTextAndEtc(0, false)
+//        setMainTextAndEtc(0, false) // 191208 주석처리, 왜 넣었는지 기억이안남
         setSubText("")
     }
 

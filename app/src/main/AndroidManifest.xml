@@ -16,7 +16,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Design.Light.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.manage.ManageActivity"></activity>
+        <activity
+            android:name=".ui.edit.EditActivity"
+            android:windowSoftInputMode="adjustResize|adjustPan"/>
+
+        <activity android:name=".ui.manage.ManageActivity" />
         <activity android:name=".ui.preview.PreviewActivity" />
         <activity
             android:name=".ui.save.SaveActivity"

@@ -84,17 +84,24 @@ class MyTimeSetFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
+        loadSaveTimeSet()
+    }
+
+    fun loadSaveTimeSet(){
         compositeDisposable.add(
             AppDatabase.getDatabase(requireContext()).timeSetDao().getTimeSetsOrderBySave()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     initSaveTimeSet(it)
+                    loadLikeTimeSet()
                 }, {
                     it.printStackTrace()
                 })
         )
+    }
 
+    fun loadLikeTimeSet(){
         compositeDisposable.add(
             AppDatabase.getDatabase(requireContext()).timeSetDao().getTimeSetsOrderByLike()
                 .subscribeOn(Schedulers.io())
@@ -106,6 +113,7 @@ class MyTimeSetFragment : Fragment() {
                 })
         )
     }
+
 
     fun initListener(){
 

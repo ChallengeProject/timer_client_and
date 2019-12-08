@@ -15,6 +15,7 @@ import kr.co.seoft.two_min.R
 import kr.co.seoft.two_min.data.AppDatabase
 import kr.co.seoft.two_min.data.TimeSet
 import kr.co.seoft.two_min.ui.ActivityHelper
+import kr.co.seoft.two_min.ui.edit.EditActivity
 import kr.co.seoft.two_min.ui.main.MainActivity
 import kr.co.seoft.two_min.util.*
 
@@ -43,13 +44,20 @@ class PreviewActivity : ActivityHelper() {
     private val compositeDisposable = CompositeDisposable()
     var isLikeOn = false
 
+    val timeSetId by lazy {
+        intent.getLongExtra(EXTRA_TIME_SET_ID, 0L)
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val timeSetId = intent.getLongExtra(EXTRA_TIME_SET_ID, 0L)
+    }
+
+    override fun onResume() {
+        super.onResume()
 
         compositeDisposable.add(
-
             AppDatabase.getDatabase(this).timeSetDao()
                 .getTimeSetById(timeSetId)
                 .subscribeOn(Schedulers.io())
@@ -59,20 +67,21 @@ class PreviewActivity : ActivityHelper() {
                     inits()
                 }, {
                     it.printStackTrace()
+                    // EditAct 에서 타임셋이 삭제될 경우 여기로 빠지게되고 자동으로 finish, 밖에서 rearrange 처리됨
+                    finish()
                 })
-
         )
     }
 
-    fun inits() {
+    private fun inits() {
         initToolbar()
         initViews()
         initListener()
     }
 
-    fun initViews() {
+    private fun initViews() {
 
-        actPreviewTvTitle.text = timeSet.title.toEditable()
+        actPreviewTvTitle.text = timeSet.title
 
         val sumOfTime = timeSet.times.sumBy { it.seconds }
 
@@ -89,10 +98,11 @@ class PreviewActivity : ActivityHelper() {
         actPreviewLsshlv.showLeftSideSnappyHorizontalListView(timeSet.times.asSequence().map { it.seconds }.toList())
     }
 
-    fun initListener() {
+    private fun initListener() {
 
         actPreviewBtBottom1Btn.setOnClickListener {
-            finish()
+
+            EditActivity.startEditActivity(this, timeSet.timeSetId)
         }
 
         actPreviewBtBottom2Btn.setOnClickListener {
@@ -114,6 +124,8 @@ class PreviewActivity : ActivityHelper() {
         setupActionBar(R.id.toolbar) {
             setDisplayShowTitleEnabled(true)
             setDisplayHomeAsUpEnabled(true)
+            setHomeAsUpIndicator(R.drawable.btn_back)
+            setTitle("")
         }
     }
 
