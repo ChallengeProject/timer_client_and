@@ -8,7 +8,7 @@
     android:orientation="vertical">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/fragClTopTime"
+        android:id="@+id/fragHomeClTopTime"
         android:layout_width="215dp"
         android:layout_height="50dp"
         android:background="@drawable/bg_home_top_text"
@@ -51,7 +51,7 @@
         app:layout_constraintBottom_toTopOf="@id/fragHomeLlNumberPad"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fragClTopTime"
+        app:layout_constraintTop_toBottomOf="@id/fragHomeClTopTime"
         tools:text="타임셋 시간 00:00:59       종료 예정 9:42 AM" />
 
     <LinearLayout

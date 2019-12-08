@@ -125,6 +125,10 @@ class MyTimeSetFragment : Fragment() {
             ManageActivity.startSaveActivity(requireContext(),true)
         }
 
+        fragMyTimeSetClEmptyLayout.setOnClickListener {
+            (requireActivity() as MainActivity).movePage(0)
+        }
+
 
     }
 

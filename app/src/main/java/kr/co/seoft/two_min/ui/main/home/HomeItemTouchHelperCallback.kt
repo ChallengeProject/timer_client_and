@@ -8,8 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 // ref : http://dudmy.net/android/2018/05/02/drag-and-swipe-recyclerview , https://github.com/dudmy/blog-sample
 class HomeItemTouchHelperCallback(
     private val moveCb: (RecyclerView.ViewHolder, RecyclerView.ViewHolder) -> Unit,
-    private val endCb: () -> Unit
+    private val endCb: (Int) -> Unit
 ) : ItemTouchHelper.Callback() {
+
+    // isMoved 처리 안하면 crash, but ManageActivityy에서는 잘됨?? 여유있을때 확인
+    private var isMoved = false
 
     override fun getMovementFlags(
         recyclerView: RecyclerView,
@@ -26,6 +29,7 @@ class HomeItemTouchHelperCallback(
         target: RecyclerView.ViewHolder
     ): Boolean {
         moveCb.invoke(viewHolder, target)
+        isMoved = true
         return true
     }
 
@@ -34,7 +38,10 @@ class HomeItemTouchHelperCallback(
      */
     override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
         super.onSelectedChanged(viewHolder, actionState)
-        endCb.invoke()
+        if (isMoved) {
+            endCb.invoke(0)
+            isMoved = false
+        }
     }
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {}

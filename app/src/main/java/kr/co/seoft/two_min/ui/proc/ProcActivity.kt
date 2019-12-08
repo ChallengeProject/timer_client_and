@@ -95,6 +95,7 @@ class ProcActivity : AppCompatActivity() {
                         timeBrd?.let {
                             unregisterReceiver(timeBrd)
                         }
+                        startActivity(Intent(baseContext,MainActivity::class.java))
                         finish()
                     }
                     CMD_BRD.STOP -> {

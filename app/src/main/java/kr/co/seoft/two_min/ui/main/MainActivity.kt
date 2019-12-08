@@ -70,11 +70,9 @@ class MainActivity : ActivityHelperForFrag() {
             override fun createFragment(position: Int): Fragment {
                 return when (position) {
                     0 -> {
-                        toolbar.setTitle("")
                         homeFragment
                     }
                     else -> {
-                        toolbar.setTitle("내 타임셋")
                         MyTimeSetFragment.newInstance()
                     }
                 }
@@ -86,9 +84,11 @@ class MainActivity : ActivityHelperForFrag() {
                 super.onPageSelected(position)
 
                 if (position == 0) {
+                    toolbar.title = ""
                     actMainViewTabLayoutLine1.visibility = View.VISIBLE
                     actMainViewTabLayoutLine2.visibility = View.INVISIBLE
                 } else {
+                    toolbar.title = "내 타임셋"
                     actMainViewTabLayoutLine1.visibility = View.INVISIBLE
                     actMainViewTabLayoutLine2.visibility = View.VISIBLE
                 }
@@ -124,19 +124,18 @@ class MainActivity : ActivityHelperForFrag() {
         actMainViewTransparentTop.setOnClickListener { /*pass*/ }
         actMainViewTransparentBottom.setOnClickListener { /*pass*/ }
 
-        TedKeyboardObserver(this).listen(object : BaseKeyboardObserver.OnKeyboardListener {
-            override fun onKeyboardChange(isShow: Boolean) {
-                if (isShow) {
-                    setShowTabLayout(false)
-                    actMainLlBottomButtons.visibility = View.INVISIBLE
-                } else {
-                    setShowTabLayout(true)
-                    if (showStatusBottomButtons) actMainLlBottomButtons.visibility = View.VISIBLE
+        TedKeyboardObserver(this).listen(
+            object : BaseKeyboardObserver.OnKeyboardListener {
+                override fun onKeyboardChange(isShow: Boolean) {
+                    if (isShow) {
+                        setShowTabLayout(false)
+                        actMainLlBottomButtons.visibility = View.INVISIBLE
+                    } else {
+                        setShowTabLayout(true)
+                        if (showStatusBottomButtons) actMainLlBottomButtons.visibility = View.VISIBLE
+                    }
                 }
-            }
-
-        })
-
+            })
     }
 
     override fun setLockViewpager(isLock: Boolean) {
@@ -232,6 +231,10 @@ class MainActivity : ActivityHelperForFrag() {
             setDisplayHomeAsUpEnabled(false) // true is back icon
             setHomeAsUpIndicator(R.drawable.btn_back)
         }
+    }
+
+    fun movePage(page:Int){
+        actMainViewPager.setCurrentItem(page,true)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
