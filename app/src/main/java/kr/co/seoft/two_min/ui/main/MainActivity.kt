@@ -19,8 +19,11 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.include_toolbar.*
 import kr.co.seoft.two_min.R
 import kr.co.seoft.two_min.data.AppDatabase
+import kr.co.seoft.two_min.data.History
 import kr.co.seoft.two_min.data.TimeSet
+import kr.co.seoft.two_min.data.UseInfo
 import kr.co.seoft.two_min.ui.ActivityHelperForFrag
+import kr.co.seoft.two_min.ui.history.HistoriesActivity
 import kr.co.seoft.two_min.ui.main.home.HomeFragment
 import kr.co.seoft.two_min.ui.main.mytimeset.MyTimeSetFragment
 import kr.co.seoft.two_min.ui.preview.PreviewActivity
@@ -124,18 +127,19 @@ class MainActivity : ActivityHelperForFrag() {
         actMainViewTransparentTop.setOnClickListener { /*pass*/ }
         actMainViewTransparentBottom.setOnClickListener { /*pass*/ }
 
-        TedKeyboardObserver(this).listen(
-            object : BaseKeyboardObserver.OnKeyboardListener {
-                override fun onKeyboardChange(isShow: Boolean) {
-                    if (isShow) {
-                        setShowTabLayout(false)
-                        actMainLlBottomButtons.visibility = View.INVISIBLE
-                    } else {
-                        setShowTabLayout(true)
-                        if (showStatusBottomButtons) actMainLlBottomButtons.visibility = View.VISIBLE
-                    }
-                }
-            })
+        // manifest에 adjustResize|adjustPan 같은 옵션을주어 동작하지않음, 근대 해당옵션으로 원하는대로 동작함 별일없으면 주석처리
+//        TedKeyboardObserver(this).listen(
+//            object : BaseKeyboardObserver.OnKeyboardListener {
+//                override fun onKeyboardChange(isShow: Boolean) {
+//                    if (isShow) {
+//                        setShowTabLayout(false)
+//                        actMainLlBottomButtons.visibility = View.INVISIBLE
+//                    } else {
+//                        setShowTabLayout(true)
+//                        if (showStatusBottomButtons) actMainLlBottomButtons.visibility = View.VISIBLE
+//                    }
+//                }
+//            })
     }
 
     override fun setLockViewpager(isLock: Boolean) {
@@ -165,6 +169,48 @@ class MainActivity : ActivityHelperForFrag() {
         actMainTablayout.visibility = isShow.setVisibleOrGone()
     }
 
+    private fun saveTimeSetForHitstory(timeSet: TimeSet, useInfo: UseInfo) {
+        compositeDisposable.add(
+            db.timeSetDao().insertTimeSet(
+                timeSet.copy().apply {
+                    timeSetId = 0
+                    useHistory = 1
+                }
+            )
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    saveHistory(timeSet.apply { timeSetId = it }, useInfo)
+                }, {
+                    it.printStackTrace()
+                })
+
+        )
+    }
+
+    fun saveHistory(timeSet: TimeSet, useInfo: UseInfo) {
+        compositeDisposable.add(
+            db.timeSetDao().insertHistory(
+                History(
+                    timeSetId = timeSet.timeSetId,
+                    wholeTime = timeSet.wholeTime,
+                    timeSetTitle = timeSet.title,
+                    startTimeString = useInfo.startTimeString,
+                    endTimeString = useInfo.endTimeString,
+                    ymdString = useInfo.ymdString
+                )
+            )
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    "저장완료todo".e()
+
+                }, {
+                    it.printStackTrace()
+                })
+        )
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -174,11 +220,19 @@ class MainActivity : ActivityHelperForFrag() {
             when (requestCode) {
                 PROC_ACTIVITY -> {
                     "PROC_ACTIVITY in Main".i()
-                    ProcEndActivity.startProcEndActivity(
-                        this,
-                        data.getParcelableExtra(ProcActivity.RESP_TIME_SET),
-                        data.getParcelableExtra(ProcActivity.RESP_USE_INFO)
-                    )
+
+                    if (data.getBooleanExtra(ProcActivity.RESP_IS_STOP, true)) { // 도중 취소
+                        val timeSet = data.getParcelableExtra(ProcActivity.RESP_TIME_SET) as TimeSet
+                        val useInfo = data.getParcelableExtra(ProcActivity.RESP_USE_INFO) as UseInfo
+                        saveTimeSetForHitstory(timeSet, useInfo)
+                    } else { // is 시간 다가서 종료
+                        ProcEndActivity.startProcEndActivity(
+                            this,
+                            data.getParcelableExtra(ProcActivity.RESP_TIME_SET),
+                            data.getParcelableExtra(ProcActivity.RESP_USE_INFO)
+                        )
+                    }
+
                 }
                 PROC_END_ACTIVITY -> {
                     "PROC_END_ACTIVITY in Main".i()
@@ -233,8 +287,8 @@ class MainActivity : ActivityHelperForFrag() {
         }
     }
 
-    fun movePage(page:Int){
-        actMainViewPager.setCurrentItem(page,true)
+    fun movePage(page: Int) {
+        actMainViewPager.setCurrentItem(page, true)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -242,14 +296,10 @@ class MainActivity : ActivityHelperForFrag() {
         when (item.itemId) {
             R.id.main_home_setting -> {
                 "main_home_setting".toaste(this)
-
-
             }
             R.id.main_home_history -> {
                 "main_home_history".toaste(this)
-
-
-//                actMainViewPager.isUserInputEnabled =false
+                HistoriesActivity.startHistoriesActivity(this)
             }
             android.R.id.home -> {
                 "android.R.id.home".toaste(this)

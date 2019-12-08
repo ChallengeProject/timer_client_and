@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.history.HistoryActivity">
+
+    <include
+        android:id="@+id/actHistoryIncToolbar"
+        layout="@layout/include_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/actHistoryClContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="35dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/actHistoryIncToolbar"
+
+        >
+
+        <TextView
+            android:id="@+id/actHistoryTvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:lines="1"
+            android:textColor="@color/ux_black"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="내 타임셋" />
+
+        <View
+            android:id="@+id/actHistoryViewLine"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/ux_dark_gray"
+            app:layout_constraintTop_toBottomOf="@id/actHistoryTvTitle" />
+
+        <TextView
+            android:id="@+id/actHistoryTvTimeSetTimeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="타임셋 시간"
+            android:textColor="@color/ux_dark_gray"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/actHistoryViewLine" />
+
+        <TextView
+            android:id="@+id/actHistoryTvUseBoundaryText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
+            android:text="사용 일시"
+            android:textColor="@color/ux_dark_gray"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/actHistoryTvTimeSetTimeText" />
+
+        <TextView
+            android:id="@+id/actHistoryTvAddTimeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
+            android:text="추가한 시간"
+            android:textColor="@color/ux_dark_gray"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/actHistoryTvUseBoundaryText" />
+
+        <TextView
+            android:id="@+id/actHistoryTvRepeatCountText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
+            android:text="반복 횟수"
+            android:textColor="@color/ux_dark_gray"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/actHistoryTvAddTimeText" />
+
+        <TextView
+            android:id="@+id/actHistoryTvEtcInfoText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
+            android:text="부가 정보"
+            android:textColor="@color/ux_dark_gray"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/actHistoryTvRepeatCountText" />
+
+
+        <TextView
+            android:id="@+id/actHistoryTvTimeSetTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:textColor="@color/ux_dark_gray"
+            android:textSize="15dp"
+            app:layout_constraintLeft_toRightOf="@id/actHistoryTvTimeSetTimeText"
+            app:layout_constraintTop_toTopOf="@id/actHistoryTvTimeSetTimeText"
+            tools:text="00:01:00" />
+
+
+        <TextView
+            android:id="@+id/actHistoryTvUseBoundary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
+            android:textColor="@color/ux_dark_gray"
+            android:textSize="15dp"
+            app:layout_constraintLeft_toLeftOf="@id/actHistoryTvTimeSetTime"
+            app:layout_constraintTop_toBottomOf="@id/actHistoryTvTimeSetTime"
+            tools:text="19.5.24/9:42 AM - 9:43 AM" />
+
+        <TextView
+            android:id="@+id/actHistoryTvAddTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
+            android:textColor="@color/ux_dark_gray"
+            android:textSize="15dp"
+            app:layout_constraintLeft_toLeftOf="@id/actHistoryTvUseBoundary"
+            app:layout_constraintTop_toBottomOf="@id/actHistoryTvUseBoundary"
+            tools:text="+3분" />
+
+        <TextView
+            android:id="@+id/actHistoryTvRepeatCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
+            android:textColor="@color/ux_dark_gray"
+            android:textSize="15dp"
+            app:layout_constraintLeft_toLeftOf="@id/actHistoryTvAddTime"
+            app:layout_constraintTop_toBottomOf="@id/actHistoryTvAddTime"
+            tools:text="3회" />
+
+
+        <TextView
+            android:id="@+id/actHistoryTvEtcInfo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
+            android:textColor="@color/ux_dark_gray"
+            android:textSize="15dp"
+            app:layout_constraintLeft_toLeftOf="@id/actHistoryTvRepeatCount"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/actHistoryTvRepeatCount"
+            tools:text="일시정지 1회 진행중머라머라 2회" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/actHistoryClMemoLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/bg_radius_20_gray"
+        app:layout_constraintBottom_toTopOf="@id/actHistoryLsshlv"
+        app:layout_constraintLeft_toLeftOf="@id/actHistoryClContent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/actHistoryClContent">
+
+        <ImageView
+            android:id="@+id/actHistoryIvMemoIcon"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="14dp"
+            android:src="@drawable/ic_temp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/actHistoryEtMemo"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@null"
+            android:gravity="top"
+            android:hint="지금도 메모를 남길 수 있어요"
+            android:scrollbars="vertical"
+            android:textColor="@color/ux_black"
+            app:layout_constraintBottom_toTopOf="@id/actHistoryTvExceedNumberText"
+            app:layout_constraintLeft_toRightOf="@id/actHistoryIvMemoIcon"
+            app:layout_constraintRight_toRightOf="@id/actHistoryTvExceedNumberText"
+            app:layout_constraintTop_toTopOf="@+id/actHistoryIvMemoIcon" />
+
+        <TextView
+            android:id="@+id/actHistoryTvExceedNumberText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="8dp"
+            android:text="/1000 bytes"
+            android:textColor="@color/ux_black"
+            android:textSize="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <TextView
+            android:id="@+id/actHistoryTvExceedNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="8dp"
+            android:text="0"
+            android:textColor="@color/ux_black"
+            android:textSize="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/actHistoryTvExceedNumberText" />
+
+        <TextView
+            android:id="@+id/actHistoryTvExceedErrorText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="작성 가능한 글자 수가 초과됐어요"
+            android:textColor="@color/ux_pink"
+            android:textSize="12dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@id/actHistoryTvExceedNumberText"
+            app:layout_constraintLeft_toLeftOf="@id/actHistoryEtMemo"
+            app:layout_constraintTop_toTopOf="@id/actHistoryTvExceedNumberText"
+            tools:visibility="visible" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:visibility="invisible"
+        tools:visibility="visible"
+        android:id="@+id/actHistoryClBubbleLayout"
+        android:layout_width="200dp"
+        android:layout_height="61dp"
+        android:background="@drawable/history_bubble"
+        app:layout_constraintBottom_toTopOf="@id/actHistoryLsshlv"
+        app:layout_constraintLeft_toLeftOf="@id/actHistoryClMemoLayout">
+
+        <ImageView
+            android:id="@+id/actHistoryIvBubbleClose"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="7dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/btn_close_big"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/actHistoryTvBubbleMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@id/actHistoryIvBubbleClose"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="@id/actHistoryIvBubbleClose"
+            tools:text="N번쨰 타이머에서\n00:00:00남기고 취소" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <kr.co.seoft.two_min.ui.proc.LeftSideSnappyHorizontalListView
+        android:id="@+id/actHistoryLsshlv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/actHistoryLlBottomButtons" />
+
+
+    <LinearLayout
+        android:id="@+id/actHistoryLlBottomButtons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/ux_gray"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <TextView
+            android:id="@+id/actHistoryBtBottom1Btn"
+            android:layout_width="100dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginEnd="19dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_bottom_button_gray"
+            android:gravity="center"
+            android:scaleType="fitXY"
+            android:text="저장"
+            android:textColor="@color/ux_pink"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/actHistoryBtBottom2Btn"
+            android:layout_width="100dp"
+            android:layout_height="45dp"
+            android:layout_marginEnd="18dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_bottom_button_gray"
+            android:gravity="center"
+            android:scaleType="fitXY"
+            android:text="시작"
+            android:textColor="@color/ux_black"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

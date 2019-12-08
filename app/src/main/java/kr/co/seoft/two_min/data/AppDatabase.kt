@@ -10,6 +10,7 @@ import androidx.room.TypeConverters
     entities = [
         Time::class,
         TimeSet::class,
+        History::class,
         Bell::class
     ],
     version = 1

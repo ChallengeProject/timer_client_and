@@ -66,7 +66,7 @@ class ProcEndActivity : AppCompatActivity() {
         setContentView(R.layout.activity_proc_end)
 
         tvTimesetTitle.text = timeSet.title
-        tvDateInfo.text = "${useInfo.ymdString} / ${useInfo.startTimeString} - ${useInfo.endTImeString}"
+        tvDateInfo.text = "${useInfo.ymdString} / ${useInfo.startTimeString} - ${useInfo.endTimeString}"
 
         playSound()
 

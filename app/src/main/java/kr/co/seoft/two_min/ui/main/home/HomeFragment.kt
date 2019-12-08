@@ -283,7 +283,7 @@ class HomeFragment : Fragment() {
                 .filter { it.type == HomeBadgeType.NORMAL || it.type == HomeBadgeType.FOCUS }
                 .map { it.time }
                 .toList(),
-            memo = "THIS_IS_MEMO",
+            memo = "",
             timeSetId = 0
         )
         resetAll()
@@ -299,7 +299,7 @@ class HomeFragment : Fragment() {
                 .filter { (it.type == HomeBadgeType.NORMAL || it.type == HomeBadgeType.FOCUS) && it.time.seconds != 0 }
                 .map { it.time }
                 .toList(),
-            memo = "THIS_IS_MEMO",
+            memo = "",
             timeSetId = 0
         )
         resetAll()

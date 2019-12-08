@@ -27,6 +27,7 @@ class ProcActivity : AppCompatActivity() {
         const val READY_COUNT = "READY_COUNT"
         const val TIMES_FOR_NOTIFIACTION = "TIMES_FOR_NOTIFIACTION"
 
+        const val RESP_IS_STOP = "RESP_IS_STOP"
         const val RESP_TIME_SET = "RESP_TIME_SET"
         const val RESP_USE_INFO = "RESP_USE_INFO"
 
@@ -89,6 +90,7 @@ class ProcActivity : AppCompatActivity() {
                     }
                     CMD_BRD.END -> {
                         setResult(Activity.RESULT_OK, Intent().apply {
+                            putExtra(RESP_IS_STOP, false)
                             putExtra(RESP_TIME_SET, timeSet)
                             putExtra(RESP_USE_INFO, UseInfo(ymdString, startTimeString, getCurrentTimeString()))
                         })
@@ -108,6 +110,11 @@ class ProcActivity : AppCompatActivity() {
                         timeBrd?.let {
                             unregisterReceiver(timeBrd)
                         }
+                        setResult(Activity.RESULT_OK, Intent().apply {
+                            putExtra(RESP_IS_STOP, true)
+                            putExtra(RESP_TIME_SET, timeSet)
+                            putExtra(RESP_USE_INFO, UseInfo(ymdString, startTimeString, getCurrentTimeString()))
+                        })
                         finish()
                     }
                     CMD_BRD.REMAIN_SEC -> {
