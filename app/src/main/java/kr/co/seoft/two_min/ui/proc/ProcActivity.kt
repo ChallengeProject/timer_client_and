@@ -59,6 +59,11 @@ class ProcActivity : AppCompatActivity() {
         private var isRepeat = false
         private var procStatus = ProcStatus.READY
 
+        var addMinute = 0
+        var repeatCount = 0
+        var pauseCount = 0
+        var changeCount = 0
+
     }
 
 
@@ -92,12 +97,12 @@ class ProcActivity : AppCompatActivity() {
                         setResult(Activity.RESULT_OK, Intent().apply {
                             putExtra(RESP_IS_STOP, false)
                             putExtra(RESP_TIME_SET, timeSet)
-                            putExtra(RESP_USE_INFO, UseInfo(ymdString, startTimeString, getCurrentTimeString()))
+                            putExtra(RESP_USE_INFO, getCreatedUseInfo())
                         })
                         timeBrd?.let {
                             unregisterReceiver(timeBrd)
                         }
-                        startActivity(Intent(baseContext,MainActivity::class.java))
+                        startActivity(Intent(baseContext, MainActivity::class.java))
                         finish()
                     }
                     CMD_BRD.STOP -> {
@@ -110,10 +115,16 @@ class ProcActivity : AppCompatActivity() {
                         timeBrd?.let {
                             unregisterReceiver(timeBrd)
                         }
+
+                        var cancelInfoCount = intent.getIntExtra(ProcService.EXTRA_STOP_INFO_COUNT, 0)
+                        var cancelInfoSecond = intent.getIntExtra(ProcService.EXTRA_STOP_INFO_SECOND, 0)
+
                         setResult(Activity.RESULT_OK, Intent().apply {
                             putExtra(RESP_IS_STOP, true)
                             putExtra(RESP_TIME_SET, timeSet)
-                            putExtra(RESP_USE_INFO, UseInfo(ymdString, startTimeString, getCurrentTimeString()))
+                            putExtra(RESP_USE_INFO, getCreatedUseInfo().apply {
+                                cancelInfo = "$cancelInfoCount#${cancelInfoSecond.toFormattingString()}"
+                            })
                         })
                         finish()
                     }
@@ -129,6 +140,7 @@ class ProcActivity : AppCompatActivity() {
                         updater.setRepeatIcon(turn)
                     }
                     CMD_BRD.UPDATE_REPEAT_CNT -> {
+                        repeatCount++
                         val repeatCnt = intent.getIntExtra(CMD_BRD.MSG, 0)
                         updater.setSubtitleRepeatCnt(repeatCnt)
                         updater.showBottomDialogRepeatEndMessage(repeatCnt)
@@ -151,6 +163,7 @@ class ProcActivity : AppCompatActivity() {
         btBottom2Btn.setOnClickListener {
             when (procStatus) {
                 ProcStatus.ING -> {
+                    pauseCount++
                     ProcService.INSTANCE?.let { procServiceInterface?.pause() }
                     procStatus = ProcStatus.PAUSE
                 }
@@ -171,6 +184,7 @@ class ProcActivity : AppCompatActivity() {
         ivAddMinuteBtn.setOnClickListener {
             ProcService.INSTANCE?.let { procServiceInterface?.addMin() }
             addingMinute++
+            addMinute++
             updater.setAddTime(addingMinute)
         }
 
@@ -210,6 +224,8 @@ class ProcActivity : AppCompatActivity() {
                 "시작 준비 중에는 타임셋 전환을 할 수 없습니다".toast()
                 return@setOnClickListener
             }
+
+            changeCount++
 
             moveTimeBadge(lsshlv.curIndex)
             updater.hideSkipMessage()
@@ -260,6 +276,12 @@ class ProcActivity : AppCompatActivity() {
 
         if (!canReady) return
         if (cnt == 0) {
+
+            addMinute = 0
+            repeatCount = 0
+            pauseCount = 0
+            changeCount = 0
+
 
             // start service from activity
             svcIntent = Intent(this, ProcService::class.java)
@@ -337,4 +359,17 @@ class ProcActivity : AppCompatActivity() {
 
         procServiceInterface?.getRepeat()
     }
+
+    fun getCreatedUseInfo(): UseInfo {
+        return UseInfo(
+            ymdString = ymdString,
+            startTimeString = startTimeString,
+            endTimeString = getCurrentTimeString(),
+            addMinute = addMinute,
+            repeatCount = repeatCount,
+            pauseCount = pauseCount,
+            changeCount = changeCount
+        )
+    }
+
 }

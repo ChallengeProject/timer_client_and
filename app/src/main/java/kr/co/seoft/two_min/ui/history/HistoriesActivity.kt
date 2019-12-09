@@ -1,5 +1,6 @@
 package kr.co.seoft.two_min.ui.history
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.Rect
@@ -9,19 +10,17 @@ import android.text.style.UnderlineSpan
 import android.view.MenuItem
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import gun0912.tedkeyboardobserver.BaseKeyboardObserver
-import gun0912.tedkeyboardobserver.TedKeyboardObserver
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_histories.*
-import kotlinx.android.synthetic.main.activity_history.*
 import kr.co.seoft.two_min.R
 import kr.co.seoft.two_min.data.AppDatabase
+import kr.co.seoft.two_min.data.TimeSet
 import kr.co.seoft.two_min.ui.ActivityHelper
+import kr.co.seoft.two_min.ui.main.MainActivity.Companion.HISTORIES_ACTIVITY
 import kr.co.seoft.two_min.ui.preview.PreviewActivity
 import kr.co.seoft.two_min.util.dpToPx
-import kr.co.seoft.two_min.util.e
 import kr.co.seoft.two_min.util.setupActionBar
 
 class HistoriesActivity : ActivityHelper() {
@@ -31,14 +30,15 @@ class HistoriesActivity : ActivityHelper() {
     companion object {
 
         private const val TAG = "HistoriesActivity"
+        const val HISTORY_ACTIVITY = 1000
 
         const val EXTRA_TIME_SET_ID = "EXTRA_TIME_SET_ID"
 
         fun startHistoriesActivity(context: Context, timeSetId: Long = -1) {
-            context.startActivity(
+            (context as Activity).startActivityForResult(
                 Intent(context, HistoriesActivity::class.java).apply {
                     putExtra(EXTRA_TIME_SET_ID, timeSetId)
-                }
+                }, HISTORIES_ACTIVITY
             )
         }
     }
@@ -57,7 +57,7 @@ class HistoriesActivity : ActivityHelper() {
         super.onCreate(savedInstanceState)
 
         // 바로실행
-        if (timeSetId == -1L) {
+        if (timeSetId != -1L) {
 
         }
 
@@ -95,6 +95,29 @@ class HistoriesActivity : ActivityHelper() {
         val ss = SpannableString(emptyText)
         ss.setSpan(UnderlineSpan(), 0, emptyText.length, 0)
         actHistoriesTvEmptyText.text = ss
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        val nonNullIntent = data ?: return
+
+        if (requestCode == HISTORY_ACTIVITY && resultCode == Activity.RESULT_OK) {
+
+            setResult(Activity.RESULT_OK,
+                Intent().apply {
+                    putExtra(
+                        HistoryActivity.RESP_TIME_SET,
+                        nonNullIntent.getParcelableExtra(HistoryActivity.RESP_TIME_SET) as TimeSet
+                    )
+                    putExtra(
+                        HistoryActivity.RESP_HISTORY_RESPONSE_TYPE,
+                        nonNullIntent.getIntExtra(HistoryActivity.RESP_HISTORY_RESPONSE_TYPE, 0)
+                    )
+                })
+            finish()
+        }
+
     }
 
     fun initListener() {

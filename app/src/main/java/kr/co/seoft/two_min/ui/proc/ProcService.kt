@@ -53,6 +53,9 @@ class ProcService : Service() {
     val REPEAT_MAX_COUNT = 99
 
     companion object {
+        const val EXTRA_STOP_INFO_COUNT = "EXTRA_STOP_INFO_COUNT"
+        const val EXTRA_STOP_INFO_SECOND = "EXTRA_STOP_INFO_SECOND"
+
         var INSTANCE: ProcService? = null // check service is alive
     }
 
@@ -133,7 +136,10 @@ class ProcService : Service() {
         stopSelf()
         INSTANCE = null
 
-        if (sendStopBrdMsg) sendBroadcast(Intent(CMD_BRD.STOP))
+        if (sendStopBrdMsg) sendBroadcast(Intent(CMD_BRD.STOP).apply {
+            putExtra(EXTRA_STOP_INFO_COUNT, arrayCnt + 1)
+            putExtra(EXTRA_STOP_INFO_SECOND, mTimer.toInt())
+        })
     }
 
     fun pause() {

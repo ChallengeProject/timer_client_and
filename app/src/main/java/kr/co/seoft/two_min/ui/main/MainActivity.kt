@@ -10,8 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
-import gun0912.tedkeyboardobserver.BaseKeyboardObserver
-import gun0912.tedkeyboardobserver.TedKeyboardObserver
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -24,6 +22,7 @@ import kr.co.seoft.two_min.data.TimeSet
 import kr.co.seoft.two_min.data.UseInfo
 import kr.co.seoft.two_min.ui.ActivityHelperForFrag
 import kr.co.seoft.two_min.ui.history.HistoriesActivity
+import kr.co.seoft.two_min.ui.history.HistoryActivity
 import kr.co.seoft.two_min.ui.main.home.HomeFragment
 import kr.co.seoft.two_min.ui.main.mytimeset.MyTimeSetFragment
 import kr.co.seoft.two_min.ui.preview.PreviewActivity
@@ -42,6 +41,7 @@ class MainActivity : ActivityHelperForFrag() {
         const val PROC_EXCEED_ACTIVITY = 1113
         const val SAVE_ACTIVITY = 1114
         const val PREVIEW_ACTIVITY = 1115
+        const val HISTORIES_ACTIVITY = 1116
     }
 
     override val layoutResourceId = R.layout.activity_main
@@ -169,7 +169,8 @@ class MainActivity : ActivityHelperForFrag() {
         actMainTablayout.visibility = isShow.setVisibleOrGone()
     }
 
-    private fun saveTimeSetForHitstory(timeSet: TimeSet, useInfo: UseInfo) {
+    private fun saveTimeSetForHistory(timeSet: TimeSet, useInfo: UseInfo) {
+
         compositeDisposable.add(
             db.timeSetDao().insertTimeSet(
                 timeSet.copy().apply {
@@ -197,6 +198,12 @@ class MainActivity : ActivityHelperForFrag() {
                     timeSetTitle = timeSet.title,
                     startTimeString = useInfo.startTimeString,
                     endTimeString = useInfo.endTimeString,
+                    addMinute = useInfo.addMinute,
+                    repeatCount = useInfo.repeatCount,
+                    pauseCount = useInfo.pauseCount,
+                    changeCount = useInfo.changeCount,
+                    cancelInfo = useInfo.cancelInfo,
+                    exceedSecond = useInfo.exceedSecond,
                     ymdString = useInfo.ymdString
                 )
             )
@@ -224,7 +231,7 @@ class MainActivity : ActivityHelperForFrag() {
                     if (data.getBooleanExtra(ProcActivity.RESP_IS_STOP, true)) { // 도중 취소
                         val timeSet = data.getParcelableExtra(ProcActivity.RESP_TIME_SET) as TimeSet
                         val useInfo = data.getParcelableExtra(ProcActivity.RESP_USE_INFO) as UseInfo
-                        saveTimeSetForHitstory(timeSet, useInfo)
+                        saveTimeSetForHistory(timeSet, useInfo)
                     } else { // is 시간 다가서 종료
                         ProcEndActivity.startProcEndActivity(
                             this,
@@ -269,6 +276,23 @@ class MainActivity : ActivityHelperForFrag() {
                                 it.printStackTrace()
                             })
                     )
+                }
+                HISTORIES_ACTIVITY -> {
+                    val timeSet = data.getParcelableExtra(HistoryActivity.RESP_TIME_SET) as TimeSet
+                    val responseType = data.getIntExtra(HistoryActivity.RESP_HISTORY_RESPONSE_TYPE, 0)
+
+                    if (responseType == HistoryActivity.HISTORY_RESP_TYPE_SAVE) {
+                        startSave(timeSet.apply {
+                            timeSetId = 0L
+                        })
+                    } else { // HistoryActivity.HISTORY_RESP_TYPE_START
+                        startProc(timeSet.apply {
+                            timeSetId = 0L
+                        })
+                    }
+
+
+
                 }
 
             }

@@ -1,5 +1,6 @@
 package kr.co.seoft.two_min.ui.history
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -10,7 +11,6 @@ import android.text.TextWatcher
 import android.text.style.ForegroundColorSpan
 import android.view.MenuItem
 import android.view.View
-import gun0912.tedkeyboardobserver.BaseKeyboardObserver
 import gun0912.tedkeyboardobserver.TedKeyboardObserver
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -21,6 +21,7 @@ import kr.co.seoft.two_min.data.AppDatabase
 import kr.co.seoft.two_min.data.History
 import kr.co.seoft.two_min.data.TimeSet
 import kr.co.seoft.two_min.ui.ActivityHelper
+import kr.co.seoft.two_min.ui.history.HistoriesActivity.Companion.HISTORY_ACTIVITY
 import kr.co.seoft.two_min.util.*
 
 
@@ -32,17 +33,25 @@ class HistoryActivity : ActivityHelper() {
         private const val TAG = "HistoryActivity"
 
         private const val EXTRA_HISTORY_ID = "EXTRA_HISTORY_ID"
+        const val RESP_HISTORY_RESPONSE_TYPE = "RESP_HISTORY_RESPONSE_TYPE"
+        const val RESP_TIME_SET = "RESP_TIME_SET"
+
+        const val HISTORY_RESP_TYPE_SAVE = 1
+        const val HISTORY_RESP_TYPE_START = 2
+
 
         fun startHistoryActivity(context: Context, historyId: Long) {
-            context.startActivity(
+            (context as Activity).startActivityForResult(
                 Intent(context, HistoryActivity::class.java).apply {
                     putExtra(EXTRA_HISTORY_ID, historyId)
-                }
+                }, HISTORY_ACTIVITY
             )
         }
     }
 
     val db by lazy { AppDatabase.getDatabase(this) }
+
+    lateinit var timeSet: TimeSet
 
     private val compositeDisposable = CompositeDisposable()
 
@@ -93,13 +102,15 @@ class HistoryActivity : ActivityHelper() {
         actHistoryTvAddTime.text = "+${history.addMinute}분"
         actHistoryTvUseBoundary.text = "${history.ymdString} / ${history.startTimeString} - ${history.endTimeString}"
         actHistoryTvTitle.text = if (history.timeSetTitle.isEmpty()) "무제 타임셋" else history.timeSetTitle
-        actHistoryTvAddTime.text = "+${history.repeatCount}회"
+        actHistoryTvRepeatCount.text = "${history.repeatCount}회"
         actHistoryTvTimeSetTime.text = history.wholeTime.toFormattingString()
 
         var etcString = ""
 
         if (history.pauseCount != 0) etcString += "일시정지 ${history.pauseCount}회,"
         if (history.changeCount != 0) etcString += "진행 중 타이머 변경 ${history.changeCount}회"
+
+        actHistoryTvEtcInfo.text = if (etcString.isEmpty()) "없음" else etcString
 
         if (history.cancelInfo.isNotEmpty()) {
             actHistoryClBubbleLayout.visibility = View.VISIBLE
@@ -126,20 +137,33 @@ class HistoryActivity : ActivityHelper() {
         }
     }
 
-    fun setTimeSetView(timeSet: TimeSet) {
+    fun setTimeSetView(timeSet_: TimeSet) {
+
+        timeSet = timeSet_
+
         actHistoryEtMemo.text = timeSet.memo.toEditable()
         actHistoryTvExceedNumber.text = timeSet.memo.length.toString()
         actHistoryLsshlv.showLeftSideSnappyHorizontalListView(timeSet.times.map { it.seconds }.toList())
     }
 
-
     fun initListener() {
         actHistoryBtBottom1Btn.setOnClickListener {
-            //저장 todo
+            setResult(Activity.RESULT_OK,
+                Intent().apply {
+                    putExtra(RESP_HISTORY_RESPONSE_TYPE, HISTORY_RESP_TYPE_SAVE)
+                    putExtra(RESP_TIME_SET, timeSet)
+                })
+            finish()
         }
 
         actHistoryBtBottom2Btn.setOnClickListener {
-            //시작 todo
+            setResult(Activity.RESULT_OK,
+                Intent().apply {
+                    putExtra(RESP_HISTORY_RESPONSE_TYPE, HISTORY_RESP_TYPE_START)
+                    putExtra(RESP_TIME_SET, timeSet)
+                })
+
+            finish()
         }
 
         actHistoryIvBubbleClose.setOnClickListener {

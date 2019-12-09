@@ -246,14 +246,15 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:visibility="invisible"
-        tools:visibility="visible"
         android:id="@+id/actHistoryClBubbleLayout"
         android:layout_width="200dp"
         android:layout_height="61dp"
+        android:layout_marginBottom="5dp"
         android:background="@drawable/history_bubble"
+        android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@id/actHistoryLsshlv"
-        app:layout_constraintLeft_toLeftOf="@id/actHistoryClMemoLayout">
+        app:layout_constraintLeft_toLeftOf="@id/actHistoryClMemoLayout"
+        tools:visibility="visible">
 
         <ImageView
             android:id="@+id/actHistoryIvBubbleClose"

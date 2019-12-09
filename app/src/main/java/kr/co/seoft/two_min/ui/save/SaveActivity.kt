@@ -79,7 +79,10 @@ class SaveActivity : ActivityHelper() {
 
         actSaveBtBottom2Btn.setOnClickListener {
             AppDatabase.getDatabase(this).timeSetDao()
-                .insertTimeSet(timeSet.apply { title = actSaveEtTitle.text.toString() })
+                .insertTimeSet(timeSet.apply {
+                    title = actSaveEtTitle.text.toString()
+                    useHistory = 0
+                })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({

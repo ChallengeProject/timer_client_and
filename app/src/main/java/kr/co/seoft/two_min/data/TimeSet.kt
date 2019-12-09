@@ -120,5 +120,11 @@ data class Bell(
 data class UseInfo(
     val ymdString: String,
     val startTimeString: String,
-    val endTimeString: String
+    val endTimeString: String,
+    val addMinute: Int = 0,
+    val repeatCount: Int = 0,
+    val pauseCount: Int = 0,
+    val changeCount: Int = 0,
+    var cancelInfo: String = "", // 양식 파싱해서 쓰자 : N#00:00:00
+    val exceedSecond: Int = 0
 ) : Parcelable
