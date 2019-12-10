@@ -24,11 +24,11 @@ interface TimeSetDao {
     @Insert
     fun insertHistory(history: History): Single<Long>
 
-    @Query("SELECT * FROM history")
+    @Query("SELECT * FROM history ORDER BY history_id DESC")
     fun getHistories(): Single<List<History>>
 
-    @Query("SELECT * FROM time_set WHERE useHistory=1 ORDER BY time_set_id DESC")
-    fun getHistoryTimeSets(): Single<List<TimeSet>>
+//    @Query("SELECT * FROM time_set WHERE useHistory=1 ORDER BY time_set_id DESC")
+//    fun getHistoryTimeSets(): Single<List<TimeSet>>
 
     @Query("SELECT * FROM history WHERE time_set_id=:timeSetId")
     fun getHistoryByTimeSetId(timeSetId: Long): Single<History>

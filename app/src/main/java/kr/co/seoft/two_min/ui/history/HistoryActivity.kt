@@ -127,8 +127,8 @@ class HistoryActivity : ActivityHelper() {
                 ForegroundColorSpan(
                     R.color.ux_pink.color()
                 ),
-                exceedString.length - 5,
-                exceedString.length - 1,
+                exceedString.length - 4,
+                exceedString.length,
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
             )
 
@@ -177,7 +177,7 @@ class HistoryActivity : ActivityHelper() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
 
                 if (s!!.length > 1000) {
-                    actHistoryEtMemo.setText(s.substring(999, s.length - 1))
+                    actHistoryEtMemo.setText(s.substring(0, s.length - 2))
                 }
 
                 actHistoryTvExceedNumber.text = s.length.toString()

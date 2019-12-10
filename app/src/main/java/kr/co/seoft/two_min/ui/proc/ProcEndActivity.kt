@@ -45,10 +45,12 @@ class ProcEndActivity : AppCompatActivity() {
         const val USE_INFO = "USE_INFO"
 
         const val RESP_TIME_SET = "RESP_TIME_SET"
+        const val RESP_USE_INFO = "RESP_USE_INFO"
         const val RESP_TYPE = "RESP_WHAT"
         const val RESP_TYPE_EXCEED = "RESP_WHAT_EXCEED"
         const val RESP_TYPE_SAVE = "RESP_WHAT_SAVE"
         const val RESP_TYPE_RESTART = "RESP_WHAT_RESTART"
+        const val RESP_TYPE_EXIT = "RESP_TYPE_EXIT"
 
         fun startProcEndActivity(context: Context, timeSet: TimeSet, useInfo: UseInfo) {
             (context as Activity).startActivityForResult(
@@ -76,11 +78,10 @@ class ProcEndActivity : AppCompatActivity() {
 
         ivTimesetEndBtn.setOnClickListener {
             Preferencer.setCurrentMemo(this, etContent.text.toString())
-            finish()
+            finishWithMessage(RESP_TYPE_EXIT)
         }
 
         btSave.setOnClickListener {
-            // TODO 구체화 되면 개발
             finishWithMessage(RESP_TYPE_SAVE)
         }
 
@@ -106,17 +107,17 @@ class ProcEndActivity : AppCompatActivity() {
 //            R.color.ux_pink
 //        )
 
-        etContent.addTextChangedListener(object : TextWatcher{
+        etContent.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {}
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
 
-                if(s!!.length > 1000) {
-                    etContent.setText(s.substring(999,s.length-1))
+                if (s!!.length > 1000) {
+                    etContent.setText(s.substring(0, s.length - 2))
                 }
 
                 tvExceedNumber.text = s.length.toString()
-                if(s.length > 999) {
+                if (s.length > 999) {
                     tvExceedNumber.setTextColor(R.color.ux_pink.color())
                     return
                 }
@@ -130,6 +131,7 @@ class ProcEndActivity : AppCompatActivity() {
     fun finishWithMessage(respType: String) {
         setResult(Activity.RESULT_OK, Intent().apply {
             putExtra(RESP_TIME_SET, timeSet)
+            putExtra(RESP_USE_INFO, useInfo)
             putExtra(RESP_TYPE, respType)
         })
         finish()

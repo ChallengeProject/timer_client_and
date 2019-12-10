@@ -30,6 +30,7 @@ import kr.co.seoft.two_min.ui.proc.ProcActivity
 import kr.co.seoft.two_min.ui.proc.ProcEndActivity
 import kr.co.seoft.two_min.ui.proc.ProcExceedActivity
 import kr.co.seoft.two_min.ui.save.SaveActivity
+import kr.co.seoft.two_min.ui.setting.SettingActivity
 import kr.co.seoft.two_min.util.*
 
 
@@ -61,6 +62,28 @@ class MainActivity : ActivityHelperForFrag() {
         initView()
         initListener()
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        when (ProcActivity.respEndType) {
+            ProcActivity.RESP_END_TYPE_STOP -> {
+                "RESP_END_TYPE_STOP".e()
+                val timeSet = ProcActivity.respTimeSet
+                val useInfo = ProcActivity.respUseInfo
+                saveTimeSetForHistory(timeSet, useInfo)
+            }
+            ProcActivity.RESP_END_TYPE_END -> {
+                "RESP_END_TYPE_END".e()
+                ProcEndActivity.startProcEndActivity(
+                    this,
+                    ProcActivity.respTimeSet,
+                    ProcActivity.respUseInfo
+                )
+            }
+        }
+        ProcActivity.respEndType = ProcActivity.RESP_END_TYPE_NONE
     }
 
     private fun initView() {
@@ -152,7 +175,7 @@ class MainActivity : ActivityHelperForFrag() {
     }
 
     override fun startProc(timeSet: TimeSet) {
-        ProcActivity.startProcActivity(this, timeSet, 5)
+        ProcActivity.startProcActivity(this, timeSet, 3)
     }
 
     override fun startSave(timeSet: TimeSet) {
@@ -225,40 +248,32 @@ class MainActivity : ActivityHelperForFrag() {
 
         if (resultCode == Activity.RESULT_OK && data != null) {
             when (requestCode) {
-                PROC_ACTIVITY -> {
-                    "PROC_ACTIVITY in Main".i()
-
-                    if (data.getBooleanExtra(ProcActivity.RESP_IS_STOP, true)) { // 도중 취소
-                        val timeSet = data.getParcelableExtra(ProcActivity.RESP_TIME_SET) as TimeSet
-                        val useInfo = data.getParcelableExtra(ProcActivity.RESP_USE_INFO) as UseInfo
-                        saveTimeSetForHistory(timeSet, useInfo)
-                    } else { // is 시간 다가서 종료
-                        ProcEndActivity.startProcEndActivity(
-                            this,
-                            data.getParcelableExtra(ProcActivity.RESP_TIME_SET),
-                            data.getParcelableExtra(ProcActivity.RESP_USE_INFO)
-                        )
-                    }
-
-                }
                 PROC_END_ACTIVITY -> {
                     "PROC_END_ACTIVITY in Main".i()
                     val timeSet = data.getParcelableExtra<TimeSet>(ProcEndActivity.RESP_TIME_SET)
+                    val useInfo = data.getParcelableExtra<UseInfo>(ProcEndActivity.RESP_USE_INFO)
                     when (data.getStringExtra(ProcEndActivity.RESP_TYPE)) {
 
+                        ProcEndActivity.RESP_TYPE_EXIT -> {
+                            saveTimeSetForHistory(timeSet, useInfo)
+                        }
                         ProcEndActivity.RESP_TYPE_EXCEED -> {
-                            ProcExceedActivity.startProcExceedActivity(this, timeSet, 3)
+                            ProcExceedActivity.startProcExceedActivity(this, timeSet, useInfo)
                         }
                         ProcEndActivity.RESP_TYPE_RESTART -> {
                             ProcActivity.startProcActivity(this, timeSet, 3)
+                            saveTimeSetForHistory(timeSet, useInfo)
                         }
                         ProcEndActivity.RESP_TYPE_SAVE -> {
-                            // TODO 저장 구체화되면 ㄱㄱ
+                            saveTimeSetForHistory(timeSet, useInfo)
+                            startSave(timeSet)
                         }
                     }
                 }
                 PROC_EXCEED_ACTIVITY -> {
-
+                    val timeSet = data.getParcelableExtra<TimeSet>(ProcExceedActivity.RESP_TIME_SET)
+                    val useInfo = data.getParcelableExtra<UseInfo>(ProcExceedActivity.RESP_USE_INFO)
+                    saveTimeSetForHistory(timeSet, useInfo)
                 }
                 SAVE_ACTIVITY -> {
                     val timeSetId = data.getLongExtra(SaveActivity.RESP_TIME_SET_ID, 0L)
@@ -292,7 +307,6 @@ class MainActivity : ActivityHelperForFrag() {
                     }
 
 
-
                 }
 
             }
@@ -320,6 +334,7 @@ class MainActivity : ActivityHelperForFrag() {
         when (item.itemId) {
             R.id.main_home_setting -> {
                 "main_home_setting".toaste(this)
+                SettingActivity.startSettingActivity(this)
             }
             R.id.main_home_history -> {
                 "main_home_history".toaste(this)

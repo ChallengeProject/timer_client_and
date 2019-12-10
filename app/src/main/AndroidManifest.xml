@@ -16,6 +16,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Design.Light.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".ui.setting.NoticeActivity"></activity>
+        <activity android:name=".ui.setting.OpenSourceActivity" />
+        <activity android:name=".ui.setting.TeamInfoActivity" />
+        <activity android:name=".ui.setting.CountDownSettingActivity" />
+        <activity android:name=".ui.setting.SoundSettingActivity" />
+        <activity android:name=".ui.setting.NoticesActivity" />
+        <activity android:name=".ui.setting.SettingActivity" />
         <activity
             android:name=".ui.history.HistoryActivity"
             android:windowSoftInputMode="stateHidden" />

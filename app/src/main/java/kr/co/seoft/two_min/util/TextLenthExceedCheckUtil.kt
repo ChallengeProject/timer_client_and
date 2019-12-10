@@ -22,7 +22,7 @@ object EditTextLenthExceedCheckUtil {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
 
                 if (s!!.length > exceedLength) {
-                    etContent.setText(s.substring(exceedLength-1, s.length - 1))
+                    etContent.setText(s.substring(0, s.length - 2))
                 }
 
                 tvExceedNumber.text = s.length.toString()

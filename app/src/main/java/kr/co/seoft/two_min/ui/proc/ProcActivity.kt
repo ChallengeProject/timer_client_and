@@ -27,10 +27,6 @@ class ProcActivity : AppCompatActivity() {
         const val READY_COUNT = "READY_COUNT"
         const val TIMES_FOR_NOTIFIACTION = "TIMES_FOR_NOTIFIACTION"
 
-        const val RESP_IS_STOP = "RESP_IS_STOP"
-        const val RESP_TIME_SET = "RESP_TIME_SET"
-        const val RESP_USE_INFO = "RESP_USE_INFO"
-
         fun startProcActivity(context: Context, timeSet: TimeSet, readyCount: Int) {
             (context as Activity).startActivityForResult(
                 Intent(context, ProcActivity::class.java).apply {
@@ -64,6 +60,14 @@ class ProcActivity : AppCompatActivity() {
         var pauseCount = 0
         var changeCount = 0
 
+        lateinit var respTimeSet: TimeSet
+        lateinit var respUseInfo: UseInfo
+        var respEndType: Int = 0
+
+        const val RESP_END_TYPE_NONE = 0
+        const val RESP_END_TYPE_STOP = 1
+        const val RESP_END_TYPE_END = 2
+
     }
 
 
@@ -94,14 +98,15 @@ class ProcActivity : AppCompatActivity() {
                         updater.showBottomDialogTimeEndMessage(round, timeSet.times.size)
                     }
                     CMD_BRD.END -> {
-                        setResult(Activity.RESULT_OK, Intent().apply {
-                            putExtra(RESP_IS_STOP, false)
-                            putExtra(RESP_TIME_SET, timeSet)
-                            putExtra(RESP_USE_INFO, getCreatedUseInfo())
-                        })
+
                         timeBrd?.let {
                             unregisterReceiver(timeBrd)
                         }
+
+                        respTimeSet = timeSet
+                        respUseInfo = getCreatedUseInfo()
+                        respEndType = RESP_END_TYPE_END
+
                         startActivity(Intent(baseContext, MainActivity::class.java))
                         finish()
                     }
@@ -116,16 +121,16 @@ class ProcActivity : AppCompatActivity() {
                             unregisterReceiver(timeBrd)
                         }
 
-                        var cancelInfoCount = intent.getIntExtra(ProcService.EXTRA_STOP_INFO_COUNT, 0)
-                        var cancelInfoSecond = intent.getIntExtra(ProcService.EXTRA_STOP_INFO_SECOND, 0)
+                        val cancelInfoCount = intent.getIntExtra(ProcService.EXTRA_STOP_INFO_COUNT, 0)
+                        val cancelInfoSecond = intent.getIntExtra(ProcService.EXTRA_STOP_INFO_SECOND, 0)
 
-                        setResult(Activity.RESULT_OK, Intent().apply {
-                            putExtra(RESP_IS_STOP, true)
-                            putExtra(RESP_TIME_SET, timeSet)
-                            putExtra(RESP_USE_INFO, getCreatedUseInfo().apply {
-                                cancelInfo = "$cancelInfoCount#${cancelInfoSecond.toFormattingString()}"
-                            })
-                        })
+                        respTimeSet = timeSet
+                        respUseInfo = getCreatedUseInfo().apply {
+                            cancelInfo = "$cancelInfoCount#${(cancelInfoSecond/1000).toFormattingString()}"
+                        }
+                        respEndType = RESP_END_TYPE_STOP
+
+                        startActivity(Intent(baseContext, MainActivity::class.java))
                         finish()
                     }
                     CMD_BRD.REMAIN_SEC -> {

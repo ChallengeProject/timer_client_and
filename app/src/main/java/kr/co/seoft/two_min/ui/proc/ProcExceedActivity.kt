@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_proc.*
 import kr.co.seoft.two_min.R
 import kr.co.seoft.two_min.data.TimeSet
+import kr.co.seoft.two_min.data.UseInfo
 import kr.co.seoft.two_min.ui.main.MainActivity
 import kr.co.seoft.two_min.util.*
 import java.text.SimpleDateFormat
@@ -26,14 +27,15 @@ class ProcExceedActivity : AppCompatActivity() {
     companion object {
         const val TIME_SET = "TIME_SET"
         const val TIMES_FOR_NOTIFIACTION = "TIMES_FOR_NOTIFIACTION"
-        const val READY_COUNT = "READY_COUNT"
+        const val USE_INFO = "USE_INFO"
         const val RESP_TIME_SET = "RESP_TIME_SET"
+        const val RESP_USE_INFO = "RESP_USE_INFO"
 
-        fun startProcExceedActivity(context: Context, timeSet: TimeSet, readyCount: Int) {
+        fun startProcExceedActivity(context: Context, timeSet: TimeSet, useInfo: UseInfo) {
             (context as Activity).startActivityForResult(
                 Intent(context, ProcExceedActivity::class.java).apply {
                     putExtra(TIME_SET, timeSet)
-                    putExtra(ProcActivity.READY_COUNT, readyCount)
+                    putExtra(USE_INFO, useInfo)
                 },
                 MainActivity.PROC_EXCEED_ACTIVITY
             )
@@ -54,6 +56,7 @@ class ProcExceedActivity : AppCompatActivity() {
         private var allTimeStr = ""
         private var procStatus = ProcStatus.READY
         private var readyCount = 5
+        private lateinit var useInfo: UseInfo
 
     }
 
@@ -63,7 +66,7 @@ class ProcExceedActivity : AppCompatActivity() {
 
         updater = ProcViewUpdater(this)
         timeSet = intent.getParcelableExtra(TIME_SET)
-        readyCount = intent.getIntExtra(READY_COUNT, 5)
+        useInfo = intent.getParcelableExtra(USE_INFO)
 
         lsshlv.showLeftSideSnappyHorizontalListView(timeSet.times.asSequence().map { it.seconds }.toList())
 
@@ -87,6 +90,13 @@ class ProcExceedActivity : AppCompatActivity() {
                         timeBrd?.let {
                             unregisterReceiver(timeBrd)
                         }
+
+                        setResult(Activity.RESULT_OK, Intent().apply {
+                            putExtra(RESP_TIME_SET, timeSet)
+                            putExtra(RESP_USE_INFO, useInfo.apply {
+                                exceedSecond = timeSet.times[0].seconds
+                            })
+                        })
 
                         finish()
                     }

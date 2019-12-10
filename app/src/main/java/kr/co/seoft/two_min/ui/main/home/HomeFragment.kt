@@ -8,14 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_home.*
 import kr.co.seoft.two_min.R
 import kr.co.seoft.two_min.data.Bell
 import kr.co.seoft.two_min.data.TimeSet
 import kr.co.seoft.two_min.ui.ActivityHelperForFrag
-import kr.co.seoft.two_min.ui.main.MainActivity
-import kr.co.seoft.two_min.util.*
+import kr.co.seoft.two_min.util.KeyboardUtil
+import kr.co.seoft.two_min.util.color
+import kr.co.seoft.two_min.util.toEndTimeStrAfterSec
+import kr.co.seoft.two_min.util.toFormattingString
 
 class HomeFragment : Fragment() {
 
@@ -203,7 +204,7 @@ class HomeFragment : Fragment() {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if (s!!.length > 100) {
-                    fragHomeEtContent.setText(s.substring(99, s.length - 1))
+                    fragHomeEtContent.setText(s.substring(0, s.length - 2))
                 }
                 fragHomeTvContentLength.text = s.length.toString()
                 if (s.length > 99) {
