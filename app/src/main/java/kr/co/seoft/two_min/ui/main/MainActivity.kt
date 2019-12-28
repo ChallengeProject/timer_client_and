@@ -61,7 +61,6 @@ class MainActivity : ActivityHelperForFrag() {
         initToolbar()
         initView()
         initListener()
-
     }
 
     override fun onResume() {
@@ -150,19 +149,22 @@ class MainActivity : ActivityHelperForFrag() {
         actMainViewTransparentTop.setOnClickListener { /*pass*/ }
         actMainViewTransparentBottom.setOnClickListener { /*pass*/ }
 
-        // manifest에 adjustResize|adjustPan 같은 옵션을주어 동작하지않음, 근대 해당옵션으로 원하는대로 동작함 별일없으면 주석처리
-//        TedKeyboardObserver(this).listen(
-//            object : BaseKeyboardObserver.OnKeyboardListener {
-//                override fun onKeyboardChange(isShow: Boolean) {
-//                    if (isShow) {
-//                        setShowTabLayout(false)
-//                        actMainLlBottomButtons.visibility = View.INVISIBLE
-//                    } else {
-//                        setShowTabLayout(true)
-//                        if (showStatusBottomButtons) actMainLlBottomButtons.visibility = View.VISIBLE
-//                    }
-//                }
-//            })
+    }
+
+    fun showToastMessage(content: String, buttonText: String? = null, cb: () -> Unit) {
+        buttonText?.let {
+            ToastUtil.showToastTask(this, content, it, cb)
+        } ?: let {
+            ToastUtil.showToast(this, content)
+        }
+    }
+
+    fun showSelectorDialog(
+        content: String,
+        btn1Text: String, btn2Text: String,
+        btn1Cb: () -> Unit, btn2Cb: () -> Unit
+    ) {
+        SelectorDialog(this, content, btn1Text, btn2Text, btn1Cb, btn2Cb)
     }
 
     override fun setLockViewpager(isLock: Boolean) {
