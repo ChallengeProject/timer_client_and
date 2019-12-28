@@ -121,7 +121,7 @@ class ProcNotification(val service: Service, val times_: ArrayList<Int>) {
 
             val notification = NotificationCompat.Builder(service, App.CHANNEL_ID)
                 .setContentText("...")
-                .setSmallIcon(R.drawable.ic_temp)
+                .setSmallIcon(R.drawable.___ic_2min)
                 .setContentIntent(pendingIntent)
                 .setOngoing(true)
                 .setOnlyAlertOnce(true)
@@ -197,6 +197,7 @@ class ProcNotification(val service: Service, val times_: ArrayList<Int>) {
                 0
             )
             else PendingIntent.getService(service, 0, Intent(CMD_EXCEED_SERVICE.RESTART), 0)
+
         val pausePendingIntent =
             if (isProcAct()) PendingIntent.getService(service, 0, Intent(CMD_PROC_SERVICE.PAUSE), 0)
             else PendingIntent.getService(service, 0, Intent(CMD_EXCEED_SERVICE.PAUSE), 0)
@@ -204,7 +205,6 @@ class ProcNotification(val service: Service, val times_: ArrayList<Int>) {
         val stopPendingIntent =
             if (isProcAct()) PendingIntent.getService(service, 0, Intent(CMD_PROC_SERVICE.STOP), 0)
             else PendingIntent.getService(service, 0, Intent(CMD_EXCEED_SERVICE.STOP), 0)
-
 
         remoteViews.setOnClickPendingIntent(R.id.notiIvCtrlPlay, playPendingIntent)
         remoteViews.setOnClickPendingIntent(R.id.notiIvCtrlPause, pausePendingIntent)

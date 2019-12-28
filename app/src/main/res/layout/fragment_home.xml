@@ -21,21 +21,22 @@
             android:id="@+id/fragHomeTvMain"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="00:00:00"
             android:textColor="@color/ux_black"
             android:textSize="24dp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:text="00:00:00" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/fragHomeIvMainClear"
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:background="?android:attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/btn_clear__"
+            android:src="@drawable/___ic_close_small"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -175,7 +176,7 @@
             <ImageView
                 android:id="@+id/fragHomeIvBack"
                 style="@style/MainNumberPad"
-                android:src="@drawable/btn_back"
+                android:src="@drawable/___ic_back"
                 android:textStyle="bold" />
 
         </LinearLayout>
@@ -228,7 +229,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#CCFFFFFF"
-        android:visibility="invisible" />
+        android:visibility="gone" />
 
     <LinearLayout
         android:id="@+id/fragHomeLlTimeInfo"
@@ -250,8 +251,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#4E8EAC"
-                android:orientation="vertical">
+                android:background="@drawable/___bubble_detail"
+                android:orientation="vertical"
+                android:padding="2dp">
 
 
                 <EditText
@@ -274,6 +276,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
                     android:layout_marginTop="2dp"
                     android:layout_marginRight="12dp"
                     android:layout_marginBottom="10dp"
@@ -322,7 +325,7 @@
                     <ImageView
                         android:layout_width="36dp"
                         android:layout_height="36dp"
-                        android:src="@drawable/icon_sound" />
+                        android:src="@drawable/___ic_bell" />
 
                     <TextView
                         android:id="@+id/fragHomeTvSilent"
@@ -391,7 +394,8 @@
                     <ImageView
                         android:layout_width="36dp"
                         android:layout_height="36dp"
-                        android:src="@drawable/icon_timer_" />
+                        android:padding="12dp"
+                        android:src="@drawable/___ic_clock" />
 
                     <TextView
                         android:id="@+id/fragHomeTvTimerPosition"
@@ -418,7 +422,8 @@
                             android:layout_marginRight="10dp"
                             android:background="?android:attr/selectableItemBackgroundBorderless"
                             android:gravity="right|center_vertical"
-                            android:src="@drawable/btn_timer_delete"
+                            android:padding="6dp"
+                            android:src="@drawable/___ic_trash_24"
                             android:text="전체적용"
                             android:textColor="@color/ux_black"
                             android:textSize="15dp"
@@ -428,10 +433,6 @@
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="15dp" />
 
         <include
             android:id="@+id/fragHomeIncSelectedHomeBadge"
@@ -449,7 +450,7 @@
         android:layout_width="36dp"
         android:layout_height="36dp"
         android:background="?android:attr/selectableItemBackgroundBorderless"
-        android:src="@drawable/icon_close"
+        android:src="@drawable/___ic_close_small"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/fragHomeLlTimeInfo"
         app:layout_constraintRight_toRightOf="@id/fragHomeLlTimeInfo"

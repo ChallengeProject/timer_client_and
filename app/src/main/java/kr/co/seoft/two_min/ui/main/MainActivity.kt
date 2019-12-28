@@ -135,18 +135,18 @@ class MainActivity : ActivityHelperForFrag() {
             }
         })
 
-        actMainTablayout.getTabAt(0)?.setIcon(R.drawable.dummy)
-        actMainTablayout.getTabAt(1)?.setIcon(R.drawable.dummy)
+        actMainTablayout.getTabAt(0)?.setIcon(R.drawable.___ic_home)
+        actMainTablayout.getTabAt(1)?.setIcon(R.drawable.___ic_my)
 
         TabLayoutMediator(actMainTablayout, actMainViewPager) { tab, position ->
             when (position) {
                 0 -> {
-                    tab.text = "Size"
-                    tab.setIcon(R.drawable.dummy)
+                    tab.text = "홈"
+                    tab.setIcon(R.drawable.___ic_home)
                 }
                 else -> {
-                    tab.text = "Template"
-                    tab.setIcon(R.drawable.btn_back)
+                    tab.text = "마이 타임셋"
+                    tab.setIcon(R.drawable.___ic_my)
                 }
             }
         }.attach()
@@ -355,7 +355,7 @@ class MainActivity : ActivityHelperForFrag() {
         setupActionBar(R.id.toolbar) {
             setDisplayShowTitleEnabled(true)
             setDisplayHomeAsUpEnabled(false) // true is back icon
-            setHomeAsUpIndicator(R.drawable.btn_back)
+            setHomeAsUpIndicator(R.drawable.___ic_back)
         }
     }
 
@@ -367,15 +367,12 @@ class MainActivity : ActivityHelperForFrag() {
         item ?: return false
         when (item.itemId) {
             R.id.main_home_setting -> {
-                "main_home_setting".toaste(this)
                 SettingActivity.startSettingActivity(this)
             }
             R.id.main_home_history -> {
-                "main_home_history".toaste(this)
                 HistoriesActivity.startHistoriesActivity(this)
             }
             android.R.id.home -> {
-                "android.R.id.home".toaste(this)
             }
         }
         return super.onOptionsItemSelected(item)

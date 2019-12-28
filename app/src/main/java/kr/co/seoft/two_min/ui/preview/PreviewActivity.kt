@@ -124,7 +124,7 @@ class PreviewActivity : ActivityHelper() {
         setupActionBar(R.id.toolbar) {
             setDisplayShowTitleEnabled(true)
             setDisplayHomeAsUpEnabled(true)
-            setHomeAsUpIndicator(R.drawable.btn_back)
+            setHomeAsUpIndicator(R.drawable.___ic_back)
             setTitle("")
         }
     }

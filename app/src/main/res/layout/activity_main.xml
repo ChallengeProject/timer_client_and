@@ -35,14 +35,14 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_weight="1"
-            android:background="#123123" />
+            android:background="@color/ux_pink" />
 
         <View
             android:id="@+id/actMainViewTabLayoutLine2"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_weight="1"
-            android:background="#456456" />
+            android:background="@color/ux_pink" />
 
     </LinearLayout>
 

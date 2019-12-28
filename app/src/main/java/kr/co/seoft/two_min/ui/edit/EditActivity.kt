@@ -155,7 +155,7 @@ class EditActivity : ActivityHelperForFrag() {
         setupActionBar(R.id.toolbar) {
             setDisplayShowTitleEnabled(true)
             setDisplayHomeAsUpEnabled(true)
-            setHomeAsUpIndicator(R.drawable.btn_back)
+            setHomeAsUpIndicator(R.drawable.___ic_back)
             setTitle("타임셋 편집")
         }
     }

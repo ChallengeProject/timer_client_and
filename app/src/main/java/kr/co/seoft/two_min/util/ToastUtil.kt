@@ -27,7 +27,7 @@ object ToastUtil {
         toastTextView.text = content
 
         Toast(activity.baseContext).apply {
-            setGravity(Gravity.BOTTOM, 0, 15.dpToPx())
+            setGravity(Gravity.BOTTOM, 0, 30.dpToPx())
             duration = Toast.LENGTH_LONG
             view = toastLayout
 
