@@ -152,6 +152,7 @@ class PreviewActivity : ActivityHelper() {
                 isLikeOn = !isLikeOn
                 invalidateOptionsMenu()
                 saveLikeToDatabase(true)
+                ToastUtil.showToast(this,"즐겨찾기에 추가되었어요!")
             }
             R.id.preview_on_share -> {
                 "preview_on_share".toaste(this)
@@ -160,6 +161,7 @@ class PreviewActivity : ActivityHelper() {
                 isLikeOn = !isLikeOn
                 invalidateOptionsMenu()
                 saveLikeToDatabase(false)
+                ToastUtil.showToast(this,"즐겨찾기에서 삭제되었어요!")
             }
         }
         return super.onOptionsItemSelected(item)

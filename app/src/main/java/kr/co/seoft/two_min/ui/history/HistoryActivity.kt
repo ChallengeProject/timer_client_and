@@ -127,7 +127,7 @@ class HistoryActivity : ActivityHelper() {
                 ForegroundColorSpan(
                     R.color.ux_pink.color()
                 ),
-                exceedString.length - 4,
+                exceedString.length - 5,
                 exceedString.length,
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
             )

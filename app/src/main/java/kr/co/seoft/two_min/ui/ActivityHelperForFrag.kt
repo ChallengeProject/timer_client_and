@@ -28,5 +28,7 @@ abstract class ActivityHelperForFrag : AppCompatActivity() {
     abstract fun setShowBottomButtons(isShow: Boolean)
     abstract fun setLockViewpager(isLock: Boolean)
     abstract fun setTransparentToolbarAndBottoms(isTransparent: Boolean)
-
+    abstract fun showToastMessage(content: String)
+    abstract fun showToastMessage(content: String, buttonText: String, cb: () -> Unit)
+    abstract fun showSelectorDialog(content: String, btn1Text: String, btn2Text: String, btn1Cb: () -> Unit, btn2Cb: () -> Unit)
 }

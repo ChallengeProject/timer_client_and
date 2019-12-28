@@ -3,15 +3,10 @@ package kr.co.seoft.two_min.ui.edit
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import androidx.fragment.app.Fragment
-import androidx.viewpager2.adapter.FragmentStateAdapter
-import androidx.viewpager2.widget.ViewPager2
-import com.google.android.material.tabs.TabLayoutMediator
 import gun0912.tedkeyboardobserver.BaseKeyboardObserver
 import gun0912.tedkeyboardobserver.TedKeyboardObserver
 import io.reactivex.Single
@@ -19,17 +14,14 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_edit.*
-import kotlinx.android.synthetic.main.include_toolbar.*
 import kr.co.seoft.two_min.R
-import kr.co.seoft.two_min.data.AppDatabase
 import kr.co.seoft.two_min.data.TimeSet
-import kr.co.seoft.two_min.ui.ActivityHelper
 import kr.co.seoft.two_min.ui.ActivityHelperForFrag
 import kr.co.seoft.two_min.ui.main.home.HomeFragment
-import kr.co.seoft.two_min.util.e
+import kr.co.seoft.two_min.util.SelectorDialog
+import kr.co.seoft.two_min.util.ToastUtil
 import kr.co.seoft.two_min.util.setVisible
 import kr.co.seoft.two_min.util.setupActionBar
-import kr.co.seoft.two_min.util.toaste
 
 class EditActivity : ActivityHelperForFrag() {
 
@@ -106,6 +98,23 @@ class EditActivity : ActivityHelperForFrag() {
                 }
             }
         })
+    }
+
+
+    override fun showToastMessage(content: String) {
+        ToastUtil.showToast(this, content)
+    }
+
+    override fun showToastMessage(content: String, buttonText: String, cb: () -> Unit) {
+        ToastUtil.showToastTask(this, content, buttonText, cb)
+    }
+
+    override fun showSelectorDialog(
+        content: String,
+        btn1Text: String, btn2Text: String,
+        btn1Cb: () -> Unit, btn2Cb: () -> Unit
+    ) {
+        SelectorDialog(this, content, btn1Text, btn2Text, btn1Cb, btn2Cb)
     }
 
     override fun startProc(timeSet: TimeSet) {

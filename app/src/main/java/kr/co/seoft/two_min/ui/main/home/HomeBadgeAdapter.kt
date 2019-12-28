@@ -25,10 +25,10 @@ class HomeBadgeAdapter(
         )
     }
 
-    private var items = INIT_HOME_BADGES.map{it.copy()}.toMutableList()
+    private var items = INIT_HOME_BADGES.map { it.copy() }.toMutableList()
 
     fun resetBadges() {
-        items = INIT_HOME_BADGES.map{it.copy()}.toMutableList()
+        items = INIT_HOME_BADGES.map { it.copy() }.toMutableList()
     }
 
     /**
@@ -132,15 +132,16 @@ class HomeBadgeAdapter(
         items.removeAll { it.time.seconds == 0 && it.type == HomeBadgeType.NORMAL }
     }
 
-    fun removeBadge(position: Int){
+    fun removeBadge(position: Int) {
 
         "removeBadge $position".e()
         items.removeAt(position)
     }
 
-    fun setCurPosBellTypeToWhole(position: Int) {
+    fun setCurPosBellTypeToWhole(position: Int): Bell {
         val curBellType = items[position].time.bell.type
         items.forEach { it.time.bell.type = curBellType }
+        return items[position].time.bell
     }
 
     fun setComment(comment: String, position: Int) {

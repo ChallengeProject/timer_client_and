@@ -57,8 +57,8 @@ class ToastPopupView(val context: Context, val content: String, val buttonText: 
         val toastTaskTvButton = toastTaskLlIn.findViewById<TextView>(R.id.toastTaskTvButton)
         val toastTaskTvContent = toastTaskLlIn.findViewById<TextView>(R.id.toastTaskTvContent)
 
-        toastTaskTvButton.text = content
-        toastTaskTvContent.text = buttonText
+        toastTaskTvContent.text = content
+        toastTaskTvButton.text = buttonText
 
         popupWindow = PopupWindow(popupView, ConstraintLayout.LayoutParams.WRAP_CONTENT, ConstraintLayout.LayoutParams.WRAP_CONTENT)
 

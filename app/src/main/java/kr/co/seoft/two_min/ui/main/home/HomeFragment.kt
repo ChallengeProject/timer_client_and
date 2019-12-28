@@ -138,9 +138,12 @@ class HomeFragment : Fragment() {
         }
 
         fragHomeTvCancel.setOnClickListener {
-            // TODO 다이얼로그로 해야됨
-
-            resetAll()
+            act.showSelectorDialog("설정한 테임셋이 초기화돼요. 정말 초기화 하시겠어요?", "취소", "초기화",
+                {
+                    // none
+                }, {
+                    resetAll()
+                })
         }
 
         fragHomeIvBack.setOnClickListener {
@@ -234,7 +237,10 @@ class HomeFragment : Fragment() {
         }
 
         fragHomeTvSetWhole.setOnClickListener {
-            fragHomeRv.setCurPosBellTypeToWhole()
+            val bellType = fragHomeRv.setCurPosBellTypeToWhole()
+            act.showToastMessage(
+                "모든 타이머의 사운드가 ${bellType.bellTypeToString()}으로 지정됐어요!"
+            )
         }
 
         fragHomeIvTimeSetDelete.setOnClickListener {

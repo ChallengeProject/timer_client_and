@@ -72,6 +72,21 @@ class MainActivity : ActivityHelperForFrag() {
                 val timeSet = ProcActivity.respTimeSet
                 val useInfo = ProcActivity.respUseInfo
                 saveTimeSetForHistory(timeSet, useInfo)
+                showToastMessage("타임셋을 취소하셨어요. 결과를 확인해보세요!", "이동") {
+                    // 마지막으로 저장된애가 방금 저장된애로 보장되기 때문에 마지막id를불러옴
+
+                    compositeDisposable.add(
+                        db.timeSetDao().getHistories()
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe({
+                                HistoryActivity.startHistoryActivity(this, it.last().historyId)
+                            }, {
+                                it.printStackTrace()
+                            })
+                    )
+
+                }
             }
             ProcActivity.RESP_END_TYPE_END -> {
                 "RESP_END_TYPE_END".e()
@@ -151,15 +166,15 @@ class MainActivity : ActivityHelperForFrag() {
 
     }
 
-    fun showToastMessage(content: String, buttonText: String? = null, cb: () -> Unit) {
-        buttonText?.let {
-            ToastUtil.showToastTask(this, content, it, cb)
-        } ?: let {
-            ToastUtil.showToast(this, content)
-        }
+    override fun showToastMessage(content: String) {
+        ToastUtil.showToast(this, content)
     }
 
-    fun showSelectorDialog(
+    override fun showToastMessage(content: String, buttonText: String, cb: () -> Unit) {
+        ToastUtil.showToastTask(this, content, buttonText, cb)
+    }
+
+    override fun showSelectorDialog(
         content: String,
         btn1Text: String, btn2Text: String,
         btn1Cb: () -> Unit, btn2Cb: () -> Unit
@@ -276,10 +291,27 @@ class MainActivity : ActivityHelperForFrag() {
                     val timeSet = data.getParcelableExtra<TimeSet>(ProcExceedActivity.RESP_TIME_SET)
                     val useInfo = data.getParcelableExtra<UseInfo>(ProcExceedActivity.RESP_USE_INFO)
                     saveTimeSetForHistory(timeSet, useInfo)
+
+                    showToastMessage("왜 타이머를 초과 기록했는지 기록해보세요!", "이동") {
+                        // 마지막으로 저장된애가 방금 저장된애로 보장되기 때문에 마지막id를불러옴
+
+                        compositeDisposable.add(
+                            db.timeSetDao().getHistories()
+                                .subscribeOn(Schedulers.io())
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .subscribe({
+                                    HistoryActivity.startHistoryActivity(this, it.last().historyId)
+                                }, {
+                                    it.printStackTrace()
+                                })
+                        )
+                    }
+
                 }
                 SAVE_ACTIVITY -> {
                     val timeSetId = data.getLongExtra(SaveActivity.RESP_TIME_SET_ID, 0L)
                     startPreviewActivity(timeSetId)
+                    showToastMessage("타임셋이 저장되었어요! 타임셋을 편집하시려면 '편집' 버튼을 눌러주세요")
                 }
                 PREVIEW_ACTIVITY -> {
                     val timeSetId = data.getLongExtra(PreviewActivity.RESP_TIME_SET_ID_FOR_START, 0L)

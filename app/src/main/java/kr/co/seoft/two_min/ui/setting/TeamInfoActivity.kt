@@ -9,6 +9,7 @@ import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_team_info.*
 import kr.co.seoft.two_min.R
 import kr.co.seoft.two_min.ui.ActivityHelper
+import kr.co.seoft.two_min.util.ToastUtil
 import kr.co.seoft.two_min.util.setupActionBar
 
 
@@ -41,6 +42,7 @@ class TeamInfoActivity : ActivityHelper() {
             val myClipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
             val myClip = ClipData.newPlainText("text", "ask2min@gmail.com")
             myClipboard.setPrimaryClip(myClip)
+            ToastUtil.showToast(this,"클립보드에 복사되었어요")
         }
     }
 
