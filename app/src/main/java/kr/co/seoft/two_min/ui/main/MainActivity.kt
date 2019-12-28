@@ -135,18 +135,18 @@ class MainActivity : ActivityHelperForFrag() {
             }
         })
 
-        actMainTablayout.getTabAt(0)?.setIcon(R.drawable.___ic_home)
-        actMainTablayout.getTabAt(1)?.setIcon(R.drawable.___ic_my)
+        actMainTablayout.getTabAt(0)?.setIcon(R.drawable._ic_home)
+        actMainTablayout.getTabAt(1)?.setIcon(R.drawable._ic_my)
 
         TabLayoutMediator(actMainTablayout, actMainViewPager) { tab, position ->
             when (position) {
                 0 -> {
                     tab.text = "홈"
-                    tab.setIcon(R.drawable.___ic_home)
+                    tab.setIcon(R.drawable._ic_home)
                 }
                 else -> {
                     tab.text = "마이 타임셋"
-                    tab.setIcon(R.drawable.___ic_my)
+                    tab.setIcon(R.drawable._ic_my)
                 }
             }
         }.attach()
@@ -355,7 +355,7 @@ class MainActivity : ActivityHelperForFrag() {
         setupActionBar(R.id.toolbar) {
             setDisplayShowTitleEnabled(true)
             setDisplayHomeAsUpEnabled(false) // true is back icon
-            setHomeAsUpIndicator(R.drawable.___ic_back)
+            setHomeAsUpIndicator(R.drawable._ic_back)
         }
     }
 

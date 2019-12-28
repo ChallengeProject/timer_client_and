@@ -5,7 +5,7 @@
     <item
         android:id="@+id/edit_remove"
         app:showAsAction="ifRoom"
-        android:icon="@drawable/___ic_trash"
+        android:icon="@drawable/_ic_trash"
         android:title="edit_remove" />
 
 </menu>

@@ -35,7 +35,7 @@
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:background="?android:attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/___ic_close_small"
+            android:src="@drawable/_ic_close_small"
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -176,7 +176,7 @@
             <ImageView
                 android:id="@+id/fragHomeIvBack"
                 style="@style/MainNumberPad"
-                android:src="@drawable/___ic_back"
+                android:src="@drawable/_ic_keypad_delete"
                 android:textStyle="bold" />
 
         </LinearLayout>
@@ -242,7 +242,7 @@
         app:layout_constraintBottom_toBottomOf="@id/fragHomeRv"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        tools:visibility="visible">
+        tools:visibility="gone">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -251,7 +251,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/___bubble_detail"
+                android:background="@drawable/_bubble_detail"
                 android:orientation="vertical"
                 android:padding="2dp">
 
@@ -325,7 +325,7 @@
                     <ImageView
                         android:layout_width="36dp"
                         android:layout_height="36dp"
-                        android:src="@drawable/___ic_bell" />
+                        android:src="@drawable/_ic_bell" />
 
                     <TextView
                         android:id="@+id/fragHomeTvSilent"
@@ -395,7 +395,7 @@
                         android:layout_width="36dp"
                         android:layout_height="36dp"
                         android:padding="12dp"
-                        android:src="@drawable/___ic_clock" />
+                        android:src="@drawable/_ic_clock" />
 
                     <TextView
                         android:id="@+id/fragHomeTvTimerPosition"
@@ -423,7 +423,7 @@
                             android:background="?android:attr/selectableItemBackgroundBorderless"
                             android:gravity="right|center_vertical"
                             android:padding="6dp"
-                            android:src="@drawable/___ic_trash_24"
+                            android:src="@drawable/_ic_trash_24"
                             android:text="전체적용"
                             android:textColor="@color/ux_black"
                             android:textSize="15dp"
@@ -450,7 +450,7 @@
         android:layout_width="36dp"
         android:layout_height="36dp"
         android:background="?android:attr/selectableItemBackgroundBorderless"
-        android:src="@drawable/___ic_close_small"
+        android:src="@drawable/_ic_close_small"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/fragHomeLlTimeInfo"
         app:layout_constraintRight_toRightOf="@id/fragHomeLlTimeInfo"

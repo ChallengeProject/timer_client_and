@@ -17,7 +17,7 @@
             android:layout_height="match_parent"
             android:background="@color/white"
             android:theme="?attr/actionBarTheme"
-            app:navigationIcon="@drawable/___ic_back"
+            app:navigationIcon="@drawable/_ic_back"
             app:title=""
             app:titleTextColor="@color/ux_black" />
 

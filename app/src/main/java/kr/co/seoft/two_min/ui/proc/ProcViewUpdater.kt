@@ -56,8 +56,8 @@ class ProcViewUpdater(val act: Activity) {
 
     fun setRepeatIcon(b: Boolean) {
         act.ivRepeatBtn.setImageResource(
-            if (b) R.drawable.___bt_repeat
-            else R.drawable.___bt_non_repeat
+            if (b) R.drawable._bt_repeat
+            else R.drawable._bt_non_repeat
         )
     }
 

@@ -121,7 +121,7 @@ class ProcNotification(val service: Service, val times_: ArrayList<Int>) {
 
             val notification = NotificationCompat.Builder(service, App.CHANNEL_ID)
                 .setContentText("...")
-                .setSmallIcon(R.drawable.___ic_2min)
+                .setSmallIcon(R.drawable._ic_2min)
                 .setContentIntent(pendingIntent)
                 .setOngoing(true)
                 .setOnlyAlertOnce(true)

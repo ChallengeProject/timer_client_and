@@ -204,7 +204,7 @@ class HistoryActivity : ActivityHelper() {
         setupActionBar(R.id.toolbar) {
             setDisplayShowTitleEnabled(true)
             setDisplayHomeAsUpEnabled(true)
-            setHomeAsUpIndicator(R.drawable.___ic_back)
+            setHomeAsUpIndicator(R.drawable._ic_back)
             setTitle("히스토리 상세")
         }
     }

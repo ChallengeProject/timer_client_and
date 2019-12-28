@@ -51,7 +51,7 @@
         android:layout_height="36dp"
         android:layout_marginLeft="5dp"
         android:padding="12dp"
-        android:src="@drawable/___ic_clock"
+        android:src="@drawable/_ic_clock"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/itemSaveTimeSetTvTitle" />
 

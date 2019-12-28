@@ -38,7 +38,7 @@
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:layout_marginRight="12dp"
-                android:src="@drawable/___ic_check" />
+                android:src="@drawable/_ic_check" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -53,7 +53,7 @@
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:layout_marginLeft="10dp"
-                    android:src="@drawable/___bt_play" />
+                    android:src="@drawable/_bt_play" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -90,7 +90,7 @@
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:layout_marginRight="12dp"
-                android:src="@drawable/___ic_check" />
+                android:src="@drawable/_ic_check" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -124,7 +124,7 @@
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:layout_marginRight="12dp"
-                android:src="@drawable/___ic_check" />
+                android:src="@drawable/_ic_check" />
 
             <TextView
                 android:layout_width="match_parent"

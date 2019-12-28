@@ -10,13 +10,13 @@
 
     <application
         android:name=".util.App"
-        android:icon="@drawable/___ic_2min"
+        android:icon="@drawable/_ic_2min"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Design.Light.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.setting.NoticeActivity"></activity>
+        <activity android:name=".ui.setting.NoticeActivity"/>
         <activity android:name=".ui.setting.OpenSourceActivity" />
         <activity android:name=".ui.setting.TeamInfoActivity" />
         <activity android:name=".ui.setting.CountDownSettingActivity" />

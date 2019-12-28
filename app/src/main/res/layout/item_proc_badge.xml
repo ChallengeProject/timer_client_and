@@ -14,7 +14,7 @@
         android:layout_width="36dp"
         android:layout_height="36dp"
         android:padding="12dp"
-        android:src="@drawable/___ic_clock" />
+        android:src="@drawable/_ic_clock" />
 
     <TextView
         android:id="@+id/tvCount"

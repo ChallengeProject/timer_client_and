@@ -4,13 +4,13 @@
 
     <item
         android:id="@+id/main_home_history"
-        android:icon="@drawable/___ic_history"
+        android:icon="@drawable/_ic_history"
         android:title="main_home_history"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/main_home_setting"
-        android:icon="@drawable/___ic_setting"
+        android:icon="@drawable/_ic_setting"
         android:title="main_home_setting"
         app:showAsAction="ifRoom" />
 

@@ -22,7 +22,7 @@
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:padding="12dp"
-            android:src="@drawable/___ic_clock" />
+            android:src="@drawable/_ic_clock" />
 
         <TextView
             android:id="@+id/itemHomeBadgeTvCount"
@@ -48,7 +48,7 @@
             android:layout_marginEnd="7dp"
             android:layout_marginRight="7dp"
             android:scaleType="fitEnd"
-            android:src="@drawable/___ic_more_vertical" />
+            android:src="@drawable/_ic_more_vertical" />
     </LinearLayout>
 
     <ImageView
@@ -59,7 +59,7 @@
         android:layout_marginRight="15dp"
         android:background="?android:attr/selectableItemBackgroundBorderless"
         android:scaleType="fitCenter"
-        android:src="@drawable/___bt_non_repeat"
+        android:src="@drawable/_bt_non_repeat"
         android:visibility="invisible"
         app:layout_constraintRight_toRightOf="parent"
         tools:targetApi="lollipop" />
@@ -73,7 +73,7 @@
         android:layout_marginLeft="15dp"
         android:background="?android:attr/selectableItemBackgroundBorderless"
         android:scaleType="fitCenter"
-        android:src="@drawable/___bt_add"
+        android:src="@drawable/_bt_add"
         android:visibility="invisible"
         app:layout_constraintLeft_toLeftOf="parent"
         tools:targetApi="lollipop" />

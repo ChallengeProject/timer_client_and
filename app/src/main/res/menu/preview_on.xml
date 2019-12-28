@@ -5,12 +5,12 @@
     <item
         android:id="@+id/preview_on_share"
         app:showAsAction="ifRoom"
-        android:icon="@drawable/___ic_share"
+        android:icon="@drawable/_ic_share"
         android:title="preview_share" />
 
     <item
         android:id="@+id/preview_on_like"
         app:showAsAction="ifRoom"
-        android:icon="@drawable/___ic_like"
+        android:icon="@drawable/_ic_like"
         android:title="preview_like"/>
 </menu>
