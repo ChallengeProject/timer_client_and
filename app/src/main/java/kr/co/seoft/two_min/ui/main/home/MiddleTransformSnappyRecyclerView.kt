@@ -49,25 +49,28 @@ class MiddleTransformSnappyRecyclerView : RecyclerView {
 
                 val pos = vh.adapterPosition
 
-                // pushed Add button
-                if (type == HomeBadgeCallbackType.ADD_PUSH || type == HomeBadgeCallbackType.NORMAL_PUSH) {
-                    if (type == HomeBadgeCallbackType.ADD_PUSH) onBadgeSelectedListener?.invoke(type, pos)
-                    homeBadgeAdapter.resetFocus(pos)
-                    focusingPos = pos
+                when (type) {
+                    HomeBadgeCallbackType.ADD_PUSH, HomeBadgeCallbackType.NORMAL_PUSH -> {
+                        if (type == HomeBadgeCallbackType.ADD_PUSH) onBadgeSelectedListener?.invoke(type, pos)
+                        homeBadgeAdapter.resetFocus(pos)
+                        focusingPos = pos
 
-                    // smoothScrollToPosition not accuracy depending on position, so add, subject value
-                    if (pos >= curPos) this.smoothScrollToPosition(pos + 1)
-                    else this.smoothScrollToPosition(pos - 1)
+                        // smoothScrollToPosition not accuracy depending on position, so add, subject value
+                        if (pos >= curPos) this.smoothScrollToPosition(pos + 1)
+                        else this.smoothScrollToPosition(pos - 1)
 
-                    if (type == HomeBadgeCallbackType.NORMAL_PUSH) {
+                        if (type == HomeBadgeCallbackType.NORMAL_PUSH) {
+                            onBadgeSelectedListener?.invoke(type, pos)
+                        }
+
+                        return@HomeBadgeAdapter
+                    }
+                    HomeBadgeCallbackType.LONG_PUSH -> {
+                        itemTouchHelper.startDrag(vh)
+                    }
+                    HomeBadgeCallbackType.FOCUS_PUSH, HomeBadgeCallbackType.REPEAT_ON_PUSH, HomeBadgeCallbackType.REPEAT_OFF_PUSH -> {
                         onBadgeSelectedListener?.invoke(type, pos)
                     }
-
-                    return@HomeBadgeAdapter
-                } else if (type == HomeBadgeCallbackType.LONG_PUSH) {
-                    itemTouchHelper.startDrag(vh)
-                } else if (type == HomeBadgeCallbackType.FOCUS_PUSH) {
-                    onBadgeSelectedListener?.invoke(type, pos)
                 }
             }
 
@@ -197,4 +200,7 @@ class MiddleTransformSnappyRecyclerView : RecyclerView {
         homeBadgeAdapter.setSecond(second, focusingPos)
     }
 
+    fun setRepeatBadgeStatus(isRepeat: Boolean) {
+        homeBadgeAdapter.setRepeatBadgeStatus(isRepeat)
+    }
 }

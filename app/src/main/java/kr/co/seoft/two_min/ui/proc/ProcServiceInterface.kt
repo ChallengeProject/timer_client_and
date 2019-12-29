@@ -8,8 +8,8 @@ import android.os.IBinder
 
 class ProcServiceInterface(val ctx: Context) {
 
-    var connection : ServiceConnection?
-    var service : ProcService? = null
+    var connection: ServiceConnection?
+    var service: ProcService? = null
 
     init {
         connection = object : ServiceConnection {
@@ -22,53 +22,52 @@ class ProcServiceInterface(val ctx: Context) {
                 service = null
             }
         }
-        val intent = Intent(ctx,ProcService::class.java)
-        ctx.bindService(intent,connection, Context.BIND_AUTO_CREATE)
+        val intent = Intent(ctx, ProcService::class.java)
+        ctx.bindService(intent, connection, Context.BIND_AUTO_CREATE)
     }
 
-    fun unbindService(){
+    fun unbindService() {
         connection?.let {
             ctx.unbindService(connection)
         }
     }
 
-    fun updateActViewNow(){
+    fun updateActViewNow() {
         service?.updateActViewNow()
     }
 
-    fun restart(){
+    fun restart() {
         service?.restart(ProcService.StartType.RESTART)
     }
 
-    fun pause(){
+    fun pause() {
         service?.pause()
     }
 
-    fun stop(){
+    fun stop() {
         service?.stop(true)
     }
 
-    fun addMin(){
+    fun addMin() {
         service?.addMin()
     }
 
-    fun move(pos:Int){
+    fun move(pos: Int) {
         service?.move(pos)
     }
 
-    fun turnRepeat(){
-        service?.turnRepeat()
+    fun turnRepeat(isOn: Boolean) {
+        service?.turnRepeat(isOn)
     }
 
-    fun getRepeat(){
+
+    fun getRepeat() {
         service?.brdIsRepeat()
     }
 
-    fun stopSound(){
+    fun stopSound() {
         service?.stopSound()
     }
-
-
 
 
 }

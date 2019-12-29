@@ -23,13 +23,15 @@ class ProcActivity : AppCompatActivity() {
     companion object {
         const val TIME_SET = "TIME_SET"
         const val READY_COUNT = "READY_COUNT"
+        const val IS_REPEAT_ON = "IS_REPEAT_ON"
         const val TIMES_FOR_NOTIFIACTION = "TIMES_FOR_NOTIFIACTION"
 
-        fun startProcActivity(context: Context, timeSet: TimeSet, readyCount: Int) {
+        fun startProcActivity(context: Context, timeSet: TimeSet, readyCount: Int, isRepeat: Boolean) {
             (context as Activity).startActivityForResult(
                 Intent(context, ProcActivity::class.java).apply {
                     putExtra(TIME_SET, timeSet)
                     putExtra(READY_COUNT, readyCount)
+                    putExtra(IS_REPEAT_ON, isRepeat)
                 },
                 MainActivity.PROC_ACTIVITY
             )
@@ -79,6 +81,8 @@ class ProcActivity : AppCompatActivity() {
         timeSet = intent.getParcelableExtra(TIME_SET)
 
         readySec = intent.getIntExtra(READY_COUNT, 5)
+
+        isRepeat = intent.getBooleanExtra(IS_REPEAT_ON, false)
 
         // init view
         lsshlv.showLeftSideSnappyHorizontalListView(timeSet.times.asSequence().map { it.seconds }.toList())
@@ -194,7 +198,7 @@ class ProcActivity : AppCompatActivity() {
         }
 
         ivRepeatBtn.setOnClickListener {
-            procServiceInterface?.turnRepeat()
+            procServiceInterface?.turnRepeat(!isRepeat)
         }
 
         ivWriteMemoBtn.setOnClickListener {
@@ -295,6 +299,7 @@ class ProcActivity : AppCompatActivity() {
             updater.setBadgeFocusAndCommentAndBell(timeSet.times[0], 0)
 
             procStatus = ProcStatus.ING
+            procServiceInterface?.turnRepeat(isRepeat)
 
             // for showing to endProcActivity
             Calendar.getInstance().run {

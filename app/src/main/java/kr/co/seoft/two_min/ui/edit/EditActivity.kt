@@ -117,7 +117,7 @@ class EditActivity : ActivityHelperForFrag() {
         SelectorDialog(this, content, btn1Text, btn2Text, btn1Cb, btn2Cb)
     }
 
-    override fun startProc(timeSet: TimeSet) {
+    override fun startProc(timeSet: TimeSet, isRepeat:Boolean) {
         // pass
     }
 

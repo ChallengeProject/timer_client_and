@@ -23,7 +23,7 @@ abstract class ActivityHelperForFrag : AppCompatActivity() {
 
     val db by lazy { AppDatabase.getDatabase(this) }
 
-    abstract fun startProc(timeSet: TimeSet)
+    abstract fun startProc(timeSet: TimeSet, isRepeat: Boolean)
     abstract fun startSave(timeSet: TimeSet)
     abstract fun setShowBottomButtons(isShow: Boolean)
     abstract fun setLockViewpager(isLock: Boolean)

@@ -291,8 +291,8 @@ class ProcService : Service() {
         INSTANCE = null
     }
 
-    fun turnRepeat() {
-        isRepeat = !isRepeat
+    fun turnRepeat(isOn:Boolean) {
+        isRepeat = isOn
         brdIsRepeat()
     }
 

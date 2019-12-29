@@ -191,9 +191,9 @@ class MainActivity : ActivityHelperForFrag() {
         actMainLlBottomButtons.visibility = isShow.setVisibleOrGone()
     }
 
-    override fun startProc(timeSet: TimeSet) {
+    override fun startProc(timeSet: TimeSet, isRepeat: Boolean) {
         Preferencer.setCurrentMemo(this, "")
-        ProcActivity.startProcActivity(this, timeSet, Preferencer.getCountDown(this))
+        ProcActivity.startProcActivity(this, timeSet, Preferencer.getCountDown(this), isRepeat)
     }
 
     override fun startSave(timeSet: TimeSet) {
@@ -279,7 +279,7 @@ class MainActivity : ActivityHelperForFrag() {
                             ProcExceedActivity.startProcExceedActivity(this, timeSet, useInfo)
                         }
                         ProcEndActivity.RESP_TYPE_RESTART -> {
-                            ProcActivity.startProcActivity(this, timeSet, Preferencer.getCountDown(this))
+                            ProcActivity.startProcActivity(this, timeSet, Preferencer.getCountDown(this), false)
                             saveTimeSetForHistory(timeSet, useInfo)
                         }
                         ProcEndActivity.RESP_TYPE_SAVE -> {
@@ -321,7 +321,7 @@ class MainActivity : ActivityHelperForFrag() {
                             .subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribe({
-                                startProc(it)
+                                startProc(it, false)
                             }, {
                                 it.printStackTrace()
                             })
@@ -338,7 +338,7 @@ class MainActivity : ActivityHelperForFrag() {
                     } else { // HistoryActivity.HISTORY_RESP_TYPE_START
                         startProc(timeSet.apply {
                             timeSetId = 0L
-                        })
+                        }, false)
                     }
 
 

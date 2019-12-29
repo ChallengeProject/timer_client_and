@@ -21,6 +21,7 @@ class HomeFragment : Fragment() {
 
     var mainSecond = 0L
     var subSecond = ""
+    var isRepeatOn = false
 
     val updater by lazy {
         HomeFragUpdater(this)
@@ -131,7 +132,7 @@ class HomeFragment : Fragment() {
                 {
                     // none
                 }, {
-                    resetAll()
+                    resetAll(true)
                 })
         }
 
@@ -167,8 +168,8 @@ class HomeFragment : Fragment() {
 
         fragHomeRv.onBadgeSelectedListener = { type, pos ->
 
-            when(type){
-                HomeBadgeCallbackType.ADD_PUSH ->{
+            when (type) {
+                HomeBadgeCallbackType.ADD_PUSH -> {
                     fragHomeRv.addHomeBadge()
 
                     resetMainAndSubSecond()
@@ -177,7 +178,7 @@ class HomeFragment : Fragment() {
 
                     checkViewVisibleAndSet()
                 }
-                HomeBadgeCallbackType.NORMAL_PUSH->{
+                HomeBadgeCallbackType.NORMAL_PUSH -> {
                     resetMainAndSubSecond(fragHomeRv.getBadge(pos).time.seconds.toLong())
                     updater.setMainTextAndEtc(mainSecond)
                     updateWholeAndRemainTime()
@@ -189,8 +190,18 @@ class HomeFragment : Fragment() {
                     fragHomeRv.removeZeroSecondBadge()
                     checkViewVisibleAndSet()
                 }
-                HomeBadgeCallbackType.FOCUS_PUSH->{
+                HomeBadgeCallbackType.FOCUS_PUSH -> {
                     updater.showTimeInfo(pos, fragHomeRv.getBadges())
+                }
+
+                HomeBadgeCallbackType.REPEAT_ON_PUSH -> {
+                    fragHomeRv.setRepeatBadgeStatus(false)
+                    isRepeatOn = false
+                }
+
+                HomeBadgeCallbackType.REPEAT_OFF_PUSH -> {
+                    fragHomeRv.setRepeatBadgeStatus(true)
+                    isRepeatOn = true
                 }
             }
         }
@@ -279,7 +290,7 @@ class HomeFragment : Fragment() {
             timeSetId = 0
         )
         resetAll()
-        act.startProc(timeSet)
+        act.startProc(timeSet, isRepeatOn)
     }
 
     fun requestSave() {
@@ -299,12 +310,14 @@ class HomeFragment : Fragment() {
         act.startSave(timeSet)
     }
 
-    fun resetAll() {
+    fun resetAll(initRepeat: Boolean = false) {
         resetMainAndSubSecond()
         updater.setMainTextAndEtc(mainSecond)
         updater.setSubText(subSecond)
         fragHomeRv.resetBadges()
         checkViewVisibleAndSet()
+
+        if (initRepeat) isRepeatOn = false
     }
 
     fun loadTimeSet(timeSet: TimeSet) {

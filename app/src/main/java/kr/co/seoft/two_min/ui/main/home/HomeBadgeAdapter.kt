@@ -49,6 +49,11 @@ class HomeBadgeAdapter(
         items.add(items.size - positionController, homeBadge)
     }
 
+    fun setRepeatBadgeStatus(isRepeat:Boolean){
+        items[0].type = if(isRepeat) HomeBadgeType.REPEAT_ON else HomeBadgeType.REPEAT_OFF
+        notifyItemChanged(0)
+    }
+
     fun setBadge(index: Int, homeBadge: HomeBadge) {
         items[index] = homeBadge
     }
@@ -213,9 +218,11 @@ class HomeBadgeAdapter(
 
             when (homeBadge.type) {
                 HomeBadgeType.REPEAT_ON -> {
+                    itemHomeBadgeIvRepeat.setImageResource(R.drawable._bt_repeat)
                     visibleViews(true, false, false, true)
                 }
                 HomeBadgeType.REPEAT_OFF -> {
+                    itemHomeBadgeIvRepeat.setImageResource(R.drawable._bt_non_repeat)
                     visibleViews(true, false, false, true)
                 }
                 HomeBadgeType.ADD_SHOW -> {
