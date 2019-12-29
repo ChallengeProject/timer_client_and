@@ -8,7 +8,7 @@
 
 
     <TextView
-        android:id="@+id/actManageTvTitle"
+        android:fontFamily="@font/nanum_square_r" android:id="@+id/actManageTvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="43dp"
@@ -22,7 +22,7 @@
 
 
     <TextView
-        android:id="@+id/actManageTvCancel"
+        android:fontFamily="@font/nanum_square_r"  android:id="@+id/actManageTvCancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="?android:attr/selectableItemBackgroundBorderless"
@@ -35,7 +35,7 @@
         app:layout_constraintTop_toTopOf="@id/actManageTvTitle" />
 
     <TextView
-        android:id="@+id/actManageTvOk"
+        android:fontFamily="@font/nanum_square_r"  android:id="@+id/actManageTvOk"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="?android:attr/selectableItemBackgroundBorderless"
@@ -62,7 +62,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:fontFamily="@font/nanum_square_r"         android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="60dp"
                 android:layout_marginTop="37dp"
@@ -81,7 +81,7 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
             <TextView
-                android:id="@+id/actManageTvRemoveText"
+                android:fontFamily="@font/nanum_square_r"    android:id="@+id/actManageTvRemoveText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"

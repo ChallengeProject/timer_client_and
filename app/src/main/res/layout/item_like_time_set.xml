@@ -9,7 +9,7 @@
 
 
     <TextView
-        android:id="@+id/itemLikeTimeSetTvWholeTime"
+        android:fontFamily="@font/nanum_square_eb"    android:id="@+id/itemLikeTimeSetTvWholeTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
@@ -22,7 +22,7 @@
         tools:text="HH:MM:SS" />
 
     <TextView
-        android:id="@+id/itemLikeTimeSetTvEndTime"
+        android:fontFamily="@font/nanum_square_r"    android:id="@+id/itemLikeTimeSetTvEndTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="20dp"
@@ -36,7 +36,7 @@
 
     <TextView
         android:id="@+id/itemLikeTimeSetTvTitle"
-        android:layout_width="wrap_content"
+        android:fontFamily="@font/nanum_square_r"    android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:textColor="@color/black"
@@ -57,7 +57,7 @@
         app:layout_constraintTop_toBottomOf="@id/itemLikeTimeSetTvWholeTime" />
 
     <TextView
-        android:id="@+id/itemLikeTimeSetTvTimeCount"
+        android:fontFamily="@font/nanum_square_r" android:id="@+id/itemLikeTimeSetTvTimeCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="20dp"

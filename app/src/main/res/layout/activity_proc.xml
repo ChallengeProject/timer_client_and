@@ -28,7 +28,7 @@
         app:layout_constraintRight_toLeftOf="@id/tvAddCount"
         app:layout_constraintTop_toTopOf="@id/ivWriteMemoBtn" />
 
-    <TextView
+    <TextView android:fontFamily="@font/nanum_square_r"
         android:id="@+id/tvAddCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -41,7 +41,7 @@
         app:layout_constraintTop_toTopOf="@id/ivAddMinuteBtn"
         tools:text="x 3" />
 
-    <TextView
+    <TextView android:fontFamily="@font/nanum_square_r"
         android:id="@+id/tvTimesetTimeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -54,7 +54,7 @@
         app:layout_constraintStart_toStartOf="@+id/tvTitle"
         app:layout_constraintTop_toBottomOf="@+id/ivWriteMemoBtn" />
 
-    <TextView
+    <TextView android:fontFamily="@font/nanum_square_r"
         android:id="@+id/tvTimesetTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -65,7 +65,7 @@
         app:layout_constraintTop_toTopOf="@id/tvTimesetTimeText"
         tools:text="00:01:00" />
 
-    <TextView
+    <TextView android:fontFamily="@font/nanum_square_r"
         android:id="@+id/tvEndTimeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -78,7 +78,7 @@
         app:layout_constraintStart_toStartOf="@+id/tvTitle"
         app:layout_constraintTop_toBottomOf="@+id/tvTimesetTimeText" />
 
-    <TextView
+    <TextView android:fontFamily="@font/nanum_square_r"
         android:id="@+id/tvEndTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -89,7 +89,7 @@
         app:layout_constraintTop_toTopOf="@id/tvEndTimeText"
         tools:text="9:42 AM" />
 
-    <TextView
+    <TextView android:fontFamily="@font/nanum_square_r"
         android:id="@+id/tvSoundText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -102,7 +102,7 @@
         app:layout_constraintStart_toStartOf="@+id/tvTitle"
         app:layout_constraintTop_toBottomOf="@+id/tvEndTimeText" />
 
-    <TextView
+    <TextView android:fontFamily="@font/nanum_square_r"
         android:id="@+id/tvSound"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -113,7 +113,7 @@
         app:layout_constraintTop_toTopOf="@id/tvSoundText"
         tools:text="해당 타이머 사운드 노출" />
 
-    <TextView
+    <TextView android:fontFamily="@font/nanum_square_r"
         android:id="@+id/tvCommentText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -125,7 +125,7 @@
         app:layout_constraintStart_toStartOf="@+id/tvTitle"
         app:layout_constraintTop_toBottomOf="@+id/tvSound" />
 
-    <TextView
+    <TextView android:fontFamily="@font/nanum_square_r"
         android:id="@+id/tvComment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -157,7 +157,7 @@
         app:layout_constraintStart_toStartOf="@+id/tvTitle"
         tools:visibility="visible">
 
-        <TextView
+        <TextView android:fontFamily="@font/nanum_square_r"
             android:id="@+id/tvSkipMessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -214,7 +214,7 @@
         android:background="#99FFFFFF"
         android:visibility="gone" />
 
-    <TextView
+    <TextView android:fontFamily="@font/nanum_square_r"
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -229,7 +229,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="내 타임셋" />
 
-    <TextView
+    <TextView android:fontFamily="@font/nanum_square_r"
         android:id="@+id/tvSubTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -254,7 +254,7 @@
         app:layout_constraintTop_toTopOf="@id/tvSubTitle" />
 
     <!-- this is second place -->
-    <TextView
+    <TextView android:fontFamily="@font/nanum_square_eb"
         android:id="@+id/tvTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -279,7 +279,7 @@
         app:layout_constraintRight_toLeftOf="@id/ivRepeatBtn"
         app:layout_constraintTop_toBottomOf="@id/tvTime" />
 
-    <TextView
+    <TextView android:fontFamily="@font/nanum_square_eb"
         android:id="@+id/btBottom1Btn"
         android:layout_width="0dp"
         android:layout_height="45dp"
@@ -298,7 +298,7 @@
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
+    <TextView android:fontFamily="@font/nanum_square_eb"
         android:id="@+id/btBottom2Btn"
         android:layout_width="0dp"
         android:layout_height="45dp"
@@ -328,7 +328,7 @@
         app:layout_constraintRight_toRightOf="parent"
         tools:visibility="visible">
 
-        <TextView
+        <TextView android:fontFamily="@font/nanum_square_r"
             android:id="@+id/tvBottomAlarmMainTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -354,7 +354,7 @@
             app:layout_constraintRight_toLeftOf="@id/tvBottomAlarmSubTitle"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
+        <TextView android:fontFamily="@font/nanum_square_r"
             android:id="@+id/tvBottomAlarmSubTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -389,7 +389,7 @@
         android:visibility="invisible"
         tools:visibility="gone">
 
-        <TextView
+        <TextView android:fontFamily="@font/nanum_square_r"
             android:id="@+id/tvMemoText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -415,7 +415,7 @@
             app:layout_constraintTop_toTopOf="@id/tvMemoText" />
 
         <EditText
-            android:id="@+id/etMemo"
+            android:fontFamily="@font/nanum_square_r"       android:id="@+id/etMemo"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="52dp"
@@ -440,7 +440,7 @@
             app:layout_constraintTop_toBottomOf="@id/etMemo" />
 
 
-        <TextView
+        <TextView android:fontFamily="@font/nanum_square_r"
             android:id="@+id/tvExceedErrorText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -453,7 +453,7 @@
             app:layout_constraintTop_toBottomOf="@id/etMemo"
             tools:visibility="visible" />
 
-        <TextView
+        <TextView android:fontFamily="@font/nanum_square_r"
             android:id="@+id/tvExceedNumberText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -466,7 +466,7 @@
             app:layout_constraintRight_toRightOf="@id/etMemo"
             app:layout_constraintTop_toBottomOf="@id/etMemo" />
 
-        <TextView
+        <TextView android:fontFamily="@font/nanum_square_r"
             android:id="@+id/tvExceedNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

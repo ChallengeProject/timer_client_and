@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content" 
+    android:layout_height="wrap_content"
     android:background="@drawable/bg_radius_20_white"
     android:paddingBottom="25dp">
 
@@ -14,6 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="25dp"
+        android:fontFamily="@font/nanum_square_eb"
         android:textColor="@color/ux_black"
         android:textSize="18dp"
         android:textStyle="bold"
@@ -25,8 +26,9 @@
         android:id="@+id/itemHistoriesTvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/nanum_square_r"
         android:textColor="@color/black"
         android:textSize="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -39,11 +41,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="20dp"
-        tools:text="YY.MM.DD"
+        android:fontFamily="@font/nanum_square_r"
         android:textColor="@color/ux_dark_gray"
         android:textSize="12dp"
         app:layout_constraintBottom_toBottomOf="@id/itemHistoriesTvTitle"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/itemHistoriesTvTitle" />
+        app:layout_constraintTop_toTopOf="@id/itemHistoriesTvTitle"
+        tools:text="YY.MM.DD" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

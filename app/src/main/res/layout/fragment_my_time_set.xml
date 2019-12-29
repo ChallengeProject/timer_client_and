@@ -20,7 +20,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:fontFamily="@font/nanum_square_r"        android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="60dp"
                 android:layout_marginTop="50dp"
@@ -28,7 +28,7 @@
                 android:textColor="@color/ux_black" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:fontFamily="@font/nanum_square_r"   android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="80dp"
@@ -57,7 +57,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:fontFamily="@font/nanum_square_r"   android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="30dp"
                     android:text="타임셋을 추가해보세요!"
@@ -69,7 +69,7 @@
 
 
             <TextView
-                android:id="@+id/fragMyTimeSetTvSaveTimeSetManage"
+                android:fontFamily="@font/nanum_square_r"       android:id="@+id/fragMyTimeSetTvSaveTimeSetManage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -99,7 +99,7 @@
 
 
                 <TextView
-                    android:id="@+id/fragMyTimeSetTvSaveTimeSetFirstItemWholeTime"
+                    android:fontFamily="@font/nanum_square_eb"     android:id="@+id/fragMyTimeSetTvSaveTimeSetFirstItemWholeTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
@@ -112,7 +112,7 @@
                     tools:text="HH:MM:SS" />
 
                 <TextView
-                    android:id="@+id/fragMyTimeSetTvSaveTimeSetFirstItemEndTime"
+                    android:fontFamily="@font/nanum_square_r" android:id="@+id/fragMyTimeSetTvSaveTimeSetFirstItemEndTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="20dp"
@@ -125,7 +125,7 @@
 
 
                 <TextView
-                    android:id="@+id/fragMyTimeSetTvSaveTimeSetFirstItemTitle"
+                    android:fontFamily="@font/nanum_square_r"      android:id="@+id/fragMyTimeSetTvSaveTimeSetFirstItemTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
@@ -147,7 +147,7 @@
                     app:layout_constraintTop_toBottomOf="@id/fragMyTimeSetTvSaveTimeSetFirstItemWholeTime" />
 
                 <TextView
-                    android:id="@+id/fragMyTimeSetTvSaveTimeSetFirstItemTimeCount"
+                    android:fontFamily="@font/nanum_square_r"       android:id="@+id/fragMyTimeSetTvSaveTimeSetFirstItemTimeCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="20dp"
@@ -172,7 +172,7 @@
                 app:spanCount="2" />
 
             <TextView
-                android:id="@+id/fragMyTimeSetTvSaveTimeSetMore"
+                android:fontFamily="@font/nanum_square_r"      android:id="@+id/fragMyTimeSetTvSaveTimeSetMore"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -191,7 +191,7 @@
 
 
             <TextView
-                android:id="@+id/fragMyTimeSetTvLikeTimeSetText"
+                android:fontFamily="@font/nanum_square_r"     android:id="@+id/fragMyTimeSetTvLikeTimeSetText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="25dp"
@@ -203,7 +203,7 @@
                 android:visibility="gone" />
 
             <TextView
-                android:id="@+id/fragMyTimeSetTvLikeTimeSetManage"
+                android:fontFamily="@font/nanum_square_r"          android:id="@+id/fragMyTimeSetTvLikeTimeSetManage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -231,7 +231,7 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
             <TextView
-                android:id="@+id/fragMyTimeSetTvLikeTimeSetMore"
+                android:fontFamily="@font/nanum_square_r"      android:id="@+id/fragMyTimeSetTvLikeTimeSetMore"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"

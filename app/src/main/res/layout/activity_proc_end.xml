@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.proc.ProcEndActivity">
 
-    <TextView
+    <TextView android:fontFamily="@font/nanum_square_r"
         android:id="@+id/tvTimesetEndText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -32,7 +32,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@id/tvTimesetEndText" />
 
-    <TextView
+    <TextView android:fontFamily="@font/nanum_square_r"
         android:id="@+id/tvTimesetTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -46,7 +46,7 @@
         app:layout_constraintTop_toBottomOf="@id/tvTimesetEndText" />
 
 
-    <TextView
+    <TextView android:fontFamily="@font/nanum_square_r"
         android:id="@+id/tvDateInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -59,7 +59,7 @@
         tools:text="19.5.24 / 9:42 AM - 9:43 AM" />
 
     <EditText
-        android:id="@+id/etContent"
+        android:fontFamily="@font/nanum_square_r"   android:id="@+id/etContent"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="13dp"
@@ -82,7 +82,7 @@
         app:layout_constraintStart_toStartOf="@id/etContent"
         app:layout_constraintTop_toBottomOf="@id/etContent" />
 
-    <TextView
+    <TextView android:fontFamily="@font/nanum_square_r"
         android:id="@+id/tvExceedErrorText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -95,7 +95,7 @@
         app:layout_constraintTop_toBottomOf="@id/etContent"
         tools:visibility="visible" />
 
-    <TextView
+    <TextView android:fontFamily="@font/nanum_square_r"
         android:id="@+id/tvExceedNumberText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -108,7 +108,7 @@
         app:layout_constraintRight_toRightOf="@id/etContent"
         app:layout_constraintTop_toBottomOf="@id/etContent" />
 
-    <TextView
+    <TextView android:fontFamily="@font/nanum_square_r"
         android:id="@+id/tvExceedNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -120,7 +120,7 @@
         app:layout_constraintTop_toBottomOf="@id/etContent" />
 
     <Button
-        android:id="@+id/btExceed"
+        android:fontFamily="@font/nanum_square_eb"   android:id="@+id/btExceed"
         android:layout_width="wrap_content"
         android:layout_height="45dp"
         android:layout_marginStart="25dp"
@@ -137,7 +137,7 @@
 
 
     <Button
-        android:id="@+id/btSave"
+        android:fontFamily="@font/nanum_square_eb" android:id="@+id/btSave"
         android:layout_width="wrap_content"
         android:layout_height="45dp"
         android:background="@drawable/bg_bottom_button_gray"
@@ -153,7 +153,7 @@
         />
 
     <Button
-        android:id="@+id/btRestart"
+        android:fontFamily="@font/nanum_square_eb"  android:id="@+id/btRestart"
         android:layout_width="wrap_content"
         android:layout_height="45dp"
         android:layout_marginEnd="25dp"

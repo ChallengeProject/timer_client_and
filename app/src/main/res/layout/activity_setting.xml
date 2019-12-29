@@ -40,7 +40,7 @@
                 android:layout_marginRight="12dp"
                 android:src="@drawable/_ic_next" />
 
-            <TextView
+            <TextView android:fontFamily="@font/nanum_square_r"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="23dp"
@@ -74,7 +74,7 @@
                 android:layout_marginRight="12dp"
                 android:src="@drawable/_ic_next" />
 
-            <TextView
+            <TextView android:fontFamily="@font/nanum_square_r"
                 android:id="@+id/actSettingTvSoundType"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -82,7 +82,7 @@
                 android:textSize="12dp"
                 tools:text="현재 : 기본음" />
 
-            <TextView
+            <TextView android:fontFamily="@font/nanum_square_r"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="23dp"
@@ -116,7 +116,7 @@
                 android:layout_marginRight="12dp"
                 android:src="@drawable/_ic_next" />
 
-            <TextView
+            <TextView android:fontFamily="@font/nanum_square_r"
                 android:id="@+id/actSettingTvCountDown"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -124,7 +124,7 @@
                 android:textSize="12dp"
                 tools:text="현재 : 5초" />
 
-            <TextView
+            <TextView android:fontFamily="@font/nanum_square_r"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="23dp"
@@ -158,7 +158,7 @@
                 android:layout_marginRight="12dp"
                 android:src="@drawable/_ic_next" />
 
-            <TextView
+            <TextView android:fontFamily="@font/nanum_square_r"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="23dp"
@@ -192,7 +192,7 @@
                 android:layout_marginRight="12dp"
                 android:src="@drawable/_ic_next" />
 
-            <TextView
+            <TextView android:fontFamily="@font/nanum_square_r"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="23dp"
@@ -213,7 +213,7 @@
 
     </LinearLayout>
 
-    <TextView
+    <TextView android:fontFamily="@font/nanum_square_r"
         android:id="@+id/actSettingTopText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

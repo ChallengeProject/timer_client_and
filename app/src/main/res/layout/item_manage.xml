@@ -31,6 +31,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:fontFamily="@font/nanum_square_eb"
         android:id="@+id/itemManageTvWholeTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -44,6 +45,7 @@
         tools:text="00:00:00" />
 
     <TextView
+        android:fontFamily="@font/nanum_square_r"
         android:id="@+id/itemManageTvTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

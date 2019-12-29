@@ -18,10 +18,10 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:fontFamily="@font/nanum_square_eb"
             android:id="@+id/fragHomeTvMain"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/nanum_square_eb"
             android:text="00:00:00"
             android:textColor="@color/ux_black"
             android:textSize="24dp"
@@ -49,6 +49,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:fontFamily="@font/nanum_square_r"
         android:textColor="@color/ux_black"
         app:layout_constraintBottom_toTopOf="@id/fragHomeLlNumberPad"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -76,6 +77,7 @@
             <TextView
                 android:id="@+id/fragHomeTv1"
                 style="@style/MainNumberPad"
+                android:fontFamily="@font/nanum_square_r"
                 android:text="1" />
 
             <Space style="@style/MainNumberPadSpaceWidth" />
@@ -83,6 +85,7 @@
             <TextView
                 android:id="@+id/fragHomeTv2"
                 style="@style/MainNumberPad"
+                android:fontFamily="@font/nanum_square_r"
                 android:text="2" />
 
             <Space style="@style/MainNumberPadSpaceWidth" />
@@ -90,6 +93,7 @@
             <TextView
                 android:id="@+id/fragHomeTv3"
                 style="@style/MainNumberPad"
+                android:fontFamily="@font/nanum_square_r"
                 android:text="3" />
 
         </LinearLayout>
@@ -105,6 +109,7 @@
             <TextView
                 android:id="@+id/fragHomeTv4"
                 style="@style/MainNumberPad"
+                android:fontFamily="@font/nanum_square_r"
                 android:text="4" />
 
             <Space style="@style/MainNumberPadSpaceWidth" />
@@ -112,6 +117,7 @@
             <TextView
                 android:id="@+id/fragHomeTv5"
                 style="@style/MainNumberPad"
+                android:fontFamily="@font/nanum_square_r"
                 android:text="5" />
 
             <Space style="@style/MainNumberPadSpaceWidth" />
@@ -119,6 +125,7 @@
             <TextView
                 android:id="@+id/fragHomeTv6"
                 style="@style/MainNumberPad"
+                android:fontFamily="@font/nanum_square_r"
                 android:text="6" />
 
         </LinearLayout>
@@ -134,6 +141,7 @@
             <TextView
                 android:id="@+id/fragHomeTv7"
                 style="@style/MainNumberPad"
+                android:fontFamily="@font/nanum_square_r"
                 android:text="7" />
 
             <Space style="@style/MainNumberPadSpaceWidth" />
@@ -193,6 +201,7 @@
             <TextView
                 android:id="@+id/fragHomeTvHour"
                 style="@style/MainNumberPad"
+                android:fontFamily="@font/nanum_square_eb"
                 android:text="시"
                 android:textStyle="bold" />
 
@@ -201,6 +210,7 @@
             <TextView
                 android:id="@+id/fragHomeTvMinute"
                 style="@style/MainNumberPad"
+                android:fontFamily="@font/nanum_square_eb"
                 android:text="분"
                 android:textStyle="bold" />
 
@@ -209,6 +219,7 @@
             <TextView
                 android:id="@+id/fragHomeTvSecond"
                 style="@style/MainNumberPad"
+                android:fontFamily="@font/nanum_square_eb"
                 android:text="초"
                 android:textStyle="bold" />
 
@@ -265,6 +276,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginRight="20dp"
                     android:background="@null"
+                    android:fontFamily="@font/nanum_square_r"
                     android:gravity="top"
                     android:hint="코멘트를 입력하실 수 있어요"
                     android:lines="9"
@@ -289,6 +301,7 @@
                         android:id="@+id/fragHomeTvContentLength"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/nanum_square_r"
                         android:gravity="right"
                         android:textColor="@color/ux_black"
                         android:textSize="12dp"
@@ -298,6 +311,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/nanum_square_r"
                         android:gravity="right"
                         android:text="/100 byte"
                         android:textColor="@color/ux_black"
@@ -335,6 +349,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
+                        android:fontFamily="@font/nanum_square_r"
                         android:gravity="center"
                         android:text="무음"
                         android:textColor="@color/ux_black"
@@ -346,6 +361,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
+                        android:fontFamily="@font/nanum_square_r"
                         android:gravity="center"
                         android:text="진동"
                         android:textColor="@color/ux_black"
@@ -357,6 +373,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
+                        android:fontFamily="@font/nanum_square_r"
                         android:text="기본음"
                         android:textColor="@color/ux_black"
                         android:textSize="15dp" />

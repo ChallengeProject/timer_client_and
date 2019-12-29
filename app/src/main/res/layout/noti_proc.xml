@@ -17,7 +17,7 @@
         android:layout_marginTop="15dp"
         android:src="@drawable/_ic_2min" />
 
-    <TextView
+    <TextView android:fontFamily="@font/nanum_square_r"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@id/tvLogo"
@@ -75,7 +75,7 @@
         android:src="@drawable/_bt_play"
         app:layout_constraintEnd_toStartOf="@id/notiIvCtrlClose" />
 
-    <TextView
+    <TextView android:fontFamily="@font/nanum_square_r"
 
         android:id="@+id/notiTvTimer"
         android:layout_width="wrap_content"
@@ -106,7 +106,7 @@
         />
 
 
-    <TextView
+    <TextView android:fontFamily="@font/nanum_square_r"
         android:id="@+id/notiTvRepeat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

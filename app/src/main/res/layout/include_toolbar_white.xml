@@ -18,6 +18,7 @@
             android:background="@color/white"
             android:theme="?attr/actionBarTheme"
             app:navigationIcon="@drawable/_ic_back"
+            app:titleTextAppearance="@style/Toolbar.TitleText"
             app:title=""
             app:titleTextColor="@color/ux_black" />
 

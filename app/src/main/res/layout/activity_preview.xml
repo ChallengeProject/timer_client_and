@@ -25,7 +25,7 @@
 
         >
 
-        <TextView
+        <TextView android:fontFamily="@font/nanum_square_r"
             android:id="@+id/actPreviewTvTitle"
             android:hint="무제 타임셋"
             android:layout_width="match_parent"
@@ -38,7 +38,7 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="내 타임셋" />
 
-        <TextView
+        <TextView android:fontFamily="@font/nanum_square_r"
             android:id="@+id/actPreviewTvTimeSetTimeText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
