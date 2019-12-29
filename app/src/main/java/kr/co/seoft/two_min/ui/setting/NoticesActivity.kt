@@ -42,7 +42,7 @@ class NoticesActivity : ActivityHelper() {
             setDisplayShowTitleEnabled(true)
             setDisplayHomeAsUpEnabled(true)
             setHomeAsUpIndicator(R.drawable._ic_back)
-            setTitle("설정")
+            setTitle("공지사항")
         }
     }
 

@@ -18,7 +18,7 @@
             android:background="@color/ux_gray"
             android:theme="?attr/actionBarTheme"
             app:navigationIcon="@drawable/_ic_back"
-            app:title=""
+            app:titleTextAppearance="@style/Toolbar.TitleText"
             app:titleTextColor="@color/ux_black" />
 
     </com.google.android.material.appbar.AppBarLayout>

@@ -162,7 +162,7 @@ class OpenSourceActivity : ActivityHelper() {
             setDisplayShowTitleEnabled(true)
             setDisplayHomeAsUpEnabled(true)
             setHomeAsUpIndicator(R.drawable._ic_back)
-            setTitle("설정")
+            setTitle("오픈소스 라이센스")
         }
     }
 
