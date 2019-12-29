@@ -2,11 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item
-        android:id="@+id/preview_off_share"
-        app:showAsAction="ifRoom"
-        android:icon="@drawable/_ic_share"
-        android:title="preview_share" />
+<!--    <item-->
+<!--        android:id="@+id/preview_off_share"-->
+<!--        app:showAsAction="ifRoom"-->
+<!--        android:icon="@drawable/_ic_share"-->
+<!--        android:title="preview_share" />-->
 
     <item
         android:id="@+id/preview_off_like"

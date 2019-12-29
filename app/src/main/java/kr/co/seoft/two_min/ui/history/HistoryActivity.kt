@@ -12,6 +12,7 @@ import android.text.style.ForegroundColorSpan
 import android.view.MenuItem
 import android.view.View
 import gun0912.tedkeyboardobserver.TedKeyboardObserver
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -197,6 +198,29 @@ class HistoryActivity : ActivityHelper() {
 //            actHistoryLsshlv.visibility = (!it).setVisibleOrGone()
             actHistoryLlBottomButtons.visibility = (!it).setVisibleOrGone()
         }
+
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        compositeDisposable.add(
+            Single.fromCallable {
+
+                db.timeSetDao().updateTimeSet(
+                    timeSet.copy(
+                        memo = actHistoryEtMemo.text.toString()
+                    )
+                )
+            }
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    // empty
+                }, {
+                    it.printStackTrace()
+                })
+        )
 
     }
 

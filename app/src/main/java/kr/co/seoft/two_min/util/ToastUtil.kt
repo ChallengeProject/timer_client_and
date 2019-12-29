@@ -37,7 +37,7 @@ object ToastUtil {
     fun showToastTask(activity: Activity, content: String, buttonText: String, cb: () -> Unit) {
         Handler().postDelayed({
             ToastPopupView(activity, content, buttonText, cb)
-        },100)
+        },500)
     }
 
 

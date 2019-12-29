@@ -164,16 +164,21 @@ class EditActivity : ActivityHelperForFrag() {
         item ?: return false
         when (item.itemId) {
             R.id.edit_remove -> {
-                compositeDisposable.add(Single.fromCallable {
-                    db.timeSetDao().deleteTimeSet(curTimeSet)
-                }
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe({
-                        finish()
-                    },{
-                        it.printStackTrace()
-                    }))
+
+                SelectorDialog(this,"타임셋을 정말 삭제하시겠어요?","취소","삭제",{
+                    // empty
+                },{
+                    compositeDisposable.add(Single.fromCallable {
+                        db.timeSetDao().deleteTimeSet(curTimeSet)
+                    }
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe({
+                            finish()
+                        },{
+                            it.printStackTrace()
+                        }))
+                })
             }
             android.R.id.home -> {
                 finish()

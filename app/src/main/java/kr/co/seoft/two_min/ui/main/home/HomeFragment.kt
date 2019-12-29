@@ -7,27 +7,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.fragment_home.*
 import kr.co.seoft.two_min.R
 import kr.co.seoft.two_min.data.Bell
 import kr.co.seoft.two_min.data.TimeSet
 import kr.co.seoft.two_min.ui.ActivityHelperForFrag
-import kr.co.seoft.two_min.util.KeyboardUtil
-import kr.co.seoft.two_min.util.color
-import kr.co.seoft.two_min.util.toEndTimeStrAfterSec
-import kr.co.seoft.two_min.util.toFormattingString
+import kr.co.seoft.two_min.util.*
 
 class HomeFragment : Fragment() {
 
     companion object {
         fun newInstance() = HomeFragment()
         const val MAX_SECOND = 360000
-    }
-
-    val vm by lazy {
-        ViewModelProviders.of(this, HomeViewModel(act.db).create())
-            .get(HomeViewModel::class.java)
     }
 
     var mainSecond = 0L
@@ -177,28 +168,32 @@ class HomeFragment : Fragment() {
         }
 
         fragHomeRv.onBadgeSelectedListener = { type, pos ->
-            if (type == HomeBadgeCallbackType.ADD_PUSH) {
-                fragHomeRv.addHomeBadge()
 
-                resetMainAndSubSecond()
-                updater.setMainTextAndEtc(mainSecond)
-                updateWholeAndRemainTime()
+            when(type){
+                HomeBadgeCallbackType.ADD_PUSH ->{
+                    fragHomeRv.addHomeBadge()
 
-                checkViewVisibleAndSet()
-            } else if (type == HomeBadgeCallbackType.NORMAL_PUSH) {
-                resetMainAndSubSecond(fragHomeRv.getBadge(pos).time.seconds.toLong())
-                updater.setMainTextAndEtc(mainSecond)
-                updateWholeAndRemainTime()
+                    resetMainAndSubSecond()
+                    updater.setMainTextAndEtc(mainSecond)
+                    updateWholeAndRemainTime()
 
-                /**
-                 * NORMAL_PUSH 상황이라서 ADD 작업은 포커싱해제타이밍이며 마지막 뱃지말고 처음~중간 부분 뱃지도 작업이 끝난상황이라서
-                 * 00:00:00 인애들을 걸러내도됨
-                 */
-                fragHomeRv.removeZeroSecondBadge()
-                checkViewVisibleAndSet()
+                    checkViewVisibleAndSet()
+                }
+                HomeBadgeCallbackType.NORMAL_PUSH->{
+                    resetMainAndSubSecond(fragHomeRv.getBadge(pos).time.seconds.toLong())
+                    updater.setMainTextAndEtc(mainSecond)
+                    updateWholeAndRemainTime()
 
-            } else if (type == HomeBadgeCallbackType.FOCUS_PUSH) {
-                updater.showTimeInfo(pos, fragHomeRv.getBadges())
+                    /**
+                     * NORMAL_PUSH 상황이라서 ADD 작업은 포커싱해제타이밍이며 마지막 뱃지말고 처음~중간 부분 뱃지도 작업이 끝난상황이라서
+                     * 00:00:00 인애들을 걸러내도됨
+                     */
+                    fragHomeRv.removeZeroSecondBadge()
+                    checkViewVisibleAndSet()
+                }
+                HomeBadgeCallbackType.FOCUS_PUSH->{
+                    updater.showTimeInfo(pos, fragHomeRv.getBadges())
+                }
             }
         }
 
@@ -284,7 +279,7 @@ class HomeFragment : Fragment() {
     fun requestProc() {
 
         val timeSet = TimeSet(
-            title = "THIS_IS_TITLE",
+            title = "무제 타임셋",
             times = fragHomeRv.getBadges()
                 .asSequence()
                 .filter { it.type == HomeBadgeType.NORMAL || it.type == HomeBadgeType.FOCUS }
@@ -300,13 +295,14 @@ class HomeFragment : Fragment() {
     fun requestSave() {
 
         val timeSet = TimeSet(
-            title = "THIS_IS_TITLE",
+
+            title = "무제 타임셋",
             times = fragHomeRv.getBadges()
                 .asSequence()
                 .filter { (it.type == HomeBadgeType.NORMAL || it.type == HomeBadgeType.FOCUS) && it.time.seconds != 0 }
                 .map { it.time }
                 .toList(),
-            memo = "",
+            memo = Preferencer.getCurrentMemo(act.baseContext),
             timeSetId = 0
         )
         resetAll()

@@ -242,6 +242,17 @@
         app:layout_constraintTop_toBottomOf="@id/tvTitle"
         tools:text="시작 N초 전" />
 
+    <View
+        android:id="@+id/viewSubTitleRedDot"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/_ic_reddot"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@id/tvSubTitle"
+        app:layout_constraintRight_toLeftOf="@id/tvSubTitle"
+        app:layout_constraintTop_toTopOf="@id/tvSubTitle" />
+
     <!-- this is second place -->
     <TextView
         android:id="@+id/tvTime"

@@ -41,7 +41,7 @@ data class History(
 data class TimeSet(
     var title: String = "",
     var times: List<Time>,
-    val memo: String = "",
+    var memo: String = "",
     var saveOrder: Int = -1,
     var likeOrder: Int = -1,
     var useHistory: Int = 0,

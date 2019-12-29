@@ -242,7 +242,7 @@
         app:layout_constraintBottom_toBottomOf="@id/fragHomeRv"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        tools:visibility="gone">
+        tools:visibility="visible">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -267,7 +267,8 @@
                     android:gravity="top"
                     android:hint="코멘트를 입력하실 수 있어요"
                     android:lines="9"
-                    android:textColor="@color/text_hint_gray"
+                    android:textColor="@color/ux_black"
+                    android:textColorHint="@color/text_hint_gray"
                     android:textSize="15dp"
                     app:layout_constraintLeft_toLeftOf="@id/tvTimesetEndText"
                     app:layout_constraintRight_toRightOf="parent"
@@ -450,7 +451,7 @@
         android:layout_width="36dp"
         android:layout_height="36dp"
         android:background="?android:attr/selectableItemBackgroundBorderless"
-        android:src="@drawable/_ic_close_small"
+        android:src="@drawable/_ic_close_big"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/fragHomeLlTimeInfo"
         app:layout_constraintRight_toRightOf="@id/fragHomeLlTimeInfo"

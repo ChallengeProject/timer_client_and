@@ -19,6 +19,7 @@ class ProcViewUpdater(val act: Activity) {
             visibility = visible
             text = str
         }
+        act.viewSubTitleRedDot.visibility = visible
     }
 
     fun setSubtitleRepeatCnt(cnt: Int) {

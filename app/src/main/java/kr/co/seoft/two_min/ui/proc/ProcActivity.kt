@@ -126,7 +126,7 @@ class ProcActivity : AppCompatActivity() {
 
                         respTimeSet = timeSet
                         respUseInfo = getCreatedUseInfo().apply {
-                            cancelInfo = "$cancelInfoCount#${(cancelInfoSecond/1000).toFormattingString()}"
+                            cancelInfo = "$cancelInfoCount#${(cancelInfoSecond / 1000).toFormattingString()}"
                         }
                         respEndType = RESP_END_TYPE_STOP
 
@@ -176,7 +176,9 @@ class ProcActivity : AppCompatActivity() {
                     ProcService.INSTANCE?.let { procServiceInterface?.restart() }
                     procStatus = ProcStatus.ING
                 }
-                ProcStatus.READY -> "시작 준비 중에는 일시정지할 수 없습니다".toast()
+                ProcStatus.READY -> {
+                    ToastUtil.showToast(this, "시작 준비 중에는 일시정지할 수 없어요")
+                }
             }
             updater.showBottomBtn(procStatus)
         }
@@ -226,7 +228,7 @@ class ProcActivity : AppCompatActivity() {
         ivSkipO.setOnClickListener {
 
             if (procStatus == ProcStatus.READY) {
-                "시작 준비 중에는 타임셋 전환을 할 수 없습니다".toast()
+                ToastUtil.showToast(this, "시작 준비 중에는 일시정지할 수 없어요")
                 return@setOnClickListener
             }
 

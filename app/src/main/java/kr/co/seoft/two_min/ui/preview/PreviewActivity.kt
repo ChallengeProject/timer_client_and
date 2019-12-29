@@ -145,18 +145,18 @@ class PreviewActivity : ActivityHelper() {
             android.R.id.home -> {
                 finish()
             }
-            R.id.preview_off_share -> {
-                "preview_off_share".toaste(this)
-            }
+//            R.id.preview_off_share -> {
+//                "preview_off_share".toaste(this)
+//            }
             R.id.preview_off_like -> {
                 isLikeOn = !isLikeOn
                 invalidateOptionsMenu()
                 saveLikeToDatabase(true)
                 ToastUtil.showToast(this,"즐겨찾기에 추가되었어요!")
             }
-            R.id.preview_on_share -> {
-                "preview_on_share".toaste(this)
-            }
+//            R.id.preview_on_share -> {
+//                "preview_on_share".toaste(this)
+//            }
             R.id.preview_on_like -> {
                 isLikeOn = !isLikeOn
                 invalidateOptionsMenu()

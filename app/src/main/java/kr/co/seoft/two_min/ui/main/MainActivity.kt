@@ -80,7 +80,7 @@ class MainActivity : ActivityHelperForFrag() {
                             .subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribe({
-                                HistoryActivity.startHistoryActivity(this, it.last().historyId)
+                                HistoryActivity.startHistoryActivity(this, it.first().historyId)
                             }, {
                                 it.printStackTrace()
                             })
@@ -192,7 +192,8 @@ class MainActivity : ActivityHelperForFrag() {
     }
 
     override fun startProc(timeSet: TimeSet) {
-        ProcActivity.startProcActivity(this, timeSet, 3)
+        Preferencer.setCurrentMemo(this, "")
+        ProcActivity.startProcActivity(this, timeSet, Preferencer.getCountDown(this))
     }
 
     override fun startSave(timeSet: TimeSet) {
@@ -216,6 +217,7 @@ class MainActivity : ActivityHelperForFrag() {
                 timeSet.copy().apply {
                     timeSetId = 0
                     useHistory = 1
+                    memo = Preferencer.getCurrentMemo(baseContext)
                 }
             )
                 .subscribeOn(Schedulers.io())
@@ -278,7 +280,7 @@ class MainActivity : ActivityHelperForFrag() {
                             ProcExceedActivity.startProcExceedActivity(this, timeSet, useInfo)
                         }
                         ProcEndActivity.RESP_TYPE_RESTART -> {
-                            ProcActivity.startProcActivity(this, timeSet, 3)
+                            ProcActivity.startProcActivity(this, timeSet, Preferencer.getCountDown(this))
                             saveTimeSetForHistory(timeSet, useInfo)
                         }
                         ProcEndActivity.RESP_TYPE_SAVE -> {
@@ -300,7 +302,7 @@ class MainActivity : ActivityHelperForFrag() {
                                 .subscribeOn(Schedulers.io())
                                 .observeOn(AndroidSchedulers.mainThread())
                                 .subscribe({
-                                    HistoryActivity.startHistoryActivity(this, it.last().historyId)
+                                    HistoryActivity.startHistoryActivity(this, it.first().historyId)
                                 }, {
                                     it.printStackTrace()
                                 })

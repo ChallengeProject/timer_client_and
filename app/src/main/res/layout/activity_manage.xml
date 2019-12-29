@@ -41,6 +41,7 @@
         android:background="?android:attr/selectableItemBackgroundBorderless"
         android:padding="15dp"
         android:text="완료"
+        android:textColor="@color/ux_black"
         android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="@id/actManageTvTitle"
         app:layout_constraintRight_toRightOf="parent"
