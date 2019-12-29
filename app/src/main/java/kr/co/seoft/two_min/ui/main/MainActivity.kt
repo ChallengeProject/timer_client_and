@@ -252,8 +252,7 @@ class MainActivity : ActivityHelperForFrag() {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    "저장완료todo".e()
-
+                    //empty
                 }, {
                     it.printStackTrace()
                 })

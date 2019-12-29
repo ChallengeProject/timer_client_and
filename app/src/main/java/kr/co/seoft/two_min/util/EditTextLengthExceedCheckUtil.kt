@@ -6,7 +6,7 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.annotation.ColorRes
 
-object EditTextLenthExceedCheckUtil {
+object EditTextLengthExceedCheckUtil {
 
 
     fun checkAndBlockExceed(
@@ -21,12 +21,17 @@ object EditTextLenthExceedCheckUtil {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
 
-                if (s!!.length > exceedLength) {
-                    etContent.setText(s.substring(0, s.length - 2))
+                var nonNullString = s?.toString() ?: return
+
+                if (nonNullString.toByteArray().size > exceedLength) {
+                    nonNullString = nonNullString.substring(0, nonNullString.length - 2)
+                    etContent.setText(nonNullString)
+                    etContent.setSelection(etContent.text.length)
                 }
 
-                tvExceedNumber.text = s.length.toString()
-                if (s.length > exceedLength-1) {
+                tvExceedNumber.text = nonNullString.toByteArray().size.toString()
+
+                if (nonNullString.toByteArray().size > exceedLength - 1) {
                     tvExceedNumber.setTextColor(exceedColor.color())
                     return
                 }

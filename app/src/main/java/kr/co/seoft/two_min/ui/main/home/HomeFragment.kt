@@ -1,8 +1,6 @@
 package kr.co.seoft.two_min.ui.main.home
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -197,21 +195,13 @@ class HomeFragment : Fragment() {
             }
         }
 
-        fragHomeEtContent.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {}
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (s!!.length > 100) {
-                    fragHomeEtContent.setText(s.substring(0, s.length - 2))
-                }
-                fragHomeTvContentLength.text = s.length.toString()
-                if (s.length > 99) {
-                    fragHomeTvContentLength.setTextColor(R.color.ux_pink.color())
-                    return
-                }
-                fragHomeTvContentLength.setTextColor(R.color.ux_black.color())
-            }
-        })
+        EditTextLengthExceedCheckUtil.checkAndBlockExceed(
+            fragHomeEtContent,
+            fragHomeTvContentLength,
+            100,
+            R.color.ux_black,
+            R.color.ux_pink
+        )
 
         fragHomeTvSilent.setOnClickListener {
             updater.setBottomLineClearToAllBellType()

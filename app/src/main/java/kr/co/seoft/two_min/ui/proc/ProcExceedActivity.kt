@@ -7,8 +7,6 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
 import android.os.Handler
-import android.text.Editable
-import android.text.TextWatcher
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_proc.*
 import kr.co.seoft.two_min.R
@@ -133,16 +131,13 @@ class ProcExceedActivity : AppCompatActivity() {
             updater.hideMemo()
         }
 
-        etMemo.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {}
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (s!!.length > 1000) {
-                    etMemo.setText(s!!.substring(999, s!!.length - 1))
-                }
-                updater.setMemoRemainByte(s!!.length)
-            }
-        })
+        EditTextLengthExceedCheckUtil.checkAndBlockExceed(
+            etMemo,
+            tvExceedNumber,
+            1000,
+            R.color.ux_black,
+            R.color.ux_pink
+        )
 
         val allTime = timeSet.wholeTime
         if (endTimeStr.isEmpty()) endTimeStr = (readyCount + allTime).toEndTimeStrAfterSec()

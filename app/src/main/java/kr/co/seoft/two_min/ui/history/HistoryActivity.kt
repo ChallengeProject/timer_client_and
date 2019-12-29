@@ -4,10 +4,8 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
 import android.text.Spannable
 import android.text.SpannableStringBuilder
-import android.text.TextWatcher
 import android.text.style.ForegroundColorSpan
 import android.view.MenuItem
 import android.view.View
@@ -171,27 +169,13 @@ class HistoryActivity : ActivityHelper() {
             actHistoryClBubbleLayout.visibility = View.INVISIBLE
         }
 
-
-        actHistoryEtMemo.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {}
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-
-                if (s!!.length > 1000) {
-                    actHistoryEtMemo.setText(s.substring(0, s.length - 2))
-                }
-
-                actHistoryTvExceedNumber.text = s.length.toString()
-                if (s.length > 999) {
-                    actHistoryTvExceedNumber.setTextColor(R.color.ux_pink.color())
-                    actHistoryTvExceedErrorText.visibility = View.VISIBLE
-                    return
-                }
-                actHistoryTvExceedErrorText.visibility = View.INVISIBLE
-                actHistoryTvExceedNumber.setTextColor(R.color.ux_black.color())
-            }
-        })
-
+        EditTextLengthExceedCheckUtil.checkAndBlockExceed(
+            actHistoryEtMemo,
+            actHistoryTvExceedNumber,
+            1000,
+            R.color.ux_black,
+            R.color.ux_pink
+        )
 
         TedKeyboardObserver(this).listen {
             actHistoryClContent.visibility = (!it).setVisibleOrGone()

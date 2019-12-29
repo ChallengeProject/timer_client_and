@@ -9,8 +9,6 @@ import android.os.Build
 import android.os.Bundle
 import android.os.VibrationEffect
 import android.os.Vibrator
-import android.text.Editable
-import android.text.TextWatcher
 import androidx.appcompat.app.AppCompatActivity
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -22,8 +20,8 @@ import kr.co.seoft.two_min.data.Bell
 import kr.co.seoft.two_min.data.TimeSet
 import kr.co.seoft.two_min.data.UseInfo
 import kr.co.seoft.two_min.ui.main.MainActivity
+import kr.co.seoft.two_min.util.EditTextLengthExceedCheckUtil
 import kr.co.seoft.two_min.util.Preferencer
-import kr.co.seoft.two_min.util.color
 import java.util.concurrent.TimeUnit
 
 class ProcEndActivity : AppCompatActivity() {
@@ -99,32 +97,13 @@ class ProcEndActivity : AppCompatActivity() {
 
 
         //TODO proc end exceed main-home 하나로 통합하기
-//        EditTextLenthExceedCheckUtil.checkAndBlockExceed(
-//            etContent,
-//            tvExceedNumber,
-//            1000,
-//            R.color.ux_black,
-//            R.color.ux_pink
-//        )
-
-        etContent.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {}
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-
-                if (s!!.length > 1000) {
-                    etContent.setText(s.substring(0, s.length - 2))
-                }
-
-                tvExceedNumber.text = s.length.toString()
-                if (s.length > 999) {
-                    tvExceedNumber.setTextColor(R.color.ux_pink.color())
-                    return
-                }
-                tvExceedNumber.setTextColor(R.color.ux_black.color())
-            }
-        })
-
+        EditTextLengthExceedCheckUtil.checkAndBlockExceed(
+            etContent,
+            tvExceedNumber,
+            1000,
+            R.color.ux_black,
+            R.color.ux_pink
+        )
 
     }
 
