@@ -95,6 +95,10 @@ class ProcActivity : AppCompatActivity() {
                     CMD_BRD.TIME -> updater.setTime(intent.getStringExtra(CMD_BRD.MSG))
                     CMD_BRD.ROUND -> {
                         val round = intent.getIntExtra(CMD_BRD.MSG, 0)
+
+                        // Android 10 os 부터 noti통한 접근시 CMD_BRD.ROUND 호출되는 버그
+                        if (round == 0) return
+
                         updater.hideSkipMessage()
                         updater.setBadgeFocusAndCommentAndBell(timeSet.times[round], round)
                         updater.showBottomDialogTimeEndMessage(round, timeSet.times.size)
