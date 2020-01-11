@@ -25,12 +25,13 @@
 
         >
 
-        <TextView android:fontFamily="@font/nanum_square_r"
+        <TextView
             android:id="@+id/actPreviewTvTitle"
-            android:hint="무제 타임셋"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@null"
+            android:fontFamily="@font/nanum_square_r"
+            android:hint="무제 타임셋"
             android:textColor="@color/ux_black"
             android:textSize="24dp"
             android:textStyle="bold"
@@ -38,11 +39,12 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="내 타임셋" />
 
-        <TextView android:fontFamily="@font/nanum_square_r"
+        <TextView
             android:id="@+id/actPreviewTvTimeSetTimeText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="118dp"
+            android:fontFamily="@font/nanum_square_r"
             android:text="타임셋 시간"
             android:textColor="@color/ux_dark_gray"
             android:textSize="15dp"
@@ -91,6 +93,7 @@
             android:id="@+id/actPreviewTvTimeSetTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/nanum_square_r"
             android:layout_marginStart="20dp"
             android:textColor="@color/ux_dark_gray"
             android:textSize="15dp"
@@ -106,6 +109,7 @@
             android:layout_marginTop="17dp"
             android:textColor="@color/ux_dark_gray"
             android:textSize="15dp"
+            android:fontFamily="@font/nanum_square_r"
             app:layout_constraintLeft_toLeftOf="@id/actPreviewTvTimeSetTime"
             app:layout_constraintTop_toBottomOf="@id/actPreviewTvTimeSetTime"
             tools:text="9:42 AM" />
@@ -116,6 +120,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="17dp"
             android:textColor="@color/ux_dark_gray"
+            android:fontFamily="@font/nanum_square_r"
             android:textSize="15dp"
             app:layout_constraintLeft_toLeftOf="@id/actPreviewTvExpectEnd"
             app:layout_constraintTop_toBottomOf="@id/actPreviewTvExpectEnd"
@@ -126,6 +131,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="17dp"
+            android:fontFamily="@font/nanum_square_r"
             android:lines="3"
             android:scrollbars="vertical"
             android:textColor="@color/ux_dark_gray"

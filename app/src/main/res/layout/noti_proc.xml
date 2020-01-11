@@ -17,13 +17,14 @@
         android:layout_marginTop="15dp"
         android:src="@drawable/_ic_2min" />
 
-    <TextView android:fontFamily="@font/nanum_square_r"
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@id/tvLogo"
         android:layout_alignBottom="@id/tvLogo"
         android:layout_marginStart="8dp"
         android:layout_toEndOf="@id/tvLogo"
+        android:fontFamily="@font/nanum_square_r"
         android:gravity="center"
 
         android:text="2min"
@@ -34,25 +35,23 @@
         android:id="@+id/notiIvCtrlClose"
         android:layout_width="36dp"
         android:layout_height="36dp"
+        android:layout_alignTop="@id/notiIvEmptyForMarginBug"
+        android:layout_alignBottom="@id/notiIvEmptyForMarginBug"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
         android:layout_marginEnd="30dp"
-        android:layout_marginBottom="15dp"
         android:background="?android:attr/selectableItemBackground"
         android:scaleType="fitXY"
         android:src="@drawable/_ic_close_big"
         app:layout_constraintTop_toBottomOf="@id/tvLogo"
-
         />
-
 
     <ImageButton
         android:id="@+id/notiIvCtrlPause"
         android:layout_width="36dp"
         android:layout_height="36dp"
-        android:layout_alignParentBottom="true"
+        android:layout_alignTop="@id/notiIvEmptyForMarginBug"
+        android:layout_alignBottom="@id/notiIvEmptyForMarginBug"
         android:layout_marginEnd="30dp"
-        android:layout_marginBottom="15dp"
         android:layout_toLeftOf="@id/notiIvCtrlClose"
         android:background="?android:attr/selectableItemBackground"
         android:scaleType="fitXY"
@@ -66,24 +65,25 @@
         android:id="@+id/notiIvCtrlPlay"
         android:layout_width="36dp"
         android:layout_height="36dp"
-        android:layout_alignParentBottom="true"
+        android:layout_alignTop="@id/notiIvEmptyForMarginBug"
+        android:layout_alignBottom="@id/notiIvEmptyForMarginBug"
         android:layout_marginEnd="30dp"
-        android:layout_marginBottom="15dp"
         android:layout_toLeftOf="@id/notiIvCtrlClose"
         android:background="?android:attr/selectableItemBackground"
         android:scaleType="fitXY"
         android:src="@drawable/_bt_play"
         app:layout_constraintEnd_toStartOf="@id/notiIvCtrlClose" />
 
-    <TextView android:fontFamily="@font/nanum_square_r"
-
+    <TextView
         android:id="@+id/notiTvTimer"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@id/notiIvCtrlClose"
-        android:layout_alignBottom="@id/notiIvCtrlClose"
+        android:layout_alignTop="@id/notiIvEmptyForMarginBug"
+        android:layout_alignBottom="@id/notiIvEmptyForMarginBug"
         android:layout_alignParentStart="true"
         android:layout_marginStart="29dp"
+        android:fontFamily="@font/nanum_square_r"
 
         android:gravity="center"
         android:textColor="@color/ux_black"
@@ -95,9 +95,9 @@
         android:id="@+id/notiIvTimerIcon"
         android:layout_width="36dp"
         android:layout_height="36dp"
-        android:layout_alignParentBottom="true"
+        android:layout_alignTop="@id/notiIvEmptyForMarginBug"
+        android:layout_alignBottom="@id/notiIvEmptyForMarginBug"
         android:layout_marginStart="2dp"
-        android:layout_marginBottom="15dp"
         android:layout_toRightOf="@id/notiTvTimer"
         android:padding="12dp"
         android:src="@drawable/_ic_clock"
@@ -106,13 +106,26 @@
         />
 
 
-    <TextView android:fontFamily="@font/nanum_square_r"
+    <!--  margin 적용 안되서 다음방식으로 해결  -->
+    <ImageView
+        android:id="@+id/notiIvEmptyForMarginBug"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="15dp"
+
+        />
+
+
+    <TextView
         android:id="@+id/notiTvRepeat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@id/notiIvCtrlClose"
-        android:layout_alignBottom="@id/notiIvCtrlClose"
+        android:layout_alignTop="@id/notiIvEmptyForMarginBug"
+        android:layout_alignBottom="@id/notiIvEmptyForMarginBug"
         android:layout_toRightOf="@id/notiIvTimerIcon"
+        android:fontFamily="@font/nanum_square_r"
         android:gravity="center"
         android:textColor="@color/ux_black"
         android:textSize="10dp"
