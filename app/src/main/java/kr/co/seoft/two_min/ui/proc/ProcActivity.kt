@@ -136,6 +136,8 @@ class ProcActivity : AppCompatActivity() {
                         }
                         respEndType = RESP_END_TYPE_STOP
 
+                        addingMinute = 0
+
                         startActivity(Intent(baseContext, MainActivity::class.java))
                         finish()
                     }
@@ -156,7 +158,7 @@ class ProcActivity : AppCompatActivity() {
                         updater.setSubtitleRepeatCnt(repeatCnt)
                         updater.showBottomDialogRepeatEndMessage(repeatCnt)
                         "CMD_BRD.UPDATE_REPEAT_CNT : $repeatCnt".e()
-
+                        updater.setBadgeFocus(0)
                     }
                 }
             }
@@ -186,7 +188,7 @@ class ProcActivity : AppCompatActivity() {
                     ToastUtil.showToast(this, "시작 준비 중에는 일시정지할 수 없어요")
                 }
             }
-            updater.showBottomBtn(procStatus)
+            updater.showBottomBtn(procStatus, true)
         }
 
         ivBottomAlarmClear.setOnClickListener {
@@ -195,6 +197,12 @@ class ProcActivity : AppCompatActivity() {
         }
 
         ivAddMinuteBtn.setOnClickListener {
+
+            if (procStatus == ProcStatus.READY) {
+                ToastUtil.showToast(this, "시작 준비 중에는 시간추가를 할 수 없어요")
+                return@setOnClickListener
+            }
+
             ProcService.INSTANCE?.let { procServiceInterface?.addMin() }
             addingMinute++
             addMinute++
@@ -241,7 +249,7 @@ class ProcActivity : AppCompatActivity() {
             updater.hideSkipMessage()
 
             procStatus = ProcStatus.ING
-            updater.showBottomBtn(procStatus)
+            updater.showBottomBtn(procStatus, true)
         }
 
         ivSkipX.setOnClickListener {
@@ -307,7 +315,7 @@ class ProcActivity : AppCompatActivity() {
 
             // for showing to endProcActivity
             Calendar.getInstance().run {
-                ymdString = "${get(Calendar.YEAR).toString().substring(2, 4)}. ${get(Calendar.MONTH) - 1}. ${get(Calendar.DATE)}"
+                ymdString = "${get(Calendar.YEAR).toString().substring(2, 4)}. ${get(Calendar.MONTH) + 1}. ${get(Calendar.DATE)}"
             }
             startTimeString = getCurrentTimeString()
 
@@ -363,7 +371,7 @@ class ProcActivity : AppCompatActivity() {
             setEndTime(endTimeStr)
             setAddTime(addingMinute)
             setRepeatIcon(isRepeat)
-            showBottomBtn(procStatus)
+            showBottomBtn(procStatus, true)
             setTimeSetTitle(timeSet.title)
             setContentToHalfTransparent(false)
         }

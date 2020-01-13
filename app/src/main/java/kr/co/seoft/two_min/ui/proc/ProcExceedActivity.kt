@@ -119,7 +119,7 @@ class ProcExceedActivity : AppCompatActivity() {
                     procStatus = ProcStatus.ING
                 }
             }
-            updater.showBottomBtn(procStatus)
+            updater.showBottomBtn(procStatus,false)
         }
 
         ivWriteMemoBtn.setOnClickListener {
@@ -185,7 +185,7 @@ class ProcExceedActivity : AppCompatActivity() {
         with(updater) {
             setWholeTime(allTimeStr)
             setEndTime(endTimeStr)
-            showBottomBtn(procStatus)
+            showBottomBtn(procStatus,false)
         }
 
         procExceedServiceInterface = ProcExceedServiceInterface(this)
@@ -200,7 +200,7 @@ class ProcExceedActivity : AppCompatActivity() {
             setWholeTime(allTimeStr)
             setEndTime(endTimeStr)
             setRepeatIcon(false)
-            showBottomBtn(procStatus)
+            showBottomBtn(procStatus,false)
             setTimeSetTitle(timeSet.title)
             setTimeColor(R.color.ux_pink.color())
             setContentToHalfTransparent(true)

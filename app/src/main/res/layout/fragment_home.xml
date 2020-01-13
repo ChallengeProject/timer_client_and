@@ -313,7 +313,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/nanum_square_r"
                         android:gravity="right"
-                        android:text="/100 byte"
+                        android:text="/100 bytes"
                         android:textColor="@color/ux_black"
                         android:textSize="12dp" />
 

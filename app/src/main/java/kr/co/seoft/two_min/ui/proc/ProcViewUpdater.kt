@@ -150,24 +150,24 @@ class ProcViewUpdater(val act: Activity) {
         act.btBottom2Btn.text = rightStr
     }
 
-    private fun setCancelAndPauseStatus() {
-        setBottomButtonText("취소", "일시정지")
+    private fun setCancelAndPauseStatus(isProc: Boolean) {
+        setBottomButtonText(if (isProc) "취소" else "종료", "일시정지")
 
         act.btBottom2Btn.background = act.getDrawable(R.drawable.bg_bottom_button_gray)
         act.btBottom2Btn.setTextColor(R.color.ux_black.color())
         setSubtitle(View.INVISIBLE, "")
     }
 
-    private fun setCancelAndRestartStatus() {
-        setBottomButtonText("취소", "시작")
+    private fun setCancelAndRestartStatus(isProc: Boolean) {
+        setBottomButtonText(if (isProc) "취소" else "종료", "시작")
         act.btBottom2Btn.background = act.getDrawable(R.drawable.bg_bottom_button_red)
         act.btBottom2Btn.setTextColor(R.color.white.color())
         setSubtitle(View.VISIBLE, "일시정지")
     }
 
-    fun showBottomBtn(procStatus: ProcStatus) {
-        if (procStatus == ProcStatus.ING || procStatus == ProcStatus.READY) setCancelAndPauseStatus()
-        else if (procStatus == ProcStatus.PAUSE) setCancelAndRestartStatus()
+    fun showBottomBtn(procStatus: ProcStatus, isProc: Boolean) {
+        if (procStatus == ProcStatus.ING || procStatus == ProcStatus.READY) setCancelAndPauseStatus(isProc)
+        else if (procStatus == ProcStatus.PAUSE) setCancelAndRestartStatus(isProc)
     }
 
     fun setContentToHalfTransparent(isTransparent: Boolean) {
