@@ -371,7 +371,7 @@ class ProcActivity : AppCompatActivity() {
             setEndTime(endTimeStr)
             setAddTime(addingMinute)
             setRepeatIcon(isRepeat)
-            showBottomBtn(procStatus, true)
+            showBottomBtn(if (ProcService.INSTANCE?.isPause == true) ProcStatus.PAUSE else ProcStatus.ING, true)
             setTimeSetTitle(timeSet.title)
             setContentToHalfTransparent(false)
         }
