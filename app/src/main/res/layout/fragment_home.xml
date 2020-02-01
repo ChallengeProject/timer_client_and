@@ -464,15 +464,4 @@
     </LinearLayout>
 
 
-    <ImageView
-        android:id="@+id/fragHomeIvCloseTimeInfo"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
-        android:background="?android:attr/selectableItemBackgroundBorderless"
-        android:src="@drawable/_ic_close_big"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@id/fragHomeLlTimeInfo"
-        app:layout_constraintRight_toRightOf="@id/fragHomeLlTimeInfo"
-        tools:visibility="visible" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

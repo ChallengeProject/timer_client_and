@@ -402,7 +402,7 @@
         android:id="@+id/clMemo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#fafafa"
+        android:background="@color/ux_gray"
         android:visibility="invisible"
         tools:visibility="gone">
 

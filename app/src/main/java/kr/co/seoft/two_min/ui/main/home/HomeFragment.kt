@@ -115,7 +115,7 @@ class HomeFragment : Fragment() {
     private fun initListener() {
         fragHomeViewTransparent.setOnClickListener { /*pass*/ }
 
-        fragHomeIvCloseTimeInfo.setOnClickListener {
+        fragHomeIncSelectedHomeBadge.setOnClickListener {
             fragHomeRv.setComment(fragHomeEtContent.text.toString())
             updater.hideTimeInfo()
             KeyboardUtil.hideSoftKeyBoard(act, fragHomeEtContent)

@@ -10,6 +10,7 @@ import android.text.style.UnderlineSpan
 import android.view.MenuItem
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -69,7 +70,22 @@ class HistoriesActivity : ActivityHelper() {
     fun initViews() {
 
         historiesAdapter = HistoriesAdapter {
-            HistoryActivity.startHistoryActivity(this, it.historyId)
+            if (it.second == HistoriesAdapter.Type.OPEN) {
+                HistoryActivity.startHistoryActivity(this, it.first.historyId)
+            } else if (it.second == HistoriesAdapter.Type.DELETE) {
+
+                compositeDisposable.add(Single.fromCallable {
+                    db.timeSetDao().deleteTimeSetById(it.first.timeSetId)
+                    db.timeSetDao().deleteHistory(it.first)
+                }
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe({
+                        refreshHistories()
+                    },{
+                        it.printStackTrace()
+                    }))
+            }
         }
 
         actHistoriesRv.adapter = historiesAdapter
@@ -79,6 +95,15 @@ class HistoriesActivity : ActivityHelper() {
             }
         })
 
+        refreshHistories()
+
+        val emptyText = actHistoriesTvEmptyText.text.toString()
+        val ss = SpannableString(emptyText)
+        ss.setSpan(UnderlineSpan(), 0, emptyText.length, 0)
+        actHistoriesTvEmptyText.text = ss
+    }
+
+    private fun refreshHistories() {
         compositeDisposable.add(
             db.timeSetDao().getHistories()
                 .subscribeOn(Schedulers.io())
@@ -90,11 +115,6 @@ class HistoriesActivity : ActivityHelper() {
                     it.printStackTrace()
                 })
         )
-
-        val emptyText = actHistoriesTvEmptyText.text.toString()
-        val ss = SpannableString(emptyText)
-        ss.setSpan(UnderlineSpan(), 0, emptyText.length, 0)
-        actHistoriesTvEmptyText.text = ss
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

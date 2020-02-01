@@ -71,7 +71,7 @@ class HomeFragUpdater(val f: HomeFragment) {
         val time = homeBadges[index].time
 
         f.fragHomeLlTimeInfo.visibility = View.VISIBLE
-        f.fragHomeIvCloseTimeInfo.visibility = View.VISIBLE
+        f.fragHomeIncSelectedHomeBadge.visibility = View.VISIBLE
         f.fragHomeViewTransparent.visibility = View.VISIBLE
 
         f.fragHomeEtContent.text = time.comment.toEditable()
@@ -113,7 +113,7 @@ class HomeFragUpdater(val f: HomeFragment) {
 
     fun hideTimeInfo() {
         f.fragHomeLlTimeInfo.visibility = View.INVISIBLE
-        f.fragHomeIvCloseTimeInfo.visibility = View.INVISIBLE
+        f.fragHomeIncSelectedHomeBadge.visibility = View.INVISIBLE
         f.fragHomeViewTransparent.visibility = View.INVISIBLE
         f.act.setTransparentToolbarAndBottoms(false)
     }

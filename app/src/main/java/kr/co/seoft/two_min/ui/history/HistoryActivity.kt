@@ -58,10 +58,11 @@ class HistoryActivity : ActivityHelper() {
         intent.getLongExtra(EXTRA_HISTORY_ID, -1L)
     }
 
+    lateinit var historyTitle: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        initToolbar()
         initListener()
         loadDataFromDatabase()
 
@@ -76,6 +77,8 @@ class HistoryActivity : ActivityHelper() {
                 .subscribe({
                     setHistoryView(it)
                     loadTimeSet(it.timeSetId)
+                    historyTitle = if (it.timeSetTitle.isEmpty()) "무제 타임셋" else it.timeSetTitle
+                    initToolbar()
                 }, {
                     it.printStackTrace()
                 })
@@ -100,7 +103,6 @@ class HistoryActivity : ActivityHelper() {
 
         actHistoryTvAddTime.text = "+${history.addMinute}분"
         actHistoryTvUseBoundary.text = "${history.ymdString} / ${history.startTimeString} - ${history.endTimeString}"
-        actHistoryTvTitle.text = if (history.timeSetTitle.isEmpty()) "무제 타임셋" else history.timeSetTitle
         actHistoryTvRepeatCount.text = "${history.repeatCount}회"
         actHistoryTvTimeSetTime.text = history.wholeTime.toFormattingString()
 
@@ -213,7 +215,7 @@ class HistoryActivity : ActivityHelper() {
             setDisplayShowTitleEnabled(true)
             setDisplayHomeAsUpEnabled(true)
             setHomeAsUpIndicator(R.drawable._ic_back)
-            setTitle("히스토리 상세")
+            setTitle(historyTitle)
         }
     }
 

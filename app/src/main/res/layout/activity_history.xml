@@ -18,50 +18,28 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
         android:layout_marginLeft="60dp"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="40dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/actHistoryIncToolbar"
+        app:layout_constraintTop_toBottomOf="@id/actHistoryIncToolbar">
 
-        >
-
-        <TextView android:fontFamily="@font/nanum_square_r"
-            android:id="@+id/actHistoryTvTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:lines="1"
-            android:textColor="@color/ux_black"
-            android:textSize="18dp"
-            android:textStyle="bold"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="내 타임셋" />
-
-        <View
-            android:id="@+id/actHistoryViewLine"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="10dp"
-            android:background="@color/ux_dark_gray"
-            app:layout_constraintTop_toBottomOf="@id/actHistoryTvTitle" />
-
-        <TextView android:fontFamily="@font/nanum_square_r"
+        <TextView
             android:id="@+id/actHistoryTvTimeSetTimeText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:fontFamily="@font/nanum_square_r"
             android:text="타임셋 시간"
             android:textColor="@color/ux_dark_gray"
             android:textSize="15dp"
             android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/actHistoryViewLine" />
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView android:fontFamily="@font/nanum_square_r"
+        <TextView
             android:id="@+id/actHistoryTvUseBoundaryText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="17dp"
+            android:fontFamily="@font/nanum_square_r"
             android:text="사용 일시"
             android:textColor="@color/ux_dark_gray"
             android:textSize="15dp"
@@ -69,11 +47,12 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/actHistoryTvTimeSetTimeText" />
 
-        <TextView android:fontFamily="@font/nanum_square_r"
+        <TextView
             android:id="@+id/actHistoryTvAddTimeText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="17dp"
+            android:fontFamily="@font/nanum_square_r"
             android:text="추가한 시간"
             android:textColor="@color/ux_dark_gray"
             android:textSize="15dp"
@@ -81,11 +60,12 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/actHistoryTvUseBoundaryText" />
 
-        <TextView android:fontFamily="@font/nanum_square_r"
+        <TextView
             android:id="@+id/actHistoryTvRepeatCountText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="17dp"
+            android:fontFamily="@font/nanum_square_r"
             android:text="반복 횟수"
             android:textColor="@color/ux_dark_gray"
             android:textSize="15dp"
@@ -93,11 +73,12 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/actHistoryTvAddTimeText" />
 
-        <TextView android:fontFamily="@font/nanum_square_r"
+        <TextView
             android:id="@+id/actHistoryTvEtcInfoText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="17dp"
+            android:fontFamily="@font/nanum_square_r"
             android:text="부가 정보"
             android:textColor="@color/ux_dark_gray"
             android:textSize="15dp"
@@ -106,11 +87,12 @@
             app:layout_constraintTop_toBottomOf="@id/actHistoryTvRepeatCountText" />
 
 
-        <TextView android:fontFamily="@font/nanum_square_r"
+        <TextView
             android:id="@+id/actHistoryTvTimeSetTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
+            android:fontFamily="@font/nanum_square_r"
             android:textColor="@color/ux_dark_gray"
             android:textSize="15dp"
             app:layout_constraintLeft_toRightOf="@id/actHistoryTvTimeSetTimeText"
@@ -118,33 +100,36 @@
             tools:text="00:01:00" />
 
 
-        <TextView android:fontFamily="@font/nanum_square_r"
+        <TextView
             android:id="@+id/actHistoryTvUseBoundary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="17dp"
+            android:fontFamily="@font/nanum_square_r"
             android:textColor="@color/ux_dark_gray"
             android:textSize="15dp"
             app:layout_constraintLeft_toLeftOf="@id/actHistoryTvTimeSetTime"
             app:layout_constraintTop_toBottomOf="@id/actHistoryTvTimeSetTime"
             tools:text="19.5.24/9:42 AM - 9:43 AM" />
 
-        <TextView android:fontFamily="@font/nanum_square_r"
+        <TextView
             android:id="@+id/actHistoryTvAddTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="17dp"
+            android:fontFamily="@font/nanum_square_r"
             android:textColor="@color/ux_dark_gray"
             android:textSize="15dp"
             app:layout_constraintLeft_toLeftOf="@id/actHistoryTvUseBoundary"
             app:layout_constraintTop_toBottomOf="@id/actHistoryTvUseBoundary"
             tools:text="+3분" />
 
-        <TextView android:fontFamily="@font/nanum_square_r"
+        <TextView
             android:id="@+id/actHistoryTvRepeatCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="17dp"
+            android:fontFamily="@font/nanum_square_r"
             android:textColor="@color/ux_dark_gray"
             android:textSize="15dp"
             app:layout_constraintLeft_toLeftOf="@id/actHistoryTvAddTime"
@@ -152,11 +137,12 @@
             tools:text="3회" />
 
 
-        <TextView android:fontFamily="@font/nanum_square_r"
+        <TextView
             android:id="@+id/actHistoryTvEtcInfo"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="17dp"
+            android:fontFamily="@font/nanum_square_r"
             android:textColor="@color/ux_dark_gray"
             android:textSize="15dp"
             app:layout_constraintLeft_toLeftOf="@id/actHistoryTvRepeatCount"
@@ -170,9 +156,9 @@
         android:id="@+id/actHistoryClMemoLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="22dp"
         android:layout_marginRight="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="25dp"
         android:background="@drawable/bg_radius_20_gray"
         app:layout_constraintBottom_toTopOf="@id/actHistoryLsshlv"
         app:layout_constraintLeft_toLeftOf="@id/actHistoryClContent"
@@ -190,12 +176,13 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:fontFamily="@font/nanum_square_r"           android:id="@+id/actHistoryEtMemo"
+            android:id="@+id/actHistoryEtMemo"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginLeft="8dp"
             android:layout_marginBottom="10dp"
             android:background="@null"
+            android:fontFamily="@font/nanum_square_r"
             android:gravity="top"
             android:hint="지금도 메모를 남길 수 있어요"
             android:scrollbars="vertical"
@@ -205,35 +192,38 @@
             app:layout_constraintRight_toRightOf="@id/actHistoryTvExceedNumberText"
             app:layout_constraintTop_toTopOf="@+id/actHistoryIvMemoIcon" />
 
-        <TextView android:fontFamily="@font/nanum_square_r"
+        <TextView
             android:id="@+id/actHistoryTvExceedNumberText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:layout_marginRight="16dp"
             android:layout_marginBottom="8dp"
+            android:fontFamily="@font/nanum_square_r"
             android:text="/1000 bytes"
             android:textColor="@color/ux_black"
             android:textSize="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent" />
 
-        <TextView android:fontFamily="@font/nanum_square_r"
+        <TextView
             android:id="@+id/actHistoryTvExceedNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="8dp"
+            android:fontFamily="@font/nanum_square_r"
             android:text="0"
             android:textColor="@color/ux_black"
             android:textSize="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toLeftOf="@id/actHistoryTvExceedNumberText" />
 
-        <TextView android:fontFamily="@font/nanum_square_r"
+        <TextView
             android:id="@+id/actHistoryTvExceedErrorText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/nanum_square_r"
             android:text="작성 가능한 글자 수가 초과됐어요"
             android:textColor="@color/ux_pink"
             android:textSize="12dp"
@@ -270,13 +260,14 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_goneMarginBottom="16dp" />
 
-        <TextView android:fontFamily="@font/nanum_square_r"
+        <TextView
             android:id="@+id/actHistoryTvBubbleMessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="12dp"
             android:layout_marginBottom="16dp"
+            android:fontFamily="@font/nanum_square_r"
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="@id/actHistoryIvBubbleClose"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -290,7 +281,7 @@
         android:id="@+id/actHistoryLsshlv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="60dp"
         app:layout_constraintBottom_toTopOf="@+id/actHistoryLlBottomButtons" />
 
 
@@ -302,7 +293,7 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <TextView android:fontFamily="@font/nanum_square_r"
+        <TextView
             android:id="@+id/actHistoryBtBottom1Btn"
             android:layout_width="100dp"
             android:layout_height="45dp"
@@ -311,6 +302,7 @@
             android:layout_marginBottom="10dp"
             android:layout_weight="1"
             android:background="@drawable/bg_bottom_button_gray"
+            android:fontFamily="@font/nanum_square_r"
             android:gravity="center"
             android:scaleType="fitXY"
             android:text="저장"
@@ -318,13 +310,14 @@
             android:textSize="15dp"
             android:textStyle="bold" />
 
-        <TextView android:fontFamily="@font/nanum_square_r"
+        <TextView
             android:id="@+id/actHistoryBtBottom2Btn"
             android:layout_width="100dp"
             android:layout_height="45dp"
             android:layout_marginEnd="18dp"
             android:layout_weight="1"
             android:background="@drawable/bg_bottom_button_gray"
+            android:fontFamily="@font/nanum_square_r"
             android:gravity="center"
             android:scaleType="fitXY"
             android:text="시작"

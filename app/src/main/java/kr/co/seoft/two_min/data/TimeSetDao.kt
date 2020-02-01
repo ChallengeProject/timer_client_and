@@ -4,6 +4,9 @@ import androidx.room.*
 import androidx.room.OnConflictStrategy.REPLACE
 import io.reactivex.Single
 
+/**
+ * 히스토리 저장시 히스토리 테이블에 쌓이고 타임셋 테이블도 쌓이고(useHistory) 참조한다
+ */
 @Dao
 interface TimeSetDao {
     @Insert
@@ -42,5 +45,10 @@ interface TimeSetDao {
     @Delete
     fun deleteTimeSet(timeSet: TimeSet)
 
+    @Query("DELETE FROM history WHERE time_set_id=:id")
+    fun deleteTimeSetById(id: Long)
+
+    @Delete
+    fun deleteHistory(history: History)
 
 }
