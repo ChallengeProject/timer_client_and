@@ -44,6 +44,13 @@
             android:layout_weight="1"
             android:background="@color/ux_pink" />
 
+        <View
+            android:id="@+id/actMainViewTabLayoutLine3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="@color/ux_pink" />
+
     </LinearLayout>
 
     <com.google.android.material.tabs.TabLayout

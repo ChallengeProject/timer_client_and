@@ -25,6 +25,7 @@ import kr.co.seoft.two_min.ui.history.HistoriesActivity
 import kr.co.seoft.two_min.ui.history.HistoryActivity
 import kr.co.seoft.two_min.ui.main.home.HomeFragment
 import kr.co.seoft.two_min.ui.main.mytimeset.MyTimeSetFragment
+import kr.co.seoft.two_min.ui.main.preset.PresetFragment
 import kr.co.seoft.two_min.ui.preview.PreviewActivity
 import kr.co.seoft.two_min.ui.proc.ProcActivity
 import kr.co.seoft.two_min.ui.proc.ProcEndActivity
@@ -61,6 +62,8 @@ class MainActivity : ActivityHelperForFrag() {
         initToolbar()
         initView()
         initListener()
+
+        movePage(1)
     }
 
     override fun onResume() {
@@ -104,16 +107,19 @@ class MainActivity : ActivityHelperForFrag() {
 
         actMainViewPager.adapter = object : FragmentStateAdapter(this) {
             override fun getItemCount(): Int {
-                return 2
+                return 3
             }
 
             override fun createFragment(position: Int): Fragment {
                 return when (position) {
                     0 -> {
+                        MyTimeSetFragment.newInstance()
+                    }
+                    1 -> {
                         homeFragment
                     }
                     else -> {
-                        MyTimeSetFragment.newInstance()
+                        PresetFragment.newInstance()
                     }
                 }
             }
@@ -123,29 +129,43 @@ class MainActivity : ActivityHelperForFrag() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
 
-                if (position == 0) {
-                    toolbar.title = ""
-                    actMainViewTabLayoutLine1.visibility = View.VISIBLE
-                    actMainViewTabLayoutLine2.visibility = View.INVISIBLE
-                } else {
-                    toolbar.title = "내 타임셋"
-                    actMainViewTabLayoutLine1.visibility = View.INVISIBLE
-                    actMainViewTabLayoutLine2.visibility = View.VISIBLE
+                actMainViewTabLayoutLine1.visibility = View.INVISIBLE
+                actMainViewTabLayoutLine2.visibility = View.INVISIBLE
+                actMainViewTabLayoutLine3.visibility = View.INVISIBLE
+
+                when (position) {
+                    0 -> {
+                        toolbar.title = "내 타임셋"
+                        actMainViewTabLayoutLine1.visibility = View.VISIBLE
+                    }
+                    1 -> {
+                        toolbar.title = ""
+                        actMainViewTabLayoutLine2.visibility = View.VISIBLE
+                    }
+                    else -> {
+                        toolbar.title = "프리셋"
+                        actMainViewTabLayoutLine3.visibility = View.VISIBLE
+                    }
                 }
             }
         })
 
-        actMainTablayout.getTabAt(0)?.setIcon(R.drawable._ic_home)
-        actMainTablayout.getTabAt(1)?.setIcon(R.drawable._ic_my)
+        actMainTablayout.getTabAt(0)?.setIcon(R.drawable._ic_preset)
+        actMainTablayout.getTabAt(1)?.setIcon(R.drawable._ic_home)
+        actMainTablayout.getTabAt(2)?.setIcon(R.drawable._ic_my)
 
         TabLayoutMediator(actMainTablayout, actMainViewPager) { tab, position ->
             when (position) {
                 0 -> {
+                    tab.text = "마이 타임셋"
+                    tab.setIcon(R.drawable._ic_preset)
+                }
+                1 -> {
                     tab.text = "홈"
                     tab.setIcon(R.drawable._ic_home)
                 }
                 else -> {
-                    tab.text = "마이 타임셋"
+                    tab.text = "프리셋"
                     tab.setIcon(R.drawable._ic_my)
                 }
             }
@@ -340,10 +360,7 @@ class MainActivity : ActivityHelperForFrag() {
                             timeSetId = 0L
                         }, false)
                     }
-
-
                 }
-
             }
         }
     }

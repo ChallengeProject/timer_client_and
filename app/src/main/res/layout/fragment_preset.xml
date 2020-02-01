@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--    https://black-jin0427.tistory.com/164-->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:descendantFocusability="blocksDescendants"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="60dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/nanum_square_r"
+                android:text="2min이 준비한 프리셋으로\n간편하게 시간의 효율을 높여보세요!"
+                android:textColor="@color/ux_black" />
+
+            <TextView
+                android:id="@+id/fragPresetTvPickText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="80dp"
+                android:fontFamily="@font/nanum_square_r"
+                android:text="2min의 타임셋 픽!"
+                android:textColor="@color/ux_black"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/fragPresetClHot1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/bg_radius_20_pink"
+                android:paddingBottom="17dp"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+
+                <TextView
+                    android:id="@+id/fragPresetTvHot1WholeTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="30dp"
+                    android:fontFamily="@font/nanum_square_eb"
+                    android:textColor="@color/white"
+                    android:textSize="24dp"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="HH:MM:SS" />
+
+                <TextView
+                    android:id="@+id/fragPresetTvHot1EndTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:fontFamily="@font/nanum_square_r"
+                    android:textColor="@color/ux_light_gray"
+                    android:textSize="12dp"
+                    app:layout_constraintBottom_toBottomOf="@id/fragPresetTvHot1WholeTime"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/fragPresetTvHot1WholeTime"
+                    tools:text="종료 예정 HH:MM PM" />
+
+
+                <TextView
+                    android:id="@+id/fragPresetTvHot1Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:fontFamily="@font/nanum_square_r"
+                    android:textColor="@color/ux_light_gray"
+                    android:textSize="12dp"
+                    app:layout_constraintBottom_toBottomOf="@id/fragPresetIvHot1ClockIcon"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/fragPresetIvHot1ClockIcon"
+                    tools:text="타임셋명" />
+
+                <ImageView
+                    android:id="@+id/fragPresetIvHot1ClockIcon"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_marginTop="33dp"
+                    android:src="@drawable/_ic_clock_white"
+                    app:layout_constraintRight_toLeftOf="@id/fragPresetTvHot1TimeCount"
+                    app:layout_constraintTop_toBottomOf="@id/fragPresetTvHot1WholeTime" />
+
+                <TextView
+                    android:id="@+id/fragPresetTvHot1TimeCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:fontFamily="@font/nanum_square_r"
+                    android:text="N"
+                    android:textColor="@color/ux_light_gray"
+                    android:textSize="12dp"
+                    app:layout_constraintBottom_toBottomOf="@id/fragPresetIvHot1ClockIcon"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/fragPresetIvHot1ClockIcon" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/fragPresetClHot2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/bg_radius_20_white"
+                android:paddingBottom="17dp"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+
+                <TextView
+                    android:id="@+id/fragPresetTvHot2WholeTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="30dp"
+                    android:fontFamily="@font/nanum_square_eb"
+                    android:textColor="@color/ux_black"
+                    android:textSize="24dp"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="HH:MM:SS" />
+
+                <TextView
+                    android:id="@+id/fragPresetTvHot2EndTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:fontFamily="@font/nanum_square_r"
+                    android:textColor="@color/ux_dark_gray"
+                    android:textSize="12dp"
+                    app:layout_constraintBottom_toBottomOf="@id/fragPresetTvHot2WholeTime"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/fragPresetTvHot2WholeTime"
+                    tools:text="종료 예정 HH:MM PM" />
+
+
+                <TextView
+                    android:id="@+id/fragPresetTvHot2Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:fontFamily="@font/nanum_square_r"
+                    android:textColor="@color/ux_black"
+                    android:textSize="12dp"
+                    app:layout_constraintBottom_toBottomOf="@id/fragPresetIvHot2ClockIcon"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/fragPresetIvHot2ClockIcon"
+                    tools:text="타임셋명" />
+
+                <ImageView
+                    android:id="@+id/fragPresetIvHot2ClockIcon"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_marginTop="33dp"
+                    android:padding="12dp"
+                    android:src="@drawable/_ic_clock"
+                    app:layout_constraintRight_toLeftOf="@id/fragPresetTvHot2TimeCount"
+                    app:layout_constraintTop_toBottomOf="@id/fragPresetTvHot2WholeTime" />
+
+                <TextView
+                    android:id="@+id/fragPresetTvHot2TimeCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:fontFamily="@font/nanum_square_r"
+                    android:text="N"
+                    android:textColor="@color/ux_dark_gray"
+                    android:textSize="12dp"
+                    app:layout_constraintBottom_toBottomOf="@id/fragPresetIvHot2ClockIcon"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/fragPresetIvHot2ClockIcon" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/fragPresetClHot3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/bg_radius_20_white"
+                android:paddingBottom="17dp"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+
+                <TextView
+                    android:id="@+id/fragPresetTvHot3WholeTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="30dp"
+                    android:fontFamily="@font/nanum_square_eb"
+                    android:textColor="@color/ux_black"
+                    android:textSize="24dp"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="HH:MM:SS" />
+
+                <TextView
+                    android:id="@+id/fragPresetTvHot3EndTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:fontFamily="@font/nanum_square_r"
+                    android:textColor="@color/ux_dark_gray"
+                    android:textSize="12dp"
+                    app:layout_constraintBottom_toBottomOf="@id/fragPresetTvHot3WholeTime"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/fragPresetTvHot3WholeTime"
+                    tools:text="종료 예정 HH:MM PM" />
+
+
+                <TextView
+                    android:id="@+id/fragPresetTvHot3Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:fontFamily="@font/nanum_square_r"
+                    android:textColor="@color/ux_black"
+                    android:textSize="12dp"
+                    app:layout_constraintBottom_toBottomOf="@id/fragPresetIvHot3ClockIcon"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/fragPresetIvHot3ClockIcon"
+                    tools:text="타임셋명" />
+
+                <ImageView
+                    android:id="@+id/fragPresetIvHot3ClockIcon"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_marginTop="33dp"
+                    android:padding="13dp"
+                    android:src="@drawable/_ic_clock"
+                    app:layout_constraintRight_toLeftOf="@id/fragPresetTvHot3TimeCount"
+                    app:layout_constraintTop_toBottomOf="@id/fragPresetTvHot3WholeTime" />
+
+                <TextView
+                    android:id="@+id/fragPresetTvHot3TimeCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:fontFamily="@font/nanum_square_r"
+                    android:text="N"
+                    android:textColor="@color/ux_dark_gray"
+                    android:textSize="12dp"
+                    app:layout_constraintBottom_toBottomOf="@id/fragPresetIvHot3ClockIcon"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/fragPresetIvHot3ClockIcon" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/fragPresetTvBasicText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="50dp"
+                android:fontFamily="@font/nanum_square_eb"
+                android:text="타임 프리셋"
+                android:textColor="@color/ux_black"
+                android:textSize="15dp"
+                android:visibility="gone" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/fragPresetRvPresets"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="20dp"
+                android:visibility="visible"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:spanCount="2"
+                tools:listitem="@layout/item_save_time_set" />
+
+
+        </LinearLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+    <ProgressBar
+        android:id="@+id/fragPresetPb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:theme="@style/ProgressbarColor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

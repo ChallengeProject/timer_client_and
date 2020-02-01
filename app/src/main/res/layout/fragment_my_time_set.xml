@@ -20,18 +20,20 @@
             android:orientation="vertical">
 
             <TextView
-                android:fontFamily="@font/nanum_square_r"        android:layout_width="wrap_content"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="60dp"
                 android:layout_marginTop="50dp"
+                android:fontFamily="@font/nanum_square_r"
                 android:text="주로 쓰는 타임셋을 모아보세요,\n시간을 관리하는 데 도움이 될 거에요 :)"
                 android:textColor="@color/ux_black" />
 
             <TextView
-                android:fontFamily="@font/nanum_square_r"   android:layout_width="wrap_content"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="80dp"
+                android:fontFamily="@font/nanum_square_r"
                 android:text="저장한 타임셋"
                 android:textColor="@color/ux_black"
                 android:textSize="15dp"
@@ -57,9 +59,10 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:fontFamily="@font/nanum_square_r"   android:layout_width="wrap_content"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="30dp"
+                    android:fontFamily="@font/nanum_square_r"
                     android:text="타임셋을 추가해보세요!"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
@@ -69,7 +72,7 @@
 
 
             <TextView
-                android:fontFamily="@font/nanum_square_r"       android:id="@+id/fragMyTimeSetTvSaveTimeSetManage"
+                android:id="@+id/fragMyTimeSetTvSaveTimeSetManage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -77,6 +80,7 @@
                 android:layout_marginRight="20dp"
                 android:background="@drawable/bg_radius_20_blue"
                 android:drawableEnd="@drawable/_ic_next_white"
+                android:fontFamily="@font/nanum_square_r"
                 android:gravity="center_vertical"
                 android:paddingLeft="20dp"
                 android:paddingTop="2dp"
@@ -99,11 +103,12 @@
 
 
                 <TextView
-                    android:fontFamily="@font/nanum_square_eb"     android:id="@+id/fragMyTimeSetTvSaveTimeSetFirstItemWholeTime"
+                    android:id="@+id/fragMyTimeSetTvSaveTimeSetFirstItemWholeTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="30dp"
+                    android:fontFamily="@font/nanum_square_eb"
                     android:textColor="@color/white"
                     android:textSize="24dp"
                     android:textStyle="bold"
@@ -112,10 +117,11 @@
                     tools:text="HH:MM:SS" />
 
                 <TextView
-                    android:fontFamily="@font/nanum_square_r" android:id="@+id/fragMyTimeSetTvSaveTimeSetFirstItemEndTime"
+                    android:id="@+id/fragMyTimeSetTvSaveTimeSetFirstItemEndTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="20dp"
+                    android:fontFamily="@font/nanum_square_r"
                     android:textColor="@color/ux_light_gray"
                     android:textSize="12dp"
                     app:layout_constraintBottom_toBottomOf="@id/fragMyTimeSetTvSaveTimeSetFirstItemWholeTime"
@@ -125,10 +131,11 @@
 
 
                 <TextView
-                    android:fontFamily="@font/nanum_square_r"      android:id="@+id/fragMyTimeSetTvSaveTimeSetFirstItemTitle"
+                    android:id="@+id/fragMyTimeSetTvSaveTimeSetFirstItemTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
+                    android:fontFamily="@font/nanum_square_r"
                     android:textColor="@color/ux_light_gray"
                     android:textSize="12dp"
                     app:layout_constraintBottom_toBottomOf="@id/fragMyTimeSetIvSaveTimeSetFirstItemClockIcon"
@@ -147,10 +154,11 @@
                     app:layout_constraintTop_toBottomOf="@id/fragMyTimeSetTvSaveTimeSetFirstItemWholeTime" />
 
                 <TextView
-                    android:fontFamily="@font/nanum_square_r"       android:id="@+id/fragMyTimeSetTvSaveTimeSetFirstItemTimeCount"
+                    android:id="@+id/fragMyTimeSetTvSaveTimeSetFirstItemTimeCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="20dp"
+                    android:fontFamily="@font/nanum_square_r"
                     android:text="N"
                     android:textColor="@color/ux_light_gray"
                     android:textSize="12dp"
@@ -172,7 +180,7 @@
                 app:spanCount="2" />
 
             <TextView
-                android:fontFamily="@font/nanum_square_r"      android:id="@+id/fragMyTimeSetTvSaveTimeSetMore"
+                android:id="@+id/fragMyTimeSetTvSaveTimeSetMore"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -180,6 +188,7 @@
                 android:layout_marginRight="20dp"
                 android:background="@drawable/bg_radius_20_gray"
                 android:drawableEnd="@drawable/_ic_next"
+                android:fontFamily="@font/nanum_square_r"
                 android:gravity="center_vertical"
                 android:paddingLeft="20dp"
                 android:paddingTop="2dp"
@@ -191,11 +200,12 @@
 
 
             <TextView
-                android:fontFamily="@font/nanum_square_r"     android:id="@+id/fragMyTimeSetTvLikeTimeSetText"
+                android:id="@+id/fragMyTimeSetTvLikeTimeSetText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="80dp"
+                android:fontFamily="@font/nanum_square_r"
                 android:text="즐겨찾는 타임셋"
                 android:textColor="@color/ux_black"
                 android:textSize="15dp"
@@ -203,7 +213,7 @@
                 android:visibility="gone" />
 
             <TextView
-                android:fontFamily="@font/nanum_square_r"          android:id="@+id/fragMyTimeSetTvLikeTimeSetManage"
+                android:id="@+id/fragMyTimeSetTvLikeTimeSetManage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -211,6 +221,7 @@
                 android:layout_marginRight="20dp"
                 android:background="@drawable/bg_radius_20_blue"
                 android:drawableEnd="@drawable/_ic_next_white"
+                android:fontFamily="@font/nanum_square_r"
                 android:gravity="center_vertical"
                 android:paddingLeft="20dp"
                 android:paddingTop="2dp"
@@ -231,7 +242,7 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
             <TextView
-                android:fontFamily="@font/nanum_square_r"      android:id="@+id/fragMyTimeSetTvLikeTimeSetMore"
+                android:id="@+id/fragMyTimeSetTvLikeTimeSetMore"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -239,6 +250,7 @@
                 android:layout_marginRight="20dp"
                 android:background="@drawable/bg_radius_20_gray"
                 android:drawableEnd="@drawable/_ic_next"
+                android:fontFamily="@font/nanum_square_r"
                 android:gravity="center_vertical"
                 android:paddingLeft="20dp"
                 android:paddingTop="2dp"
@@ -252,6 +264,17 @@
 
 
     </androidx.core.widget.NestedScrollView>
+
+
+    <ProgressBar
+        android:id="@+id/fragMyTimeSetPb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:theme="@style/ProgressbarColor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

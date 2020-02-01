@@ -40,5 +40,9 @@
         <item name="android:fontFamily">@font/nanum_square_r</item>
     </style>
 
+    <style name="ProgressbarColor">
+        <item name="colorAccent">@color/ux_pink</item>
+    </style>
+
 
 </resources>

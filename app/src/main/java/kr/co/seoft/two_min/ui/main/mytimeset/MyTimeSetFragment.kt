@@ -87,7 +87,7 @@ class MyTimeSetFragment : Fragment() {
         loadSaveTimeSet()
     }
 
-    fun loadSaveTimeSet(){
+    fun loadSaveTimeSet() {
         compositeDisposable.add(
             AppDatabase.getDatabase(requireContext()).timeSetDao().getTimeSetsOrderBySave()
                 .subscribeOn(Schedulers.io())
@@ -95,13 +95,15 @@ class MyTimeSetFragment : Fragment() {
                 .subscribe({
                     initSaveTimeSet(it)
                     loadLikeTimeSet()
+
+                    fragMyTimeSetPb.visibility = View.GONE
                 }, {
                     it.printStackTrace()
                 })
         )
     }
 
-    fun loadLikeTimeSet(){
+    fun loadLikeTimeSet() {
         compositeDisposable.add(
             AppDatabase.getDatabase(requireContext()).timeSetDao().getTimeSetsOrderByLike()
                 .subscribeOn(Schedulers.io())
@@ -115,14 +117,14 @@ class MyTimeSetFragment : Fragment() {
     }
 
 
-    fun initListener(){
+    fun initListener() {
 
         fragMyTimeSetTvSaveTimeSetManage.setOnClickListener {
-            ManageActivity.startSaveActivity(requireContext(),false)
+            ManageActivity.startSaveActivity(requireContext(), false)
         }
 
         fragMyTimeSetTvLikeTimeSetManage.setOnClickListener {
-            ManageActivity.startSaveActivity(requireContext(),true)
+            ManageActivity.startSaveActivity(requireContext(), true)
         }
 
         fragMyTimeSetClEmptyLayout.setOnClickListener {
