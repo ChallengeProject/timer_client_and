@@ -26,14 +26,8 @@ class ManageActivity : ActivityHelper() {
 
     companion object {
 
-        private const val EXTRA_IS_LIKE_TIME_SET = "EXTRA_IS_LIKE_TIME_SET"
-
-        fun startSaveActivity(context: Context, isLikeTimeSet: Boolean) {
-            (context as Activity).startActivity(
-                Intent(context, ManageActivity::class.java).apply {
-                    putExtra(EXTRA_IS_LIKE_TIME_SET, isLikeTimeSet)
-                }
-            )
+        fun startSaveActivity(context: Context) {
+            (context as Activity).startActivity(Intent(context, ManageActivity::class.java))
         }
     }
 
@@ -44,10 +38,6 @@ class ManageActivity : ActivityHelper() {
     private lateinit var removeItemTouchHelper: ItemTouchHelper
 
     private var compositeDisposable = CompositeDisposable()
-
-    val isLikeTimeSet by lazy {
-        intent.getBooleanExtra(EXTRA_IS_LIKE_TIME_SET, false)
-    }
 
     private val curAdapter by lazy {
         ManageAdapter(true) { type, vh ->
@@ -95,23 +85,12 @@ class ManageActivity : ActivityHelper() {
 
         actManageTvOk.setOnClickListener {
             Single.fromCallable {
-
-                if (isLikeTimeSet) {
-                    val dao = AppDatabase.getDatabase(this).timeSetDao()
-                    curTimeSets.forEachIndexed { index, timeSet ->
-                        dao.updateTimeSet(timeSet.apply { likeOrder = index })
-                    }
-                    removeTimeSets.forEach {
-                        dao.updateTimeSet(it.apply { likeOrder = -1 })
-                    }
-                } else {
-                    val dao = AppDatabase.getDatabase(this).timeSetDao()
-                    curTimeSets.forEachIndexed { index, timeSet ->
-                        dao.updateTimeSet(timeSet.apply { saveOrder = index })
-                    }
-                    removeTimeSets.forEach {
-                        dao.deleteTimeSet(it)
-                    }
+                val dao = AppDatabase.getDatabase(this).timeSetDao()
+                curTimeSets.forEachIndexed { index, timeSet ->
+                    dao.updateTimeSet(timeSet.apply { saveOrder = index })
+                }
+                removeTimeSets.forEach {
+                    dao.deleteTimeSet(it)
                 }
             }
                 .subscribeOn(Schedulers.io())
@@ -122,7 +101,6 @@ class ManageActivity : ActivityHelper() {
                     it.printStackTrace()
                 })
         }
-
     }
 
     private fun initRecyclerViews() {
@@ -152,33 +130,17 @@ class ManageActivity : ActivityHelper() {
     }
 
     private fun initTimeSets() {
-
-        if (isLikeTimeSet) {
-            compositeDisposable.add(
-                AppDatabase.getDatabase(this).timeSetDao().getTimeSetsOrderByLike()
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe({
-                        curTimeSets = it.toMutableList()
-                        curAdapter.submitList(curTimeSets)
-                    }, {
-                        it.printStackTrace()
-                    })
-            )
-        } else {
-            compositeDisposable.add(
-                AppDatabase.getDatabase(this).timeSetDao().getTimeSetsOrderBySave()
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe({
-                        curTimeSets = it.toMutableList()
-                        curAdapter.submitList(curTimeSets)
-                    }, {
-                        it.printStackTrace()
-                    })
-            )
-        }
-
+        compositeDisposable.add(
+            AppDatabase.getDatabase(this).timeSetDao().getTimeSetsOrderBySave()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    curTimeSets = it.toMutableList()
+                    curAdapter.submitList(curTimeSets)
+                }, {
+                    it.printStackTrace()
+                })
+        )
         removeAdapter.submitList(removeTimeSets)
     }
 

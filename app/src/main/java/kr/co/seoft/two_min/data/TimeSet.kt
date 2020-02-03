@@ -43,7 +43,6 @@ data class TimeSet(
     var times: List<Time>,
     var memo: String = "",
     var saveOrder: Int = -1,
-    var likeOrder: Int = -1,
     var useHistory: Int = 0,
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "time_set_id")

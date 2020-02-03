@@ -17,7 +17,6 @@ import kr.co.seoft.two_min.data.Bell
 import kr.co.seoft.two_min.data.Time
 import kr.co.seoft.two_min.data.TimeSet
 import kr.co.seoft.two_min.ui.main.MainActivity
-import kr.co.seoft.two_min.ui.main.mytimeset.SaveTimeSetAdapter
 import kr.co.seoft.two_min.ui.proc.ProcActivity
 import kr.co.seoft.two_min.util.*
 
@@ -39,7 +38,7 @@ class PresetFragment : Fragment() {
     }
 
     private val timeSetAdapter by lazy {
-        SaveTimeSetAdapter {
+        PresetAdapter {
             ProcActivity.startProcActivity(act, it, Preferencer.getCountDown(act), false)
         }
     }

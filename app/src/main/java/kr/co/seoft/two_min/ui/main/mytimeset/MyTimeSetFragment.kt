@@ -2,6 +2,8 @@ package kr.co.seoft.two_min.ui.main.mytimeset
 
 import android.graphics.Rect
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.style.UnderlineSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,13 +49,13 @@ class MyTimeSetFragment : Fragment() {
         }
     }
 
-    private val likeTimeSetAdapter by lazy {
-        LikeTimeSetAdapter {
-            act.startPreviewActivity(it.timeSetId)
-        }
-    }
-
     var compositeDisposable = CompositeDisposable()
+
+    private val clHot by lazy { listOf(fragMyTimeSetClHot1, fragMyTimeSetClHot2, fragMyTimeSetClHot3) }
+    private val tvHotWholeTime by lazy { listOf(fragMyTimeSetTvHot1WholeTime, fragMyTimeSetTvHot2WholeTime, fragMyTimeSetTvHot3WholeTime) }
+    private val tvHotEndTime by lazy { listOf(fragMyTimeSetTvHot1EndTime, fragMyTimeSetTvHot2EndTime, fragMyTimeSetTvHot3EndTime) }
+    private val tvHotTitle by lazy { listOf(fragMyTimeSetTvHot1Title, fragMyTimeSetTvHot2Title, fragMyTimeSetTvHot3Title) }
+    private val tvHotTimeCount by lazy { listOf(fragMyTimeSetTvHot1TimeCount, fragMyTimeSetTvHot2TimeCount, fragMyTimeSetTvHot3TimeCount) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -61,22 +63,14 @@ class MyTimeSetFragment : Fragment() {
         fragMyTimeSetRvSaveTimeSet.adapter = saveTimeSetAdapter
         fragMyTimeSetRvSaveTimeSet.addItemDecoration(object : RecyclerView.ItemDecoration() {
             override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
-                val pos = parent.getChildAdapterPosition(view)
-                if (pos % 2 == 0) {
-                    outRect.right = 5.dpToPx()
-                } else {
-                    outRect.left = 5.dpToPx()
-                }
                 outRect.bottom = 10.dpToPx()
             }
         })
 
-        fragMyTimeSetRvLikeTimeSet.adapter = likeTimeSetAdapter
-        fragMyTimeSetRvLikeTimeSet.addItemDecoration(object : RecyclerView.ItemDecoration() {
-            override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
-                outRect.bottom = 10.dpToPx()
-            }
-        })
+        val emptyText = fragMyTimeSetTvSaveTimeSetManage.text.toString()
+        val ss = SpannableString(emptyText)
+        ss.setSpan(UnderlineSpan(), 0, emptyText.length, 0)
+        fragMyTimeSetTvSaveTimeSetManage.text = ss
 
         initListener()
     }
@@ -94,7 +88,7 @@ class MyTimeSetFragment : Fragment() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     initSaveTimeSet(it)
-                    loadLikeTimeSet()
+//                    loadLikeTimeSet()
 
                     fragMyTimeSetPb.visibility = View.GONE
                 }, {
@@ -103,48 +97,40 @@ class MyTimeSetFragment : Fragment() {
         )
     }
 
-    fun loadLikeTimeSet() {
-        compositeDisposable.add(
-            AppDatabase.getDatabase(requireContext()).timeSetDao().getTimeSetsOrderByLike()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    initLikeTimeSet(it)
-                }, {
-                    it.printStackTrace()
-                })
-        )
-    }
+//    fun loadLikeTimeSet() {
+//        compositeDisposable.add(
+//            AppDatabase.getDatabase(requireContext()).timeSetDao().getTimeSetsOrderByLike()
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe({
+//
+//                }, {
+//                    it.printStackTrace()
+//                })
+//        )
+//    }
 
 
     fun initListener() {
 
         fragMyTimeSetTvSaveTimeSetManage.setOnClickListener {
-            ManageActivity.startSaveActivity(requireContext(), false)
-        }
-
-        fragMyTimeSetTvLikeTimeSetManage.setOnClickListener {
-            ManageActivity.startSaveActivity(requireContext(), true)
+            ManageActivity.startSaveActivity(requireContext())
         }
 
         fragMyTimeSetClEmptyLayout.setOnClickListener {
             (requireActivity() as MainActivity).movePage(0)
         }
-
-
     }
 
     private fun initSaveTimeSet(timeSets: List<TimeSet>) {
         if (timeSets.isEmpty()) {
             fragMyTimeSetClEmptyLayout.visibility = View.VISIBLE
             fragMyTimeSetTvSaveTimeSetManage.visibility = View.GONE
-            fragMyTimeSetClSaveTimeSetFirstItem.visibility = View.GONE
             fragMyTimeSetRvSaveTimeSet.visibility = View.GONE
             fragMyTimeSetTvSaveTimeSetMore.visibility = View.GONE
         } else {
             fragMyTimeSetClEmptyLayout.visibility = View.GONE
             fragMyTimeSetTvSaveTimeSetManage.visibility = View.VISIBLE
-            fragMyTimeSetClSaveTimeSetFirstItem.visibility = View.VISIBLE
             fragMyTimeSetRvSaveTimeSet.visibility = View.VISIBLE
 
             if (timeSets.size >= 10) {
@@ -152,45 +138,23 @@ class MyTimeSetFragment : Fragment() {
             } else {
                 fragMyTimeSetTvSaveTimeSetMore.visibility = View.GONE
             }
+        }
 
-            timeSets.first().run {
-                fragMyTimeSetTvSaveTimeSetFirstItemTimeCount.text = this.times.size.toString()
-                fragMyTimeSetTvSaveTimeSetFirstItemEndTime.text = "종료 예정 ${this.wholeTime.toEndTimeStrAfterSec()}"
-                fragMyTimeSetTvSaveTimeSetFirstItemTitle.text = this.title
-                fragMyTimeSetTvSaveTimeSetFirstItemWholeTime.text = this.wholeTime.x1000L().toTimeStr()
+        timeSets.forEachIndexed { index, timeSet ->
+            if (index >= 3) return@forEachIndexed
+            clHot[index].visibility = View.VISIBLE
+            tvHotWholeTime[index].text = timeSet.wholeTime.x1000L().toTimeStr()
+            tvHotEndTime[index].text = "종료 예정 ${timeSet.wholeTime.toEndTimeStrAfterSec()}"
+            tvHotTitle[index].text = timeSet.title
+            tvHotTimeCount[index].text = timeSet.times.size.toString()
+
+            clHot[index].setOnClickListener {
+                act.startPreviewActivity(timeSets[index].timeSetId)
             }
-
-            fragMyTimeSetClSaveTimeSetFirstItem.setOnClickListener {
-                act.startPreviewActivity(timeSets[0].timeSetId)
-            }
-
-            saveTimeSetAdapter.submitList(timeSets.drop(1).take(8))
         }
 
+        saveTimeSetAdapter.submitList(timeSets.drop(3).take(7))
     }
-
-    private fun initLikeTimeSet(likeTimeSets: List<TimeSet>) {
-
-        if (likeTimeSets.isEmpty()) {
-            fragMyTimeSetTvLikeTimeSetText.visibility = View.GONE
-            fragMyTimeSetTvLikeTimeSetManage.visibility = View.GONE
-            fragMyTimeSetRvLikeTimeSet.visibility = View.GONE
-            return
-        } else {
-            fragMyTimeSetTvLikeTimeSetText.visibility = View.VISIBLE
-            fragMyTimeSetTvLikeTimeSetManage.visibility = View.VISIBLE
-            fragMyTimeSetRvLikeTimeSet.visibility = View.VISIBLE
-        }
-
-        if (likeTimeSets.size >= 11) {
-            fragMyTimeSetTvLikeTimeSetMore.visibility = View.VISIBLE
-        } else {
-            fragMyTimeSetTvLikeTimeSetMore.visibility = View.GONE
-        }
-
-        likeTimeSetAdapter.submitList(likeTimeSets.take(10))
-    }
-
 
     override fun onDestroy() {
         super.onDestroy()

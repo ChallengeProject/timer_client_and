@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.item_like_time_set.view.*
+import kotlinx.android.synthetic.main.item_preset.view.*
 import kr.co.seoft.two_min.R
 import kr.co.seoft.two_min.data.TimeSet
 import kr.co.seoft.two_min.util.toEndTimeStrAfterSec
@@ -27,7 +27,7 @@ class PresetAdapter(private val cb: (TimeSet) -> Unit) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemVH {
         return ItemVH(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_like_time_set, parent, false),
+                .inflate(R.layout.item_preset, parent, false),
             cb
         )
     }
@@ -38,10 +38,10 @@ class PresetAdapter(private val cb: (TimeSet) -> Unit) :
 
     class ItemVH(itemView: View, private val cb: (TimeSet) -> Unit) : RecyclerView.ViewHolder(itemView) {
 
-        val tvWholeTime = itemView.itemLikeTimeSetTvWholeTime
-        val tvEndTime = itemView.itemLikeTimeSetTvEndTime
-        val tvTitle = itemView.itemLikeTimeSetTvTitle
-        val tvTimeCount = itemView.itemLikeTimeSetTvTimeCount
+        val tvWholeTime = itemView.itemPresetTvWholeTime
+        val tvEndTime = itemView.itemPresetTvEndTime
+        val tvTitle = itemView.itemPresetTvTitle
+        val tvTimeCount = itemView.itemPresetTvTimeCount
 
         fun bind(timeSet: TimeSet) {
             tvWholeTime.text = timeSet.wholeTime.x1000L().toTimeStr()

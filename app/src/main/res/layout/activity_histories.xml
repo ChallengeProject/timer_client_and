@@ -39,10 +39,11 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView android:fontFamily="@font/nanum_square_r"
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:fontFamily="@font/nanum_square_r"
             android:gravity="center"
             android:text="타임셋 히스토리가 아직 없어요.\n나만의 시간을 자유롭게 등록해 보세요!"
             android:textColor="@color/black"
@@ -52,11 +53,12 @@
             android:layout_width="0dp"
             android:layout_height="30dp" />
 
-        <TextView android:fontFamily="@font/nanum_square_r"
+        <TextView
             android:id="@+id/actHistoriesTvEmptyText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:fontFamily="@font/nanum_square_r"
             android:gravity="center"
             android:text="타임셋 만들어 보기"
             android:textColor="@color/ux_pink"

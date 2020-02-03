@@ -18,9 +18,6 @@ interface TimeSetDao {
     @Query("SELECT * FROM time_set WHERE useHistory=0 ORDER BY saveOrder ASC, time_set_id DESC")
     fun getTimeSetsOrderBySave(): Single<List<TimeSet>>
 
-    @Query("SELECT * FROM time_set WHERE useHistory=0 AND NOT likeOrder=-1 ORDER BY likeOrder ASC, time_set_id DESC")
-    fun getTimeSetsOrderByLike(): Single<List<TimeSet>>
-
     @Query("SELECT * FROM time_set WHERE time_set_id=:id")
     fun getTimeSetById(id: Long): Single<TimeSet>
 
@@ -29,9 +26,6 @@ interface TimeSetDao {
 
     @Query("SELECT * FROM history ORDER BY history_id DESC")
     fun getHistories(): Single<List<History>>
-
-//    @Query("SELECT * FROM time_set WHERE useHistory=1 ORDER BY time_set_id DESC")
-//    fun getHistoryTimeSets(): Single<List<TimeSet>>
 
     @Query("SELECT * FROM history WHERE time_set_id=:timeSetId")
     fun getHistoryByTimeSetId(timeSetId: Long): Single<History>
