@@ -124,7 +124,7 @@ class MyTimeSetFragment : Fragment() {
         }
 
         fragMyTimeSetClEmptyLayout.setOnClickListener {
-            (requireActivity() as MainActivity).movePage(0)
+            (requireActivity() as MainActivity).movePage(1)
         }
     }
 
