@@ -53,6 +53,12 @@ data class TimeSet(
         get() {
             return times.map { it.seconds }.reduce { acc, i -> acc + i }
         }
+
+    fun hash(): Int {
+        return title.hashCode() + memo.hashCode() +
+                if (times.isEmpty()) 0
+                else times.map { it.seconds + it.comment.hashCode() + it.bell.type.ordinal }.reduce { acc, rst -> acc + rst }
+    }
 }
 
 @Parcelize

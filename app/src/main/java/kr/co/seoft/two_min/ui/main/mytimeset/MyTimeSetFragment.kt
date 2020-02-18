@@ -18,10 +18,8 @@ import kr.co.seoft.two_min.data.AppDatabase
 import kr.co.seoft.two_min.data.TimeSet
 import kr.co.seoft.two_min.ui.main.MainActivity
 import kr.co.seoft.two_min.ui.manage.ManageActivity
-import kr.co.seoft.two_min.util.dpToPx
-import kr.co.seoft.two_min.util.toEndTimeStrAfterSec
-import kr.co.seoft.two_min.util.toTimeStr
-import kr.co.seoft.two_min.util.x1000L
+import kr.co.seoft.two_min.ui.proc.ProcActivity
+import kr.co.seoft.two_min.util.*
 
 
 class MyTimeSetFragment : Fragment() {
@@ -48,6 +46,11 @@ class MyTimeSetFragment : Fragment() {
             act.startPreviewActivity(it.timeSetId)
         }
     }
+    private val recentlyAdapter by lazy {
+        SaveTimeSetAdapter {
+            ProcActivity.startProcActivity(act, it, Preferencer.getCountDown(act), false)
+        }
+    }
 
     var compositeDisposable = CompositeDisposable()
 
@@ -62,6 +65,13 @@ class MyTimeSetFragment : Fragment() {
 
         fragMyTimeSetRvSaveTimeSet.adapter = saveTimeSetAdapter
         fragMyTimeSetRvSaveTimeSet.addItemDecoration(object : RecyclerView.ItemDecoration() {
+            override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+                outRect.bottom = 10.dpToPx()
+            }
+        })
+
+        fragMyTimeSetRvRecentlyTimeSet.adapter = recentlyAdapter
+        fragMyTimeSetRvRecentlyTimeSet.addItemDecoration(object : RecyclerView.ItemDecoration() {
             override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
                 outRect.bottom = 10.dpToPx()
             }
@@ -88,28 +98,24 @@ class MyTimeSetFragment : Fragment() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     initSaveTimeSet(it)
-//                    loadLikeTimeSet()
 
                     fragMyTimeSetPb.visibility = View.GONE
                 }, {
                     it.printStackTrace()
                 })
         )
+
+        val recentlies = Preferencer.getRecentlyTimeSet(act).filterNot {
+            it.title == Preferencer.EMPTY_TIME_SET_TITLE
+        }.toList()
+
+        if (recentlies.isNotEmpty()) {
+            fragMyTimeSetRvRecentlyTimeSet.visibility = View.VISIBLE
+            fragMyTimeSetTvRecentlyTimeSetText.visibility = View.VISIBLE
+
+            recentlyAdapter.submitList(recentlies)
+        }
     }
-
-//    fun loadLikeTimeSet() {
-//        compositeDisposable.add(
-//            AppDatabase.getDatabase(requireContext()).timeSetDao().getTimeSetsOrderByLike()
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe({
-//
-//                }, {
-//                    it.printStackTrace()
-//                })
-//        )
-//    }
-
 
     fun initListener() {
 

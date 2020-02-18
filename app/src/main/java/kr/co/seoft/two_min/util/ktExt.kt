@@ -15,6 +15,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import java.lang.reflect.Type
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -136,3 +137,8 @@ fun Boolean.setVisibleOrGone(): Int {
 inline fun <reified T> Gson.jsonToObject(json: String) = this.fromJson<T>(json, object: TypeToken<T>() {}.type)
 
 fun Int.color() = ContextCompat.getColor(App.get, this)
+
+
+fun <T : Any> T.toJson() = Gson().toJson(this)
+fun <T : Any> String.fromJson(classType: Class<T>): T? = Gson().fromJson<T>(this, classType as Type)
+fun <T : Any> String.fromJson(type: Type): T? = Gson().fromJson<T>(this, type)

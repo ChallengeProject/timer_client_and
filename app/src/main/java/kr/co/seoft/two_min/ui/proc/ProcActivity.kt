@@ -70,6 +70,30 @@ class ProcActivity : AppCompatActivity() {
 
     }
 
+    /**
+     * 최근타임셋 가져와서
+     * 지금 타임셋과 비교해서 같은게있으면 그거 맨앞으로 가져오고
+     * 같은게없으면 기존 최근타임셋 3번째인덱스를 제거하고 1,2를 2,3번쨰인덱스로 밀고 1번인덱스에 새 타임셋을 넣어 저장
+     * 비교는 자체 hash를 이용
+     */
+    private fun resetRecentlyTimeSet() {
+        val recentlyTimeSets = Preferencer.getRecentlyTimeSet(this).toMutableList()
+        val isContain = recentlyTimeSets.map { it.hash() }.contains(timeSet.hash())
+        recentlyTimeSets.add(0, timeSet)
+        if (isContain) {
+            var idx = 0
+            recentlyTimeSets.forEachIndexed { index, ts ->
+                if (index != 0 && ts.hash() == timeSet.hash()) {
+                    idx = index
+                    return@forEachIndexed
+                }
+            }
+            recentlyTimeSets.removeAt(idx)
+            Preferencer.setRecentlyTimeSet(this, recentlyTimeSets.take(3))
+        } else {
+            Preferencer.setRecentlyTimeSet(this, recentlyTimeSets.take(3))
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,6 +103,8 @@ class ProcActivity : AppCompatActivity() {
 
         // init properties
         timeSet = intent.getParcelableExtra(TIME_SET)
+
+        resetRecentlyTimeSet()
 
         readySec = intent.getIntExtra(READY_COUNT, 5)
 
