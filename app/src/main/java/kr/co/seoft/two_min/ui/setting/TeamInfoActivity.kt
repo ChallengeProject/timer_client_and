@@ -42,7 +42,7 @@ class TeamInfoActivity : ActivityHelper() {
             val myClipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
             val myClip = ClipData.newPlainText("text", "ask2min@gmail.com")
             myClipboard.setPrimaryClip(myClip)
-            ToastUtil.showToast(this,"클립보드에 복사되었어요")
+            ToastUtil.showToast(this,getString(R.string.copy_to_clipboard))
         }
     }
 
@@ -52,7 +52,7 @@ class TeamInfoActivity : ActivityHelper() {
             setDisplayShowTitleEnabled(true)
             setDisplayHomeAsUpEnabled(true)
             setHomeAsUpIndicator(R.drawable._ic_back)
-            setTitle("제작팀 정보")
+            setTitle(getString(R.string.team_info))
         }
     }
 

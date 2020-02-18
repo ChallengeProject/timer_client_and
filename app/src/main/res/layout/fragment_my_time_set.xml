@@ -25,7 +25,7 @@
                 android:layout_marginLeft="60dp"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/nanum_square_r"
-                android:text="주로 쓰는 타임셋을 모아보세요,\n시간을 관리하는 데 도움이 될 거에요 :)"
+                android:text="@string/jaju_timeset_text"
                 android:textColor="@color/ux_black" />
 
             <RelativeLayout
@@ -42,7 +42,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:fontFamily="@font/nanum_square_b"
-                    android:text="저장한 타임셋"
+                    android:text="@string/save_timeset"
                     android:textColor="@color/ux_black"
                     android:textSize="15dp" />
 
@@ -53,7 +53,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:fontFamily="@font/nanum_square_b"
-                    android:text="관리"
+                    android:text="@string/manage"
                     android:textColor="@color/ux_black"
                     android:textSize="11dp"
                     android:visibility="gone" />
@@ -84,7 +84,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="30dp"
                     android:fontFamily="@font/nanum_square_r"
-                    android:text="타임셋을 추가해보세요!"
+                    android:text="@string/add_timeset_text"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent" />
@@ -358,7 +358,7 @@
                 android:paddingTop="2dp"
                 android:paddingRight="10dp"
                 android:paddingBottom="2dp"
-                android:text="저장한 시간 모두보기"
+                android:text="@string/view_all_time"
                 android:textColor="@color/ux_pink"
                 android:visibility="gone"
                 tools:visibility="visible" />
@@ -371,7 +371,7 @@
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="80dp"
                 android:fontFamily="@font/nanum_square_r"
-                android:text="최근 이용 타임셋"
+                android:text="@string/recently_timeset"
                 android:textColor="@color/ux_black"
                 android:textSize="15dp"
                 android:textStyle="bold"

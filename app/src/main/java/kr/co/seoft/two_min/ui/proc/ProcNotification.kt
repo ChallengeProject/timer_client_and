@@ -15,6 +15,7 @@ import kr.co.seoft.two_min.data.TimeSet
 import kr.co.seoft.two_min.util.App
 import kr.co.seoft.two_min.util.color
 import kr.co.seoft.two_min.util.e
+import kr.co.seoft.two_min.util.en
 
 
 /**
@@ -164,7 +165,11 @@ class ProcNotification(val service: Service, val times_: ArrayList<Int>) {
             setTextViewText(R.id.notiTvTimer, timer)
 
             if (step == EXCEED_TEXT && maxStep == EXCEED_TEXT.toString()) {
-                setTextViewText(R.id.notiTvRepeat, "초과 기록")
+                if(en()){
+                    setTextViewText(R.id.notiTvRepeat, "Overtime")
+                } else {
+                    setTextViewText(R.id.notiTvRepeat, "초과 기록")
+                }
                 setTextColor(R.id.notiTvRepeat, R.color.ux_pink.color())
             } else {
                 setTextViewText(R.id.notiTvRepeat, "${step + 1}/$maxStep")

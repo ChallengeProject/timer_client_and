@@ -63,7 +63,11 @@ class HomeFragUpdater(val f: HomeFragment) {
     }
 
     fun setSubText(str1: String, str2: String) {
-        f.fragHomeTvSub.text = "타임셋 시간 $str1        종료 예정 $str2"
+        if(en()){
+            f.fragHomeTvSub.text = "Timeset $str1        End time $str2"
+        } else {
+            f.fragHomeTvSub.text = "타임셋 시간 $str1        종료 예정 $str2"
+        }
     }
 
     fun showTimeInfo(index: Int, homeBadges: MutableList<HomeBadge>) {
@@ -77,7 +81,11 @@ class HomeFragUpdater(val f: HomeFragment) {
         f.fragHomeEtContent.text = time.comment.toEditable()
         f.fragHomeTvContentLength.text = "${time.comment.length}"
 
-        f.fragHomeTvTimerPosition.text = "${index}번째 타이머"
+        f.fragHomeTvTimerPosition.text = if(en()){
+            "${index}st timer"
+        } else {
+            "${index}번째 타이머"
+        }
 
         f.fragHomeTvSetWhole.paintFlags = (f.fragHomeTvSetWhole.paintFlags or Paint.UNDERLINE_TEXT_FLAG)
 

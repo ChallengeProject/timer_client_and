@@ -171,7 +171,7 @@
             <TextView
                 android:id="@+id/fragHomeTvCancel"
                 style="@style/MainNumberPad"
-                android:text="취소" />
+                android:text="@string/canc" />
 
             <Space style="@style/MainNumberPadSpaceWidth" />
 
@@ -202,7 +202,7 @@
                 android:id="@+id/fragHomeTvHour"
                 style="@style/MainNumberPad"
                 android:fontFamily="@font/nanum_square_eb"
-                android:text="시"
+                android:text="@string/hour"
                 android:textStyle="bold" />
 
             <Space style="@style/MainNumberPadSpaceWidth" />
@@ -211,7 +211,7 @@
                 android:id="@+id/fragHomeTvMinute"
                 style="@style/MainNumberPad"
                 android:fontFamily="@font/nanum_square_eb"
-                android:text="분"
+                android:text="@string/minute"
                 android:textStyle="bold" />
 
             <Space style="@style/MainNumberPadSpaceWidth" />
@@ -220,7 +220,7 @@
                 android:id="@+id/fragHomeTvSecond"
                 style="@style/MainNumberPad"
                 android:fontFamily="@font/nanum_square_eb"
-                android:text="초"
+                android:text="@string/seconds"
                 android:textStyle="bold" />
 
         </LinearLayout>
@@ -278,7 +278,7 @@
                     android:background="@null"
                     android:fontFamily="@font/nanum_square_r"
                     android:gravity="top"
-                    android:hint="코멘트를 입력하실 수 있어요"
+                    android:hint="@string/comment_input_text"
                     android:lines="9"
                     android:textColor="@color/ux_black"
                     android:textColorHint="@color/text_hint_gray"
@@ -351,7 +351,7 @@
                         android:layout_marginRight="10dp"
                         android:fontFamily="@font/nanum_square_r"
                         android:gravity="center"
-                        android:text="무음"
+                        android:text="@string/slient"
                         android:textColor="@color/ux_black"
                         android:textSize="15dp" />
 
@@ -363,7 +363,7 @@
                         android:layout_marginRight="10dp"
                         android:fontFamily="@font/nanum_square_r"
                         android:gravity="center"
-                        android:text="진동"
+                        android:text="@string/vibration"
                         android:textColor="@color/ux_black"
                         android:textSize="15dp" />
 
@@ -374,7 +374,7 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:fontFamily="@font/nanum_square_r"
-                        android:text="기본음"
+                        android:text="@string/defaultt"
                         android:textColor="@color/ux_black"
                         android:textSize="15dp" />
 
@@ -385,7 +385,7 @@
                         android:layout_height="match_parent"
                         android:layout_marginRight="10dp"
                         android:gravity="right|center_vertical"
-                        android:text="전체적용"
+                        android:text="@string/apply_all"
                         android:textColor="@color/ux_black"
                         android:textSize="15dp"
                         android:textStyle="" />
@@ -423,7 +423,7 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:gravity="center"
-                        android:text="1번째 타이머"
+                        android:text=""
                         android:textColor="@color/ux_black"
                         android:textSize="15dp" />
 
@@ -443,7 +443,6 @@
                             android:gravity="right|center_vertical"
                             android:padding="6dp"
                             android:src="@drawable/_ic_trash_24"
-                            android:text="전체적용"
                             android:textColor="@color/ux_black"
                             android:textSize="15dp"
                             android:textStyle="" />

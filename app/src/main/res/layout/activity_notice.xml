@@ -76,6 +76,6 @@
         app:layout_constraintBottom_toBottomOf="@id/actNoticeIncToolbar"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@id/actNoticeIncToolbar"
-        tools:text="최신 버전입니다" />
+        tools:text="@string/recently_version" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

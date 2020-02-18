@@ -59,7 +59,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="18dp"
-                    android:text="기본음"
+                    android:text="@string/defaultt"
                     android:textColor="@color/ux_black"
                     android:textSize="12dp" />
 
@@ -96,7 +96,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="60dp"
-                android:text="진동"
+                android:text="@string/vibration"
                 android:textColor="@color/ux_black"
                 android:textSize="12dp" />
 
@@ -130,7 +130,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="60dp"
-                android:text="무음"
+                android:text="@string/slient"
                 android:textColor="@color/ux_black"
                 android:textSize="12dp" />
 
@@ -157,6 +157,6 @@
         app:layout_constraintBottom_toBottomOf="@id/actSoundSettingIncToolbar"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@id/actSoundSettingIncToolbar"
-        tools:text="최신 버전입니다" />
+        tools:text="@string/recently_version" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

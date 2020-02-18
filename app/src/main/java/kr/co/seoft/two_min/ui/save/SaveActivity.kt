@@ -115,7 +115,7 @@ class SaveActivity : ActivityHelper() {
         setupActionBar(R.id.toolbar) {
             setDisplayShowTitleEnabled(true)
             setDisplayHomeAsUpEnabled(true)
-            title = "타임셋 저장"
+            title = getString(R.string.save_timeset)
         }
     }
 

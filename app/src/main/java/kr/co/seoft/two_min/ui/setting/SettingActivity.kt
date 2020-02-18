@@ -40,15 +40,15 @@ class SettingActivity : ActivityHelper() {
     override fun onResume() {
         super.onResume()
 
-        actSettingTvSoundType.text = "현재 : ${when (Preferencer.getSoundType(this)) {
-            SOUND_TYPE_BASIC -> "기본음"
-            SOUND_TYPE_VIBRATE -> "진동"
-            SOUND_TYPE_SILENT -> "무음"
-            else -> "기본음"
+        actSettingTvSoundType.text = "${getString(R.string.current)} : ${when (Preferencer.getSoundType(this)) {
+            SOUND_TYPE_BASIC -> getString(R.string.defaultt)
+            SOUND_TYPE_VIBRATE -> getString(R.string.vibration)
+            SOUND_TYPE_SILENT -> getString(R.string.slient)
+            else -> getString(R.string.defaultt)
         }
         }"
 
-        actSettingTvCountDown.text = "현재 : ${Preferencer.getCountDown(this)}초"
+        actSettingTvCountDown.text = "${getString(R.string.current)} : ${Preferencer.getCountDown(this)}${getString(R.string.seconds)}"
     }
 
     fun initListener() {
@@ -78,7 +78,7 @@ class SettingActivity : ActivityHelper() {
             setDisplayShowTitleEnabled(true)
             setDisplayHomeAsUpEnabled(true)
             setHomeAsUpIndicator(R.drawable._ic_back)
-            setTitle("설정")
+            setTitle(getString(R.string.setting))
         }
     }
 

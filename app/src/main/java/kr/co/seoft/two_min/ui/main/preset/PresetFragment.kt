@@ -80,81 +80,156 @@ class PresetFragment : Fragment() {
 
     private fun loadPresets() {
 
-
-        compositeDisposable.add(
-
-            service.getHotPreset()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    it.forEachIndexed { index, apiTimeSet ->
-                        val timeSet = TimeSet(
-                            apiTimeSet.title,
-                            apiTimeSet.timers.map {
-                                Time(
-                                    it.end,
-                                    it.comment,
-                                    Bell(
-                                        when (it.alarm) {
-                                            1 -> Bell.Type.VIBRATION
-                                            2 -> Bell.Type.SLIENT
-                                            else -> Bell.Type.DEFAULT
-                                        }
+        if (en()) {
+            compositeDisposable.add(
+                service.getHotPresetEn()
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe({
+                        it.forEachIndexed { index, apiTimeSet ->
+                            val timeSet = TimeSet(
+                                apiTimeSet.title,
+                                apiTimeSet.timers.map {
+                                    Time(
+                                        it.end,
+                                        it.comment,
+                                        Bell(
+                                            when (it.alarm) {
+                                                1 -> Bell.Type.VIBRATION
+                                                2 -> Bell.Type.SLIENT
+                                                else -> Bell.Type.DEFAULT
+                                            }
+                                        )
                                     )
-                                )
-                            })
+                                })
 
-                        if (index == 0) fragPresetTvPickText.visibility = View.VISIBLE
+                            if (index == 0) fragPresetTvPickText.visibility = View.VISIBLE
 
-                        clHot[index].visibility = View.VISIBLE
-                        tvHotWholeTime[index].text = timeSet.wholeTime.x1000L().toTimeStr()
-                        tvHotEndTime[index].text = "종료 예정 ${timeSet.wholeTime.toEndTimeStrAfterSec()}"
-                        tvHotTitle[index].text = timeSet.title
-                        tvHotTimeCount[index].text = timeSet.times.size.toString()
+                            clHot[index].visibility = View.VISIBLE
+                            tvHotWholeTime[index].text = timeSet.wholeTime.x1000L().toTimeStr()
+                            tvHotEndTime[index].text = "${getString(R.string.scheduled_to_end)} ${timeSet.wholeTime.toEndTimeStrAfterSec()}"
+                            tvHotTitle[index].text = timeSet.title
+                            tvHotTimeCount[index].text = timeSet.times.size.toString()
 
-                        clHot[index].setOnClickListener {
-                            ProcActivity.startProcActivity(act, timeSet, Preferencer.getCountDown(act), apiTimeSet.isRepeat)
+                            clHot[index].setOnClickListener {
+                                ProcActivity.startProcActivity(act, timeSet, Preferencer.getCountDown(act), apiTimeSet.isRepeat)
+                            }
+
+                            fragPresetPb.visibility = View.GONE
+                        }
+                    }, {
+                        it.printStackTrace()
+                    })
+            )
+        } else {
+            compositeDisposable.add(
+
+                service.getHotPreset()
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe({
+                        it.forEachIndexed { index, apiTimeSet ->
+                            val timeSet = TimeSet(
+                                apiTimeSet.title,
+                                apiTimeSet.timers.map {
+                                    Time(
+                                        it.end,
+                                        it.comment,
+                                        Bell(
+                                            when (it.alarm) {
+                                                1 -> Bell.Type.VIBRATION
+                                                2 -> Bell.Type.SLIENT
+                                                else -> Bell.Type.DEFAULT
+                                            }
+                                        )
+                                    )
+                                })
+
+                            if (index == 0) fragPresetTvPickText.visibility = View.VISIBLE
+
+                            clHot[index].visibility = View.VISIBLE
+                            tvHotWholeTime[index].text = timeSet.wholeTime.x1000L().toTimeStr()
+                            tvHotEndTime[index].text = "${getString(R.string.scheduled_to_end)} ${timeSet.wholeTime.toEndTimeStrAfterSec()}"
+                            tvHotTitle[index].text = timeSet.title
+                            tvHotTimeCount[index].text = timeSet.times.size.toString()
+
+                            clHot[index].setOnClickListener {
+                                ProcActivity.startProcActivity(act, timeSet, Preferencer.getCountDown(act), apiTimeSet.isRepeat)
+                            }
+
+                            fragPresetPb.visibility = View.GONE
+                        }
+                    }, {
+                        it.printStackTrace()
+                    })
+            )
+        }
+
+        if (en()) {
+            compositeDisposable.add(
+                service.getBasicPresetEn()
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe({
+                        val list = it.map {
+                            TimeSet(
+                                it.title,
+                                it.timers.map {
+                                    Time(
+                                        it.end,
+                                        it.comment,
+                                        Bell(
+                                            when (it.alarm) {
+                                                1 -> Bell.Type.VIBRATION
+                                                2 -> Bell.Type.SLIENT
+                                                else -> Bell.Type.DEFAULT
+                                            }
+                                        )
+                                    )
+                                })
                         }
 
+                        if (list.isNotEmpty()) fragPresetTvBasicText.visibility = View.VISIBLE
+                        timeSetAdapter.submitList(list)
+
                         fragPresetPb.visibility = View.GONE
-                    }
-                }, {
-                    it.printStackTrace()
-                })
-        )
-
-        compositeDisposable.add(
-
-            service.getBasicPreset()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    val list = it.map {
-                        TimeSet(
-                            it.title,
-                            it.timers.map {
-                                Time(
-                                    it.end,
-                                    it.comment,
-                                    Bell(
-                                        when (it.alarm) {
-                                            1 -> Bell.Type.VIBRATION
-                                            2 -> Bell.Type.SLIENT
-                                            else -> Bell.Type.DEFAULT
-                                        }
+                    }, {
+                        it.printStackTrace()
+                    })
+            )
+        } else {
+            compositeDisposable.add(
+                service.getBasicPreset()
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe({
+                        val list = it.map {
+                            TimeSet(
+                                it.title,
+                                it.timers.map {
+                                    Time(
+                                        it.end,
+                                        it.comment,
+                                        Bell(
+                                            when (it.alarm) {
+                                                1 -> Bell.Type.VIBRATION
+                                                2 -> Bell.Type.SLIENT
+                                                else -> Bell.Type.DEFAULT
+                                            }
+                                        )
                                     )
-                                )
-                            })
-                    }
+                                })
+                        }
 
-                    if (list.isNotEmpty()) fragPresetTvBasicText.visibility = View.VISIBLE
-                    timeSetAdapter.submitList(list)
+                        if (list.isNotEmpty()) fragPresetTvBasicText.visibility = View.VISIBLE
+                        timeSetAdapter.submitList(list)
 
-                    fragPresetPb.visibility = View.GONE
-                }, {
-                    it.printStackTrace()
-                })
-        )
+                        fragPresetPb.visibility = View.GONE
+                    }, {
+                        it.printStackTrace()
+                    })
+            )
+        }
 
 
     }

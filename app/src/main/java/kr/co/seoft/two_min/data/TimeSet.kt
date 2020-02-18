@@ -3,6 +3,7 @@ package kr.co.seoft.two_min.data
 import android.os.Parcelable
 import androidx.room.*
 import kotlinx.android.parcel.Parcelize
+import kr.co.seoft.two_min.util.en
 
 @Parcelize
 @Entity(tableName = "history")
@@ -112,11 +113,20 @@ data class Bell(
     }
 
     fun bellTypeToString(): String {
-        return when (type) {
-            Type.SLIENT -> "무음"
-            Type.VIBRATION -> "진동"
-            Type.DEFAULT -> "기본음"
-            else -> "기본음"
+        if(en()){
+            return when (type) {
+                Type.SLIENT -> "Mute"
+                Type.VIBRATION -> "Vibration"
+                Type.DEFAULT -> "Default"
+                else -> "Default"
+            }
+        } else {
+            return when (type) {
+                Type.SLIENT -> "무음"
+                Type.VIBRATION -> "진동"
+                Type.DEFAULT -> "기본음"
+                else -> "기본음"
+            }
         }
     }
 }

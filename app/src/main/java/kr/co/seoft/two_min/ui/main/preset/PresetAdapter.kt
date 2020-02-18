@@ -45,7 +45,7 @@ class PresetAdapter(private val cb: (TimeSet) -> Unit) :
 
         fun bind(timeSet: TimeSet) {
             tvWholeTime.text = timeSet.wholeTime.x1000L().toTimeStr()
-            tvEndTime.text = "종료 예정 ${timeSet.wholeTime.toEndTimeStrAfterSec()}"
+            tvEndTime.text = "${itemView.context.getString(R.string.scheduled_to_end)} ${timeSet.wholeTime.toEndTimeStrAfterSec()}"
             tvTitle.text = timeSet.title
             tvTimeCount.text = timeSet.times.size.toString()
 

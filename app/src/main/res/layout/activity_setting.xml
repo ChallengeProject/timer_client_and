@@ -44,7 +44,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="23dp"
-                android:text="공지사항"
+                android:text="@string/notice"
                 android:textColor="@color/ux_black"
                 android:textSize="12dp" />
 
@@ -86,7 +86,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="23dp"
-                android:text="기본 사운드 설정"
+                android:text="@string/setting_sound"
                 android:textColor="@color/ux_black"
                 android:textSize="12dp" />
 
@@ -128,7 +128,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="23dp"
-                android:text="카운트다운"
+                android:text="@string/count_down"
                 android:textColor="@color/ux_black"
                 android:textSize="12dp" />
 
@@ -162,7 +162,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="23dp"
-                android:text="제작팀 정보"
+                android:text="@string/team_info"
                 android:textColor="@color/ux_black"
                 android:textSize="12dp" />
 
@@ -196,7 +196,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="23dp"
-                android:text="오픈소스 라이센스"
+                android:text="@string/opensource_license"
                 android:textColor="@color/ux_black"
                 android:textSize="12dp" />
 
@@ -218,7 +218,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="20dp"
-        android:text="최신 버전입니다"
+        android:text="@string/recently_version"
         android:textColor="@color/ux_black"
         android:textSize="12dp"
         app:layout_constraintBottom_toBottomOf="@id/actSettingIncToolbar"

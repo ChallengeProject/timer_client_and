@@ -75,9 +75,8 @@ class MainActivity : ActivityHelperForFrag() {
                 val timeSet = ProcActivity.respTimeSet
                 val useInfo = ProcActivity.respUseInfo
                 saveTimeSetForHistory(timeSet, useInfo)
-                showToastMessage("타임셋을 취소하셨어요. 결과를 확인해보세요!", "이동") {
+                showToastMessage(getString(R.string.timeset_cancel_text), getString(R.string.move)) {
                     // 마지막으로 저장된애가 방금 저장된애로 보장되기 때문에 마지막id를불러옴
-
                     compositeDisposable.add(
                         db.timeSetDao().getHistories()
                             .subscribeOn(Schedulers.io())
@@ -88,7 +87,6 @@ class MainActivity : ActivityHelperForFrag() {
                                 it.printStackTrace()
                             })
                     )
-
                 }
             }
             ProcActivity.RESP_END_TYPE_END -> {
@@ -135,7 +133,7 @@ class MainActivity : ActivityHelperForFrag() {
 
                 when (position) {
                     0 -> {
-                        toolbar.title = "내 타임셋"
+                        toolbar.title = getString(R.string.my)
                         actMainViewTabLayoutLine1.visibility = View.VISIBLE
                     }
                     1 -> {
@@ -143,7 +141,7 @@ class MainActivity : ActivityHelperForFrag() {
                         actMainViewTabLayoutLine2.visibility = View.VISIBLE
                     }
                     else -> {
-                        toolbar.title = "프리셋"
+                        toolbar.title = getString(R.string.preset)
                         actMainViewTabLayoutLine3.visibility = View.VISIBLE
                     }
                 }
@@ -157,15 +155,15 @@ class MainActivity : ActivityHelperForFrag() {
         TabLayoutMediator(actMainTablayout, actMainViewPager) { tab, position ->
             when (position) {
                 0 -> {
-                    tab.text = "마이 타임셋"
+                    tab.text = getString(R.string.my)
                     tab.setIcon(R.drawable._ic_preset)
                 }
                 1 -> {
-                    tab.text = "홈"
+                    tab.text = getString(R.string.home)
                     tab.setIcon(R.drawable._ic_home)
                 }
                 else -> {
-                    tab.text = "프리셋"
+                    tab.text = getString(R.string.preset)
                     tab.setIcon(R.drawable._ic_my)
                 }
             }
@@ -313,7 +311,7 @@ class MainActivity : ActivityHelperForFrag() {
                     val useInfo = data.getParcelableExtra<UseInfo>(ProcExceedActivity.RESP_USE_INFO)
                     saveTimeSetForHistory(timeSet, useInfo)
 
-                    showToastMessage("왜 타이머를 초과 기록했는지 기록해보세요!", "이동") {
+                    showToastMessage(getString(R.string.why_exceed_text), getString(R.string.move)) {
                         // 마지막으로 저장된애가 방금 저장된애로 보장되기 때문에 마지막id를불러옴
 
                         compositeDisposable.add(
@@ -332,7 +330,7 @@ class MainActivity : ActivityHelperForFrag() {
                 SAVE_ACTIVITY -> {
                     val timeSetId = data.getLongExtra(SaveActivity.RESP_TIME_SET_ID, 0L)
                     startPreviewActivity(timeSetId)
-                    showToastMessage("타임셋이 저장되었어요! 타임셋을 편집하시려면 '편집' 버튼을 눌러주세요")
+                    showToastMessage(getString(R.string.timeset_save_text))
                 }
                 PREVIEW_ACTIVITY -> {
                     val timeSetId = data.getLongExtra(PreviewActivity.RESP_TIME_SET_ID_FOR_START, 0L)

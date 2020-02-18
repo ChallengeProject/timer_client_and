@@ -40,11 +40,12 @@
                 android:layout_marginRight="12dp"
                 android:src="@drawable/_ic_check" />
 
-            <TextView android:fontFamily="@font/nanum_square_r"
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="23dp"
-                android:text="10초"
+                android:fontFamily="@font/nanum_square_r"
+                android:text="@string/second10"
                 android:textColor="@color/ux_black"
                 android:textSize="12dp" />
 
@@ -75,11 +76,12 @@
                 android:layout_marginRight="12dp"
                 android:src="@drawable/_ic_check" />
 
-            <TextView android:fontFamily="@font/nanum_square_r"
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="23dp"
-                android:text="5초"
+                android:fontFamily="@font/nanum_square_r"
+                android:text="@string/second5"
                 android:textColor="@color/ux_black"
                 android:textSize="12dp" />
 
@@ -110,11 +112,12 @@
                 android:layout_marginRight="12dp"
                 android:src="@drawable/_ic_check" />
 
-            <TextView android:fontFamily="@font/nanum_square_r"
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="23dp"
-                android:text="3초"
+                android:fontFamily="@font/nanum_square_r"
+                android:text="@string/second3"
                 android:textColor="@color/ux_black"
                 android:textSize="12dp" />
 
@@ -145,11 +148,12 @@
                 android:layout_marginRight="12dp"
                 android:src="@drawable/_ic_check" />
 
-            <TextView android:fontFamily="@font/nanum_square_r"
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="23dp"
-                android:text="2초"
+                android:fontFamily="@font/nanum_square_r"
+                android:text="@string/second2"
                 android:textColor="@color/ux_black"
                 android:textSize="12dp" />
 
@@ -180,11 +184,12 @@
                 android:layout_marginRight="12dp"
                 android:src="@drawable/_ic_check" />
 
-            <TextView android:fontFamily="@font/nanum_square_r"
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="23dp"
-                android:text="1초"
+                android:fontFamily="@font/nanum_square_r"
+                android:text="@string/second1"
                 android:textColor="@color/ux_black"
                 android:textSize="12dp" />
 
@@ -215,11 +220,12 @@
                 android:layout_marginRight="12dp"
                 android:src="@drawable/_ic_check" />
 
-            <TextView android:fontFamily="@font/nanum_square_r"
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="23dp"
-                android:text="0초"
+                android:fontFamily="@font/nanum_square_r"
+                android:text="@string/second0"
                 android:textColor="@color/ux_black"
                 android:textSize="12dp" />
 
@@ -236,16 +242,17 @@
 
     </LinearLayout>
 
-    <TextView android:fontFamily="@font/nanum_square_r"
+    <TextView
         android:id="@+id/actCountDownSettingTopText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="20dp"
+        android:fontFamily="@font/nanum_square_r"
         android:textColor="@color/ux_black"
         android:textSize="12dp"
         app:layout_constraintBottom_toBottomOf="@id/actCountDownSettingIncToolbar"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@id/actCountDownSettingIncToolbar"
-        tools:text="최신 버전입니다" />
+        tools:text="@string/recently_version" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

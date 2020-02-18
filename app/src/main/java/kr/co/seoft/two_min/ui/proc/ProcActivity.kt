@@ -99,6 +99,8 @@ class ProcActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_proc)
 
+
+
         updater = ProcViewUpdater(this)
 
         // init properties
@@ -211,7 +213,7 @@ class ProcActivity : AppCompatActivity() {
                     procStatus = ProcStatus.ING
                 }
                 ProcStatus.READY -> {
-                    ToastUtil.showToast(this, "시작 준비 중에는 일시정지할 수 없어요")
+                    ToastUtil.showToast(this, getString(R.string.cant_in_reading))
                 }
             }
             updater.showBottomBtn(procStatus, true)
@@ -225,7 +227,7 @@ class ProcActivity : AppCompatActivity() {
         ivAddMinuteBtn.setOnClickListener {
 
             if (procStatus == ProcStatus.READY) {
-                ToastUtil.showToast(this, "시작 준비 중에는 시간추가를 할 수 없어요")
+                ToastUtil.showToast(this, getString(R.string.cant_in_reading))
                 return@setOnClickListener
             }
 
@@ -265,7 +267,7 @@ class ProcActivity : AppCompatActivity() {
         ivSkipO.setOnClickListener {
 
             if (procStatus == ProcStatus.READY) {
-                ToastUtil.showToast(this, "시작 준비 중에는 일시정지할 수 없어요")
+                ToastUtil.showToast(this, getString(R.string.cant_in_reading))
                 return@setOnClickListener
             }
 

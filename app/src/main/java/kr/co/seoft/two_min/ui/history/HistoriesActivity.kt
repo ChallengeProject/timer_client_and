@@ -152,7 +152,7 @@ class HistoriesActivity : ActivityHelper() {
             setDisplayShowTitleEnabled(true)
             setDisplayHomeAsUpEnabled(true)
             setHomeAsUpIndicator(R.drawable._ic_back)
-            setTitle("히스토리")
+            setTitle(getString(R.string.history))
         }
     }
 

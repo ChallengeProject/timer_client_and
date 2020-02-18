@@ -25,7 +25,7 @@
                 android:layout_marginLeft="60dp"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/nanum_square_r"
-                android:text="2min이 준비한 프리셋으로\n간편하게 시간의 효율을 높여보세요!"
+                android:text="@string/we_ready_text"
                 android:textColor="@color/ux_black" />
 
             <TextView
@@ -35,7 +35,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="80dp"
                 android:fontFamily="@font/nanum_square_r"
-                android:text="2min의 타임셋 픽!"
+                android:text="@string/timeset_pick"
                 android:textColor="@color/ux_black"
                 android:textSize="15dp"
                 android:textStyle="bold"
@@ -286,7 +286,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="50dp"
                 android:fontFamily="@font/nanum_square_eb"
-                android:text="타임 프리셋"
+                android:text="@string/preset"
                 android:textColor="@color/ux_black"
                 android:textSize="15dp"
                 android:visibility="gone" />

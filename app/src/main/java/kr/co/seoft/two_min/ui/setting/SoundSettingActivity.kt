@@ -104,7 +104,7 @@ class SoundSettingActivity : ActivityHelper() {
             setDisplayShowTitleEnabled(true)
             setDisplayHomeAsUpEnabled(true)
             setHomeAsUpIndicator(R.drawable._ic_back)
-            setTitle("기본 사운드 설정")
+            setTitle(getString(R.string.setting_sound))
         }
     }
 

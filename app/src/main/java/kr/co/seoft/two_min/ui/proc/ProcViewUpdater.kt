@@ -9,10 +9,17 @@ import kr.co.seoft.two_min.R
 import kr.co.seoft.two_min.data.Bell
 import kr.co.seoft.two_min.data.Time
 import kr.co.seoft.two_min.util.color
+import kr.co.seoft.two_min.util.en
 
 
 class ProcViewUpdater(val act: Activity) {
 
+    init {
+        if (en()) {
+            act.ivAddMinuteBtn.setImageResource(R.drawable._bt_add_minute_en)
+            act.ivWriteMemoBtn.setImageResource(R.drawable._bt_input_memo_en)
+        }
+    }
 
     private fun setSubtitle(visible: Int, str: String) {
         act.tvSubTitle.apply {
@@ -23,11 +30,15 @@ class ProcViewUpdater(val act: Activity) {
     }
 
     fun setSubtitleRepeatCnt(cnt: Int) {
-        setSubtitle(View.VISIBLE, "${cnt}회 반복")
+        setSubtitle(View.VISIBLE, "${cnt}${act.getString(R.string.ghl_repeat)}")
     }
 
     fun setSubtitleReadyCnt(cnt: Int) {
-        setSubtitle(View.VISIBLE, "시작 ${cnt}초 전")
+        if (en()) {
+            setSubtitle(View.VISIBLE, "${cnt} Seconds")
+        } else {
+            setSubtitle(View.VISIBLE, "시작 ${cnt}초 전")
+        }
         if (cnt == 0) hideSubtitle()
     }
 
@@ -86,7 +97,11 @@ class ProcViewUpdater(val act: Activity) {
         act.clSkipMessage.visibility = View.VISIBLE
         act.ivSkipO.visibility = View.VISIBLE
 
-        act.tvSkipMessage.text = "${pos + 1}번쨰 타이머부터 시작하시겠어요?"
+        if (en()) {
+            act.tvSkipMessage.text = "Strart with the ${pos + 1} timer."
+        } else {
+            act.tvSkipMessage.text = "${pos + 1}번쨰 타이머부터 시작하시겠어요?"
+        }
     }
 
     // call from [ rvHTRV.onTouch listener in this class ] + alpha
@@ -110,11 +125,21 @@ class ProcViewUpdater(val act: Activity) {
     }
 
     fun setSound(bell: Bell) {
-        act.tvSound.text = when (bell.type) {
-            Bell.Type.SLIENT -> "무음"
-            Bell.Type.VIBRATION -> "진동"
-            Bell.Type.DEFAULT -> "기본음"
-            Bell.Type.USER -> "사용자 지정음"
+
+        if (en()) {
+            act.tvSound.text = when (bell.type) {
+                Bell.Type.SLIENT -> "Mute"
+                Bell.Type.VIBRATION -> "Vibration"
+                Bell.Type.DEFAULT -> "Default"
+                Bell.Type.USER -> "사용자 지정음"
+            }
+        } else {
+            act.tvSound.text = when (bell.type) {
+                Bell.Type.SLIENT -> "무음"
+                Bell.Type.VIBRATION -> "진동"
+                Bell.Type.DEFAULT -> "기본음"
+                Bell.Type.USER -> "사용자 지정음"
+            }
         }
     }
 
@@ -132,11 +157,19 @@ class ProcViewUpdater(val act: Activity) {
     }
 
     fun showBottomDialogTimeEndMessage(curCnt: Int, lastCnt: Int) {
-        setBottomDialog("${curCnt}번째 타이머 종료", "$curCnt/$lastCnt")
+        if (en()) {
+            setBottomDialog("End ${curCnt} timer", "$curCnt/$lastCnt")
+        } else {
+            setBottomDialog("${curCnt}번째 타이머 종료", "$curCnt/$lastCnt")
+        }
     }
 
     fun showBottomDialogRepeatEndMessage(repeatCnt: Int) {
-        setBottomDialog("반복 타임셋 종료", "${repeatCnt}회 반복")
+        if (en()) {
+            setBottomDialog("End repeat time set", "${repeatCnt} Repetitions")
+        } else {
+            setBottomDialog("반복 타임셋 종료", "${repeatCnt}회 반복")
+        }
     }
 
     fun hideBottomDialog() {
@@ -151,7 +184,12 @@ class ProcViewUpdater(val act: Activity) {
     }
 
     private fun setCancelAndPauseStatus(isProc: Boolean) {
-        setBottomButtonText(if (isProc) "취소" else "종료", "일시정지")
+
+        if (en()) {
+            setBottomButtonText(if (isProc) "cancel" else "end", "pause")
+        } else {
+            setBottomButtonText(if (isProc) "취소" else "종료", "일시정지")
+        }
 
         act.btBottom2Btn.background = act.getDrawable(R.drawable.bg_bottom_button_gray)
         act.btBottom2Btn.setTextColor(R.color.ux_black.color())
@@ -159,10 +197,15 @@ class ProcViewUpdater(val act: Activity) {
     }
 
     private fun setCancelAndRestartStatus(isProc: Boolean) {
-        setBottomButtonText(if (isProc) "취소" else "종료", "시작")
+        if (en()) {
+            setBottomButtonText(if (isProc) "cancel" else "end", "start")
+        } else {
+            setBottomButtonText(if (isProc) "취소" else "종료", "시작")
+        }
+
         act.btBottom2Btn.background = act.getDrawable(R.drawable.bg_bottom_button_red)
         act.btBottom2Btn.setTextColor(R.color.white.color())
-        setSubtitle(View.VISIBLE, "일시정지")
+        setSubtitle(View.VISIBLE, act.getString(R.string.pause))
     }
 
     fun showBottomBtn(procStatus: ProcStatus, isProc: Boolean) {

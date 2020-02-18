@@ -117,7 +117,7 @@ class EditActivity : ActivityHelperForFrag() {
         SelectorDialog(this, content, btn1Text, btn2Text, btn1Cb, btn2Cb)
     }
 
-    override fun startProc(timeSet: TimeSet, isRepeat:Boolean) {
+    override fun startProc(timeSet: TimeSet, isRepeat: Boolean) {
         // pass
     }
 
@@ -156,7 +156,7 @@ class EditActivity : ActivityHelperForFrag() {
             setDisplayShowTitleEnabled(true)
             setDisplayHomeAsUpEnabled(true)
             setHomeAsUpIndicator(R.drawable._ic_back)
-            setTitle("타임셋 편집")
+            setTitle(getString(R.string.time_set_edit))
         }
     }
 
@@ -165,9 +165,9 @@ class EditActivity : ActivityHelperForFrag() {
         when (item.itemId) {
             R.id.edit_remove -> {
 
-                SelectorDialog(this,"타임셋을 정말 삭제하시겠어요?","취소","삭제",{
+                SelectorDialog(this, getString(R.string.check_remove_time_set), getString(R.string.cancel), getString(R.string.delete), {
                     // empty
-                },{
+                }, {
                     compositeDisposable.add(Single.fromCallable {
                         db.timeSetDao().deleteTimeSet(curTimeSet)
                     }
@@ -175,7 +175,7 @@ class EditActivity : ActivityHelperForFrag() {
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe({
                             finish()
-                        },{
+                        }, {
                             it.printStackTrace()
                         }))
                 })

@@ -93,7 +93,7 @@ class CountDownSettingActivity : ActivityHelper() {
             setDisplayShowTitleEnabled(true)
             setDisplayHomeAsUpEnabled(true)
             setHomeAsUpIndicator(R.drawable._ic_back)
-            setTitle("카운트다운")
+            setTitle(getString(R.string.count_down))
         }
     }
 

@@ -15,6 +15,13 @@ interface ApiService{
     fun getBasicPreset() : Single<List<ApiTimeSet>>
 
 
+    @GET("develop/v1/timeset/preset/hot/en.json")
+    fun getHotPresetEn() : Single<List<ApiTimeSet>>
+
+    @GET("develop/v1/timeset/preset/list/en.json")
+    fun getBasicPresetEn() : Single<List<ApiTimeSet>>
+
+
 
     companion object {
         fun create(): ApiService {

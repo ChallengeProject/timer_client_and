@@ -150,7 +150,7 @@ class MyTimeSetFragment : Fragment() {
             if (index >= 3) return@forEachIndexed
             clHot[index].visibility = View.VISIBLE
             tvHotWholeTime[index].text = timeSet.wholeTime.x1000L().toTimeStr()
-            tvHotEndTime[index].text = "종료 예정 ${timeSet.wholeTime.toEndTimeStrAfterSec()}"
+            tvHotEndTime[index].text = "${getString(R.string.scheduled_to_end)} ${timeSet.wholeTime.toEndTimeStrAfterSec()}"
             tvHotTitle[index].text = timeSet.title
             tvHotTimeCount[index].text = timeSet.times.size.toString()
 

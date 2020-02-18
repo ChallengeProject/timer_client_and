@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">2min</string>
+    <string name="eng">o</string>
+    <string name="home">Home</string>
+    <string name="time_set_edit">Edit</string>
+    <string name="minute_only_kor"> </string>
+    <string name="ghl_only_kor"> </string>
+    <string name="none">none</string>
+    <string name="init">Init</string>
+    <string name="untitle">Untitle</string>
+    <string name="check_remove_time_set">Do you want to delete your timeset?</string>
+    <string name="delete">Delete</string>
+    <string name="history">History</string>
+    <string name="exceed_record">Overtime</string>
+    <string name="canc">canc</string>
+    <string name="cancel">Cancel</string>
+    <string name="scheduled_to_end">End at</string>
+    <string name="move">move</string>
+    <string name="timeset_cancel_text">You canceled the timeset. Check out the results!</string>
+    <string name="my">My</string>
+    <string name="preset">Preset</string>
+    <string name="why_exceed_text">Record why you exceeded the timer!</string>
+    <string name="timeset_save_text">Timeset has been saved! Press the Edit button to edit the timeset</string>
+    <string name="cant_in_reading">Can`t do it while Ready</string>
+    <string name="ghl_repeat">Repetitions</string>
+    <string name="slient">Mute</string>
+    <string name="defaultt">Default</string>
+    <string name="vibration">Vibration</string>
+    <string name="pause">pause</string>
+    <string name="save_timeset">Save time set</string>
+    <string name="count_down">CountDown</string>
+    <string name="notice_name">Notice name</string>
+    <string name="notice">Notice</string>
+    <string name="current">current</string>
+    <string name="seconds">sec</string>
+    <string name="setting">Setting</string>
+    <string name="setting_sound">Setting sound</string>
+    <string name="copy_to_clipboard">Copy to clipboard</string>
+    <string name="team_info">Team info</string>
+    <string name="recently_version">Recently version</string>
+    <string name="second10">10 second</string>
+    <string name="second5">5 second</string>
+    <string name="second3">3 second</string>
+    <string name="second2">2 second</string>
+    <string name="second1">1 second</string>
+    <string name="second0">0 second</string>
+    <string name="complete">Complete</string>
+    <string name="history_text">No timeset history yet.\nFeel free to register your time!</string>
+    <string name="create_timeset">Create time set</string>
+
+    <string name="timeset_time">Timeset time</string>
+    <string name="use_date"> Date of use</string>
+    <string name="exceed_time">Time added</string>
+    <string name="repeat_num">Repetitions</string>
+    <string name="info">Additional Information</string>
+    <string name="can_save_memo_text">Can leave notes now</string>
+    <string name="exceed_text_text">Exceed number of characters that can be written</string>
+    <string name="save">Save</string>
+    <string name="start">Start</string>
+    <string name="manage_save_timeset">Manage saved timeset</string>
+    <string name="timeset_order_text">Set the timeset order to your liking</string>
+    <string name="deleted_timeset">Deleted timeset</string>
+
+    <string name="dont_have_notice">There is no registered notice</string>
+    <string name="sound">sound</string>
+    <string name="comment">comment</string>
+    <string name="edit">Edit</string>
+    <string name="input_memo">Input memo</string>
+    <string name="input_memo_text">Input memo.</string>
+    <string name="end_time_set">end timeset</string>
+    <string name="restart">restart</string>
+    <string name="team_info_text">Hello.\n Thank you for using 2min.\n\n See you in the future for more advanced apps.</string>
+    <string name="copy">copy</string>
+    <string name="hour">hour</string>
+    <string name="minute">min</string>
+    <string name="comment_input_text">Can enter a comment</string>
+    <string name="apply_all">Apply all</string>
+    <string name="jaju_timeset_text">Collect your favorite timesets,\nIt will help you manage your time :)</string>
+    <string name="manage">manage</string>
+    <string name="add_timeset_text">Add a timeset!</string>
+    <string name="view_all_time">Check all time</string>
+    <string name="recently_timeset">Recemtly timeset</string>
+    <string name="we_ready_text">Easily boost your time with presets\n prepared by 2min!</string>
+    <string name="timeset_pick">2min Timeset Pick</string>
+    <string name="opensource_license">OpenSource Lisense</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</resources>

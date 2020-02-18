@@ -1,4 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">2min</string>
-    <string name="apply_whole"><u>전체적용</u></string>
+    <string name="eng">x</string>
+    <string name="home">홈</string>
+    <string name="time_set_edit">타임셋 편집</string>
+    <string name="minute_only_kor">분</string>
+    <string name="ghl_only_kor">회</string>
+    <string name="none">없음</string>
+    <string name="init">초기화</string>
+    <string name="untitle">무제 타임셋</string>
+    <string name="check_remove_time_set">타임셋을 정말 삭제하시겠어요?</string>
+    <string name="delete">삭제</string>
+    <string name="history">히스토리</string>
+    <string name="exceed_record">초과 기록</string>
+    <string name="canc">취소</string>
+    <string name="cancel">취소</string>
+    <string name="scheduled_to_end">종료예정</string>
+    <string name="move">이동</string>
+    <string name="timeset_cancel_text">타임셋을 취소하셨어요. 결과를 확인해보세요!</string>
+    <string name="my">마이</string>
+    <string name="preset">프리셋</string>
+    <string name="why_exceed_text">왜 타이머를 초과 기록했는지 기록해보세요!</string>
+    <string name="timeset_save_text">타임셋이 저장되었어요! 타임셋을 편집하시려면 편집 버튼을 눌러주세요</string>
+    <string name="cant_in_reading">시작 준비 중에는 할 수 없어요</string>
+    <string name="ghl_repeat">회 반복</string>
+    <string name="slient">무음</string>
+    <string name="defaultt">기본음</string>
+    <string name="vibration">진동</string>
+    <string name="pause">일시정지</string>
+    <string name="save_timeset">타임셋 저장</string>
+    <string name="count_down">카운트다운</string>
+    <string name="notice_name">공지사항 명</string>
+    <string name="notice">공지사항</string>
+    <string name="current">현재</string>
+    <string name="seconds">초</string>
+    <string name="setting">설정</string>
+    <string name="setting_sound">기본 사운드 설정</string>
+    <string name="copy_to_clipboard">클립보드에 복사되었어요</string>
+    <string name="team_info">제작 팀 정보</string>
+    <string name="recently_version">최신 버전입니다</string>
+    <string name="second10">10초</string>
+    <string name="second5">5초</string>
+    <string name="second3">3초</string>
+    <string name="second2">2초</string>
+    <string name="second1">1초</string>
+    <string name="second0">0초</string>
+    <string name="complete">완료</string>
+    <string name="history_text">타임셋 히스토리가 아직 없어요.\n나만의 시간을 자유롭게 등록해 보세요!</string>
+    <string name="create_timeset">타임셋 만들어 보기</string>
+
+    <string name="timeset_time">타임셋 시간</string>
+    <string name="use_date">사용 일시</string>
+    <string name="exceed_time">추가한 시간</string>
+    <string name="repeat_num">반복 횟수</string>
+    <string name="info">부가 정보</string>
+    <string name="can_save_memo_text">지금도 메모를 남길 수 있어요</string>
+    <string name="exceed_text_text">작성 가능한 글자 수가 초과됐어요</string>
+    <string name="save">저장</string>
+    <string name="start">시작</string>
+    <string name="manage_save_timeset">저장한 타임셋 관리</string>
+    <string name="timeset_order_text">원하는대로 타임셋 순서를 설정해서\n보다 편하게 사용해보세요</string>
+    <string name="deleted_timeset">삭제된 타임셋</string>
+    <string name="dont_have_notice">등록된 공지사항이 없어요</string>
+    <string name="sound">사운드</string>
+    <string name="comment">코멘트</string>
+    <string name="edit">편집</string>
+    <string name="input_memo">메모 입력</string>
+    <string name="input_memo_text">메모를 입력하세요.</string>
+    <string name="end_time_set">타임셋 종료</string>
+    <string name="restart">재시작</string>
+    <string name="team_info_text">안녕하세요.\n2min 을 사용해주셔서 감사드립니다.\n\n앞으로 더욱 발전된 앱으로 찾아뵙겠습니다.</string>
+    <string name="copy">복사</string>
+    <string name="hour">시</string>
+    <string name="minute">분</string>
+    <string name="comment_input_text">코멘트를 입력하실 수 있어요</string>
+    <string name="apply_all">전체적용</string>
+    <string name="jaju_timeset_text">주로 쓰는 타임셋을 모아보세요,\n시간을 관리하는 데 도움이 될 거에요 :)</string>
+    <string name="manage">관리</string>
+    <string name="add_timeset_text">타임셋을 추가해보세요!</string>
+    <string name="view_all_time">저장한 시간 모두보기</string>
+    <string name="recently_timeset">최근 이용 타임셋</string>
+    <string name="we_ready_text">2min이 준비한 프리셋으로\n간편하게 시간의 효율을 높여보세요!</string>
+    <string name="timeset_pick">2min의 타임셋 픽!</string>
+    <string name="opensource_license">오픈소스 라이센스</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    getString(R.string.ssssssssss)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </resources>

@@ -128,12 +128,22 @@ class HomeFragment : Fragment() {
         }
 
         fragHomeTvCancel.setOnClickListener {
-            act.showSelectorDialog("설정한 테임셋이 초기화돼요. 정말 초기화 하시겠어요?", "취소", "초기화",
-                {
-                    // none
-                }, {
-                    resetAll(true)
-                })
+            if(en()){
+                act.showSelectorDialog("설정한 타임셋이 초기화돼요. 정말 초기화 하시겠어요?", "취소", "초기화",
+                    {
+                        // none
+                    }, {
+                        resetAll(true)
+                    })
+            } else {
+                act.showSelectorDialog("The timeset you set is initialized. Do you really want to reset?", getString(R.string.cancel), getString(R.string.init),
+                    {
+                        // none
+                    }, {
+                        resetAll(true)
+                    })
+
+            }
         }
 
         fragHomeIvBack.setOnClickListener {
@@ -235,7 +245,11 @@ class HomeFragment : Fragment() {
         fragHomeTvSetWhole.setOnClickListener {
             val bellType = fragHomeRv.setCurPosBellTypeToWhole()
             act.showToastMessage(
-                "모든 타이머의 사운드가 ${bellType.bellTypeToString()}으로 지정됐어요!"
+                if(en()){
+                    "All timer sounds are ${bellType.bellTypeToString()}!"
+                } else {
+                    "모든 타이머의 사운드가 ${bellType.bellTypeToString()}으로 지정됐어요!"
+                }
             )
         }
 
@@ -280,7 +294,7 @@ class HomeFragment : Fragment() {
     fun requestProc() {
 
         val timeSet = TimeSet(
-            title = "무제 타임셋",
+            title = "${getString(R.string.untitle)}",
             times = fragHomeRv.getBadges()
                 .asSequence()
                 .filter { it.type == HomeBadgeType.NORMAL || it.type == HomeBadgeType.FOCUS }
@@ -297,7 +311,7 @@ class HomeFragment : Fragment() {
 
         val timeSet = TimeSet(
 
-            title = "무제 타임셋",
+            title = "${getString(R.string.untitle)}",
             times = fragHomeRv.getBadges()
                 .asSequence()
                 .filter { (it.type == HomeBadgeType.NORMAL || it.type == HomeBadgeType.FOCUS) && it.time.seconds != 0 }

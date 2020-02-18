@@ -45,7 +45,7 @@
             android:layout_gravity="center"
             android:fontFamily="@font/nanum_square_r"
             android:gravity="center"
-            android:text="타임셋 히스토리가 아직 없어요.\n나만의 시간을 자유롭게 등록해 보세요!"
+            android:text="@string/history_text"
             android:textColor="@color/black"
             android:textSize="18dp" />
 
@@ -60,7 +60,7 @@
             android:layout_gravity="center"
             android:fontFamily="@font/nanum_square_r"
             android:gravity="center"
-            android:text="타임셋 만들어 보기"
+            android:text="@string/create_timeset"
             android:textColor="@color/ux_pink"
             android:textSize="18dp" />
     </LinearLayout>

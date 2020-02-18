@@ -7,6 +7,7 @@ import android.app.NotificationManager
 import android.content.Context
 import android.graphics.Color
 import android.os.Build
+import kr.co.seoft.two_min.R
 
 class App : Application() {
 
@@ -37,4 +38,8 @@ class App : Application() {
         }
 
     }
+}
+
+fun en():Boolean{
+    return App.get.getString(R.string.eng) == "o"
 }

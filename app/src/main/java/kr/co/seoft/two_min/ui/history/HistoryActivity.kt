@@ -77,7 +77,7 @@ class HistoryActivity : ActivityHelper() {
                 .subscribe({
                     setHistoryView(it)
                     loadTimeSet(it.timeSetId)
-                    historyTitle = if (it.timeSetTitle.isEmpty()) "무제 타임셋" else it.timeSetTitle
+                    historyTitle = if (it.timeSetTitle.isEmpty()) getString(R.string.untitle) else it.timeSetTitle
                     initToolbar()
                 }, {
                     it.printStackTrace()
@@ -101,27 +101,43 @@ class HistoryActivity : ActivityHelper() {
 
     fun setHistoryView(history: History) {
 
-        actHistoryTvAddTime.text = "+${history.addMinute}분"
+        actHistoryTvAddTime.text = "+${history.addMinute}${getString(R.string.minute_only_kor)}"
         actHistoryTvUseBoundary.text = "${history.ymdString} / ${history.startTimeString} - ${history.endTimeString}"
-        actHistoryTvRepeatCount.text = "${history.repeatCount}회"
+        actHistoryTvRepeatCount.text = "${history.repeatCount}${getString(R.string.ghl_only_kor)}"
         actHistoryTvTimeSetTime.text = history.wholeTime.toFormattingString()
 
         var etcString = ""
 
-        if (history.pauseCount != 0) etcString += "일시정지 ${history.pauseCount}회,"
-        if (history.changeCount != 0) etcString += "진행 중 타이머 변경 ${history.changeCount}회"
+        if (history.pauseCount != 0) etcString += if (en()) {
+            "${history.pauseCount} Pause,"
+        } else {
+            "일시정지 ${history.pauseCount}회,"
+        }
 
-        actHistoryTvEtcInfo.text = if (etcString.isEmpty()) "없음" else etcString
+
+
+        if (history.changeCount != 0) etcString += if (en()) {
+            "${history.changeCount} Change"
+        } else {
+            "진행 중 타이머 변경 ${history.changeCount}회"
+        }
+
+        actHistoryTvEtcInfo.text = if (etcString.isEmpty()) "${getString(R.string.none)}" else etcString
 
         if (history.cancelInfo.isNotEmpty()) {
             actHistoryClBubbleLayout.visibility = View.VISIBLE
-            actHistoryTvBubbleMessage.text = "${history.cancelInfo.split("#")[0]}번째 타이머에서" +
-                    "\n${history.cancelInfo.split("#")[1]} 남기고 취소"
+            actHistoryTvBubbleMessage.text = if (en()) {
+                "Cancel with ${history.cancelInfo.split("#")[1]}\n" +
+                        "on ${history.cancelInfo.split("#")[0]} timer"
+            } else {
+                "${history.cancelInfo.split("#")[0]}번째 타이머에서" +
+                        "\n${history.cancelInfo.split("#")[1]} 남기고 취소"
+            }
         }
 
         if (history.exceedSecond != 0) {
 
-            var exceedString = "${history.exceedSecond.toFormattingString()}\n초과 기록"
+            var exceedString = "${history.exceedSecond.toFormattingString()}\n${getString(R.string.exceed_record)}"
 
             val ssb = SpannableStringBuilder(exceedString)
             ssb.setSpan(
