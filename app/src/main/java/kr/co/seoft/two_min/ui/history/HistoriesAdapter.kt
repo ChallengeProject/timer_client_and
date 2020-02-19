@@ -71,11 +71,16 @@ class HistoriesAdapter(val cb: (Pair<History,Type>) -> Unit) :
                             duration = 300
                         }
                     }
-
                     return true
                 }
 
                 override fun onScroll(p0: MotionEvent?, p1: MotionEvent?, p2: Float, p3: Float): Boolean {
+                    if (p2 > 0) {
+                        clDelete.visibility = View.VISIBLE
+                        clDelete.animation = AlphaAnimation(0f, 1f).apply {
+                            duration = 300
+                        }
+                    }
                     return true
                 }
 
