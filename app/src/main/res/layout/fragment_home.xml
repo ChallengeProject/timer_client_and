@@ -1,125 +1,466 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:gravity="center_horizontal"
-        android:orientation="vertical">
-
-    <TextView
-            android:id="@+id/preview"
-            android:layout_width="200dp"
-            android:layout_height="40dp"
-            android:background="#c8c8c8"
-            android:gravity="center"
-            android:text="59"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
-
-    <ImageButton
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginEnd="10dp"
-            android:background="@android:color/black"
-            app:layout_constraintBottom_toBottomOf="@id/preview"
-            app:layout_constraintRight_toRightOf="@id/preview"
-            app:layout_constraintTop_toTopOf="@id/preview"/>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/ux_gray"
+    android:orientation="vertical">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/previewInfo"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/preview">
-
-        <ImageButton
-                android:id="@+id/repeatBtn"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:background="@android:color/black"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+        android:id="@+id/fragHomeClTopTime"
+        android:layout_width="215dp"
+        android:layout_height="50dp"
+        android:background="@drawable/bg_home_top_text"
+        app:layout_constraintBottom_toTopOf="@id/fragHomeTvSub"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-                android:id="@+id/input"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#969696"
-                android:textSize="12dp"
-                android:visibility="gone"
-                app:layout_constraintLeft_toLeftOf="@id/repeatBtn"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="59"/>
-
-        <TextView
-                android:id="@+id/total"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingEnd="5dp"
-                android:text="전체"
-                android:textColor="#969696"
-                android:textSize="12dp"
-                app:layout_constraintLeft_toRightOf="@id/previewInfoGuideline"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="전체"/>
-
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="000:00:59"
-                android:textColor="#969696"
-                android:textSize="12dp"
-                app:layout_constraintLeft_toRightOf="@id/total"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="000:00:59"/>
-
-        <TextView
-                android:id="@+id/endTime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:paddingEnd="5dp"
-                android:text="종료"
-                android:textColor="#969696"
-                android:textSize="12dp"
-                app:layout_constraintLeft_toRightOf="@id/previewInfoGuideline"
-                app:layout_constraintTop_toBottomOf="@id/total"
-                tools:text="종료"/>
-
-        <TextView
-                android:id="@+id/time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="9:52 AM"
-                android:textColor="#969696"
-                android:textSize="12dp"
-                app:layout_constraintLeft_toRightOf="@id/endTime"
-                app:layout_constraintTop_toBottomOf="@id/total"
-                tools:text="9:52 AM"/>
-
-        <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/previewInfoGuideline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_begin="55dp"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <LinearLayout
-            android:id="@+id/container"
+            android:id="@+id/fragHomeTvMain"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:fontFamily="@font/nanum_square_eb"
+            android:text="00:00:00"
+            android:textColor="@color/ux_black"
+            android:textSize="24dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/previewInfo"/>
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/fragHomeIvMainClear"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/_ic_close_small"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/fragHomeTvSub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/nanum_square_r"
+        android:textColor="@color/ux_black"
+        app:layout_constraintBottom_toTopOf="@id/fragHomeLlNumberPad"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragHomeClTopTime"
+        tools:text="타임셋 시간 00:00:59       종료 예정 9:42 AM" />
+
+    <LinearLayout
+        android:id="@+id/fragHomeLlNumberPad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragHomeTvSub">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/fragHomeTv1"
+                style="@style/MainNumberPad"
+                android:fontFamily="@font/nanum_square_r"
+                android:text="1" />
+
+            <Space style="@style/MainNumberPadSpaceWidth" />
+
+            <TextView
+                android:id="@+id/fragHomeTv2"
+                style="@style/MainNumberPad"
+                android:fontFamily="@font/nanum_square_r"
+                android:text="2" />
+
+            <Space style="@style/MainNumberPadSpaceWidth" />
+
+            <TextView
+                android:id="@+id/fragHomeTv3"
+                style="@style/MainNumberPad"
+                android:fontFamily="@font/nanum_square_r"
+                android:text="3" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/fragHomeTv4"
+                style="@style/MainNumberPad"
+                android:fontFamily="@font/nanum_square_r"
+                android:text="4" />
+
+            <Space style="@style/MainNumberPadSpaceWidth" />
+
+            <TextView
+                android:id="@+id/fragHomeTv5"
+                style="@style/MainNumberPad"
+                android:fontFamily="@font/nanum_square_r"
+                android:text="5" />
+
+            <Space style="@style/MainNumberPadSpaceWidth" />
+
+            <TextView
+                android:id="@+id/fragHomeTv6"
+                style="@style/MainNumberPad"
+                android:fontFamily="@font/nanum_square_r"
+                android:text="6" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/fragHomeTv7"
+                style="@style/MainNumberPad"
+                android:fontFamily="@font/nanum_square_r"
+                android:text="7" />
+
+            <Space style="@style/MainNumberPadSpaceWidth" />
+
+            <TextView
+                android:id="@+id/fragHomeTv8"
+                style="@style/MainNumberPad"
+                android:text="8" />
+
+            <Space style="@style/MainNumberPadSpaceWidth" />
+
+            <TextView
+                android:id="@+id/fragHomeTv9"
+                style="@style/MainNumberPad"
+                android:text="9" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/fragHomeTvCancel"
+                style="@style/MainNumberPad"
+                android:text="@string/canc" />
+
+            <Space style="@style/MainNumberPadSpaceWidth" />
+
+            <TextView
+                android:id="@+id/fragHomeTv0"
+                style="@style/MainNumberPad"
+                android:text="0" />
+
+            <Space style="@style/MainNumberPadSpaceWidth" />
+
+            <ImageView
+                android:id="@+id/fragHomeIvBack"
+                style="@style/MainNumberPad"
+                android:src="@drawable/_ic_keypad_delete"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="65dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/fragHomeTvHour"
+                style="@style/MainNumberPad"
+                android:fontFamily="@font/nanum_square_eb"
+                android:text="@string/hour"
+                android:textStyle="bold" />
+
+            <Space style="@style/MainNumberPadSpaceWidth" />
+
+            <TextView
+                android:id="@+id/fragHomeTvMinute"
+                style="@style/MainNumberPad"
+                android:fontFamily="@font/nanum_square_eb"
+                android:text="@string/minute"
+                android:textStyle="bold" />
+
+            <Space style="@style/MainNumberPadSpaceWidth" />
+
+            <TextView
+                android:id="@+id/fragHomeTvSecond"
+                style="@style/MainNumberPad"
+                android:fontFamily="@font/nanum_square_eb"
+                android:text="@string/seconds"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <kr.co.seoft.two_min.ui.main.home.MiddleTransformSnappyRecyclerView
+        android:id="@+id/fragHomeRv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragHomeLlNumberPad" />
+
+    <View
+        android:id="@+id/fragHomeViewTransparent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#CCFFFFFF"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/fragHomeLlTimeInfo"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:background="#16DBFFE6"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@id/fragHomeRv"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:visibility="visible">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/_bubble_detail"
+                android:orientation="vertical"
+                android:padding="2dp">
+
+
+                <EditText
+                    android:id="@+id/fragHomeEtContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@null"
+                    android:fontFamily="@font/nanum_square_r"
+                    android:gravity="top"
+                    android:hint="@string/comment_input_text"
+                    android:lines="9"
+                    android:textColor="@color/ux_black"
+                    android:textColorHint="@color/text_hint_gray"
+                    android:textSize="15dp"
+                    app:layout_constraintLeft_toLeftOf="@id/tvTimesetEndText"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvDateInfo" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginRight="12dp"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="right"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/fragHomeTvContentLength"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nanum_square_r"
+                        android:gravity="right"
+                        android:textColor="@color/ux_black"
+                        android:textSize="12dp"
+
+                        tools:text="15" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nanum_square_r"
+                        android:gravity="right"
+                        android:text="/100 bytes"
+                        android:textColor="@color/ux_black"
+                        android:textSize="12dp" />
+
+                </LinearLayout>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@color/ux_gray" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="15dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:src="@drawable/_ic_bell" />
+
+                    <TextView
+                        android:id="@+id/fragHomeTvSilent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:fontFamily="@font/nanum_square_r"
+                        android:gravity="center"
+                        android:text="@string/slient"
+                        android:textColor="@color/ux_black"
+                        android:textSize="15dp" />
+
+                    <TextView
+                        android:id="@+id/fragHomeTvVibrate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:fontFamily="@font/nanum_square_r"
+                        android:gravity="center"
+                        android:text="@string/vibration"
+                        android:textColor="@color/ux_black"
+                        android:textSize="15dp" />
+
+                    <TextView
+                        android:id="@+id/fragHomeTvBasicBell"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:fontFamily="@font/nanum_square_r"
+                        android:text="@string/defaultt"
+                        android:textColor="@color/ux_black"
+                        android:textSize="15dp" />
+
+
+                    <TextView
+                        android:id="@+id/fragHomeTvSetWhole"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="10dp"
+                        android:gravity="right|center_vertical"
+                        android:text="@string/apply_all"
+                        android:textColor="@color/ux_black"
+                        android:textSize="15dp"
+                        android:textStyle="" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@color/ux_gray" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="15dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:padding="12dp"
+                        android:src="@drawable/_ic_clock" />
+
+                    <TextView
+                        android:id="@+id/fragHomeTvTimerPosition"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:gravity="center"
+                        android:text=""
+                        android:textColor="@color/ux_black"
+                        android:textSize="15dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="right"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/fragHomeIvTimeSetDelete"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:background="?android:attr/selectableItemBackgroundBorderless"
+                            android:gravity="right|center_vertical"
+                            android:padding="6dp"
+                            android:src="@drawable/_ic_trash_24"
+                            android:textColor="@color/ux_black"
+                            android:textSize="15dp"
+                            android:textStyle="" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+
+        <include
+            android:id="@+id/fragHomeIncSelectedHomeBadge"
+            layout="@layout/item_home_badge"
+            app:layout_constraintBottom_toBottomOf="@id/fragHomeRv"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/fragHomeRv" />
+
+    </LinearLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

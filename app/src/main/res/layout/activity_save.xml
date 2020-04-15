@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.save.SaveActivity">
+
+    <include
+        android:id="@+id/actSaveIncToolbar"
+        layout="@layout/include_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+
+        android:id="@+id/actSaveClContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/actSaveIncToolbar"
+
+        >
+
+        <EditText
+            android:fontFamily="@font/nanum_square_r"       android:id="@+id/actSaveEtTitle"
+            android:lines="1"
+            android:hint="@string/untitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:textColor="@color/ux_black"
+            android:textSize="24dp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="내 타임셋" />
+
+
+        <ImageView
+            android:id="@+id/actSaveIvClose"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginEnd="10dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/_ic_close_small"
+            app:layout_constraintBottom_toBottomOf="@id/actSaveEtTitle"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/actSaveEtTitle" />
+
+        <View
+            android:id="@+id/actSaveViewLine"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="13dp"
+            android:background="@color/ux_pink"
+            app:layout_constraintTop_toBottomOf="@id/actSaveEtTitle" />
+
+        <TextView android:fontFamily="@font/nanum_square_r"
+            android:id="@+id/actSaveTvTimeSetTimeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
+            android:text="@string/timeset_time"
+            android:textColor="@color/ux_dark_gray"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/actSaveViewLine" />
+
+        <TextView android:fontFamily="@font/nanum_square_r"
+            android:id="@+id/actSaveTvExpectEndText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
+            android:text="@string/scheduled_to_end"
+            android:textColor="@color/ux_dark_gray"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/actSaveTvTimeSetTimeText" />
+
+        <TextView android:fontFamily="@font/nanum_square_r"
+            android:id="@+id/actSaveTvSoundText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
+            android:text="@string/sound"
+            android:textColor="@color/ux_dark_gray"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/actSaveTvExpectEndText" />
+
+        <TextView android:fontFamily="@font/nanum_square_r"
+            android:id="@+id/actSaveTvCommnetText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
+            android:text="@string/comment"
+            android:textColor="@color/ux_dark_gray"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/actSaveTvSoundText" />
+
+
+        <TextView android:fontFamily="@font/nanum_square_r"
+            android:id="@+id/actSaveTvTimeSetTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:textColor="@color/ux_dark_gray"
+            android:textSize="15dp"
+            app:layout_constraintLeft_toRightOf="@id/actSaveTvTimeSetTimeText"
+            app:layout_constraintTop_toTopOf="@id/actSaveTvTimeSetTimeText"
+            tools:text="00:01:00" />
+
+
+        <TextView android:fontFamily="@font/nanum_square_r"
+            android:id="@+id/actSaveTvExpectEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
+            android:textColor="@color/ux_dark_gray"
+            android:textSize="15dp"
+            app:layout_constraintLeft_toLeftOf="@id/actSaveTvTimeSetTime"
+            app:layout_constraintTop_toBottomOf="@id/actSaveTvTimeSetTime"
+            tools:text="9:42 AM" />
+
+        <TextView android:fontFamily="@font/nanum_square_r"
+            android:id="@+id/actSaveTvSound"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
+            android:textColor="@color/ux_dark_gray"
+            android:textSize="15dp"
+            app:layout_constraintLeft_toLeftOf="@id/actSaveTvExpectEnd"
+            app:layout_constraintTop_toBottomOf="@id/actSaveTvExpectEnd"
+            tools:text="해당 타이머 사운드 노출" />
+
+        <TextView android:fontFamily="@font/nanum_square_r"
+            android:id="@+id/actSaveTvComment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
+            android:lines="3"
+            android:scrollbars="vertical"
+            android:textColor="@color/ux_dark_gray"
+            android:textSize="15dp"
+            app:layout_constraintLeft_toLeftOf="@id/actSaveTvSound"
+            app:layout_constraintTop_toBottomOf="@id/actSaveTvSound"
+            tools:text="해당 타이머 코맨트 노출\n3줄까지..." />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <kr.co.seoft.two_min.ui.proc.LeftSideSnappyHorizontalListView
+        android:id="@+id/actSaveLsshlv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/actSaveClContent" />
+
+
+    <LinearLayout
+        android:id="@+id/actSaveLlBottomButtons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/ux_gray"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <TextView android:fontFamily="@font/nanum_square_r"
+            android:id="@+id/actSaveBtBottom1Btn"
+            android:layout_width="100dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginEnd="19dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_bottom_button_gray"
+            android:gravity="center"
+            android:scaleType="fitXY"
+            android:text="@string/cancel"
+            android:textColor="@color/ux_pink"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+
+        <TextView android:fontFamily="@font/nanum_square_r"
+            android:id="@+id/actSaveBtBottom2Btn"
+            android:layout_width="100dp"
+            android:layout_height="45dp"
+            android:layout_marginEnd="18dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_bottom_button_red"
+            android:gravity="center"
+            android:scaleType="fitXY"
+            android:text="@string/complete"
+            android:textColor="@color/white"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

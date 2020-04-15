@@ -1,0 +1,504 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.proc.ProcActivity">
+
+    <ImageView
+        android:id="@+id/ivRepeatBtn"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="15dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/_bt_repeat"
+        app:layout_constraintLeft_toRightOf="@id/ivWriteMemoBtn"
+        app:layout_constraintRight_toLeftOf="@id/ivAddMinuteBtn"
+        app:layout_constraintTop_toTopOf="@id/ivWriteMemoBtn" />
+
+    <ImageView
+        android:id="@+id/ivAddMinuteBtn"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="15dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/_bt_add_minute"
+        app:layout_constraintLeft_toRightOf="@id/ivRepeatBtn"
+        app:layout_constraintRight_toLeftOf="@id/tvAddCount"
+        app:layout_constraintTop_toTopOf="@id/ivWriteMemoBtn" />
+
+    <TextView
+        android:id="@+id/tvAddCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:fontFamily="@font/nanum_square_r"
+        android:text=""
+        android:textColor="@color/ux_black"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toBottomOf="@id/ivAddMinuteBtn"
+        app:layout_constraintLeft_toRightOf="@id/ivAddMinuteBtn"
+        app:layout_constraintTop_toTopOf="@id/ivAddMinuteBtn"
+        tools:text="x 3" />
+
+    <TextView
+        android:id="@+id/tvTimesetTimeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="65dp"
+        android:fontFamily="@font/nanum_square_r"
+        android:text="@string/timeset_time"
+        android:textColor="@color/ux_dark_gray"
+        android:textSize="12dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/tvEndTimeText"
+        app:layout_constraintStart_toStartOf="@+id/tvTitle"
+        app:layout_constraintTop_toBottomOf="@+id/ivWriteMemoBtn" />
+
+    <TextView
+        android:id="@+id/tvTimesetTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:fontFamily="@font/nanum_square_r"
+        android:textColor="@color/ux_dark_gray"
+        android:textSize="12dp"
+        app:layout_constraintLeft_toRightOf="@id/tvTimesetTimeText"
+        app:layout_constraintTop_toTopOf="@id/tvTimesetTimeText"
+        tools:text="00:01:00" />
+
+    <TextView
+        android:id="@+id/tvEndTimeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/nanum_square_r"
+        android:text="@string/scheduled_to_end"
+        android:textColor="@color/ux_dark_gray"
+        android:textSize="12dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/tvSoundText"
+        app:layout_constraintStart_toStartOf="@+id/tvTitle"
+        app:layout_constraintTop_toBottomOf="@+id/tvTimesetTimeText" />
+
+    <TextView
+        android:id="@+id/tvEndTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/nanum_square_r"
+        android:textColor="@color/ux_dark_gray"
+        android:textSize="12dp"
+        app:layout_constraintLeft_toRightOf="@id/tvEndTimeText"
+        app:layout_constraintStart_toStartOf="@+id/tvTimesetTime"
+        app:layout_constraintTop_toTopOf="@id/tvEndTimeText"
+        tools:text="9:42 AM" />
+
+    <TextView
+        android:id="@+id/tvSoundText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/nanum_square_r"
+        android:text="@string/sound"
+        android:textColor="@color/ux_dark_gray"
+        android:textSize="12dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/tvCommentText"
+        app:layout_constraintStart_toStartOf="@+id/tvTitle"
+        app:layout_constraintTop_toBottomOf="@+id/tvEndTimeText" />
+
+    <TextView
+        android:id="@+id/tvSound"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/nanum_square_r"
+        android:textColor="@color/ux_dark_gray"
+        android:textSize="12dp"
+        app:layout_constraintLeft_toRightOf="@id/tvSoundText"
+        app:layout_constraintStart_toStartOf="@+id/tvTimesetTime"
+        app:layout_constraintTop_toTopOf="@id/tvSoundText"
+        tools:text="해당 타이머 사운드 노출" />
+
+    <TextView
+        android:id="@+id/tvCommentText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/nanum_square_r"
+        android:text="@string/comment"
+        android:textColor="@color/ux_dark_gray"
+        android:textSize="12dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/tvTitle"
+        app:layout_constraintTop_toBottomOf="@+id/tvSound" />
+
+    <TextView
+        android:id="@+id/tvComment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/nanum_square_r"
+        android:textColor="@color/ux_dark_gray"
+        android:textSize="12dp"
+        app:layout_constraintLeft_toRightOf="@id/tvCommentText"
+        app:layout_constraintStart_toStartOf="@+id/tvTimesetTime"
+        app:layout_constraintTop_toTopOf="@id/tvCommentText"
+        tools:text="해당 타이머 사운드 노출" />
+
+
+    <kr.co.seoft.two_min.ui.proc.LeftSideSnappyHorizontalListView
+        android:id="@+id/lsshlv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="73dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvCommentText" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clSkipMessage"
+        android:layout_width="200dp"
+        android:layout_height="61dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/_bubble_x"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@id/lsshlv"
+        app:layout_constraintStart_toStartOf="@+id/tvTitle"
+        tools:visibility="visible">
+
+        <TextView
+            android:id="@+id/tvSkipMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="18dp"
+            android:fontFamily="@font/nanum_square_r"
+            android:textColor="@color/ux_black"
+            android:textSize="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="1번쨰 타이머부터\n시작하시겠어요?" />
+
+        <ImageView
+            android:id="@+id/ivSkipX"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="9dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="16dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/_ic_close_big"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/ivSkipO"
+        android:layout_width="50dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="-100dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/_bubble_o"
+        android:visibility="invisible"
+        app:layout_constraintStart_toEndOf="@id/clSkipMessage"
+        app:layout_constraintTop_toTopOf="@id/clSkipMessage"
+        tools:visibility="visible" />
+
+    <ImageView
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:src="@drawable/_ic_o_white"
+        app:layout_constraintBottom_toBottomOf="@id/ivSkipO"
+        app:layout_constraintLeft_toLeftOf="@id/ivSkipO"
+        app:layout_constraintRight_toRightOf="@id/ivSkipO"
+        app:layout_constraintTop_toTopOf="@id/ivSkipO" />
+
+    <View
+        android:id="@+id/viewHalfTransparent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#99FFFFFF"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="60dp"
+        android:fontFamily="@font/nanum_square_r"
+        android:text=""
+        android:textColor="@color/ux_black"
+        android:textSize="12dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/tvSubTitle"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="내 타임셋" />
+
+    <TextView
+        android:id="@+id/tvSubTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/nanum_square_r"
+        android:text=""
+        android:textColor="@color/ux_black"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toTopOf="@id/tvTime"
+        app:layout_constraintLeft_toLeftOf="@id/tvTitle"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle"
+        tools:text="시작 N초 전" />
+
+    <View
+        android:id="@+id/viewSubTitleRedDot"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/_ic_reddot"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@id/tvSubTitle"
+        app:layout_constraintRight_toLeftOf="@id/tvSubTitle"
+        app:layout_constraintTop_toTopOf="@id/tvSubTitle" />
+
+    <!-- this is second place -->
+    <TextView
+        android:id="@+id/tvTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/nanum_square_eb"
+        android:text=""
+        android:textColor="@color/ux_black"
+        android:textSize="50dp"
+        app:layout_constraintBottom_toTopOf="@id/ivWriteMemoBtn"
+        app:layout_constraintLeft_toLeftOf="@id/tvTitle"
+        app:layout_constraintTop_toBottomOf="@id/tvSubTitle"
+        tools:text="00:00:59" />
+
+    <ImageView
+        android:id="@+id/ivWriteMemoBtn"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/_bt_input_memo"
+        app:layout_constraintBottom_toTopOf="@id/tvTimesetTimeText"
+        app:layout_constraintLeft_toLeftOf="@id/tvTitle"
+        app:layout_constraintRight_toLeftOf="@id/ivRepeatBtn"
+        app:layout_constraintTop_toBottomOf="@id/tvTime" />
+
+    <TextView
+        android:id="@+id/btBottom1Btn"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginEnd="19dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/bg_bottom_button_gray"
+        android:fontFamily="@font/nanum_square_eb"
+        android:gravity="center"
+        android:scaleType="fitXY"
+        android:text="@string/cancel"
+        android:textColor="@color/ux_pink"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btBottom2Btn"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/btBottom2Btn"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_marginEnd="18dp"
+        android:background="@drawable/bg_bottom_button_gray"
+        android:fontFamily="@font/nanum_square_eb"
+        android:gravity="center"
+        android:scaleType="fitXY"
+        android:text="@string/pause"
+        android:textColor="@color/ux_black"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/btBottom1Btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btBottom1Btn" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clBottomAlarm"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/bg_bottom_button_gray"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:visibility="visible">
+
+        <TextView
+            android:id="@+id/tvBottomAlarmMainTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"
+            android:fontFamily="@font/nanum_square_r"
+            android:gravity="center"
+            android:textColor="@color/ux_black"
+            android:textSize="15dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/ivBottomAlarmIcon"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="타임셋 종료" />
+
+        <ImageView
+            android:id="@+id/ivBottomAlarmIcon"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:padding="12dp"
+            android:src="@drawable/_ic_clock"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/tvBottomAlarmMainTitle"
+            app:layout_constraintRight_toLeftOf="@id/tvBottomAlarmSubTitle"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvBottomAlarmSubTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"
+            android:fontFamily="@font/nanum_square_r"
+            android:gravity="center"
+            android:text="1/3"
+            android:textColor="@color/ux_dark_gray"
+            android:textSize="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/ivBottomAlarmIcon"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/ivBottomAlarmClear"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginEnd="10dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/_ic_o"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clMemo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/ux_gray"
+        android:visibility="invisible"
+        tools:visibility="gone">
+
+        <TextView
+            android:id="@+id/tvMemoText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="43dp"
+            android:fontFamily="@font/nanum_square_r"
+            android:text="@string/input_memo"
+            android:textColor="@color/ux_black"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/etMemo"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/ivCloseMemoBtn"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginEnd="10dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/_ic_close_big"
+            app:layout_constraintBottom_toBottomOf="@id/tvMemoText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvMemoText" />
+
+        <EditText
+            android:id="@+id/etMemo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="52dp"
+            android:layout_marginEnd="10dp"
+            android:background="@null"
+            android:fontFamily="@font/nanum_square_r"
+            android:gravity="top"
+            android:hint="@string/input_memo_text"
+            android:lines="10"
+            android:maxLength="1000"
+            android:textColor="@color/ux_black"
+            android:textSize="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tvMemoText"
+            app:layout_constraintTop_toBottomOf="@id/tvMemoText" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@color/ux_dark_gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/etMemo"
+            app:layout_constraintTop_toBottomOf="@id/etMemo" />
+
+
+        <TextView
+            android:id="@+id/tvExceedErrorText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/nanum_square_r"
+            android:text="@string/exceed_text_text"
+            android:textColor="@color/ux_pink"
+            android:textSize="12dp"
+            android:visibility="invisible"
+            app:layout_constraintLeft_toLeftOf="@id/tvMemoText"
+            app:layout_constraintTop_toBottomOf="@id/etMemo"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tvExceedNumberText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/nanum_square_r"
+            android:text="/1000 bytes"
+            android:textColor="@color/ux_black"
+            android:textSize="12dp"
+            app:layout_constraintEnd_toEndOf="@id/etMemo"
+            app:layout_constraintLeft_toRightOf="@id/tvExceedNumber"
+            app:layout_constraintRight_toRightOf="@id/etMemo"
+            app:layout_constraintTop_toBottomOf="@id/etMemo" />
+
+        <TextView
+            android:id="@+id/tvExceedNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/nanum_square_r"
+            android:text="0"
+            android:textColor="@color/ux_black"
+            android:textSize="12dp"
+            app:layout_constraintRight_toLeftOf="@id/tvExceedNumberText"
+            app:layout_constraintTop_toBottomOf="@id/etMemo" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

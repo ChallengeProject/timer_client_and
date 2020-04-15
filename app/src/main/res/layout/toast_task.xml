@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/toastTaskLlRoot"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/toastTaskLlIn"
+        android:layout_width="319dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/bg_radius_5_black"
+        android:gravity="center_vertical"
+        android:layoutDirection="rtl"
+        android:orientation="horizontal"
+        android:padding="1dp">
+
+        <TextView
+            android:fontFamily="@font/nanum_square_r"
+            android:id="@+id/toastTaskTvButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_radius_5_white_only_right"
+            android:gravity="center_vertical"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:textColor="@color/ux_black"
+            android:textSize="12dp"
+            tools:text="task" />
+
+        <TextView
+            android:fontFamily="@font/nanum_square_r"
+            android:id="@+id/toastTaskTvContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:textColor="@color/white"
+            android:textSize="12dp"
+            tools:text="토스트팝업내용노출" />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

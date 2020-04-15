@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/llRoot"
+    android:layout_width="130dp"
+    android:layout_height="70dp"
+    android:layout_marginEnd="10dp"
+    android:layout_marginRight="10dp"
+    android:background="@drawable/bg_timeset_times_gray_stroke"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:layout_margin="8dp"
+        android:src="@drawable/_ic_clock" />
+
+    <TextView
+        android:fontFamily="@font/nanum_square_r"
+        android:id="@+id/tvCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="7dp"
+        android:textColor="@color/text_hint_gray"
+        android:textSize="10dp"
+        tools:text="1/3" />
+
+    <TextView
+        android:fontFamily="@font/nanum_square_eb"
+        android:id="@+id/itemProcBadgeTvTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/ux_black"
+        android:textSize="12dp"
+        android:textStyle="bold"
+        tools:text="00:00:59" />
+
+
+</LinearLayout>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/ux_gray"
+    tools:context=".ui.edit.EditActivity">
+
+
+    <include
+        android:id="@+id/actEditIncToolbar"
+        layout="@layout/include_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <FrameLayout
+        android:id="@+id/actEditFrag"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/actEditLlBottomButtons"
+        app:layout_constraintTop_toBottomOf="@id/actEditIncToolbar"   />
+
+
+    <LinearLayout
+        android:id="@+id/actEditLlBottomButtons"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/ux_gray"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent" >
+
+        <TextView
+            android:fontFamily="@font/nanum_square_eb"        android:id="@+id/actEditBtBottom1Btn"
+            android:layout_width="100dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginEnd="19dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_bottom_button_gray"
+            android:gravity="center"
+            android:scaleType="fitXY"
+            android:text="@string/cancel"
+            android:textColor="@color/ux_pink"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:fontFamily="@font/nanum_square_eb"            android:id="@+id/actEditBtBottom2Btn"
+            android:layout_width="100dp"
+            android:layout_height="45dp"
+            android:layout_marginEnd="18dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_bottom_button_red"
+            android:gravity="center"
+            android:scaleType="fitXY"
+            android:text="@string/complete"
+            android:textColor="@color/white"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+
+    <View
+        android:id="@+id/actEditViewTransparentTop"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#CCFFFFFF"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@id/actEditFrag"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <View
+        android:id="@+id/actEditViewTransparentBottom"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#CCFFFFFF"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/actEditFrag" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
